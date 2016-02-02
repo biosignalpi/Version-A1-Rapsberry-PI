@@ -1,0 +1,80 @@
+cmake_minimum_required(VERSION 2.8.12)
+PROJECT(BioPI)
+
+#add_subdirectory(Tests)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+
+#set(CMAKE_CXX_FLAGS_COVERAGE "${CMAKE_CXX_FLAGS_RELEASE} -fprofile-arcs -ftest-coverage")
+#find_package(PkgConfig)
+#pkg_check_modules(GTEST REQUIRED gtest>=1.7.0)
+#pkg_check_modules(GMOCK REQUIRED gmock>=1.7.0)
+
+#include_directories(
+#    ${GTEST_INCLUDE_DIRS}
+#    ${GMOCK_INCLUDE_DIRS}
+#) 
+#set( QT_ROOT ~/ExJobb/Software/Qt/5.5/gcc_64/bin)
+#set( ENV(CMAKE_PREFIX_PATH) ${QT_ROOT} )
+#FIND_PACKAGE( Qt4 COMPONENTS QtCore QtGui QtDBUS REQUIRED )
+FIND_PACKAGE(Qt5Widgets REQUIRED)
+FIND_PACKAGE(Qt5Core REQUIRED)
+FIND_PACKAGE(Qt5Gui REQUIRED)
+#FIND_PACKAGE(Qt5DBus REQUIRED)
+
+
+find_library(bcm2835_lib bcm2835 REQUIRED)
+include_directories("/mnt/rasp-rootfs/usr/local/include/")
+
+#include_directories(${Qt5Core_INCLUDE_DIR})
+#include_directories(${Qt5Gui_INCLUDE_DIR})
+#link_directories(${Qt5Core_LIBRARY_DIRS})
+#link_directories("/mnt/rasp-rootfs/usr/lib/arm-linux-gnueabihf")
+
+include_directories(SYSTEM
+"/mnt/rasp-rootfs/usr/include/arm-linux-gnueabihf"
+"/mnt/rasp-rootfs/usr/include"
+"/mnt/rasp-rootfs/usr/local/include"
+"/mnt/rasp-rootfs/usr/lib/arm-linux-gnueabihf"
+)
+
+link_directories(
+"/mnt/rasp-rootfs/opt/vc/lib"
+"/mnt/rasp-rootfs/lib/arm-linux-gnueabihf"
+"/mnt/rasp-rootfs/rootfs/lib"
+"/mnt/rasp-rootfs/usr/lib/arm-linux-gnueabihf"
+"/mnt/rasp-rootfs/usr/lib"
+"/mnt/rasp-rootfs/usr/local/lib"
+)  
+
+add_library(mainwindow mainwindow.cpp settingssingleton.cpp
+model.cpp  datastream.cpp ecgstream.cpp 
+  settingswidget.cpp homepagewidget.cpp
+ mainwindow.ui)
+
+add_library(devicemanager devicemanager.cpp deviceinterface.cpp 
+ecgmock.cpp meanFilter.cpp)
+
+add_definitions(
+-march=armv6zk 
+-mfpu=vfp 
+-mfloat-abi=hard
+)
+
+add_definitions(${QT5Widgets_DEFINITIONS})
+set_target_properties(Qt5::Core PROPERTIES MAP_IMPORTED_CONFIG_COVERAGE "RELEASE")
+ 
+#include_directories(Qt5Widgets_INCLUDE_DIRS Qt5Gui_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+ADD_EXECUTABLE(BioPI WIN32 main.cpp)
+target_link_libraries(devicemanager ${bcm2835})
+
+
+Target_Link_Libraries(BioPI mainwindow devicemanager)
+#TARGET_LINK_LIBRARIES(BioPI mainwindow bcm2835)
+qt5_use_modules(mainwindow Core Widgets)
+qt5_use_modules(devicemanager Core Widgets)

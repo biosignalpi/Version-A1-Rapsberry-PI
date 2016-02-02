@@ -1,0 +1,12 @@
+file(GLOB SRCS *.cpp)
+
+ADD_EXECUTABLE(EcgStream_test ${SRCS})
+
+TARGET_LINK_LIBRARIES(EcgStream_test
+    libfoo
+    libgtest
+    libgmock
+)
+
+add_test(NAME EcgStream_test
+         COMMAND EcgStream_test)
