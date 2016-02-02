@@ -1,25 +1,30 @@
 BioSignal-Pi
 ============
-# Requirements:
-* Collect data from the ADAS
-* Store collected data 
-* Vizualize sampled data in real time and from file 
-* Collect data at different rates
-* Lead-off detection
+
+Biosignal PI aim is to provide a flexible and affordable open-source platform and tools for physiological and biological measurements such as blood pressure, blood glucose, weight, body composition, activity monitoring, and brain and cardiac activity.In first step, electrocardiogram (ECG) with wide usage in diagnosing and monitoring of heart disease and even in monitoring the autonomic nervous system through heart-rate variability (HRV) is developed.
+
+This version provides 5-12 leads ECG and respiration measurement system based on Raspberry PI, a credit-card-size single-board computer, and ADAS1000. ADAS1000 is introduced by Analog Devices includes all the components necessary to perform a five-lead ECG digital conversion with respiration and pacemaker-artefact detection in a single chip.
+
+============
+
+# Functional Requirements:
+* Capture physiologicalsignal/data
+* Store captured data 
+* Visualize sampled data in real time
+* Visualize sampled data from file 
+* Process data
+
+# General Requirements:
 * Highly modular with interchangable parts
-* PiFace controllability
-* HRV Analysis
-* Blue-tooth communication
-* Independently testable classes (dependency reduction)
+* Extendable
+* Hardware independence
+* Easy to deploy 
+* Testable classes,dependency reduction
+* Open-source
 
-**FIRST SKELETON**
-* Collect mock data through Device Manager
-* Use correct stream object for the data
-* No vizulization only save to file
-* Settings singleton set with const values
-* Test??
 
-To be run on computer and RPI
+
+
 
 
 
