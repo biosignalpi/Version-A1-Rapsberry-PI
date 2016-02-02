@@ -1,0 +1,25 @@
+Building with cmake
+
+cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_ECLIPSE_VERSION=4.5 -DCMAKE_ECLIPSE_GENERATE_SOURCE_PROJECT=TRUE -DCMAKE_PREFIX_PATH=/home/martin/ExJobb/Software/Qt/5.5/gcc_64/lib/cmake/ CMAKE_BUILD_TYPE=Debug ../BioPi-New/ 
+
+
+Building BioPi from optiplex
+cmake -G"Eclipse CDT4 - Unix Makefiles" -C ../optiplex.cmake -DCMAKE_BUILD_TYPE=Debug ../BioPi-New/
+
+Building BioPi from Mint
+cmake -G"Eclipse CDT4 - Unix Makefiles" -C ../mint.cmake -DCMAKE_BUILD_TYPE=Debug ../BioPi-New/
+
+cmake -G"Eclipse CDT4 - Unix Makefiles" -DCMAKE_ECLIPSE_VERSION=4.5 -DCMAKE_ECLIPSE_GENERATE_SOURCE_PROJECT=TRUE -DCMAKE_PREFIX_PATH=/usr/local/qt5/lib/cmake/ -DCMAKE_BUILD_TYPE=Debug ../BioPi-New/ 
+
+Building RPI from computer
+cmake -DCMAKE_TOOLCHAIN_FILE=../pi.cmake -DCMAKE_BUILD_TYPE=Debug ../BioPi-New/
+
+Building for computer
+cmake -C ../ubuntu.cmake -DCMAKE_BUILD_TYPE=Debug ../BioPi-New/
+
+
+important to link Qt files to can be done manually in CmakeCache.txt  /home/martin/ExJobb/Software/Qt/5.5/gcc_64/lib/cmake
+
+Otherwise gives unable to start xcb
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/qwt-6.1.2/lib

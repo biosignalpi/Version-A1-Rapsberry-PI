@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>BioPI-Source@BioPi-New</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+	</buildSpec>
+	<natures>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>[Subprojects]</name>
+			<type>2</type>
+			<locationURI>virtual:/virtual</locationURI>
+		</link>
+		<link>
+			<name>[Subprojects]/PiFaceCAD_example</name>
+			<type>2</type>
+			<location>/home/msss/ExJobb/Git-Repositories/Version-A1-Rapsberry-PI/BioPi-New/PiFace-Interface</location>
+		</link>
+	</linkedResources>
+</projectDescription>

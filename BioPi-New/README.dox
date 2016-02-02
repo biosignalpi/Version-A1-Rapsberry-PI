@@ -1,0 +1,10 @@
+/**
+
+@mainpage Biosignal PI
+
+Biosignal PI aim is to provide a flexible and affordable open-source platform and tools for physiological and biological measurements such as blood pressure, blood glucose, weight, body composition, activity monitoring, and brain and cardiac activity. 
+In first step,  electrocardiogram (ECG) with wide usage in diagnosing and monitoring of heart disease and even in monitoring the autonomic nervous system through heart-rate variability (HRV) is developed. 
+
+This version provides 5-12 leads ECG and respiration measurement system based on Raspberry PI, a credit-card-size single-board computer, and ADAS1000. ADAS1000 is introduced by Analog Devices includes all the components necessary to perform a five-lead ECG digital conversion with respiration and pacemaker-artefact detection in a single chip.
+*/
+

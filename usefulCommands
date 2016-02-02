@@ -1,0 +1,7 @@
+cp *.txt ../textFilesFrombuild/   command to copy all test text files from directory to "safe" directory before rebuild
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/qwt-6.1.2/lib  command for adding library to temporary path 
+
+when installing with apt-get  option -y will answer all questions with yes
+
+
