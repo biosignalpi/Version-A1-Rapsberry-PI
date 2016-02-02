@@ -1,0 +1,60 @@
+/**
+@mainpage
+
+[pifacecad.h](pifacecad_8h.html)
+
+@section links Links
+
+- [piface.org.uk](http://www.piface.org.uk)
+- [PiFace product source code](http://piface.github.io)
+- [Source code on GitHub](https://github.com/piface/libpifacecad)
+- [libmcp23s17](http://piface.github.io/libmcp23s17)
+
+@section use Using the library
+
+Download:
+
+    $ git clone https://github.com/piface/libmcp23s17.git
+    $ git clone https://github.com/piface/libpifacecad.git
+
+Build the library:
+
+    $ cd libmcp23s17/ && make && cd -
+    $ cd libpifacecad/ && make
+
+This creates the library `libpifacecad.a`.
+
+Build and run the example and the pifacecad utility for command line control:
+
+    $ make example
+    $ ./example
+
+    $ make pifacecad
+    $ ./pifacecad open
+    $ ./pifacecad open blinkoff cursoroff
+    $ ./pifacecad read switches # read switch port
+    $ ./pifacecad -b2 read switch # read switch 2 (0-7)
+    $ ./pifacecad write "Hello world" # write to the screen
+    $ ./pifacecad backlight on # backlight 'on' or 'off'
+    $ ./pifacecad setcursor 5 1
+    $ ./pifacecad home
+    $ ./pifacecad clear
+    $ ./pifacecad --help
+
+Include the library in your project with:
+
+    $ gcc -o example example.c -Isrc/ -L. -lpifacecad -L../libmcp23s17/ -lmcp23s17
+
+`-I` directories to search for header files.
+`-L` directories to search for libraries.
+`-l` libraries to link.
+
+@section todo Todo
+
+Feel free to contribute!
+
+- LCDProc driver
+- Debian install
+- Interrupts (using libmcp23s17 interrupts?)
+
+*/
