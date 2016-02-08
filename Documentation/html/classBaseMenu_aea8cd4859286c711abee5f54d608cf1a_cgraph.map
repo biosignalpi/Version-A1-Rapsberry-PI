@@ -1,0 +1,4 @@
+<map id="BaseMenu::~BaseMenu" name="BaseMenu::~BaseMenu">
+<area shape="rect" id="node2" href="$classBaseMenu.html#a722bb88987e9a64015c59f3419d89704" title="Pure virtual function, creates the next Menu object Pure virtual function, that is meant to create a ..." alt="" coords="216,5,364,32"/>
+<area shape="rect" id="node3" href="$classAbstractMenu.html#a4163c42d2127430e184612cb95211cda" title="Sets the first row of the PiFace CAD to the current option choosen Uses the C library pifacecad..." alt="" coords="412,5,601,32"/>
+</map>

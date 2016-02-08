@@ -1,0 +1,7 @@
+<map id="DeviceInterface::updateStatus" name="DeviceInterface::updateStatus">
+<area shape="rect" id="node2" href="$classDeviceInterface.html#a83df9dc924dbe0e6c3e0d0fef2a604d0" title="DeviceInterface::updateStatus\lFunction" alt="" coords="252,5,451,47"/>
+<area shape="rect" id="node3" href="$classEcgMock.html#aaa2628c0e8364980e6f252dfc3b86d1a" title="EcgMock::getData" alt="" coords="286,71,417,98"/>
+<area shape="rect" id="node4" href="$classEcgMock.html#a8822f99759fcfe9648262007cb380daa" title="EcgMock::run" alt="" coords="300,122,403,149"/>
+<area shape="rect" id="node5" href="$classSamplingThread.html#a3145c2d8049b3f126f78cb1274154eeb" title="SamplingThread::run" alt="" coords="280,173,423,199"/>
+<area shape="rect" id="node6" href="$classSamplingThread.html#ade4c865b24840742b532a71208101f39" title="SamplingThread::setFileType" alt="" coords="256,223,447,250"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="src/PiFace&#45;Interface/ecgcapturemenu.h" name="src/PiFace&#45;Interface/ecgcapturemenu.h">
+<area shape="rect" id="node2" href="$basemenu_8h.html" title="basemenu.h" alt="" coords="279,95,373,121"/>
+<area shape="rect" id="node6" href="$datalogger_8h.html" title="../datalogger.h" alt="" coords="866,244,970,271"/>
+<area shape="rect" id="node12" href="$devicemanager_8h.html" title="../devicemanager.h" alt="" coords="623,95,755,121"/>
+<area shape="rect" id="node3" href="$abstractmenu_8h.html" title="abstractmenu.h" alt="" coords="45,169,157,196"/>
+<area shape="rect" id="node8" href="$datastream_8h.html" title="datastream.h" alt="" coords="866,319,965,345"/>
+<area shape="rect" id="node11" href="$ecgstreamobject_8h.html" title="ecgstreamobject.h" alt="" coords="864,393,993,420"/>
+<area shape="rect" id="node13" href="$deviceinterface_8h.html" title="deviceinterface.h" alt="" coords="669,244,791,271"/>
+<area shape="rect" id="node16" href="$ecgmock_8h.html" title="ecgmock.h" alt="" coords="727,169,813,196"/>
+<area shape="rect" id="node17" href="$samplingthread_8h.html" title="samplingthread.h" alt="" coords="451,169,572,196"/>
+</map>

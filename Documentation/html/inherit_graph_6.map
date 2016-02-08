@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classHomePageWidget.html" title="Startpage for the Biosignal PI software. " alt="" coords="140,5,268,32"/>
+<area shape="rect" id="node3" href="$classHrvWidget.html" title="Widget responsible for the graphical interface of the HRV Analysis. " alt="" coords="162,56,246,83"/>
+<area shape="rect" id="node4" href="$classMainWindow.html" title="MainWindow holds all the different parts of the GUI Implements the different widgets used in the GUI ..." alt="" coords="155,107,253,133"/>
+<area shape="rect" id="node5" href="$classPlotAndCaptureWidget.html" title="Widget used for capture and plotting of data from the connected DeviceManager. " alt="" coords="127,157,281,184"/>
+<area shape="rect" id="node6" href="$classPlottingWidget.html" title="Widget that can read ECG information from file and plots the data. " alt="" coords="151,208,257,235"/>
+<area shape="rect" id="node7" href="$classSettingsWidget.html" title="Widget used to change the different settings in SettingsWidget. " alt="" coords="149,259,259,285"/>
+<area shape="rect" id="node8" href="$classSliderWidget.html" title="Class used by PlottingWidget to enable a slider for the different signals plotted. " alt="" coords="156,309,252,336"/>
+</map>

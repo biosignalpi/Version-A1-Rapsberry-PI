@@ -1,0 +1,12 @@
+<map id="src/datalogger.h" name="src/datalogger.h">
+<area shape="rect" id="node2" href="$datalogger_8cpp.html" title="src/datalogger.cpp" alt="" coords="5,87,133,114"/>
+<area shape="rect" id="node3" href="$plotandcapturewidget_8h.html" title="src/plotandcapturewidget.h" alt="" coords="157,87,336,114"/>
+<area shape="rect" id="node5" href="$plotandcapturewidget_8cpp.html" title="src/plotandcapturewidget.cpp" alt="" coords="215,177,407,203"/>
+<area shape="rect" id="node6" href="$ecgcapturemenu_8h.html" title="src/PiFace&#45;Interface\l/ecgcapturemenu.h" alt="" coords="513,80,653,121"/>
+<area shape="rect" id="node4" href="$mainwindow_8cpp.html" title="src/mainwindow.cpp" alt="" coords="50,177,190,203"/>
+<area shape="rect" id="node7" href="$basemenu_8cpp.html" title="src/PiFace&#45;Interface\l/basemenu.cpp" alt="" coords="431,169,571,211"/>
+<area shape="rect" id="node8" href="$settingsmenu_8h.html" title="src/PiFace&#45;Interface\l/settingsmenu.h" alt="" coords="595,169,735,211"/>
+<area shape="rect" id="node10" href="$ecgcapturemenu_8cpp.html" title="src/PiFace&#45;Interface\l/ecgcapturemenu.cpp" alt="" coords="744,259,891,300"/>
+<area shape="rect" id="node9" href="$bluetoothmenu_8cpp.html" title="src/PiFace&#45;Interface\l/bluetoothmenu.cpp" alt="" coords="415,259,555,300"/>
+<area shape="rect" id="node11" href="$settingsmenu_8cpp.html" title="src/PiFace&#45;Interface\l/settingsmenu.cpp" alt="" coords="579,259,719,300"/>
+</map>

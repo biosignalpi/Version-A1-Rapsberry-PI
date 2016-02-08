@@ -1,0 +1,8 @@
+<map id="src/settingssingleton.h" name="src/settingssingleton.h">
+<area shape="rect" id="node2" href="$datalogger_8cpp.html" title="src/datalogger.cpp" alt="" coords="5,87,133,114"/>
+<area shape="rect" id="node3" href="$devicemanager_8cpp.html" title="src/devicemanager.cpp" alt="" coords="158,87,314,114"/>
+<area shape="rect" id="node4" href="$ecgcapturemenu_8cpp.html" title="src/PiFace&#45;Interface\l/ecgcapturemenu.cpp" alt="" coords="339,80,485,121"/>
+<area shape="rect" id="node5" href="$samplingthread_8cpp.html" title="src/samplingthread.cpp" alt="" coords="509,87,667,114"/>
+<area shape="rect" id="node6" href="$settingssingleton_8cpp.html" title="src/settingssingleton.cpp" alt="" coords="691,87,858,114"/>
+<area shape="rect" id="node7" href="$settingswidget_8cpp.html" title="src/settingswidget.cpp" alt="" coords="882,87,1035,114"/>
+</map>

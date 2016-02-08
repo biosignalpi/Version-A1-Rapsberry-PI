@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classDataLogger.html" title="The DataLogger class. " alt="" coords="158,5,247,32"/>
+<area shape="rect" id="node3" href="$classEcgCapture.html" title="Responsible for communication with ADAS. " alt="" coords="157,56,248,83"/>
+<area shape="rect" id="node4" href="$classPiFaceControlAndView.html" title="Handles the eventloop of the PiFace GUI. " alt="" coords="124,107,281,133"/>
+</map>

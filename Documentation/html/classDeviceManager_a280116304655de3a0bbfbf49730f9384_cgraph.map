@@ -1,0 +1,6 @@
+<map id="DeviceManager::init" name="DeviceManager::init">
+<area shape="rect" id="node2" href="$classSettingsSingleton.html#aad528becd7ce5903c418a5b8b718074c" title="Retrives a reference to the ONE and ONLY SettingsSingleton created for the application. " alt="" coords="229,5,361,47"/>
+<area shape="rect" id="node3" href="$classSettingsSingleton.html#aa6db88481c421b96974519b8e28192c9" title="Returns a int containing the value from private int sourceId. " alt="" coords="229,71,361,112"/>
+<area shape="rect" id="node4" href="$classDeviceManager.html#aa7b96de52a17b961688e81f5e999da74" title="Slot used to transfer updateStatus from initiated device to the local signal. " alt="" coords="195,137,396,163"/>
+<area shape="rect" id="node5" href="$classDeviceManager.html#a14f86d572f6ea7222032ec00499a16a8" title="Slot used to transfer sendSampleVector from initiated device to the local signal. ..." alt="" coords="192,188,399,229"/>
+</map>

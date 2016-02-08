@@ -1,0 +1,17 @@
+<map id="EcgCaptureMenu::newMenu" name="EcgCaptureMenu::newMenu">
+<area shape="rect" id="node2" href="$classAbstractMenu.html#a4163c42d2127430e184612cb95211cda" title="Sets the first row of the PiFace CAD to the current option choosen Uses the C library pifacecad..." alt="" coords="240,91,429,117"/>
+<area shape="rect" id="node3" href="$classDeviceManager.html#a8569742b2eb08d95052506e372b6bd31" title="Stops the running device. " alt="" coords="261,141,408,168"/>
+<area shape="rect" id="node5" href="$classDataLogger.html#a17296a2d3088e979c9b1f48e68caf9ad" title="Saves the input to a txt&#45;file, header&#45;file and edf&#45;file(if bool saveAsEdf in SettingsSingleton) ..." alt="" coords="272,359,397,385"/>
+<area shape="rect" id="node4" href="$classDeviceInterface.html#a101b3b53a01add866737920e03a850a8" title="DeviceInterface::stop" alt="" coords="488,5,635,32"/>
+<area shape="rect" id="node6" href="$classSettingsSingleton.html#aad528becd7ce5903c418a5b8b718074c" title="Retrives a reference to the ONE and ONLY SettingsSingleton created for the application. " alt="" coords="495,57,627,98"/>
+<area shape="rect" id="node7" href="$classSettingsSingleton.html#aa5c7ee7b9966f8391d7431a7e8ab3949" title="Returns a QString containing the value from private QString fileName. " alt="" coords="495,122,627,163"/>
+<area shape="rect" id="node8" href="$classSettingsSingleton.html#a11896cc46cb374ae6a8234e1cd3cb68f" title="Returns a int containing the value from private int sampleRate. " alt="" coords="495,187,627,229"/>
+<area shape="rect" id="node9" href="$classSettingsSingleton.html#a612c925c64e9862b0fdeca1b5f8f4773" title="Returns a QString containing the value from private QString source. " alt="" coords="495,253,627,294"/>
+<area shape="rect" id="node10" href="$classSettingsSingleton.html#a0275cd8a138fa91222ad36d9fbf465d2" title="Returns a QString containing the value from private QString recordingName. " alt="" coords="494,318,629,359"/>
+<area shape="rect" id="node11" href="$classSettingsSingleton.html#a01b74f6d99cfbbd5bc6114b69ee5c87c" title="Returns a QString containing the value from private QString patientCode. " alt="" coords="495,383,627,425"/>
+<area shape="rect" id="node12" href="$classSettingsSingleton.html#ab9e0ab27c53f748e458cfb14f71a94ea" title="Returns a QString containing the value from private QString name. " alt="" coords="495,449,627,490"/>
+<area shape="rect" id="node13" href="$classSettingsSingleton.html#a3e61e7730d97ab3e893499538aba04ba" title="Returns a QString containing the value from private QString gender. " alt="" coords="495,514,627,555"/>
+<area shape="rect" id="node14" href="$classSettingsSingleton.html#a8e25762548883f476860ed5e1ab0b366" title="Returns a QString containing the value from private QString birthDate. " alt="" coords="495,579,627,621"/>
+<area shape="rect" id="node15" href="$classSettingsSingleton.html#a14e8cddfa2bfbc896b9f31bddb4e675b" title="Returns a QString containing the value from private QString notes. " alt="" coords="495,645,627,686"/>
+<area shape="rect" id="node16" href="$structEcgStreamObject.html#ae988014880bd678ae693545b6b1f0175" title="Converts the data from the struct into a QString representation. " alt="" coords="477,711,645,737"/>
+</map>

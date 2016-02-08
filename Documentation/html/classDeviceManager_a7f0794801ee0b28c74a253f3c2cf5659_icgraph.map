@@ -1,0 +1,9 @@
+<map id="DeviceManager::sendSampleVector" name="DeviceManager::sendSampleVector">
+<area shape="rect" id="node2" href="$classDeviceManager.html#a14f86d572f6ea7222032ec00499a16a8" title="Slot used to transfer sendSampleVector from initiated device to the local signal. ..." alt="" coords="247,5,453,47"/>
+<area shape="rect" id="node3" href="$classDeviceManager.html#a280116304655de3a0bbfbf49730f9384" title="Prepares a new data&#45;collection,. " alt="" coords="501,42,640,69"/>
+<area shape="rect" id="node4" href="$classEcgCaptureMenu.html#ac430bc0a2eb1879fe77cd0133d4dd704" title="EcgCaptureMenu::EcgCaptureMenu" alt="" coords="688,13,920,39"/>
+<area shape="rect" id="node7" href="$classPlotAndCaptureWidget.html#a232d01f00a25365382f094ad8eedb7fa" title="PlotAndCaptureWidget\l::startCapture" alt="" coords="727,64,881,105"/>
+<area shape="rect" id="node5" href="$classSettingsMenu.html#abc441c12e8044c13f1a99791e2ee30d1" title="Unimplemented. " alt="" coords="968,13,1135,39"/>
+<area shape="rect" id="node6" href="$classSettingsMenu.html#a02ee4145d9109e70bad37893a88c94c7" title="SettingsMenu::~SettingsMenu" alt="" coords="1183,13,1381,39"/>
+<area shape="rect" id="node8" href="$classPlotAndCaptureWidget.html#a7dca31208a65906f0a96bf4143e0da4f" title="PlotAndCaptureWidget\l::plotSampleVector" alt="" coords="974,64,1129,105"/>
+</map>

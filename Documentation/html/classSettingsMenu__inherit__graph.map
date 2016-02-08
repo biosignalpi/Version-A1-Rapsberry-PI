@@ -1,0 +1,5 @@
+<map id="SettingsMenu" name="SettingsMenu">
+<area shape="rect" id="node2" href="$classEcgCaptureMenu.html" title="Menu were the user can chosse between SettingsMenu or starting ECG&#45;capture The start menu starts the ..." alt="" coords="5,155,128,181"/>
+<area shape="rect" id="node3" href="$classBaseMenu.html" title="Homepage of the Menu&#45;system for the PiFace GUI. " alt="" coords="25,80,109,107"/>
+<area shape="rect" id="node4" href="$classAbstractMenu.html" title="Abstract menu object for PiFace CAD. " alt="" coords="15,5,118,32"/>
+</map>

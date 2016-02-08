@@ -1,0 +1,6 @@
+<map id="BaseMenu" name="BaseMenu">
+<area shape="rect" id="node3" href="$classBluetoothMenu.html" title="The BluetoothMenu class. " alt="" coords="5,155,115,181"/>
+<area shape="rect" id="node4" href="$classEcgCaptureMenu.html" title="Menu were the user can chosse between SettingsMenu or starting ECG&#45;capture The start menu starts the ..." alt="" coords="139,155,261,181"/>
+<area shape="rect" id="node2" href="$classAbstractMenu.html" title="Abstract menu object for PiFace CAD. " alt="" coords="78,5,181,32"/>
+<area shape="rect" id="node5" href="$classSettingsMenu.html" title="The SettingsMenu class for the PiFace GUI. " alt="" coords="149,229,251,256"/>
+</map>

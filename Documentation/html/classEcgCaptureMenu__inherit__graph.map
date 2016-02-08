@@ -1,0 +1,5 @@
+<map id="EcgCaptureMenu" name="EcgCaptureMenu">
+<area shape="rect" id="node4" href="$classSettingsMenu.html" title="The SettingsMenu class for the PiFace GUI. " alt="" coords="15,229,118,256"/>
+<area shape="rect" id="node2" href="$classBaseMenu.html" title="Homepage of the Menu&#45;system for the PiFace GUI. " alt="" coords="25,80,109,107"/>
+<area shape="rect" id="node3" href="$classAbstractMenu.html" title="Abstract menu object for PiFace CAD. " alt="" coords="15,5,118,32"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="SamplingThread::getData" name="SamplingThread::getData">
+<area shape="rect" id="node2" href="$classSamplingThread.html#ab1284bf5429771100bf0a60ffe3aacef" title="SamplingThread::startThread" alt="" coords="224,177,415,203"/>
+<area shape="rect" id="node3" href="$classSettingsSingleton.html#aad528becd7ce5903c418a5b8b718074c" title="Retrives a reference to the ONE and ONLY SettingsSingleton created for the application. " alt="" coords="463,5,595,47"/>
+<area shape="rect" id="node4" href="$classSettingsSingleton.html#aa5c7ee7b9966f8391d7431a7e8ab3949" title="Returns a QString containing the value from private QString fileName. " alt="" coords="463,71,595,112"/>
+<area shape="rect" id="node5" href="$classSettingsSingleton.html#aa6db88481c421b96974519b8e28192c9" title="Returns a int containing the value from private int sourceId. " alt="" coords="463,136,595,177"/>
+<area shape="rect" id="node6" href="$classSettingsSingleton.html#a11896cc46cb374ae6a8234e1cd3cb68f" title="Returns a int containing the value from private int sampleRate. " alt="" coords="463,201,595,243"/>
+<area shape="rect" id="node7" href="$group__Device-Facade.html#ga8f080b59e8caab0993bb7ee6b872b6a0" title="Initiate the device by configuring the registers depending on operating mode and sampling frequency..." alt="" coords="471,267,587,294"/>
+<area shape="rect" id="node8" href="$group__Device-Facade.html#ga9582047c81db34a3cab2bb315fcb1793" title="Start capturing frames from the ADAS1000. " alt="" coords="466,318,591,345"/>
+</map>

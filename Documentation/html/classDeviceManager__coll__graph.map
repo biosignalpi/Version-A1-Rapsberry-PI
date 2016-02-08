@@ -1,0 +1,4 @@
+<map id="DeviceManager" name="DeviceManager">
+<area shape="rect" id="node3" href="$classDeviceInterface.html" title="Abstract interface for all devices. " alt="" coords="79,171,193,197"/>
+<area shape="rect" id="node4" href="$classDataStream.html" title="Abstract Interface that should be used for storing data in the memory. " alt="" coords="102,81,194,108"/>
+</map>
