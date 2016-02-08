@@ -1,7 +1,7 @@
 BioSignal-Pi
 ============
 
-[Link to Software Documentation](http://martinr89.github.io/BiosignalPI)
+[Link to Software Documentation](http://biosignalpi.github.io/Version-A1-Rapsberry-PI)
 
 ============
 Biosignal PI aim is to provide a flexible and affordable open-source platform and tools for physiological and biological measurements such as blood pressure, blood glucose, weight, body composition, activity monitoring, and brain and cardiac activity.In first step, electrocardiogram (ECG) with wide usage in diagnosing and monitoring of heart disease and even in monitoring the autonomic nervous system through heart-rate variability (HRV) is developed.
