@@ -1,0 +1,25 @@
+#Setting up workstation for compilation and cross-compilation of QT5 for the Raspberry PI.
+
+This guide is a modified version of the following article
+http://www.ics.com/blog/building-qt-5-raspberry-pi
+with help from
+http://stackoverflow.com/questions/19162072/installing-raspberry-pi-cross-compiler
+
+#Setting up a cross-compilation toolchain
+$ mkdir ~/raspberry
+$ cd ~/raspberry
+$ git clone 
+#Preparing the SD-card. 
+download the desired version of raspbian from http://www.raspberrypi.org/downloads/
+unzip the downloaded software and rename it to a working name.
+In this example the Raspbian img is called raspberry-working-image.img
+
+
+
+
+./fixQualifiedLibraryPaths /mnt/rasp-rootfs $HOME/ExJobb/RaspberryPi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf-gcc 
+
+
+
+
+
