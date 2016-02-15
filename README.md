@@ -10,7 +10,7 @@ This version provides 5-12 leads ECG and respiration measurement system based on
 
 
 
-#System Requirements
+###System Requirements
 In order to be able to cross-compile the Raspberry Pi(RPI) from an workstation it is neccessary to utilize a cross-compiler this project has used the arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian toolchain. 
 Cloned from https://github.com/raspberrypi/tools
 
@@ -22,26 +22,29 @@ To build the Biosignal PI software the system needs to have the following softwa
 * libpifacecad c-library used for PiFaceCad
 * libmcp23s17 c-library used for PiFaceCad
 
-#Building the Biosignal PI software
+###Building the Biosignal PI software
 The software is built through the use of CMake.
- $ mkdir [buildFolder]  
+
+    mkdir [buildFolder]  
 The buildFolder is just an example name this can be set to anything. 
- $ cd [buildFolder]
- $ cmake -C ../[local-settings-file].cmake ../src/
+
+    cd [buildFolder]
+    cmake -C ../[local-settings-file].cmake ../src/
 local-settings-file is a file that should be set to tell CMake about the path to the needed dependecies see the different .cmake files in the main folder for example.
- $ make 
+
+    make 
 
  
 
-#To build the Documentation
- $ make docs 
+###To build the Documentation
+    make docs 
 This will create the documentation in the folder Documentation
 
-# Build tests
- $ make tests
+### Build tests
+    make tests
 
 
-# For information on how to setup the workstation for cross-compilation and installing Qt se
+#### For information on how to setup the workstation for cross-compilation and installing Qt see the wikipage
 
 
 
