@@ -35,8 +35,8 @@ void SamplingThread::run()
 {
 	clock.start();
 		prevTime = clock.elapsed();
-		emit updateStatus(QString("Collecting samples..."));
 		startThread();
+		emit updateStatus(QString("Collecting samples..."));
 		while(!stopThread) {
 
 			double elapsed = clock.elapsed();
@@ -125,6 +125,9 @@ void SamplingThread::startThread()
 
     ecg->init(source, freq);
     ecg->start();
+    stopThread=false;
+
+
 }
 
 
@@ -350,7 +353,7 @@ void SamplingThread::sample(double elapsed,DataStream& inputStream){
 	lead3 += frame.at(3);
 	respiration += frame.at(4);
 
-    inputStream.push_back(EcgStreamObject(frame.at(1), frame.at(2),frame.at(3), frame.at(4),elapsed/1000));
+    inputStream.append(EcgStreamObject(frame.at(1), frame.at(2),frame.at(3), frame.at(4),elapsed/1000));
 
 	counter++;
 
@@ -399,6 +402,8 @@ void SamplingThread::getData(DataStream& inputStream){
 
 		if (usec>1) {
 			usleep(usec);
+			qDebug() << "sleep" << usec  << endl;
+
 		}
 
 	}
