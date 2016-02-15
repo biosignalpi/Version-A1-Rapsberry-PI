@@ -1,0 +1,194 @@
+\hypertarget{hrvanalysis_8cpp_source}{}\section{hrvanalysis.\+cpp}
+\label{hrvanalysis_8cpp_source}\index{src/hrvanalysis.\+cpp@{src/hrvanalysis.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * hrvanalysis.cpp}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Nov 23, 2015}
+00005 \textcolor{comment}{ *      Author: martin}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#include "\hyperlink{hrvanalysis_8h}{hrvanalysis.h}"}
+00009 
+00010 \textcolor{preprocessor}{#include <cmath>}
+00011 \textcolor{preprocessor}{#include <math.h>}
+00012 \textcolor{preprocessor}{#include <stddef.h>}
+00013 \textcolor{preprocessor}{#include <stdlib.h>}
+00014 \textcolor{preprocessor}{#include <string.h>}
+00015 \textcolor{preprocessor}{#include <QDebug>}
+00016 
+00017 
+00018 
+00019 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_emxAPI.h"}
+00020 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_terminate.h"}
+00021 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_initialize.h"}
+00022 
+00023 \textcolor{preprocessor}{#include "HRV/freqDomainHRV\_emxAPI.h"}
+00024 \textcolor{preprocessor}{#include "HRV/freqDomainHRV\_terminate.h"}
+00025 \textcolor{preprocessor}{#include "HRV/freqDomainHRV\_initialize.h"}
+00026 
+00027 
+00028 \textcolor{preprocessor}{#include "HRV/preProcessIBI\_terminate.h"}
+00029 \textcolor{preprocessor}{#include "HRV/preProcessIBI\_initialize.h"}
+00030 \textcolor{preprocessor}{#include "HRV/preProcessIBI.h"}
+00031 \textcolor{preprocessor}{#include "HRV/preProcessIBI\_types.h"}
+00032 
+00033 
+\hypertarget{hrvanalysis_8cpp_source.tex_l00034}{}\hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{00034} \textcolor{keywordtype}{void} \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{performTimeDomainHrv}(\textcolor{keyword}{const} QVector<double>* ibiData, struct0\_T *output) \{
+00035     timeDomainHRV\_initialize();
+00036     preProcessIBI\_initialize();
+00037 
+00038     emxArray\_real\_T *ibi, *nibi;
+00039      emxArray\_boolean\_T *art;
+00040 
+00041     emxInitArray\_real\_T(&nibi, 2);
+00042     emxInitArray\_boolean\_T(&art, 1);
+00043 
+00044 
+00045     \textcolor{comment}{// Initialize function 'timeDomainHRV' input arguments.}
+00046     \textcolor{comment}{// Initialize function input argument 'ibi'.}
+00047     \textcolor{keywordtype}{int} i;
+00048     ibi = \hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}(ibiData);
+00049     preProcessIBI(ibi, nibi, art);
+00050     \textcolor{comment}{// Call the entry-point 'timeDomainHRV'.}
+00051     qDebug() << \textcolor{stringliteral}{"Terminate Matlab function"} << endl;
+00052     timeDomainHRV(nibi, 100, 10, output);
+00053     qDebug() << \textcolor{stringliteral}{"Terminate Matlab function"} << endl;
+00054     emxDestroyArray\_real\_T(ibi);
+00055     emxDestroyArray\_real\_T(nibi);
+00056     emxDestroyArray\_boolean\_T(art);
+00057     \textcolor{comment}{//    qDebug() << "Terminate Matlab function" << endl;}
+00058 
+00059     timeDomainHRV\_terminate();
+00060     preProcessIBI\_terminate();
+00061 \}
+\hypertarget{hrvanalysis_8cpp_source.tex_l00062}{}\hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{00062} \textcolor{keywordtype}{void} \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{performFreqDomainHrv}(\textcolor{keyword}{const} QVector<double>* ibiData,\textcolor{keyword}{const} QVector<double>* 
+      timeData, structFreq\_T *output) \{
+00063     freqDomainHRV\_initialize();
+00064     preProcessIBI\_initialize();
+00065     emxArray\_real\_T *ibi, *nibi;
+00066     emxArray\_boolean\_T *art;
+00067 
+00068     emxInitArray\_real\_T(&nibi, 2);
+00069     emxInitArray\_boolean\_T(&art, 1);
+00070     \textcolor{comment}{// Initialize function 'timeDomainHRV' input arguments.}
+00071     \textcolor{comment}{// Initialize function input argument 'ibi'.}
+00072     \textcolor{keywordtype}{int} i;
+00073     ibi = \hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}(ibiData,timeData);
+00074     preProcessIBI(ibi, nibi, art);
+00075     \textcolor{comment}{// Call the entry-point 'timeDomainHRV'.}
+00076     qDebug() << \textcolor{stringliteral}{"Terminate Matlab function"} << endl;
+00077     freqDomainHRV(nibi,output);
+00078     qDebug() << \textcolor{stringliteral}{"Terminate Matlab function"} << endl;
+00079     emxDestroyArray\_real\_T(ibi);
+00080     emxDestroyArray\_real\_T(nibi);
+00081     emxDestroyArray\_boolean\_T(art);
+00082     \textcolor{comment}{//    qDebug() << "Terminate Matlab function" << endl;}
+00083 
+00084     freqDomainHRV\_terminate();
+00085     preProcessIBI\_terminate();
+00086 
+00087 \}
+00088 
+\hypertarget{hrvanalysis_8cpp_source.tex_l00089}{}\hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{00089} emxArray\_real\_T *\hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}(\textcolor{keyword}{const} QVector<double>* ibiData,\textcolor{keyword}{const} 
+      QVector<double>* timeData)
+00090 \{
+00091 
+00092     emxArray\_real\_T *result;
+00093     \textcolor{keywordtype}{int} iv1[2] = \{ ibiData->length(), 2 \};
+00094 
+00095     \textcolor{keywordtype}{int} idx0;
+00096     \textcolor{keywordtype}{int} idx1;
+00097 
+00098     \textcolor{comment}{// Set the size of the array.}
+00099     \textcolor{comment}{// Change this size to the value that the application requires.}
+00100     result = emxCreateND\_real\_T(2, *(\textcolor{keywordtype}{int} (*)[2])&iv1[0]);
+00101 
+00102     \textcolor{comment}{//   result = emxCreateND\_real\_T(2, *(int (*)[ibiData->length()])&iv1[0]);}
+00103 
+00104     \textcolor{comment}{// Loop over the array to initialize each element.}
+00105     qDebug() << result->size[0U] << endl
+00106             << result->size[0] << endl
+00107             << ibiData->length() <<endl
+00108             << iv1[0] <<endl;
+00109     \textcolor{keywordtype}{int} index=0;
+00110     \textcolor{keywordflow}{for} (idx0 = 0; idx0 < result->size[0U]; idx0++) \{
+00111         \textcolor{keywordflow}{for} (idx1 = 0; idx1 < 2; idx1++) \{
+00112             \textcolor{comment}{// Set the value of the array element.}
+00113             \textcolor{comment}{// Change this value to the value that the application requires.}
+00114             \textcolor{keywordflow}{if} (idx1==0)
+00115                 result->data[idx0 + result->size[0] * idx1] = (timeData->at(index)*1000);
+00116             \textcolor{keywordflow}{else}
+00117                 result->data[idx0 + result->size[0] * idx1] = (ibiData->at(index++)*1000);
+00118         \}
+00119     \}
+00120 
+00121     qDebug() << \textcolor{stringliteral}{"Created ibiFile in argInit\_Unboundedx2\_real\_T"} << endl;
+00122     \textcolor{keywordflow}{return} result;
+00123 \}
+00124 
+\hypertarget{hrvanalysis_8cpp_source.tex_l00125}{}\hyperlink{group__HRV-Analysis_ga95c104a451f12859980435cf9353fc76}{00125} emxArray\_real\_T *\hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}(\textcolor{keyword}{const} QVector<double>* ibiData)
+00126 \{
+00127 
+00128     emxArray\_real\_T *result;
+00129     \textcolor{keywordtype}{int} iv1[2] = \{ ibiData->length(), 2 \};
+00130 
+00131     \textcolor{keywordtype}{int} idx0;
+00132     \textcolor{keywordtype}{int} idx1;
+00133 
+00134     \textcolor{comment}{// Set the size of the array.}
+00135     \textcolor{comment}{// Change this size to the value that the application requires.}
+00136     result = emxCreateND\_real\_T(2, *(\textcolor{keywordtype}{int} (*)[2])&iv1[0]);
+00137 
+00138     \textcolor{comment}{//   result = emxCreateND\_real\_T(2, *(int (*)[ibiData->length()])&iv1[0]);}
+00139 
+00140     \textcolor{comment}{// Loop over the array to initialize each element.}
+00141     qDebug() << result->size[0U] << endl
+00142             << result->size[0] << endl
+00143             << ibiData->length() <<endl
+00144             << iv1[0] <<endl;
+00145     \textcolor{keywordtype}{int} timeCount=0,index=0;
+00146 
+00147     \textcolor{keywordflow}{for} (idx0 = 0; idx0 < result->size[0U]; idx0++) \{
+00148         \textcolor{keywordflow}{for} (idx1 = 0; idx1 < 2; idx1++) \{
+00149             \textcolor{comment}{// Set the value of the array element.}
+00150             \textcolor{comment}{// Change this value to the value that the application requires.}
+00151             \textcolor{keywordflow}{if} (idx1==0) \{
+00152                 result->data[idx0 + result->size[0] * idx1] = timeCount;
+00153                 timeCount+=ibiData->at(index);
+00154             \}
+00155             \textcolor{keywordflow}{else}
+00156                 result->data[idx0 + result->size[0] * idx1] = (ibiData->at(index++));
+00157         \}
+00158     \}
+00159     \textcolor{keywordflow}{return} result;
+00160 \}
+00161 
+\hypertarget{hrvanalysis_8cpp_source.tex_l00162}{}\hyperlink{group__HRV-Analysis_ga3bb79c98480ffdfdb826b87cac72be16}{00162} emxArray\_real\_T *\hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}()
+00163 \{
+00164 
+00165     emxArray\_real\_T *result;
+00166     \textcolor{keyword}{static} \textcolor{keywordtype}{int} iv1[2] = \{ 2, 2 \};
+00167 
+00168     \textcolor{keywordtype}{int} idx0;
+00169     \textcolor{keywordtype}{int} idx1;
+00170 
+00171     \textcolor{comment}{// Set the size of the array.}
+00172     \textcolor{comment}{// Change this size to the value that the application requires.}
+00173     result = emxCreateND\_real\_T(2, *(\textcolor{keywordtype}{int} (*)[100])&iv1[0]);
+00174 
+00175     \textcolor{comment}{// Loop over the array to initialize each element.}
+00176     \textcolor{keywordflow}{for} (idx0 = 0; idx0 < result->size[0U]; idx0++) \{
+00177         \textcolor{keywordflow}{for} (idx1 = 0; idx1 < 2; idx1++) \{
+00178             \textcolor{comment}{// Set the value of the array element.}
+00179             \textcolor{comment}{// Change this value to the value that the application requires.}
+00180             result->data[idx0 + result->size[0] * idx1] = 1.075;
+00181         \}
+00182     \}
+00183 
+00184     qDebug() << \textcolor{stringliteral}{"Created ibiFile in argInit\_Unboundedx2\_real\_T"} << endl;
+00185     \textcolor{keywordflow}{return} result;
+00186 \}
+00187 
+\end{DoxyCode}

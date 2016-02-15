@@ -1,0 +1,29 @@
+\hypertarget{ecgstreamobject_8cpp_source}{}\section{ecgstreamobject.\+cpp}
+\label{ecgstreamobject_8cpp_source}\index{src/ecgstreamobject.\+cpp@{src/ecgstreamobject.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{ecgstreamobject_8h}{ecgstreamobject.h}"}
+00002 
+\hypertarget{ecgstreamobject_8cpp_source.tex_l00003}{}\hyperlink{structEcgStreamObject_ae7be034b8a6701ca31af84cf5cc6f1e2}{00003} \hyperlink{structEcgStreamObject_ae7be034b8a6701ca31af84cf5cc6f1e2}{EcgStreamObject::EcgStreamObject}()
+00004 \{
+00005 
+00006 \}
+00007 
+\hypertarget{ecgstreamobject_8cpp_source.tex_l00008}{}\hyperlink{structEcgStreamObject_a51eafb78010c5589b8c488d89d057c60}{00008} \hyperlink{structEcgStreamObject_ae7be034b8a6701ca31af84cf5cc6f1e2}{EcgStreamObject::EcgStreamObject}(\textcolor{keywordtype}{double} \_frame1, \textcolor{keywordtype}{double} \_frame2, \textcolor{keywordtype}{double} 
+      \_frame3, \textcolor{keywordtype}{double} \_resp, \textcolor{keywordtype}{double} \_time)
+00009     : \hyperlink{structEcgStreamObject_ad6e113c9158619aa7305d7c95dc79d45}{frame1}(\_frame1),\hyperlink{structEcgStreamObject_a7f297c636f2bb49ce4337e670f66752a}{frame2}(\_frame2),\hyperlink{structEcgStreamObject_a40bfead3ce53e3a9677569dcdb80875a}{frame3}(\_frame3),\hyperlink{structEcgStreamObject_a79a47ddd0a7c6c432d12b0da042091bf}{time}(\_time),
+      \hyperlink{structEcgStreamObject_ab8b391bafe34077ab3733e29d1b76b50}{resp}(\_resp)\{
+00010 
+00011 \}
+00012 
+\hypertarget{ecgstreamobject_8cpp_source.tex_l00013}{}\hyperlink{structEcgStreamObject_ae988014880bd678ae693545b6b1f0175}{00013} QString \hyperlink{structEcgStreamObject_ae988014880bd678ae693545b6b1f0175}{EcgStreamObject::toText}()\textcolor{keyword}{ const}\{
+00014     QString tmp=QString::number(\hyperlink{structEcgStreamObject_a79a47ddd0a7c6c432d12b0da042091bf}{time}) + \textcolor{stringliteral}{"\(\backslash\)t"} + QString::number(\hyperlink{structEcgStreamObject_ad6e113c9158619aa7305d7c95dc79d45}{frame1}) + \textcolor{stringliteral}{"\(\backslash\)t"}
+00015                       +QString::number(\hyperlink{structEcgStreamObject_a7f297c636f2bb49ce4337e670f66752a}{frame2}) + \textcolor{stringliteral}{"\(\backslash\)t"}
+00016                        + QString::number(\hyperlink{structEcgStreamObject_a40bfead3ce53e3a9677569dcdb80875a}{frame3}) + \textcolor{stringliteral}{"\(\backslash\)t"}
+00017                         + QString::number(\hyperlink{structEcgStreamObject_ab8b391bafe34077ab3733e29d1b76b50}{resp});
+00018     \textcolor{keywordflow}{return} tmp;
+00019 \}
+\hypertarget{ecgstreamobject_8cpp_source.tex_l00020}{}\hyperlink{structEcgStreamObject_a0b44f43509360ffae050c6dedcbb59dd}{00020} \hyperlink{structEcgStreamObject_a0b44f43509360ffae050c6dedcbb59dd}{EcgStreamObject::~EcgStreamObject}()\{
+00021 
+00022 \}
+\end{DoxyCode}

@@ -1,0 +1,155 @@
+\hypertarget{convertecgtoibi_8cpp_source}{}\section{convertecgtoibi.\+cpp}
+\label{convertecgtoibi_8cpp_source}\index{src/convertecgtoibi.\+cpp@{src/convertecgtoibi.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * convertecgtoibi.cpp}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Nov 5, 2015}
+00005 \textcolor{comment}{ *      Author: martin}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#include "libFiles/QRSDET.H"}
+00009 \textcolor{preprocessor}{#include "libFiles/QRSFILT.CPP"}
+00010 
+00011 \textcolor{preprocessor}{#include "\hyperlink{convertecgtoibi_8h}{convertecgtoibi.h}"}
+00012 \textcolor{preprocessor}{#include <QThread>}
+00013 \textcolor{preprocessor}{#include <QString>}
+00014 \textcolor{preprocessor}{#include <QVector>}
+00015 \textcolor{preprocessor}{#include <QPointF>}
+00016 \textcolor{preprocessor}{#include <QFile>}
+00017 \textcolor{preprocessor}{#include <QTextStream>}
+00018 \textcolor{preprocessor}{#include <QRegularExpression>}
+00019 \textcolor{preprocessor}{#include <QDebug>}
+00020 \textcolor{preprocessor}{#include <iostream>}
+00021 
+00022 
+\hypertarget{convertecgtoibi_8cpp_source.tex_l00023}{}\hyperlink{classConvertEcgToIbi_add4a7e9eceff1edadcce6e7aa417c05f}{00023} \hyperlink{classConvertEcgToIbi_add4a7e9eceff1edadcce6e7aa417c05f}{ConvertEcgToIbi::ConvertEcgToIbi}(QString fileName, QObject *parent):
+00024 QThread( parent )
+00025 \{
+00026     fname = fileName;
+00027 
+00028 
+00029 \}
+00030 
+00031 \textcolor{comment}{/*}
+00032 \textcolor{comment}{ * Load the file with chosen filename and emit the signal sendFileData() when the file is read.}
+00033 \textcolor{comment}{ */}
+\hypertarget{convertecgtoibi_8cpp_source.tex_l00034}{}\hyperlink{classConvertEcgToIbi_a3d9ea57ed19352295382095febc82f71}{00034} \textcolor{keywordtype}{void} \hyperlink{classConvertEcgToIbi_a3d9ea57ed19352295382095febc82f71}{ConvertEcgToIbi::run}()
+00035 \{
+00036     QFile myFile(fname);
+00037     \textcolor{keywordflow}{if} (myFile.open(QIODevice::ReadOnly | QIODevice::Text)) \{
+00038         time.start();
+00039         QTextStream ecgInfo(&myFile);
+00040         QVector<int > ecgVals;
+00041         QVector<double> timeData;
+00042         \textcolor{keywordtype}{int} iterations;
+00043         \textcolor{keywordflow}{if} (!ecgInfo.atEnd()) \{
+00044             QString strVals = ecgInfo.readLine();
+00045             ecgInfo.readLine();
+00046             ecgInfo.readLine();
+00047             \textcolor{keywordtype}{double} tmp;
+00048             \textcolor{keywordtype}{int} i=0;
+00049             \textcolor{keywordflow}{while} (!ecgInfo.atEnd()) \{
+00050 
+00051                 strVals = ecgInfo.readLine();
+00052                 QStringList strPieces = strVals.split(QRegularExpression(\textcolor{stringliteral}{"\(\backslash\)\(\backslash\)s+"}));
+00053 
+00054 
+00055                 \textcolor{keywordflow}{if} (strPieces.length()==4) \{
+00056                     tmp=strPieces[2].toDouble();
+00057                     ecgVals.append((tmp*500)); 
+00058 
+00059                 \}
+00060                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strPieces.length()==3) \{
+00061                                     tmp=strPieces[2].toDouble();
+00062                                     ecgVals.append((tmp*500));
+00063                                                     \}
+00064                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strPieces.length()==5)\{
+00065 
+00066                     tmp=strPieces[2].toDouble();
+00067                     ecgVals.append((tmp*500));
+00068                     \}
+00069                 \textcolor{keywordflow}{else} \{
+00070                     std::cerr << \textcolor{stringliteral}{"Wrong File"} << std::endl;
+00071                     \textcolor{keywordflow}{return};
+00072                 \}
+00073                 i++;
+00074                 \}
+00075             QVector<double> qrsPeaks;
+00076             extractRtoR(&ecgVals, &qrsPeaks);
+00077             qrsPeaks.takeFirst();\textcolor{comment}{// Remove the influense of the QRS-detectors learning period}
+00078             qrsPeaks.takeFirst();\textcolor{comment}{// Remove the influense of the QRS-detectors learning period}
+00079             qrsPeaks.takeFirst();\textcolor{comment}{// Remove the influense of the QRS-detectors learning period}
+00080             tmp=0;
+00081             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i; i<qrsPeaks.length(); i++)\{
+00082                 tmp=tmp+(qrsPeaks.at(i));
+00083                 timeData.append(tmp);
+00084             \}
+00085             \textcolor{keywordflow}{if} (qrsPeaks.length()>10)\{   
+00086                 emit \hyperlink{classConvertEcgToIbi_a34d6d61a81e88116c65a2ba9198b7f1c}{sendFileData}(qrsPeaks,timeData);
+00087                 saveAsIbiFile(&qrsPeaks);
+00088             \}
+00089             \textcolor{keywordflow}{else}
+00090                 std::cerr << \textcolor{stringliteral}{"Not enough R peaks detected"} << std::endl;
+00091             qDebug(\textcolor{stringliteral}{"Time elapsed: %d ms"}, time.elapsed());
+00092 
+00093         \}
+00094         ecgInfo.flush();
+00095         myFile.close();
+00096 
+00097 
+00098 
+00099     \}
+00100 
+00101 \}
+00102 
+00103 \textcolor{keywordtype}{void} ConvertEcgToIbi::extractRtoR(QVector<int>* input, QVector<double>* output) \{
+00104 
+00105     output->append(\hyperlink{group__HRV-Analysis_ga5c14f0d7dd58dec49e939470bcb5db1c}{QRSDet}(input->takeFirst(),1));
+00106     \textcolor{keywordtype}{double} tmpQrs=0;
+00107     \textcolor{keywordtype}{double} count=0;
+00108     \textcolor{keywordflow}{while} (!input->empty()) \{
+00109         tmpQrs=\hyperlink{group__HRV-Analysis_ga5c14f0d7dd58dec49e939470bcb5db1c}{QRSDet}(input->takeFirst(),0);
+00110         \textcolor{keywordflow}{if} (tmpQrs==0)\{
+00111             count=count+1000/sampRate;
+00112         \}
+00113         \textcolor{keywordflow}{else} \{
+00114             output->append((count+1000/sampRate)/1000);
+00115             count=0;
+00116         \}
+00117 
+00118 
+00119 
+00120     \}
+00121 \}
+00122 \textcolor{keywordtype}{void} ConvertEcgToIbi::saveAsIbiFile(QVector<double>* input)\{
+00123     std::cerr << input->length() <<std::endl;
+00124     QFile outFile(fname + \textcolor{stringliteral}{"\_RR.txt"});
+00125 
+00126             \textcolor{keywordflow}{if} (!outFile.open(QIODevice::WriteOnly | QIODevice::Text)) \{
+00127 
+00128                 std::cerr << \textcolor{stringliteral}{"Failed to open data file for write"} << std::endl;
+00129             \} \textcolor{keywordflow}{else} \{
+00130                 QTextStream out(&outFile);
+00131                 \textcolor{keywordtype}{double} time=0,tmp=0;
+00132                 qDebug() << \textcolor{stringliteral}{"Writing "} << input->length() << \textcolor{stringliteral}{" samples to "} << fname << \textcolor{stringliteral}{"..."} << endl;
+00133 
+00134                 out <<\textcolor{stringliteral}{"Length:"} << \textcolor{stringliteral}{"\(\backslash\)t"} << QString::number(input->length()) << \textcolor{stringliteral}{"\(\backslash\)n"};
+00135                 out <<\textcolor{stringliteral}{"[s]"} << \textcolor{stringliteral}{"\(\backslash\)t"} << \textcolor{stringliteral}{"[s]"} << \textcolor{stringliteral}{"\(\backslash\)n"};
+00136                 \textcolor{keywordflow}{while} (!input->empty())\{
+00137                     tmp=input->takeFirst();
+00138                   \textcolor{comment}{//  tmp=tmp/1000;}
+00139                 out << QString::number(time, \textcolor{charliteral}{'f'}, 3) << \textcolor{stringliteral}{"\(\backslash\)t"}
+00140                             << QString::number(tmp, \textcolor{charliteral}{'f'}, 3) << \textcolor{stringliteral}{"\(\backslash\)n"};
+00141                     time+=tmp;
+00142                 \}
+00143 
+00144                 std::cerr << \textcolor{stringliteral}{"Samples saved in text format"} << std::endl;
+00145                 outFile.close();
+00146             \}
+00147 \}
+00148 
+00149 
+00150 
+\end{DoxyCode}

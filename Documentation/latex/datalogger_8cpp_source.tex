@@ -1,0 +1,103 @@
+\hypertarget{datalogger_8cpp_source}{}\section{datalogger.\+cpp}
+\label{datalogger_8cpp_source}\index{src/datalogger.\+cpp@{src/datalogger.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{datalogger_8h}{datalogger.h}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{settingssingleton_8h}{settingssingleton.h}"}
+00003 \textcolor{preprocessor}{#include <QDebug>}
+00004 \textcolor{preprocessor}{#include <iostream>}
+00005 \textcolor{preprocessor}{#include "\hyperlink{ecgstreamobject_8h}{ecgstreamobject.h}"}
+00006 \textcolor{preprocessor}{#include <QFile>}
+00007 
+00008 
+\hypertarget{datalogger_8cpp_source.tex_l00009}{}\hyperlink{classDataLogger_a4b383913e0fd834ff9b0d8bbd295c2db}{00009} \hyperlink{classDataLogger_a4b383913e0fd834ff9b0d8bbd295c2db}{DataLogger::DataLogger}(QObject *parent) : QObject(parent)
+00010 \{
+00011 
+00012 \}
+00013 
+\hypertarget{datalogger_8cpp_source.tex_l00014}{}\hyperlink{classDataLogger_a9aaff109f3e7749a0a0a0313655da50a}{00014} \hyperlink{classDataLogger_a9aaff109f3e7749a0a0a0313655da50a}{DataLogger::~DataLogger}()\{
+00015 
+00016 \}
+\hypertarget{datalogger_8cpp_source.tex_l00021}{}\hyperlink{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}{00021} \textcolor{keywordtype}{void} \hyperlink{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}{DataLogger::save}(\hyperlink{classDataStream}{DataStream} &input)\{
+00022     saveAsText(input);
+00023 
+00024     \textcolor{keywordflow}{if}  (\hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().getSaveAsEdf())\{
+00025         saveAsEdf(input);
+00026     \}
+00027 \}
+00036 \textcolor{keywordtype}{void} DataLogger::saveAsText(\hyperlink{classDataStream}{DataStream} &input)\{
+00037 
+00038 
+00039             QFile outFileHeader(\hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().getFileName()+\textcolor{stringliteral}{"
+      \_header.txt"});
+00040 
+00041                 \textcolor{keywordflow}{if} (!outFileHeader.open(QIODevice::WriteOnly | QIODevice::Text)) \{
+00042                 emit \hyperlink{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{updateStatus}(\textcolor{stringliteral}{"Failed to open data file for write!"});
+00043                     std::cerr << \textcolor{stringliteral}{"Failed to open header-data file for write!!"} << endl;
+00044                 \} \textcolor{keywordflow}{else} \{
+00045                     QTextStream outHeader(&outFileHeader);
+00046 
+00047                     outHeader   << \textcolor{stringliteral}{"[ECG CAPTURE SETTINGS]\(\backslash\)n"}
+00048                                 << \textcolor{stringliteral}{"Filename: "} <<      
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_aa5c7ee7b9966f8391d7431a7e8ab3949}{getFileName}() << \textcolor{stringliteral}{".txt \(\backslash\)n"}
+00049                                 << \textcolor{stringliteral}{"Samples: "} <<       QString::number(input.size()) << \textcolor{stringliteral}{"\(\backslash\)n"}
+00050                                 << \textcolor{stringliteral}{"Duration: "} <<      QString::number(input.back().time) << \textcolor{stringliteral}{"ms \(\backslash\)n"}
+00051                                 << \textcolor{stringliteral}{"Sample rate: "} <<   QString::number(
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a11896cc46cb374ae6a8234e1cd3cb68f}{getSampleRate}()) << \textcolor{stringliteral}{" Hz\(\backslash\)n"}
+00052                                 << \textcolor{stringliteral}{"Source: "}  <<       
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a612c925c64e9862b0fdeca1b5f8f4773}{getSource}() << \textcolor{stringliteral}{"\(\backslash\)n"}
+00053                                 << \textcolor{stringliteral}{"\(\backslash\)n[RECORDING INFORMATION]\(\backslash\)n"}
+00054                                 << \textcolor{stringliteral}{"Recording name: "} <<    
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a0275cd8a138fa91222ad36d9fbf465d2}{getRecordingName}() << \textcolor{stringliteral}{"\(\backslash\)n"}
+00055                                 << \textcolor{stringliteral}{"Patient code: "} <<      
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a01b74f6d99cfbbd5bc6114b69ee5c87c}{getPatientCode}() << \textcolor{stringliteral}{"\(\backslash\)n"}
+00056                                 << \textcolor{stringliteral}{"Name: "} <<              
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_ab9e0ab27c53f748e458cfb14f71a94ea}{getName}() << \textcolor{stringliteral}{"\(\backslash\)n"}
+00057                                 << \textcolor{stringliteral}{"Gender: "} <<            
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a3e61e7730d97ab3e893499538aba04ba}{getGender}() << \textcolor{stringliteral}{"\(\backslash\)n"}
+00058                                 << \textcolor{stringliteral}{"Birthdate: "} <<         
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a8e25762548883f476860ed5e1ab0b366}{getBirthDate}() << \textcolor{stringliteral}{"\(\backslash\)n"}
+00059                                 << \textcolor{stringliteral}{"Notes: "} <<             
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a14e8cddfa2bfbc896b9f31bddb4e675b}{getNotes}() << \textcolor{stringliteral}{"\(\backslash\)n"};
+00060 
+00061                     outFileHeader.close();
+00062 
+00063                 \}
+00064 
+00065                 QFile outFile(\hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().getFileName() + \textcolor{stringliteral}{"
+      .txt"});
+00066 
+00067                 \textcolor{keywordflow}{if} (!outFile.open(QIODevice::WriteOnly | QIODevice::Text)) \{
+00068                 emit \hyperlink{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{updateStatus}(\textcolor{stringliteral}{"Failed to open data file for write!"});
+00069                     std::cerr << \textcolor{stringliteral}{"Failed to open data file for write"} << std::endl;
+00070                 \} \textcolor{keywordflow}{else} \{
+00071                     QTextStream out(&outFile);
+00072 
+00073                 emit \hyperlink{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{updateStatus}(QString(\textcolor{stringliteral}{"Writing "} + QString::number(input.size()) + \textcolor{stringliteral}{"
+       samples to "} + \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_aa5c7ee7b9966f8391d7431a7e8ab3949}{getFileName}() + \textcolor{stringliteral}{"..."}));
+00074                     qDebug() << \textcolor{stringliteral}{"Writing "} << input.size() << \textcolor{stringliteral}{" samples to "} << 
+      \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_aa5c7ee7b9966f8391d7431a7e8ab3949}{getFileName}() << \textcolor{stringliteral}{"..."} << endl;
+00075 
+00076                     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i ; i<input.size();i++)\{
+00077                            \textcolor{keyword}{const} \hyperlink{structEcgStreamObject}{EcgStreamObject} tmp=input.at(i);
+00078                                             out << tmp.\hyperlink{structEcgStreamObject_ae988014880bd678ae693545b6b1f0175}{toText}() << endl; \textcolor{comment}{//"\(\backslash\)n";}
+00079 
+00080 
+00081                     \}
+00082 
+00083                 emit \hyperlink{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{updateStatus}(QString(\textcolor{stringliteral}{"Samples saved in text format"}));
+00084                     std::cerr << \textcolor{stringliteral}{"Samples saved in text format"} << std::endl;
+00085 
+00086                     outFile.close();
+00087                 \}
+00088 
+00089 
+00090 
+00091 \}
+00098 \textcolor{keywordtype}{void} DataLogger::saveAsEdf(\hyperlink{classDataStream}{DataStream} &input)\{
+00099     qDebug() << \textcolor{stringliteral}{"Save as EDF not implemented yet"} << endl;
+00100     \hyperlink{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{updateStatus}(\textcolor{stringliteral}{"Save as EDF not implemented yet"});
+00101 
+00102 
+00103 \}
+\end{DoxyCode}

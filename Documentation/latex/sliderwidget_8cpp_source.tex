@@ -1,0 +1,83 @@
+\hypertarget{sliderwidget_8cpp_source}{}\section{sliderwidget.\+cpp}
+\label{sliderwidget_8cpp_source}\index{src/sliderwidget.\+cpp@{src/sliderwidget.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{sliderwidget_8h}{sliderwidget.h}"}
+00002 \textcolor{preprocessor}{#include <QtWidgets>}
+00003 \textcolor{preprocessor}{#include <QDebug>}
+00004 
+\hypertarget{sliderwidget_8cpp_source.tex_l00005}{}\hyperlink{classSliderWidget_a22d7be7e513e8d74ec95fcc73d96fdf6}{00005} \hyperlink{classSliderWidget_a22d7be7e513e8d74ec95fcc73d96fdf6}{SliderWidget::SliderWidget}(\textcolor{keywordtype}{int} min, \textcolor{keywordtype}{int} max, \textcolor{keywordtype}{int} tick, QWidget *parent):
+00006     QWidget( parent )
+00007 \{
+00008     sliderMin = min;
+00009     sliderMax = max;
+00010     tickSize = tick;
+00011 
+00012     slider = \textcolor{keyword}{new} QSlider(Qt::Horizontal);
+00013     valueLabel = \textcolor{keyword}{new} QLabel;
+00014 
+00015     slider->setRange(sliderMin,sliderMax);
+00016 
+00017     valueLabel->setText(QString::number(slider->value()));
+00018 
+00019     connect(slider, SIGNAL(\hyperlink{classSliderWidget_a23048ce6bec593c2b4d932293b055fa7}{valueChanged}(\textcolor{keywordtype}{int})), \textcolor{keyword}{this}, SLOT(setLabelValue(\textcolor{keywordtype}{int})));
+00020     connect(slider, SIGNAL(\hyperlink{classSliderWidget_a23048ce6bec593c2b4d932293b055fa7}{valueChanged}(\textcolor{keywordtype}{int})), SIGNAL(\hyperlink{classSliderWidget_a23048ce6bec593c2b4d932293b055fa7}{valueChanged}(\textcolor{keywordtype}{int})));
+00021     connect(slider, SIGNAL(\hyperlink{classSliderWidget_aa109c6305bc6e78efe3091982e787325}{sliderReleased}()), SIGNAL(
+      \hyperlink{classSliderWidget_aa109c6305bc6e78efe3091982e787325}{sliderReleased}()));
+00022 
+00023     QHBoxLayout *hLayout = \textcolor{keyword}{new} QHBoxLayout;
+00024     hLayout->addWidget(slider, 19);
+00025     hLayout->addWidget(valueLabel, 1);
+00026 
+00027     setLayout(hLayout);
+00028 \}
+00029 
+00030 \textcolor{keywordtype}{void} SliderWidget::setLabelValue(\textcolor{keywordtype}{int} newValue)
+00031 \{
+00032     valueLabel->setText(QString::number(sliderMin + newValue*tickSize));
+00033 \}
+00034 
+00035 \textcolor{keywordtype}{void} SliderWidget::updateRange()
+00036 \{
+00037     slider->setRange(sliderMin, sliderMax);
+00038 \}
+00039 
+\hypertarget{sliderwidget_8cpp_source.tex_l00040}{}\hyperlink{classSliderWidget_a8d5fb2c86d6dbcbe67ae480590020af6}{00040} \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_a8d5fb2c86d6dbcbe67ae480590020af6}{SliderWidget::setTickSize}(\textcolor{keywordtype}{int} t)
+00041 \{
+00042     tickSize = t;
+00043 \}
+00044 
+\hypertarget{sliderwidget_8cpp_source.tex_l00045}{}\hyperlink{classSliderWidget_aeb088af9a4577c8ca1e64a06bd74eaa1}{00045} \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_aeb088af9a4577c8ca1e64a06bd74eaa1}{SliderWidget::setInterval}(\textcolor{keywordtype}{int} min, \textcolor{keywordtype}{int} max)
+00046 \{
+00047     sliderMin = min;
+00048     sliderMax = max;
+00049 
+00050     updateRange();
+00051 \}
+00052 
+\hypertarget{sliderwidget_8cpp_source.tex_l00053}{}\hyperlink{classSliderWidget_a3aec05c05cefab0ec470f6eb79afa81b}{00053} \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_a3aec05c05cefab0ec470f6eb79afa81b}{SliderWidget::getTicksize}()
+00054 \{
+00055     \textcolor{keywordflow}{return} tickSize;
+00056 \}
+00057 
+\hypertarget{sliderwidget_8cpp_source.tex_l00058}{}\hyperlink{classSliderWidget_a6606e549b1e934517a48f68f9d29ffa6}{00058} \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_a6606e549b1e934517a48f68f9d29ffa6}{SliderWidget::getMin}()
+00059 \{
+00060     \textcolor{keywordflow}{return} sliderMin;
+00061 \}
+00062 
+\hypertarget{sliderwidget_8cpp_source.tex_l00063}{}\hyperlink{classSliderWidget_acdeb4972b7a4ae90f0d042317ff2965d}{00063} \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_acdeb4972b7a4ae90f0d042317ff2965d}{SliderWidget::getMax}()
+00064 \{
+00065     \textcolor{keywordflow}{return} sliderMax;
+00066 \}
+00067 
+\hypertarget{sliderwidget_8cpp_source.tex_l00068}{}\hyperlink{classSliderWidget_a05ed61d5bb79a82da1f51f73b5e2466a}{00068} \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_a05ed61d5bb79a82da1f51f73b5e2466a}{SliderWidget::value}()
+00069 \{
+00070     \textcolor{keywordflow}{return} slider->value();
+00071 \}
+00072 
+\hypertarget{sliderwidget_8cpp_source.tex_l00073}{}\hyperlink{classSliderWidget_ad69dd98151b2132011341f7ae7799480}{00073} \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_ad69dd98151b2132011341f7ae7799480}{SliderWidget::setValue}(\textcolor{keywordtype}{int} val)
+00074 \{
+00075     slider->setValue(val);
+00076     setLabelValue(val);
+00077 \}
+\end{DoxyCode}

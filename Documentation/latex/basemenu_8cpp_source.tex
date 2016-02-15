@@ -1,0 +1,34 @@
+\hypertarget{basemenu_8cpp_source}{}\section{basemenu.\+cpp}
+\label{basemenu_8cpp_source}\index{src/\+Pi\+Face-\/\+Interface/basemenu.\+cpp@{src/\+Pi\+Face-\/\+Interface/basemenu.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{basemenu_8h}{basemenu.h}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{ecgcapturemenu_8h}{ecgcapturemenu.h}"}
+00003 \textcolor{preprocessor}{#include "\hyperlink{bluetoothmenu_8h}{bluetoothmenu.h}"}
+00004 
+\hypertarget{basemenu_8cpp_source.tex_l00005}{}\hyperlink{classBaseMenu_aac7431fdaecc0ecc3a0695511dc8426f}{00005} \hyperlink{classBaseMenu_aac7431fdaecc0ecc3a0695511dc8426f}{BaseMenu::BaseMenu}()
+00006 \{
+00007     \hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{numberOfOptions}=1;
+00008     \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}=\{\textcolor{stringliteral}{"Ecg Capture"}, \textcolor{stringliteral}{"Bluetooth"}\};
+00009 \}
+00010 
+\hypertarget{basemenu_8cpp_source.tex_l00011}{}\hyperlink{classBaseMenu_a722bb88987e9a64015c59f3419d89704}{00011} \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classBaseMenu_a722bb88987e9a64015c59f3419d89704}{BaseMenu::newMenu}()\{
+00012     \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classBaseMenu_a722bb88987e9a64015c59f3419d89704}{newMenu}=0;
+00013     \textcolor{keywordflow}{switch} (\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption})\{
+00014     \textcolor{keywordflow}{case} 0:
+00015         \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{setUpperText}();
+00016         newMenu=\textcolor{keyword}{new} \hyperlink{classEcgCaptureMenu}{EcgCaptureMenu};
+00017         \textcolor{keywordflow}{break};
+00018 
+00019     \textcolor{keywordflow}{case} 1:
+00020         \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{setUpperText}();
+00021         newMenu=\textcolor{keyword}{new} \hyperlink{classBluetoothMenu}{BluetoothMenu};
+00022         \textcolor{keywordflow}{break};
+00023     \}
+00024     \textcolor{keywordflow}{return} \hyperlink{classBaseMenu_a722bb88987e9a64015c59f3419d89704}{newMenu};
+00025 
+00026 
+00027 \}
+00028 
+00029 
+\end{DoxyCode}

@@ -1,0 +1,34 @@
+\hypertarget{hrvanalysis_8cpp}{}\section{src/hrvanalysis.cpp File Reference}
+\label{hrvanalysis_8cpp}\index{src/hrvanalysis.\+cpp@{src/hrvanalysis.\+cpp}}
+{\ttfamily \#include \char`\"{}hrvanalysis.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$Q\+Debug$>$}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/time\+Domain\+H\+R\+V\+\_\+emx\+A\+P\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/time\+Domain\+H\+R\+V\+\_\+terminate.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/time\+Domain\+H\+R\+V\+\_\+initialize.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/freq\+Domain\+H\+R\+V\+\_\+emx\+A\+P\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/freq\+Domain\+H\+R\+V\+\_\+terminate.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/freq\+Domain\+H\+R\+V\+\_\+initialize.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/pre\+Process\+I\+B\+I\+\_\+terminate.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/pre\+Process\+I\+B\+I\+\_\+initialize.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/pre\+Process\+I\+B\+I.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/pre\+Process\+I\+B\+I\+\_\+types.\+h\char`\"{}}\\*
+Include dependency graph for hrvanalysis.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hrvanalysis_8cpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, struct0\+\_\+T $\ast$output)
+\begin{DoxyCompactList}\small\item\em Performs the Statistical Time Domain calculations for H\+RV Analysis. \end{DoxyCompactList}\item 
+void \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{perform\+Freq\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, const Q\+Vector$<$ double $>$ $\ast$time\+Data, struct\+Freq\+\_\+T $\ast$output)
+\begin{DoxyCompactList}\small\item\em Performs calculations for Frequency Domain H\+RV Analysis. \end{DoxyCompactList}\item 
+emx\+Array\+\_\+real\+\_\+T $\ast$ \hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{arg\+Init\+\_\+\+Unboundedx2\+\_\+real\+\_\+T} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, const Q\+Vector$<$ double $>$ $\ast$time\+Data)
+\begin{DoxyCompactList}\small\item\em Creates the emx\+Array\+\_\+real\+\_\+T needed for \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv()} The emx\+Array\+\_\+real\+\_\+T is the input vector to the Matlab-\/\+Coder function called by \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{perform\+Freq\+Domain\+Hrv()} \end{DoxyCompactList}\item 
+emx\+Array\+\_\+real\+\_\+T $\ast$ \hyperlink{group__HRV-Analysis_ga95c104a451f12859980435cf9353fc76}{arg\+Init\+\_\+\+Unboundedx2\+\_\+real\+\_\+T} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data)
+\begin{DoxyCompactList}\small\item\em Creates the emx\+Array\+\_\+real\+\_\+T needed for \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv()} The emx\+Array\+\_\+real\+\_\+T is the input vector to the Matlab-\/\+Coder function called by \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv()} \end{DoxyCompactList}\item 
+emx\+Array\+\_\+real\+\_\+T $\ast$ \hyperlink{group__HRV-Analysis_ga3bb79c98480ffdfdb826b87cac72be16}{arg\+Init\+\_\+\+Unboundedx2\+\_\+real\+\_\+T} ()
+\begin{DoxyCompactList}\small\item\em Creates the emx\+Array\+\_\+real\+\_\+T needed for \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv()} The emx\+Array\+\_\+real\+\_\+T is the input vector to the Matlab-\/\+Coder function called by \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv()} \end{DoxyCompactList}\end{DoxyCompactItemize}

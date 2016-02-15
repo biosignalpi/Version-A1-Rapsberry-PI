@@ -1,0 +1,28 @@
+\hypertarget{deviceinterface_8cpp_source}{}\section{deviceinterface.\+cpp}
+\label{deviceinterface_8cpp_source}\index{src/deviceinterface.\+cpp@{src/deviceinterface.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{deviceinterface_8h}{deviceinterface.h}"}
+00002 \textcolor{preprocessor}{#include <iostream>}
+00003      
+\hypertarget{deviceinterface_8cpp_source.tex_l00004}{}\hyperlink{classDeviceInterface_a9923935a7fa7b3134568ec7fd97705e3}{00004}     \hyperlink{classDeviceInterface_a9923935a7fa7b3134568ec7fd97705e3}{DeviceInterface::DeviceInterface}(\hyperlink{classDataStream}{DataStream}& inputStream) : 
+      stream(inputStream) \{
+00005         \textcolor{comment}{//stream=inputStream;}
+00006     \}
+00007     
+\hypertarget{deviceinterface_8cpp_source.tex_l00008}{}\hyperlink{classDeviceInterface_a668a221c7a77701e25719f406d407746}{00008}     \hyperlink{classDeviceInterface_a668a221c7a77701e25719f406d407746}{DeviceInterface::~DeviceInterface}() \{
+00009 
+00010     \}
+\hypertarget{deviceinterface_8cpp_source.tex_l00011}{}\hyperlink{classDeviceInterface_a03e9c1bfeabe1a97f05bf9107b89ae67}{00011}     \textcolor{keywordtype}{void} \hyperlink{classDeviceInterface_a03e9c1bfeabe1a97f05bf9107b89ae67}{DeviceInterface::init}(\hyperlink{classDataStream}{DataStream}& inputStream)\{
+00012         \hyperlink{classDeviceInterface_ac98f5cd34bafb43265436b29b9f734fa}{stream}=inputStream;
+00013     \}
+\hypertarget{deviceinterface_8cpp_source.tex_l00014}{}\hyperlink{classDeviceInterface_adae4c7e07e9bdbbe62be961fd306b5c8}{00014}     \textcolor{keywordtype}{void} \hyperlink{classDeviceInterface_adae4c7e07e9bdbbe62be961fd306b5c8}{DeviceInterface::sendSampleVectorFunction}(QVector<
+      QVector<QPointF> > input)\{
+00015 
+00016         emit \hyperlink{classDeviceInterface_ae1bcd766865161a659076d2561e79dc5}{sendSampleVector}(input);
+00017     \}
+\hypertarget{deviceinterface_8cpp_source.tex_l00018}{}\hyperlink{classDeviceInterface_a83df9dc924dbe0e6c3e0d0fef2a604d0}{00018}         \textcolor{keywordtype}{void} \hyperlink{classDeviceInterface_a83df9dc924dbe0e6c3e0d0fef2a604d0}{DeviceInterface::updateStatusFunction}(QString input)\{
+00019             std::cerr << \textcolor{stringliteral}{"updateStatusFunction"} << std::endl;
+00020             emit \hyperlink{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}{updateStatus}(input);
+00021         \}
+\end{DoxyCode}

@@ -1,0 +1,230 @@
+\hypertarget{classEcgMock}{}\section{Ecg\+Mock Class Reference}
+\label{classEcgMock}\index{Ecg\+Mock@{Ecg\+Mock}}
+
+
+Mock version of an device The \hyperlink{classEcgMock}{Ecg\+Mock} device will return sine and cosine functions as data.  
+
+
+
+
+{\ttfamily \#include $<$ecgmock.\+h$>$}
+
+
+
+Inheritance diagram for Ecg\+Mock\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=166pt]{classEcgMock__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Ecg\+Mock\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classEcgMock__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classEcgMock_a880936385845728f4d96a54848d8ab6e}{Ecg\+Mock} (\hyperlink{classDataStream}{Data\+Stream} \&input\+Stream)
+\item 
+virtual \hyperlink{classEcgMock_a977966ab6184171d95c9f9c01eca0c7a}{$\sim$\+Ecg\+Mock} ()
+\item 
+virtual void \hyperlink{classEcgMock_aaa2628c0e8364980e6f252dfc3b86d1a}{get\+Data} (\hyperlink{classDataStream}{Data\+Stream} \&)
+\item 
+virtual bool \hyperlink{classEcgMock_ab5e3aac9d92b52b23fafb6e540902f28}{connected} ()
+\begin{DoxyCompactList}\small\item\em true as long as \hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{close()} isn\textquotesingle{}t called. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classEcgMock_aed480e6edc6016917a5663f61b3a5091}{reconnect} ()
+\begin{DoxyCompactList}\small\item\em sets state=true \end{DoxyCompactList}\item 
+virtual void \hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{close} ()
+\begin{DoxyCompactList}\small\item\em sets state=false \end{DoxyCompactList}\item 
+virtual void \hyperlink{classEcgMock_aa65eb7c062913402c77ed1dc628168a7}{stop} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classEcgMock_a8822f99759fcfe9648262007cb380daa}{run} ()
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Mock version of an device The \hyperlink{classEcgMock}{Ecg\+Mock} device will return sine and cosine functions as data. 
+
+Call the \hyperlink{classEcgMock}{Ecg\+Mock} should render (sine(x),cosine(x),tan(x),sin(2x)) \begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000004}{Bug}]No known Bugs \end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{ecgmock_8h_source_l00021}{21} of file \hyperlink{ecgmock_8h_source}{ecgmock.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ecg\+Mock@{Ecg\+Mock}!Ecg\+Mock@{Ecg\+Mock}}
+\index{Ecg\+Mock@{Ecg\+Mock}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{Ecg\+Mock(\+Data\+Stream \&input\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}Ecg\+Mock\+::\+Ecg\+Mock (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{input\+Stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classEcgMock_a880936385845728f4d96a54848d8ab6e}{}\label{classEcgMock_a880936385845728f4d96a54848d8ab6e}
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00015}{15} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+\index{Ecg\+Mock@{Ecg\+Mock}!````~Ecg\+Mock@{$\sim$\+Ecg\+Mock}}
+\index{````~Ecg\+Mock@{$\sim$\+Ecg\+Mock}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{$\sim$\+Ecg\+Mock()}]{\setlength{\rightskip}{0pt plus 5cm}Ecg\+Mock\+::$\sim$\+Ecg\+Mock (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEcgMock_a977966ab6184171d95c9f9c01eca0c7a}{}\label{classEcgMock_a977966ab6184171d95c9f9c01eca0c7a}
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00019}{19} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{classEcgMock_a977966ab6184171d95c9f9c01eca0c7a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Ecg\+Mock@{Ecg\+Mock}!close@{close}}
+\index{close@{close}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{close()}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Mock\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{}\label{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}
+
+
+sets state=false 
+
+
+
+Implements \hyperlink{classDeviceInterface_a08473443413b1725a3930aace12e2837}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00107}{107} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=314pt]{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Ecg\+Mock@{Ecg\+Mock}!connected@{connected}}
+\index{connected@{connected}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{connected()}]{\setlength{\rightskip}{0pt plus 5cm}bool Ecg\+Mock\+::connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEcgMock_ab5e3aac9d92b52b23fafb6e540902f28}{}\label{classEcgMock_ab5e3aac9d92b52b23fafb6e540902f28}
+
+
+true as long as \hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{close()} isn\textquotesingle{}t called. 
+
+
+
+Implements \hyperlink{classDeviceInterface_a4c7fa83218b6a7c5700cb75253b2165e}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00099}{99} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+\index{Ecg\+Mock@{Ecg\+Mock}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{get\+Data(\+Data\+Stream \&)}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Mock\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{input\+Stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEcgMock_aaa2628c0e8364980e6f252dfc3b86d1a}{}\label{classEcgMock_aaa2628c0e8364980e6f252dfc3b86d1a}
+\begin{DoxySeeAlso}{See also}
+\hyperlink{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887}{Device\+Interface\+::get\+Data()};
+\end{DoxySeeAlso}
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000003}{Deprecated}]old function, not used 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classDataStream}{Data\+Stream}} & \&\\
+\hline
+\end{DoxyParams}
+\end{DoxyRefDesc}
+
+
+Implements \hyperlink{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00028}{28} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+\index{Ecg\+Mock@{Ecg\+Mock}!reconnect@{reconnect}}
+\index{reconnect@{reconnect}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{reconnect()}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Mock\+::reconnect (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEcgMock_aed480e6edc6016917a5663f61b3a5091}{}\label{classEcgMock_aed480e6edc6016917a5663f61b3a5091}
+
+
+sets state=true 
+
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00103}{103} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+\index{Ecg\+Mock@{Ecg\+Mock}!run@{run}}
+\index{run@{run}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{run()}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Mock\+::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classEcgMock_a8822f99759fcfe9648262007cb380daa}{}\label{classEcgMock_a8822f99759fcfe9648262007cb380daa}
+
+
+Implements \hyperlink{classDeviceInterface_a6511c2845f5198acc94f5d7dd21cae57}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00047}{47} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+\index{Ecg\+Mock@{Ecg\+Mock}!stop@{stop}}
+\index{stop@{stop}!Ecg\+Mock@{Ecg\+Mock}}
+\subsubsection[{stop()}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Mock\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classEcgMock_aa65eb7c062913402c77ed1dc628168a7}{}\label{classEcgMock_aa65eb7c062913402c77ed1dc628168a7}
+
+
+Implements \hyperlink{classDeviceInterface_a101b3b53a01add866737920e03a850a8}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{ecgmock_8cpp_source_l00094}{94} of file \hyperlink{ecgmock_8cpp_source}{ecgmock.\+cpp}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{ecgmock_8h}{ecgmock.\+h}\item 
+src/\hyperlink{ecgmock_8cpp}{ecgmock.\+cpp}\end{DoxyCompactItemize}

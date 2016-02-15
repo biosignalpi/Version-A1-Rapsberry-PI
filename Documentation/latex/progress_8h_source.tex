@@ -1,0 +1,83 @@
+\hypertarget{progress_8h_source}{}\section{progress.\+h}
+\label{progress_8h_source}\index{src/\+Qt-\/btfiletransfer/progress.\+h@{src/\+Qt-\/btfiletransfer/progress.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/****************************************************************************}
+00002 \textcolor{comment}{**}
+00003 \textcolor{comment}{** Copyright (C) 2015 The Qt Company Ltd.}
+00004 \textcolor{comment}{** Contact: http://www.qt.io/licensing/}
+00005 \textcolor{comment}{**}
+00006 \textcolor{comment}{** This file is part of the QtBluetooth module of the Qt Toolkit.}
+00007 \textcolor{comment}{**}
+00008 \textcolor{comment}{** $QT\_BEGIN\_LICENSE:BSD$}
+00009 \textcolor{comment}{** You may use this file under the terms of the BSD license as follows:}
+00010 \textcolor{comment}{**}
+00011 \textcolor{comment}{** "Redistribution and use in source and binary forms, with or without}
+00012 \textcolor{comment}{** modification, are permitted provided that the following conditions are}
+00013 \textcolor{comment}{** met:}
+00014 \textcolor{comment}{**   * Redistributions of source code must retain the above copyright}
+00015 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer.}
+00016 \textcolor{comment}{**   * Redistributions in binary form must reproduce the above copyright}
+00017 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer in}
+00018 \textcolor{comment}{**     the documentation and/or other materials provided with the}
+00019 \textcolor{comment}{**     distribution.}
+00020 \textcolor{comment}{**   * Neither the name of The Qt Company Ltd nor the names of its}
+00021 \textcolor{comment}{**     contributors may be used to endorse or promote products derived}
+00022 \textcolor{comment}{**     from this software without specific prior written permission.}
+00023 \textcolor{comment}{**}
+00024 \textcolor{comment}{**}
+00025 \textcolor{comment}{** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00026 \textcolor{comment}{** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00027 \textcolor{comment}{** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00028 \textcolor{comment}{** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00029 \textcolor{comment}{** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00030 \textcolor{comment}{** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00031 \textcolor{comment}{** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00032 \textcolor{comment}{** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00033 \textcolor{comment}{** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00034 \textcolor{comment}{** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00035 \textcolor{comment}{** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."}
+00036 \textcolor{comment}{**}
+00037 \textcolor{comment}{** $QT\_END\_LICENSE$}
+00038 \textcolor{comment}{**}
+00039 \textcolor{comment}{****************************************************************************/}
+00040 
+00041 \textcolor{preprocessor}{#ifndef PROGRESS\_H}
+00042 \textcolor{preprocessor}{#define PROGRESS\_H}
+00043 
+00044 \textcolor{preprocessor}{#include <QDialog>}
+00045 \textcolor{preprocessor}{#include <qbluetoothglobal.h>}
+00046 \textcolor{preprocessor}{#include <QTime>}
+00047 
+00048 QT\_FORWARD\_DECLARE\_CLASS(QBluetoothTransferReply)
+00049 
+00050 QT\_USE\_NAMESPACE
+00051 
+00052 QT\_BEGIN\_NAMESPACE
+00053 namespace \hyperlink{namespaceUi}{Ui} \{
+00054     \textcolor{keyword}{class }\hyperlink{classProgress}{Progress};
+00055 \}
+00056 QT\_END\_NAMESPACE
+00057 
+\hypertarget{progress_8h_source.tex_l00058}{}\hyperlink{classProgress}{00058} \textcolor{keyword}{class }\hyperlink{classProgress}{Progress} : \textcolor{keyword}{public} QDialog
+00059 \{
+00060     Q\_OBJECT
+00061 
+00062 \textcolor{keyword}{public}:
+00063     \textcolor{keyword}{explicit} \hyperlink{classProgress_a51e0a5625142fedf57d9d822afb1b8d4}{Progress}(QWidget *parent = 0);
+00064     \hyperlink{classProgress_abfa443f16958768636a59a560b625317}{~Progress}();
+00065 
+00066     \textcolor{keywordtype}{void} \hyperlink{classProgress_ae2fec44e18b6cfb3e4cba984bdb16824}{setStatus}(QString title, QString filename);
+00067 
+00068 \textcolor{keyword}{public} Q\_SLOTS:
+00069     \textcolor{keywordtype}{void} \hyperlink{classProgress_a15a8bf25ca7faafcc866813f1fd90677}{finished}(QBluetoothTransferReply *);
+00070     \textcolor{keywordtype}{void} \hyperlink{classProgress_ae4b8bbb82b1713a353688fb24ea39864}{uploadProgress}(qint64 bytesSent, qint64 bytesTotal);
+00071 
+00072 \textcolor{keyword}{private}:
+00073     Ui::Progress *ui;
+00074 
+00075     QTime start;
+00076 \};
+00077 
+00078 \textcolor{preprocessor}{#endif // PROGRESS\_H}
+\end{DoxyCode}

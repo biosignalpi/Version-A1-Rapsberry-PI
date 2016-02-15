@@ -1,0 +1,91 @@
+
+\begin{DoxyRefList}
+\item[\label{todo__todo000021}%
+\hypertarget{todo__todo000021}{}%
+Member \hyperlink{classBluetoothMenu_a0fd16ad5a39ce3624613ad7834a55565}{Bluetooth\+Menu\+:\+:new\+Menu} ()]implement when Bluetooth functionallity is working for the R\+PI 
+
+Implement to get Bluyetooth functionallity  
+\item[\label{todo__todo000003}%
+\hypertarget{todo__todo000003}{}%
+Class \hyperlink{classConvertEcgToIbi}{Convert\+Ecg\+To\+Ibi} ]take different sort of files as input 
+\item[\label{todo__todo000001}%
+\hypertarget{todo__todo000001}{}%
+Member \hyperlink{classConvertEcgToIbi_a3d9ea57ed19352295382095febc82f71}{Convert\+Ecg\+To\+Ibi\+:\+:run} ()]normalize input to work with more files 
+
+F\+IX this check neater  
+\item[\label{todo__todo000009}%
+\hypertarget{todo__todo000009}{}%
+Member \hyperlink{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}{Device\+Manager\+:\+:stop} ()]use connected() before execution  
+\item[\label{todo__todo000011}%
+\hypertarget{todo__todo000011}{}%
+Class \hyperlink{classEcgCapture}{Ecg\+Capture} ]Move all function descriptions from the .cpp file to the headerfile (.h file) \begin{DoxyAuthor}{Author}
+Jonathan 
+
+Martin  
+\end{DoxyAuthor}
+
+\item[\label{todo__todo000012}%
+\hypertarget{todo__todo000012}{}%
+Member \hyperlink{group__Device-Facade_ga8fef74cdd0296256ab4a700dae2d02a4}{Ecg\+Capture\+:\+:stop} ()]Implement 
+\item[\label{todo__todo000013}%
+\hypertarget{todo__todo000013}{}%
+Module \hyperlink{group__HRV-Analysis}{H\+R\+V-\/\+Analysis} ]Add a function/class that takes a \hyperlink{classDataStream}{Data\+Stream} object as input and performs all the steps of the H\+RV Analysis taking E\+C\+G-\/\+Data as input and returning calculated H\+R\+V-\/\+Data.  
+\item[\label{todo__todo000014}%
+\hypertarget{todo__todo000014}{}%
+File \hyperlink{hrvanalysis_8h}{hrvanalysis.h} ]add the ability to use a \hyperlink{classDataStream}{Data\+Stream} object as input for the H\+R\+V-\/functions.  
+\item[\label{todo__todo000017}%
+\hypertarget{todo__todo000017}{}%
+Class \hyperlink{classHrvWidget}{Hrv\+Widget} ]Might be neccessary to set a upper limit for how large files to analyze. The qrs detection is the most computional demanding function called by \hyperlink{classHrvWidget}{Hrv\+Widget} 
+
+Add a seperate Header\+Text\+Area to display information from Header textfile if that exists. 
+
+Add the ability to use it for different sampling frequency sampling frequency is set in compile-\/time. Value set in Q\+R\+S\+D\+E\+T.\+h and \hyperlink{convertecgtoibi_8h}{convertecgtoibi.\+h}  
+\item[\label{todo__todo000018}%
+\hypertarget{todo__todo000018}{}%
+Class \hyperlink{classLoadBigFile}{Load\+Big\+File} ]Could be integrated into \hyperlink{classDataLogger}{Data\+Logger} instead  
+\item[\label{todo__todo000019}%
+\hypertarget{todo__todo000019}{}%
+Class \hyperlink{classMainWindow}{Main\+Window} ]add new Icons for the H\+R\+V-\/\+Widget and the Bluetooth\+Transfer-\/\+Widget 
+\item[\label{todo__todo000016}%
+\hypertarget{todo__todo000016}{}%
+global\+Scope$>$ Member \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{perform\+Freq\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, const Q\+Vector$<$ double $>$ $\ast$time\+Data, struct\+Freq\+\_\+T $\ast$output)]Add Ectopic Intervall Detection and Ectopic Interval Correction for the ibi\+Data 
+
+Add Detrend for the ibi\+Data 
+\item[\label{todo__todo000015}%
+\hypertarget{todo__todo000015}{}%
+global\+Scope$>$ Member \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, struct0\+\_\+T $\ast$output)]Add Ectopic Intervall Detection and Ectopic Interval Correction for the ibi\+Data 
+\item[\label{todo__todo000023}%
+\hypertarget{todo__todo000023}{}%
+Class \hyperlink{classPlotAndCaptureWidget}{Plot\+And\+Capture\+Widget} ]Move comments from .cpp file to header file (.h)  
+\item[\label{todo__todo000024}%
+\hypertarget{todo__todo000024}{}%
+Member \hyperlink{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}{Plot\+And\+Capture\+Widget\+:\+:take\+Screen} ()]prevent overwriting previous snapshots  
+\item[\label{todo__todo000025}%
+\hypertarget{todo__todo000025}{}%
+Class \hyperlink{classPlottingWidget}{Plotting\+Widget} ]Use the \hyperlink{classDataLogger}{Data\+Logger} instead of load\+Big\+File for reading data from txt and edf file. This needs to be implemented both in this class and also in the \hyperlink{classDataLogger}{Data\+Logger} Class. 
+\item[\label{todo__todo000030}%
+\hypertarget{todo__todo000030}{}%
+Member \hyperlink{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{Sampling\+Thread\+:\+:close} ()]Implement function 
+
+Implement  
+\item[\label{todo__todo000029}%
+\hypertarget{todo__todo000029}{}%
+Member \hyperlink{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{Sampling\+Thread\+:\+:connected} ()]Implement function 
+
+Implement \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\item[\label{todo__todo000028}%
+\hypertarget{todo__todo000028}{}%
+Member \hyperlink{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}{Sampling\+Thread\+:\+:get\+Data} (\hyperlink{classDataStream}{Data\+Stream} \&)]
+\item[\label{todo__todo000022}%
+\hypertarget{todo__todo000022}{}%
+Member \hyperlink{classSettingsMenu_abc441c12e8044c13f1a99791e2ee30d1}{Settings\+Menu\+:\+:new\+Menu} ()]Implement  
+\item[\label{todo__todo000031}%
+\hypertarget{todo__todo000031}{}%
+Class \hyperlink{classSettingsSingleton}{Settings\+Singleton} ]Add verification functions controlling the input.  
+\item[\label{todo__todo000033}%
+\hypertarget{todo__todo000033}{}%
+Class \hyperlink{classSettingsWidget}{Settings\+Widget} ]Add some sort of input-\/control for validating that the entered data is \char`\"{}correct\char`\"{} 
+\end{DoxyRefList}

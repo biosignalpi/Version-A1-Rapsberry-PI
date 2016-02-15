@@ -1,0 +1,139 @@
+\hypertarget{mainwindow_8cpp_source}{}\section{mainwindow.\+cpp}
+\label{mainwindow_8cpp_source}\index{src/mainwindow.\+cpp@{src/mainwindow.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{mainwindow_8h}{mainwindow.h}"}
+00002 \textcolor{comment}{/*#include "ecgplotwidget.h"}
+00003 \textcolor{comment}{#include "ecgviewwidget.h"}
+00004 \textcolor{comment}{#include "emptywidget.h" */}
+00005 \textcolor{preprocessor}{#include "\hyperlink{homepagewidget_8h}{homepagewidget.h}"}
+00006 \textcolor{preprocessor}{#include "\hyperlink{plottingwidget_8h}{plottingwidget.h}"}
+00007 \textcolor{preprocessor}{#include "\hyperlink{settingswidget_8h}{settingswidget.h}"}
+00008 \textcolor{preprocessor}{#include <QtWidgets>}
+00009 \textcolor{preprocessor}{#include "\hyperlink{plotandcapturewidget_8h}{plotandcapturewidget.h}"}
+00010 \textcolor{preprocessor}{#include "\hyperlink{hrvwidget_8h}{hrvwidget.h}"}
+00011 \textcolor{preprocessor}{#include "\hyperlink{remoteselector_8h}{Qt-btfiletransfer/remoteselector.h}"}
+00012 
+\hypertarget{mainwindow_8cpp_source.tex_l00013}{}\hyperlink{classMainWindow_a25e1fb1c2c42a5b961db39ae08ff6443}{00013} \hyperlink{classMainWindow_a25e1fb1c2c42a5b961db39ae08ff6443}{MainWindow::MainWindow}(QWidget *parent):
+00014     QWidget( parent )
+00015 \{
+00016     setupComponents();
+00017     setupActions();
+00018     setupLayout();
+00019 \}
+00020 
+00021 \textcolor{keywordtype}{void} MainWindow::quit()
+00022 \{
+00023     qApp->quit();
+00024 \}
+00025 
+00026 \textcolor{keywordtype}{void} MainWindow::takeScreenshot()
+00027 \{
+00028     QPixmap screen = this->grab();
+00029 
+00030     QDir directory(qApp->applicationDirPath());
+00031     QStringList filesInDir = directory.entryList();
+00032     QString baseName = QDate::currentDate().toString().remove(\textcolor{stringliteral}{" "});
+00033 
+00034     \textcolor{keywordflow}{if} (filesInDir.contains(baseName+\textcolor{stringliteral}{".png"})) \{
+00035         \textcolor{keywordtype}{int} ii=1;
+00036         \textcolor{keywordflow}{while} (filesInDir.contains(QString(baseName+\textcolor{stringliteral}{"%1.png"}).arg(ii))) \{
+00037             ii++;
+00038         \}
+00039         baseName += QString::number(ii);
+00040     \}
+00041     baseName += \textcolor{stringliteral}{".png"};
+00042     screen.save(baseName);
+00043 
+00044 \}
+00049 \textcolor{keywordtype}{void} MainWindow::setupComponents()
+00050 \{
+00051     \hyperlink{classHomePageWidget}{HomePageWidget} *homePageWidget = \textcolor{keyword}{new} \hyperlink{classHomePageWidget}{HomePageWidget};
+00052     \hyperlink{classPlotAndCaptureWidget}{PlotAndCaptureWidget} *ecgPlotWidget = \textcolor{keyword}{new} 
+      \hyperlink{classPlotAndCaptureWidget}{PlotAndCaptureWidget};
+00053     \hyperlink{classPlottingWidget}{PlottingWidget} *plottingWidget = \textcolor{keyword}{new} \hyperlink{classPlottingWidget}{PlottingWidget};
+00054     \hyperlink{classSettingsWidget}{SettingsWidget} *settingsWidget = \textcolor{keyword}{new} \hyperlink{classSettingsWidget}{SettingsWidget};
+00055     \hyperlink{classHrvWidget}{HrvWidget} *hrvWidget= \textcolor{keyword}{new} \hyperlink{classHrvWidget}{HrvWidget};
+00056     \hyperlink{classRemoteSelector}{RemoteSelector} *bluetoothWidget=\textcolor{keyword}{new} \hyperlink{classRemoteSelector}{RemoteSelector};
+00057 
+00058     quitButton = \textcolor{keyword}{new} QPushButton(tr(\textcolor{stringliteral}{"Quit"}));
+00059     quitButton->show();
+00060     quitButton->setMinimumHeight(64);
+00061     quitButton->setMaximumHeight(64);
+00062 
+00063 
+00064     screenShotButton = \textcolor{keyword}{new} QPushButton(tr(\textcolor{stringliteral}{"Take snapshot"}));
+00065     screenShotButton->show();
+00066     screenShotButton->setMinimumHeight(64);
+00067     screenShotButton->setMaximumHeight(64);
+00068 
+00069 
+00070     stackedWidget = \textcolor{keyword}{new} QStackedWidget();
+00071     stackedWidget->addWidget(homePageWidget);
+00072     stackedWidget->addWidget(ecgPlotWidget);
+00073     stackedWidget->addWidget(plottingWidget);
+00074     stackedWidget->addWidget(settingsWidget);
+00075     stackedWidget->addWidget(hrvWidget);
+00076     stackedWidget->addWidget(bluetoothWidget);
+00077 
+00078 
+00079     QListWidgetItem *homeListWidgetItem = \textcolor{keyword}{new} QListWidgetItem;
+00080     homeListWidgetItem->setText(\textcolor{stringliteral}{"Start"});
+00081     homeListWidgetItem->setIcon(QIcon(\textcolor{stringliteral}{":/images/images/go-home.png"}));
+00082 
+00083     QListWidgetItem *plotCaptureListWidgetItem = \textcolor{keyword}{new} QListWidgetItem;
+00084     plotCaptureListWidgetItem->setText(\textcolor{stringliteral}{"ECG capture"});
+00085     plotCaptureListWidgetItem->setIcon(QIcon(\textcolor{stringliteral}{":/images/images/emblem-favorite.png"}));
+00086 
+00087     QListWidgetItem *ecgViewListWidgetItem = \textcolor{keyword}{new} QListWidgetItem;
+00088     ecgViewListWidgetItem->setText(\textcolor{stringliteral}{"View ECG"});
+00089     ecgViewListWidgetItem->setIcon(QIcon(\textcolor{stringliteral}{":/images/images/media-playback-start-4.png"}));
+00090 
+00091     QListWidgetItem *settingsListWidgetItem = \textcolor{keyword}{new} QListWidgetItem;
+00092     settingsListWidgetItem->setText(\textcolor{stringliteral}{"Settings"});
+00093     settingsListWidgetItem->setIcon(QIcon(\textcolor{stringliteral}{":/images/images/emblem-system-2.png"}));
+00094 
+00095     QListWidgetItem *hrvListWidgetItem = \textcolor{keyword}{new} QListWidgetItem;
+00096     hrvListWidgetItem->setText(\textcolor{stringliteral}{"HRV"});
+00097     hrvListWidgetItem->setIcon(QIcon(\textcolor{stringliteral}{":/images/images/emblem-system-2.png"}));
+00098 
+00099     QListWidgetItem *bluetoothWidgetItem = \textcolor{keyword}{new} QListWidgetItem;
+00100     bluetoothWidgetItem->setText(\textcolor{stringliteral}{"Bluetooth Transfer"});
+00101     bluetoothWidgetItem->setIcon(QIcon(\textcolor{stringliteral}{":/images/images/emblem-favorite.png"}));
+00102 
+00103 
+00104     listWidget = \textcolor{keyword}{new} QListWidget();
+00105     listWidget->addItem(homeListWidgetItem);
+00106     listWidget->addItem(plotCaptureListWidgetItem);
+00107     listWidget->addItem(ecgViewListWidgetItem);
+00108     listWidget->addItem(settingsListWidgetItem);
+00109     listWidget->addItem(hrvListWidgetItem);
+00110     listWidget->addItem(bluetoothWidgetItem);
+00111     listWidget->setIconSize(QSize(48,48));
+00112     listWidget->setFlow(QListWidget::LeftToRight);
+00113     listWidget->setMaximumHeight(64);
+00114     listWidget->setUniformItemSizes(\textcolor{keyword}{false});
+00115 \}
+00116 
+00117 \textcolor{keywordtype}{void} MainWindow::setupActions()
+00118 \{
+00119 
+00120     connect(listWidget, SIGNAL(currentRowChanged(\textcolor{keywordtype}{int})), stackedWidget, SLOT(setCurrentIndex(\textcolor{keywordtype}{int})));
+00121     connect(quitButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(quit()));
+00122     connect(screenShotButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(takeScreenshot()));
+00123 \}
+00124 
+00125 \textcolor{keywordtype}{void} MainWindow::setupLayout()
+00126 \{
+00127     QHBoxLayout *sidebarLayout = \textcolor{keyword}{new} QHBoxLayout;
+00128     sidebarLayout->addWidget(listWidget);
+00129     sidebarLayout->addWidget(screenShotButton);
+00130     sidebarLayout->addWidget(quitButton);
+00131 
+00132     QVBoxLayout *mainLayout = \textcolor{keyword}{new} QVBoxLayout;
+00133     mainLayout->addWidget(stackedWidget);
+00134     mainLayout->addLayout(sidebarLayout);
+00135 
+00136     setLayout(mainLayout);
+00137 \}
+\end{DoxyCode}

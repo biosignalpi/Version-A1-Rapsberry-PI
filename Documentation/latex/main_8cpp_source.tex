@@ -1,0 +1,27 @@
+\hypertarget{main_8cpp_source}{}\section{main.\+cpp}
+\label{main_8cpp_source}\index{src/main.\+cpp@{src/main.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{mainwindow_8h}{mainwindow.h}"}
+00002 \textcolor{preprocessor}{#include <QApplication>}
+00003 \textcolor{preprocessor}{#include <stdio.h>}
+00004 \textcolor{preprocessor}{#include <iostream>}
+00005 \textcolor{preprocessor}{#include <QStyleFactory>}
+00006 
+00007 \textcolor{keyword}{using namespace }\hyperlink{namespacestd}{std};
+00008 
+\hypertarget{main_8cpp_source.tex_l00009}{}\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{00009} \textcolor{keywordtype}{int} \hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])
+00010 \{
+00011     QApplication a(argc, argv);
+00012     qApp->setStyle(QStyleFactory::create(\textcolor{stringliteral}{"Fusion"}));
+00013     qRegisterMetaType< QVector<QPointF> >(\textcolor{stringliteral}{"QVector<QPointF>"});
+00014     qRegisterMetaType< QPointF >(\textcolor{stringliteral}{"QPointF"});
+00015     qRegisterMetaType< QVector< double> >(\textcolor{stringliteral}{"QVector<double>"});
+00016     qRegisterMetaType< QVector<QVector<QPointF> > >(\textcolor{stringliteral}{"QVector<QVector<QPointF> >"});
+00017     \hyperlink{classMainWindow}{MainWindow} w;
+00018     w.setFixedSize(800,700);  \textcolor{comment}{//Needed for using the Biosignal PI with Linux Mint and Ubuntu the Window
+       will resize unexpectedly otherwise}
+00019     w.show();
+00020     \textcolor{keywordflow}{return} a.exec();
+00021 \}
+\end{DoxyCode}

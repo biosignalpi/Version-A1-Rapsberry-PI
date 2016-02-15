@@ -1,0 +1,29 @@
+\hypertarget{ecgcapturemenu_8h_source}{}\section{ecgcapturemenu.\+h}
+\label{ecgcapturemenu_8h_source}\index{src/\+Pi\+Face-\/\+Interface/ecgcapturemenu.\+h@{src/\+Pi\+Face-\/\+Interface/ecgcapturemenu.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef ECGCAPTUREMENU\_H}
+00002 \textcolor{preprocessor}{#define ECGCAPTUREMENU\_H}
+00003 
+00004 \textcolor{preprocessor}{#include "\hyperlink{basemenu_8h}{basemenu.h}"}
+00005 \textcolor{preprocessor}{#include "../datalogger.h"}
+00006 \textcolor{preprocessor}{#include "../devicemanager.h"}
+00007 
+\hypertarget{ecgcapturemenu_8h_source.tex_l00014}{}\hyperlink{classEcgCaptureMenu}{00014} \textcolor{keyword}{class }\hyperlink{classEcgCaptureMenu}{EcgCaptureMenu} : \textcolor{keyword}{public} \hyperlink{classBaseMenu}{BaseMenu}
+00015 \{
+00016 \textcolor{keyword}{public}:
+00017     \hyperlink{classEcgCaptureMenu_ac430bc0a2eb1879fe77cd0133d4dd704}{EcgCaptureMenu}();
+\hypertarget{ecgcapturemenu_8h_source.tex_l00018}{}\hyperlink{classEcgCaptureMenu_ac779737a084cb49d1517974543d4965b}{00018}     \textcolor{keyword}{virtual} \hyperlink{classEcgCaptureMenu_ac779737a084cb49d1517974543d4965b}{~EcgCaptureMenu}()\{\};
+00024     \textcolor{keyword}{virtual} \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classEcgCaptureMenu_a610d2985e09cd56cb381e6e443dbbc72}{newMenu}();
+00025 \textcolor{keyword}{private}:
+00026        \hyperlink{classDeviceManager}{DeviceManager}* device;
+00027        \hyperlink{classDataStream}{DataStream}* stream;
+00028        \hyperlink{classDataLogger}{DataLogger}* logger;
+00029 \};
+00030 
+00031 \textcolor{preprocessor}{#endif // ECGCAPTUREMENU\_H}
+00032 
+00033 
+00034 
+00035 
+\end{DoxyCode}

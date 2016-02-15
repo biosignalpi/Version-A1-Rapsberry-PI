@@ -1,0 +1,420 @@
+\hypertarget{plottingwidget_8cpp_source}{}\section{plottingwidget.\+cpp}
+\label{plottingwidget_8cpp_source}\index{src/plottingwidget.\+cpp@{src/plottingwidget.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{plottingwidget_8h}{plottingwidget.h}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{sliderwidget_8h}{sliderwidget.h}"}
+00003 \textcolor{preprocessor}{#include "\hyperlink{loadbigfile_8h}{loadbigfile.h}"}
+00004 \textcolor{preprocessor}{#include <\hyperlink{plot_8h}{plot.h}>}
+00005 \textcolor{preprocessor}{#include <QtWidgets>}
+00006 
+\hypertarget{plottingwidget_8cpp_source.tex_l00007}{}\hyperlink{classPlottingWidget_a094b0449651206a5d5fbad95489d9a05}{00007} \hyperlink{classPlottingWidget_a094b0449651206a5d5fbad95489d9a05}{PlottingWidget::PlottingWidget}(QWidget *parent):
+00008     QWidget( parent )
+00009 \{
+00010     recordingTime = 0;
+00011     nFrames = 0;
+00012     currentFrame = 0;
+00013 
+00014     setupComponents();
+00015     setupActions();
+00016     setupLayout();
+00017 \}
+00018 
+00019 \textcolor{comment}{/*}
+00020 \textcolor{comment}{ * Load the supported ECG formats from the application directory.}
+00021 \textcolor{comment}{ *}
+00022 \textcolor{comment}{ * Supported formats: .txt, .edf, .bdf}
+00023 \textcolor{comment}{ */}
+00024 \textcolor{keywordtype}{void} PlottingWidget::getEcgFileList()
+00025 \{
+00026     ecgFilesWidget->clear();
+00027 
+00028     QStringList nameFilter;
+00029     nameFilter << \textcolor{stringliteral}{"*.txt"};
+00030     nameFilter << \textcolor{stringliteral}{"*.edf"};
+00031     nameFilter << \textcolor{stringliteral}{"*.bdf"};
+00032     QDir directory(qApp->applicationDirPath());
+00033     QStringList ecgFiles = directory.entryList(nameFilter);
+00034 
+00035     ecgFilesWidget->addItems(ecgFiles);
+00036 \}
+00037 
+00038 \textcolor{comment}{/*}
+00039 \textcolor{comment}{ * If a file is double-clicked, load it in a different thread to prevent locking the GUI}
+00040 \textcolor{comment}{ */}
+00041 \textcolor{keywordtype}{void} PlottingWidget::fileSelected(QListWidgetItem *item)
+00042 \{
+00043     tlbl->setText(\textcolor{stringliteral}{"Loading "}+item->text());
+00044     progBar->setVisible(\textcolor{keyword}{true});
+00045     progBar->setRange(0,0);
+00046     progBar->setValue(0);
+00047 
+00048     \hyperlink{classLoadBigFile}{LoadBigFile} *loadFile = \textcolor{keyword}{new} \hyperlink{classLoadBigFile}{LoadBigFile}(item->text());
+00049 
+00050     connect(loadFile, SIGNAL(sendFileData(QVector<QVector<QPointF> >)), \textcolor{keyword}{this}, SLOT(initEcg(QVector<
+      QVector<QPointF> >)));
+00051 
+00052     loadFile->start();
+00053 
+00054     \textcolor{comment}{//Read header file and display information about the recording}
+00055     QFileInfo fInfo(item->text());
+00056     QFile headerFile(fInfo.baseName()+\textcolor{stringliteral}{"\_header.txt"});
+00057     \textcolor{keywordflow}{if} (headerFile.open(QIODevice::ReadOnly | QIODevice::Text)) \{
+00058         QTextStream headerTextStream(&headerFile);
+00059         QString headerText;
+00060 
+00061         \textcolor{keywordflow}{while} (!headerTextStream.atEnd()) \{
+00062             headerText += headerTextStream.readLine() + \textcolor{stringliteral}{"\(\backslash\)n"};
+00063         \}
+00064 
+00065         headerTextArea->setText(headerText);
+00066         headerTextStream.flush();
+00067         headerFile.close();
+00068     \}
+00069 \}
+00070 
+00071 \textcolor{comment}{/*}
+00072 \textcolor{comment}{ * Clear the plot}
+00073 \textcolor{comment}{ */}
+00074 \textcolor{keywordtype}{void} PlottingWidget::clearPlot()
+00075 \{
+00076     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00077         d\_plots[ii]->ClearPlot();
+00078     \}
+00079 
+00080 
+00081 \}
+00082 
+00083 \textcolor{comment}{/*}
+00084 \textcolor{comment}{ * If the slider for browsing the ecg is moved, update the plot to show the new interval of}
+00085 \textcolor{comment}{ * the ECG.}
+00086 \textcolor{comment}{ */}
+00087 \textcolor{keywordtype}{void} PlottingWidget::updatePlot(\textcolor{keywordtype}{int} index)
+00088 \{
+00089     \textcolor{keywordtype}{int} windowSize = timeframeComboBox->itemData(timeframeComboBox->currentIndex()).toInt();
+00090     \textcolor{keywordtype}{int} startingPosition = index*windowSize;
+00091     currentFrame = index;
+00092 
+00093     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00094         d\_plots[ii]->setInterval(startingPosition, startingPosition+windowSize);
+00095     \}
+00096     \textcolor{comment}{// d\_plot->setInterval(startingPosition, startingPosition+windowSize);}
+00097 \}
+00098 
+00099 \textcolor{comment}{/*}
+00100 \textcolor{comment}{ * If the window size of the plot is changed, go back to the start and update the plotted interval}
+00101 \textcolor{comment}{ */}
+00102 \textcolor{keywordtype}{void} PlottingWidget::windowSizeChanged(\textcolor{keywordtype}{int} index)
+00103 \{
+00104     \textcolor{keywordflow}{if} (index > 1) \{
+00105         currentFrame = 0;
+00106         \textcolor{keywordtype}{int} windowSize = timeframeComboBox->itemData(index).toInt();
+00107         nFrames = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(recordingTime/timeframeComboBox->itemData(index).toInt());
+00108 
+00109         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00110             d\_plots[ii]->setInterval(0, windowSize);
+00111         \}
+00112 
+00113         \textcolor{comment}{//d\_plot->setInterval(0, windowSize);}
+00114     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (index == 0) \{
+00115         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00116             d\_plots[ii]->setInterval(0, recordingTime);
+00117         \}
+00118 
+00119         \textcolor{comment}{// d\_plot->setInterval(0, recordingTime);}
+00120         nFrames = 0;
+00121     \}
+00122 
+00123     startingPointSlider->\hyperlink{classSliderWidget_aeb088af9a4577c8ca1e64a06bd74eaa1}{setInterval}(0, nFrames);
+00124     startingPointSlider->\hyperlink{classSliderWidget_ad69dd98151b2132011341f7ae7799480}{setValue}(0);
+00125 \}
+00126 
+00127 \textcolor{comment}{/*}
+00128 \textcolor{comment}{ * Init the ECG vector and display the ECG.}
+00129 \textcolor{comment}{ */}
+00130 \textcolor{keywordtype}{void} PlottingWidget::initEcg(QVector<QVector<QPointF> > fileData)
+00131 \{
+00132     ecgVals = fileData;
+00133 
+00134     tlbl->setText(\textcolor{stringliteral}{"Done!"});
+00135     progBar->setMaximum(10);
+00136     progBar->setValue(10);
+00137 
+00138     recordingTime = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(ecgVals.last().at(0).x());
+00139     nFrames = \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(recordingTime/timeframeComboBox->itemData(timeframeComboBox->currentIndex())
+      .toInt());
+00140 
+00141     startingPointSlider->\hyperlink{classSliderWidget_aeb088af9a4577c8ca1e64a06bd74eaa1}{setInterval}(0,nFrames);
+00142 
+00143     plotVector();
+00144 
+00145     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00146         d\_plots[ii]->setInterval(0, timeframeComboBox->itemData(timeframeComboBox->currentIndex()).toInt())
+      ;
+00147     \}
+00148 
+00149     \textcolor{keywordflow}{if} (recordingTime>5) \{
+00150         QVector<double> maxVector;
+00151         QVector<double> minVector;
+00152 
+00153         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00154             maxVector.append(ecgVals[500].at(ii).y());
+00155             minVector.append(ecgVals[500].at(ii).y());
+00156         \}
+00157 
+00158         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 500; ii<ecgVals.length(); ii++) \{
+00159             \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} jj = 0; jj<4; jj++) \{
+00160                 \textcolor{keywordflow}{if}(ecgVals[ii].at(jj).y()<maxVector[jj]) \{
+00161                     \textcolor{keywordflow}{if} (ecgVals[ii].at(jj).y()<minVector[jj])
+00162                     \{
+00163                         minVector[jj] = ecgVals[ii].at(jj).y();
+00164                     \}
+00165                 \} \textcolor{keywordflow}{else} \{
+00166                     maxVector[jj] = ecgVals[ii].at(jj).y();
+00167                 \}
+00168             \}
+00169         \}
+00170 
+00171         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00172             d\_plots[ii]->setYAxis(minVector[ii], maxVector[ii]);
+00173         \}
+00174 
+00175     \}
+00176 
+00177     \textcolor{comment}{// d\_plot->setInterval(0, timeframeComboBox->itemData(timeframeComboBox->currentIndex()).toInt());}
+00178 \}
+00179 
+00180 \textcolor{comment}{/*}
+00181 \textcolor{comment}{ * Plot the vector obtained from the initEcg method}
+00182 \textcolor{comment}{ */}
+00183 \textcolor{keywordtype}{void} PlottingWidget::plotVector()
+00184 \{
+00185     \textcolor{keyword}{const} \textcolor{keywordtype}{int} sampleSize = ecgVals.length();
+00186     d\_plots[0]->setInterval(0, ecgVals.last().at(0).x());
+00187 
+00188     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00189         d\_plots[ii]->ClearPlot();
+00190     \}
+00191     \textcolor{comment}{// d\_plot->ClearPlot();}
+00192 
+00193     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii < sampleSize; ii++) \{
+00194         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} jj = 0; jj<4; jj++) \{
+00195             d\_plots[jj]->AppendPoint(ecgVals.at(ii).at(jj));
+00196         \}
+00197         \textcolor{comment}{// d\_plot[ii]->AppendPoint(ecgVals.at(ii).at(0));}
+00198     \}
+00199 
+00200     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00201         d\_plots[ii]->DrawCurveSegment(sampleSize);
+00202     \}
+00203     \textcolor{comment}{// d\_plot->DrawCurveSegment(sampleSize);}
+00204 
+00205 \}
+00206 
+00207 \textcolor{comment}{/*}
+00208 \textcolor{comment}{ * Show the previous frame of the signal}
+00209 \textcolor{comment}{ */}
+00210 \textcolor{keywordtype}{void} PlottingWidget::prev()
+00211 \{
+00212     \textcolor{keywordflow}{if} (currentFrame > 0) \{
+00213         \textcolor{keywordtype}{int} windowSize = timeframeComboBox->itemData(timeframeComboBox->currentIndex()).toInt();
+00214         currentFrame = startingPointSlider->\hyperlink{classSliderWidget_a05ed61d5bb79a82da1f51f73b5e2466a}{value}() - 1;
+00215         startingPointSlider->\hyperlink{classSliderWidget_ad69dd98151b2132011341f7ae7799480}{setValue}(currentFrame);
+00216 
+00217         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00218             d\_plots[ii]->setInterval(currentFrame*windowSize, (currentFrame+1)*windowSize);
+00219         \}
+00220         \textcolor{comment}{// d\_plot->setInterval(currentFrame*windowSize, (currentFrame+1)*windowSize);}
+00221     \}
+00222 \}
+00223 
+00224 \textcolor{comment}{/*}
+00225 \textcolor{comment}{ * Start ECG playback}
+00226 \textcolor{comment}{ */}
+00227 \textcolor{keywordtype}{void} PlottingWidget::play()
+00228 \{
+00229     \textcolor{keywordtype}{int} windowSize = timeframeComboBox->itemData(timeframeComboBox->currentIndex()).toInt();
+00230     playTimer->start(windowSize*1000);
+00231 \}
+00232 
+00233 \textcolor{comment}{/*}
+00234 \textcolor{comment}{ * Pause ECG playback}
+00235 \textcolor{comment}{ */}
+00236 \textcolor{keywordtype}{void} PlottingWidget::pause()
+00237 \{
+00238     playTimer->stop();
+00239 \}
+00240 
+00241 \textcolor{comment}{/*}
+00242 \textcolor{comment}{ * Show the next fram of the signal}
+00243 \textcolor{comment}{ */}
+00244 \textcolor{keywordtype}{void} PlottingWidget::next()
+00245 \{
+00246     \textcolor{keywordflow}{if} (currentFrame<nFrames) \{
+00247         \textcolor{keywordtype}{int} windowSize = timeframeComboBox->itemData(timeframeComboBox->currentIndex()).toInt();
+00248         currentFrame = startingPointSlider->\hyperlink{classSliderWidget_a05ed61d5bb79a82da1f51f73b5e2466a}{value}() + 1;
+00249         startingPointSlider->\hyperlink{classSliderWidget_ad69dd98151b2132011341f7ae7799480}{setValue}(currentFrame);
+00250 
+00251         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00252             d\_plots[ii]->setInterval(currentFrame*windowSize, (currentFrame+1)*windowSize);
+00253         \}
+00254         \textcolor{comment}{// d\_plot->setInterval(currentFrame*windowSize, (currentFrame+1)*windowSize);}
+00255     \}
+00256 \}
+00257 
+00258 \textcolor{comment}{/*}
+00259 \textcolor{comment}{ * Catches the event when the mouse is in the widget are and the scroll button is moved.}
+00260 \textcolor{comment}{ * If scrolled away from the user the next methos is triggered and a step forward is made,}
+00261 \textcolor{comment}{ * if scrolled towards the user the prev method is triggered to browse backwards.}
+00262 \textcolor{comment}{ */}
+\hypertarget{plottingwidget_8cpp_source.tex_l00263}{}\hyperlink{classPlottingWidget_abcb7d54e226df7067f821c954bb3589b}{00263} \textcolor{keywordtype}{void} \hyperlink{classPlottingWidget_abcb7d54e226df7067f821c954bb3589b}{PlottingWidget::wheelEvent}(QWheelEvent *event)
+00264 \{
+00265     \textcolor{keywordtype}{int} delta = \textcolor{keyword}{event}->delta();
+00266 
+00267     \textcolor{keywordflow}{if} (delta > 0) \{
+00268         next();
+00269     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (delta < 0) \{
+00270         prev();
+00271     \}
+00272 \}
+00273 
+00274 \textcolor{comment}{/*}
+00275 \textcolor{comment}{ * Setup the necessary components that is used in the widget}
+00276 \textcolor{comment}{ */}
+00277 \textcolor{keywordtype}{void} PlottingWidget::setupComponents()
+00278 \{
+00279     \textcolor{comment}{//Timer used to play a recorded ECG}
+00280     playTimer = \textcolor{keyword}{new} QTimer();
+00281 
+00282     \textcolor{comment}{//Buttons}
+00283     getFilesButton = \textcolor{keyword}{new} QPushButton(\textcolor{stringliteral}{"Get ECG files"});
+00284     resetPlotButton = \textcolor{keyword}{new} QPushButton(\textcolor{stringliteral}{"Reset plot"});
+00285 
+00286     \textcolor{comment}{//Header text area}
+00287     headerTextArea = \textcolor{keyword}{new} QTextEdit(\textcolor{stringliteral}{""});
+00288 
+00289     \textcolor{comment}{//Progressbar label}
+00290     tlbl = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"no file selected"});
+00291 
+00292     \textcolor{comment}{//List of ecg files}
+00293     ecgFilesWidget = \textcolor{keyword}{new} QListWidget;
+00294     ecgFilesWidget->setFixedSize(QSize(QWIDGETSIZE\_MAX,100));
+00295 
+00296     \textcolor{comment}{//Plot widget}
+00297     \textcolor{comment}{//d\_plot = new Plot("",this);}
+00298     d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Lead I"}, \textcolor{keyword}{this}));
+00299     d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Lead II"}, \textcolor{keyword}{this}));
+00300     d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Lead III"}, \textcolor{keyword}{this}));
+00301     d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Respiration"}, \textcolor{keyword}{this}));
+00302 
+00303     d\_plots[0]->setCurveColor(Qt::red);
+00304     d\_plots[1]->setCurveColor(Qt::blue);
+00305     d\_plots[2]->setCurveColor(Qt::green);
+00306     d\_plots[3]->setCurveColor(Qt::black);
+00307 
+00308     d\_plots[3]->setCurveMargin(0.0001);
+00309 
+00310     \textcolor{comment}{//Progress bar}
+00311     progBar = \textcolor{keyword}{new} QProgressBar();
+00312     progBar->setRange(0,0);
+00313     progBar->setVisible(\textcolor{keyword}{false});
+00314     progBar->setTextVisible(\textcolor{keyword}{false});
+00315 
+00316     \textcolor{comment}{//Window size component}
+00317     timeframeComboBox = \textcolor{keyword}{new} QComboBox();
+00318     timeframeComboBox->addItem(\textcolor{stringliteral}{"Whole recording"}, 0);
+00319     timeframeComboBox->insertSeparator(1);
+00320     timeframeComboBox->addItem(\textcolor{stringliteral}{"5 s"}, 5);
+00321     timeframeComboBox->addItem(\textcolor{stringliteral}{"10 s"}, 10);
+00322     timeframeComboBox->addItem(\textcolor{stringliteral}{"1 min"}, 60);
+00323     timeframeComboBox->setCurrentIndex(2);
+00324 
+00325     \textcolor{comment}{//Slider to navigate the recorded signal}
+00326     startingPointSlider = \textcolor{keyword}{new} \hyperlink{classSliderWidget}{SliderWidget}();
+00327 \}
+00328 
+00329 \textcolor{comment}{/*}
+00330 \textcolor{comment}{ * Setup actions and the signal-slots used in the widget}
+00331 \textcolor{comment}{ */}
+00332 \textcolor{keywordtype}{void} PlottingWidget::setupActions()
+00333 \{
+00334     \textcolor{comment}{//ECG navigation control buttons}
+00335     prevAction = \textcolor{keyword}{new} QAction(QIcon(\textcolor{stringliteral}{":/images/images/media-skip-backward-6.png"}), \textcolor{stringliteral}{"Prev."}, \textcolor{keyword}{this});
+00336     playAction = \textcolor{keyword}{new} QAction(QIcon(\textcolor{stringliteral}{":/images/images/media-playback-start-6.png"}), \textcolor{stringliteral}{"Play"}, \textcolor{keyword}{this});
+00337     pauseAction = \textcolor{keyword}{new} QAction(QIcon(\textcolor{stringliteral}{":/images/images/media-playback-pause-6.png"}), \textcolor{stringliteral}{"Pause"}, \textcolor{keyword}{this});
+00338     nextAction = \textcolor{keyword}{new} QAction(QIcon(\textcolor{stringliteral}{":/images/images/media-skip-forward-6.png"}), \textcolor{stringliteral}{"Next"}, \textcolor{keyword}{this});
+00339 
+00340     \textcolor{comment}{//Signals-slots}
+00341     connect(prevAction, SIGNAL(triggered()), \textcolor{keyword}{this}, SLOT(prev()));
+00342     connect(nextAction, SIGNAL(triggered()), \textcolor{keyword}{this}, SLOT(next()));
+00343     connect(playAction, SIGNAL(triggered()), \textcolor{keyword}{this}, SLOT(play()));
+00344     connect(pauseAction, SIGNAL(triggered()), \textcolor{keyword}{this}, SLOT(pause()));
+00345     connect(timeframeComboBox,SIGNAL(currentIndexChanged(\textcolor{keywordtype}{int})),\textcolor{keyword}{this},SLOT(windowSizeChanged(\textcolor{keywordtype}{int})));
+00346     connect(getFilesButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(getEcgFileList()));
+00347     connect(resetPlotButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(clearPlot()));
+00348     connect(startingPointSlider, SIGNAL(valueChanged(\textcolor{keywordtype}{int})), \textcolor{keyword}{this}, SLOT(updatePlot(\textcolor{keywordtype}{int})));
+00349     connect(ecgFilesWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), \textcolor{keyword}{this}, SLOT(fileSelected(
+      QListWidgetItem*)));
+00350     connect(playTimer, SIGNAL(timeout()), \textcolor{keyword}{this}, SLOT(next()));
+00351 \}
+00352 
+00353 \textcolor{comment}{/*}
+00354 \textcolor{comment}{ * Setup the layout of the widget}
+00355 \textcolor{comment}{ */}
+00356 \textcolor{keywordtype}{void} PlottingWidget::setupLayout()
+00357 \{
+00358 
+00359     QLabel *wsLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Window size"});
+00360 
+00361     \textcolor{comment}{//Setup the navigation control}
+00362     QToolBar *playbackButtons = \textcolor{keyword}{new} QToolBar;
+00363     playbackButtons->addAction(prevAction);
+00364     playbackButtons->addAction(playAction);
+00365     playbackButtons->addAction(pauseAction);
+00366     playbackButtons->addAction(nextAction);
+00367 
+00368     \textcolor{comment}{//Progressbar area}
+00369     QHBoxLayout *progressBarLayout = \textcolor{keyword}{new} QHBoxLayout;
+00370     progressBarLayout->addWidget(tlbl, 2);
+00371     progressBarLayout->addWidget(progBar, 8);
+00372 
+00373     \textcolor{comment}{//Window size control area}
+00374     QHBoxLayout *wsLayout = \textcolor{keyword}{new} QHBoxLayout;
+00375     wsLayout->addStretch();
+00376     wsLayout->addWidget(wsLabel);
+00377     wsLayout->addWidget(timeframeComboBox);
+00378     wsLayout->addStretch();
+00379 
+00380     \textcolor{comment}{//Area with navigation control components}
+00381     QHBoxLayout *playbackLayout = \textcolor{keyword}{new} QHBoxLayout;
+00382     playbackLayout->addWidget(playbackButtons);
+00383     playbackLayout->addWidget(startingPointSlider);
+00384 
+00385     \textcolor{comment}{//Sidebar layout}
+00386     QVBoxLayout *sidebarLayout = \textcolor{keyword}{new} QVBoxLayout;
+00387     sidebarLayout->addWidget(getFilesButton);
+00388     sidebarLayout->addWidget(ecgFilesWidget);
+00389     sidebarLayout->addLayout(progressBarLayout);
+00390     sidebarLayout->addLayout(wsLayout);
+00391     sidebarLayout->addWidget(headerTextArea);
+00392     sidebarLayout->addStretch();
+00393     sidebarLayout->addWidget(resetPlotButton);
+00394 
+00395     \textcolor{comment}{//Plot layout}
+00396     QVBoxLayout *plotLayout = \textcolor{keyword}{new} QVBoxLayout;
+00397     \textcolor{comment}{//plotLayout->addWidget(d\_plot);}
+00398 
+00399     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii < 4; ii++) \{
+00400         plotLayout->addWidget(d\_plots[ii]);
+00401     \}
+00402 
+00403     plotLayout->addLayout(playbackLayout);
+00404 
+00405     \textcolor{comment}{//Main layout}
+00406     QHBoxLayout *mainLayout = \textcolor{keyword}{new} QHBoxLayout;
+00407     mainLayout->addLayout(sidebarLayout, 1);
+00408     mainLayout->addLayout(plotLayout, 9);
+00409 
+00410     setLayout(mainLayout);
+00411 \}
+\end{DoxyCode}

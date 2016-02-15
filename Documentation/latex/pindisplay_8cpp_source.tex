@@ -1,0 +1,74 @@
+\hypertarget{pindisplay_8cpp_source}{}\section{pindisplay.\+cpp}
+\label{pindisplay_8cpp_source}\index{src/\+Qt-\/btfiletransfer/pindisplay.\+cpp@{src/\+Qt-\/btfiletransfer/pindisplay.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/****************************************************************************}
+00002 \textcolor{comment}{**}
+00003 \textcolor{comment}{** Copyright (C) 2015 The Qt Company Ltd.}
+00004 \textcolor{comment}{** Contact: http://www.qt.io/licensing/}
+00005 \textcolor{comment}{**}
+00006 \textcolor{comment}{** This file is part of the QtBluetooth module of the Qt Toolkit.}
+00007 \textcolor{comment}{**}
+00008 \textcolor{comment}{** $QT\_BEGIN\_LICENSE:BSD$}
+00009 \textcolor{comment}{** You may use this file under the terms of the BSD license as follows:}
+00010 \textcolor{comment}{**}
+00011 \textcolor{comment}{** "Redistribution and use in source and binary forms, with or without}
+00012 \textcolor{comment}{** modification, are permitted provided that the following conditions are}
+00013 \textcolor{comment}{** met:}
+00014 \textcolor{comment}{**   * Redistributions of source code must retain the above copyright}
+00015 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer.}
+00016 \textcolor{comment}{**   * Redistributions in binary form must reproduce the above copyright}
+00017 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer in}
+00018 \textcolor{comment}{**     the documentation and/or other materials provided with the}
+00019 \textcolor{comment}{**     distribution.}
+00020 \textcolor{comment}{**   * Neither the name of The Qt Company Ltd nor the names of its}
+00021 \textcolor{comment}{**     contributors may be used to endorse or promote products derived}
+00022 \textcolor{comment}{**     from this software without specific prior written permission.}
+00023 \textcolor{comment}{**}
+00024 \textcolor{comment}{**}
+00025 \textcolor{comment}{** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00026 \textcolor{comment}{** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00027 \textcolor{comment}{** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00028 \textcolor{comment}{** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00029 \textcolor{comment}{** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00030 \textcolor{comment}{** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00031 \textcolor{comment}{** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00032 \textcolor{comment}{** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00033 \textcolor{comment}{** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00034 \textcolor{comment}{** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00035 \textcolor{comment}{** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."}
+00036 \textcolor{comment}{**}
+00037 \textcolor{comment}{** $QT\_END\_LICENSE$}
+00038 \textcolor{comment}{**}
+00039 \textcolor{comment}{****************************************************************************/}
+00040 
+00041 \textcolor{preprocessor}{#include "\hyperlink{pindisplay_8h}{pindisplay.h}"}
+00042 \textcolor{preprocessor}{#include "ui\_pindisplay.h"}
+00043 
+\hypertarget{pindisplay_8cpp_source.tex_l00044}{}\hyperlink{classpinDisplay_a36cbc413bef6dbb2b35d22034e09d954}{00044} \hyperlink{classpinDisplay_a36cbc413bef6dbb2b35d22034e09d954}{pinDisplay::pinDisplay}(QString title, QString pin, QWidget *parent) :
+00045     QDialog(parent),
+00046     ui(new \hyperlink{namespaceUi}{Ui}::\hyperlink{classpinDisplay}{pinDisplay})
+00047 \{
+00048     ui->setupUi(\textcolor{keyword}{this});
+00049     ui->label->setText(title);
+00050     ui->pin->setText(pin);
+00051 
+00052     connect(ui->buttonBox, SIGNAL(accepted()), \textcolor{keyword}{this}, SIGNAL(accepted()));
+00053     connect(ui->buttonBox, SIGNAL(rejected()), \textcolor{keyword}{this}, SIGNAL(rejected()));
+00054 \}
+00055 
+\hypertarget{pindisplay_8cpp_source.tex_l00056}{}\hyperlink{classpinDisplay_a9f0d6882b7e823bf510390701f5e2f85}{00056} \hyperlink{classpinDisplay_a9f0d6882b7e823bf510390701f5e2f85}{pinDisplay::~pinDisplay}()
+00057 \{
+00058     \textcolor{keyword}{delete} ui;
+00059 \}
+00060 
+00061 \textcolor{keywordtype}{void} pinDisplay::on\_buttonBox\_accepted()
+00062 \{
+00063     deleteLater();
+00064 \}
+00065 
+\hypertarget{pindisplay_8cpp_source.tex_l00066}{}\hyperlink{classpinDisplay_a1a00155d5f7c1e3c1c7512cf5a2670af}{00066} \textcolor{keywordtype}{void} \hyperlink{classpinDisplay_a1a00155d5f7c1e3c1c7512cf5a2670af}{pinDisplay::setOkCancel}()
+00067 \{
+00068     ui->buttonBox->addButton(QDialogButtonBox::Cancel);
+00069 \}
+\end{DoxyCode}

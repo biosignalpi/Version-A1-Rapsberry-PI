@@ -1,0 +1,164 @@
+\hypertarget{group__HRV-Analysis}{}\section{H\+R\+V-\/\+Analysis}
+\label{group__HRV-Analysis}\index{H\+R\+V-\/\+Analysis@{H\+R\+V-\/\+Analysis}}
+
+
+Classes and Functions used for H\+R\+V-\/\+Analysis.  
+
+
+\subsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file \hyperlink{hrvanalysis_8h}{hrvanalysis.\+h}
+\begin{DoxyCompactList}\small\item\em Collection of functions used to interact with the Matlab Coder generated H\+R\+V-\/functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classConvertEcgToIbi}{Convert\+Ecg\+To\+Ibi}
+\begin{DoxyCompactList}\small\item\em Converts textfile with E\+C\+G-\/data into I\+BI file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{group__HRV-Analysis_ga5c14f0d7dd58dec49e939470bcb5db1c}{Q\+R\+S\+Det} (int, int)
+\begin{DoxyCompactList}\small\item\em Q\+R\+S\+Det Function used for the Q\+R\+S-\/detection. \end{DoxyCompactList}\item 
+void \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, struct0\+\_\+T $\ast$output)
+\begin{DoxyCompactList}\small\item\em Performs the Statistical Time Domain calculations for H\+RV Analysis. \end{DoxyCompactList}\item 
+void \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{perform\+Freq\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, const Q\+Vector$<$ double $>$ $\ast$time\+Data, struct\+Freq\+\_\+T $\ast$output)
+\begin{DoxyCompactList}\small\item\em Performs calculations for Frequency Domain H\+RV Analysis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classes and Functions used for H\+R\+V-\/\+Analysis. 
+
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000013}{Todo}]Add a function/class that takes a \hyperlink{classDataStream}{Data\+Stream} object as input and performs all the steps of the H\+RV Analysis taking E\+C\+G-\/\+Data as input and returning calculated H\+R\+V-\/\+Data. \end{DoxyRefDesc}
+
+
+\subsection{Function Documentation}
+\index{H\+R\+V-\/\+Analysis@{H\+R\+V-\/\+Analysis}!perform\+Freq\+Domain\+Hrv@{perform\+Freq\+Domain\+Hrv}}
+\index{perform\+Freq\+Domain\+Hrv@{perform\+Freq\+Domain\+Hrv}!H\+R\+V-\/\+Analysis@{H\+R\+V-\/\+Analysis}}
+\subsubsection[{perform\+Freq\+Domain\+Hrv(const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, const Q\+Vector$<$ double $>$ $\ast$time\+Data, struct\+Freq\+\_\+\+T $\ast$output)}]{\setlength{\rightskip}{0pt plus 5cm}void perform\+Freq\+Domain\+Hrv (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ double $>$ $\ast$}]{ibi\+Data, }
+\item[{const Q\+Vector$<$ double $>$ $\ast$}]{time\+Data, }
+\item[{struct\+Freq\+\_\+T $\ast$}]{output}
+\end{DoxyParamCaption}
+)}\hypertarget{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{}\label{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}
+
+
+Performs calculations for Frequency Domain H\+RV Analysis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ibi\+Data} & Q\+Vector containing double with ibi information. \\
+\hline
+\mbox{\tt in}  & {\em time\+Data} & Q\+Vector containing double with time information. \\
+\hline
+\mbox{\tt out}  & {\em output} & struct0\+\_\+T containing the calculated metrics needed to plot a Lomb-\/periodogram\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000016}{Todo}]Add Ectopic Intervall Detection and Ectopic Interval Correction for the ibi\+Data 
+
+Add Detrend for the ibi\+Data\end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{hrvanalysis_8cpp_source_l00062}{62} of file \hyperlink{hrvanalysis_8cpp_source}{hrvanalysis.\+cpp}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=344pt]{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{H\+R\+V-\/\+Analysis@{H\+R\+V-\/\+Analysis}!perform\+Time\+Domain\+Hrv@{perform\+Time\+Domain\+Hrv}}
+\index{perform\+Time\+Domain\+Hrv@{perform\+Time\+Domain\+Hrv}!H\+R\+V-\/\+Analysis@{H\+R\+V-\/\+Analysis}}
+\subsubsection[{perform\+Time\+Domain\+Hrv(const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, struct0\+\_\+\+T $\ast$output)}]{\setlength{\rightskip}{0pt plus 5cm}void perform\+Time\+Domain\+Hrv (
+\begin{DoxyParamCaption}
+\item[{const Q\+Vector$<$ double $>$ $\ast$}]{ibi\+Data, }
+\item[{struct0\+\_\+T $\ast$}]{output}
+\end{DoxyParamCaption}
+)}\hypertarget{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{}\label{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}
+
+
+Performs the Statistical Time Domain calculations for H\+RV Analysis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em ibi\+Data} & Q\+Vector containing double with ibi information. \\
+\hline
+\mbox{\tt out}  & {\em output} & struct0\+\_\+T containing all the calculated metrics\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000015}{Todo}]Add Ectopic Intervall Detection and Ectopic Interval Correction for the ibi\+Data\end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{hrvanalysis_8cpp_source_l00034}{34} of file \hyperlink{hrvanalysis_8cpp_source}{hrvanalysis.\+cpp}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{H\+R\+V-\/\+Analysis@{H\+R\+V-\/\+Analysis}!Q\+R\+S\+Det@{Q\+R\+S\+Det}}
+\index{Q\+R\+S\+Det@{Q\+R\+S\+Det}!H\+R\+V-\/\+Analysis@{H\+R\+V-\/\+Analysis}}
+\subsubsection[{Q\+R\+S\+Det(int, int)}]{\setlength{\rightskip}{0pt plus 5cm}int Q\+R\+S\+Det (
+\begin{DoxyParamCaption}
+\item[{int}]{, }
+\item[{int}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__HRV-Analysis_ga5c14f0d7dd58dec49e939470bcb5db1c}{}\label{group__HRV-Analysis_ga5c14f0d7dd58dec49e939470bcb5db1c}
+
+
+Q\+R\+S\+Det Function used for the Q\+R\+S-\/detection. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=279pt]{group__HRV-Analysis_ga5c14f0d7dd58dec49e939470bcb5db1c_icgraph}
+\end{center}
+\end{figure}
+
+

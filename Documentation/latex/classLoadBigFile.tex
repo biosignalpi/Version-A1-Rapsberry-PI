@@ -1,0 +1,116 @@
+\hypertarget{classLoadBigFile}{}\section{Load\+Big\+File Class Reference}
+\label{classLoadBigFile}\index{Load\+Big\+File@{Load\+Big\+File}}
+
+
+Class used to load a big .txt file in a new thread.  
+
+
+
+
+{\ttfamily \#include $<$loadbigfile.\+h$>$}
+
+
+
+Inheritance diagram for Load\+Big\+File\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classLoadBigFile__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Load\+Big\+File\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classLoadBigFile__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9}{send\+File\+Data} (Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$)
+\begin{DoxyCompactList}\small\item\em signal used to send the loaded txt file as a Q\+Vector$<$Q\+Vector $<$\+Q\+Point\+F$>$ $>$ that can be used for plotting the file \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classLoadBigFile_ad09a2464295530b5a7f202d7059e7e8a}{Load\+Big\+File} (Q\+String file\+Name, Q\+Object $\ast$parent=N\+U\+LL)
+\item 
+virtual void \hyperlink{classLoadBigFile_a8a1ceb823a23faa69485c864c35cd60f}{run} ()
+\begin{DoxyCompactList}\small\item\em Load the file with chosen filename and emit the signal \hyperlink{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9}{send\+File\+Data()} when the file is read. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class used to load a big .txt file in a new thread. 
+
+\begin{DoxyAuthor}{Author}
+Jonatan
+\end{DoxyAuthor}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000018}{Todo}]Could be integrated into \hyperlink{classDataLogger}{Data\+Logger} instead \end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{loadbigfile_8h_source_l00014}{14} of file \hyperlink{loadbigfile_8h_source}{loadbigfile.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Load\+Big\+File@{Load\+Big\+File}!Load\+Big\+File@{Load\+Big\+File}}
+\index{Load\+Big\+File@{Load\+Big\+File}!Load\+Big\+File@{Load\+Big\+File}}
+\subsubsection[{Load\+Big\+File(\+Q\+String file\+Name, Q\+Object $\ast$parent=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}Load\+Big\+File\+::\+Load\+Big\+File (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{file\+Name, }
+\item[{Q\+Object $\ast$}]{parent = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}\hypertarget{classLoadBigFile_ad09a2464295530b5a7f202d7059e7e8a}{}\label{classLoadBigFile_ad09a2464295530b5a7f202d7059e7e8a}
+
+
+Definition at line \hyperlink{loadbigfile_8cpp_source_l00014}{14} of file \hyperlink{loadbigfile_8cpp_source}{loadbigfile.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\index{Load\+Big\+File@{Load\+Big\+File}!run@{run}}
+\index{run@{run}!Load\+Big\+File@{Load\+Big\+File}}
+\subsubsection[{run()}]{\setlength{\rightskip}{0pt plus 5cm}void Load\+Big\+File\+::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classLoadBigFile_a8a1ceb823a23faa69485c864c35cd60f}{}\label{classLoadBigFile_a8a1ceb823a23faa69485c864c35cd60f}
+
+
+Load the file with chosen filename and emit the signal \hyperlink{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9}{send\+File\+Data()} when the file is read. 
+
+
+
+Definition at line \hyperlink{loadbigfile_8cpp_source_l00024}{24} of file \hyperlink{loadbigfile_8cpp_source}{loadbigfile.\+cpp}.
+
+\index{Load\+Big\+File@{Load\+Big\+File}!send\+File\+Data@{send\+File\+Data}}
+\index{send\+File\+Data@{send\+File\+Data}!Load\+Big\+File@{Load\+Big\+File}}
+\subsubsection[{send\+File\+Data}]{\setlength{\rightskip}{0pt plus 5cm}void Load\+Big\+File\+::send\+File\+Data (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9}{}\label{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9}
+
+
+signal used to send the loaded txt file as a Q\+Vector$<$Q\+Vector $<$\+Q\+Point\+F$>$ $>$ that can be used for plotting the file 
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=334pt]{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{loadbigfile_8h}{loadbigfile.\+h}\item 
+src/\hyperlink{loadbigfile_8cpp}{loadbigfile.\+cpp}\end{DoxyCompactItemize}

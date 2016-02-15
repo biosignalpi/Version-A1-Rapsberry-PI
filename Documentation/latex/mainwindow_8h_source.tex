@@ -1,0 +1,39 @@
+\hypertarget{mainwindow_8h_source}{}\section{mainwindow.\+h}
+\label{mainwindow_8h_source}\index{src/mainwindow.\+h@{src/mainwindow.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef MAINWINDOW\_H}
+00002 \textcolor{preprocessor}{#define MAINWINDOW\_H}
+00003 
+00004 \textcolor{preprocessor}{#include <QWidget>}
+00005 
+00006 \textcolor{keyword}{class }QPushButton;
+00007 \textcolor{keyword}{class }QListWidget;
+00008 \textcolor{keyword}{class }QStackedWidget;
+00009 
+\hypertarget{mainwindow_8h_source.tex_l00019}{}\hyperlink{classMainWindow}{00019} \textcolor{keyword}{class }\hyperlink{classMainWindow}{MainWindow} : \textcolor{keyword}{public} QWidget
+00020 \{
+00021     Q\_OBJECT
+00022 
+00023 \textcolor{keyword}{public}:
+00024     \hyperlink{classMainWindow_a25e1fb1c2c42a5b961db39ae08ff6443}{MainWindow}(QWidget * = NULL);
+00025 
+00026 \textcolor{keyword}{private} slots:
+00030     \textcolor{keywordtype}{void} quit();
+00034     \textcolor{keywordtype}{void} takeScreenshot();
+00035 
+00036 \textcolor{keyword}{private}:
+00040     \textcolor{keywordtype}{void} setupComponents();
+00044     \textcolor{keywordtype}{void} setupActions();
+00048     \textcolor{keywordtype}{void} setupLayout();
+00049 
+00050 
+00051     QPushButton *quitButton;
+00052     QPushButton *screenShotButton;
+00053     QListWidget *listWidget;
+00054     QStackedWidget *stackedWidget;
+00055 
+00056 \};
+00057 
+00058 \textcolor{preprocessor}{#endif // MAINWINDOW\_H}
+\end{DoxyCode}

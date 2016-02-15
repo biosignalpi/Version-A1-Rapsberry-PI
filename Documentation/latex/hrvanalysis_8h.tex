@@ -1,0 +1,46 @@
+\hypertarget{hrvanalysis_8h}{}\section{src/hrvanalysis.h File Reference}
+\label{hrvanalysis_8h}\index{src/hrvanalysis.\+h@{src/hrvanalysis.\+h}}
+
+
+Collection of functions used to interact with the Matlab Coder generated H\+R\+V-\/functions.  
+
+
+{\ttfamily \#include \char`\"{}H\+R\+V/rtwtypes.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/time\+Domain\+H\+R\+V.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/rt\+\_\+nonfinite.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/time\+Domain\+H\+R\+V\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/freq\+Domain\+H\+R\+V.\+h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}H\+R\+V/freq\+Domain\+H\+R\+V\+\_\+types.\+h\char`\"{}}\\*
+{\ttfamily \#include $<$Q\+Vector$>$}\\*
+Include dependency graph for hrvanalysis.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hrvanalysis_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{hrvanalysis_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{perform\+Time\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, struct0\+\_\+T $\ast$output)
+\begin{DoxyCompactList}\small\item\em Performs the Statistical Time Domain calculations for H\+RV Analysis. \end{DoxyCompactList}\item 
+void \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{perform\+Freq\+Domain\+Hrv} (const Q\+Vector$<$ double $>$ $\ast$ibi\+Data, const Q\+Vector$<$ double $>$ $\ast$time\+Data, struct\+Freq\+\_\+T $\ast$output)
+\begin{DoxyCompactList}\small\item\em Performs calculations for Frequency Domain H\+RV Analysis. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Collection of functions used to interact with the Matlab Coder generated H\+R\+V-\/functions. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000014}{Todo}]add the ability to use a \hyperlink{classDataStream}{Data\+Stream} object as input for the H\+R\+V-\/functions. \end{DoxyRefDesc}
+
+
+Definition in file \hyperlink{hrvanalysis_8h_source}{hrvanalysis.\+h}.
+

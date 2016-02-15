@@ -1,0 +1,287 @@
+\hypertarget{classAbstractMenu}{}\section{Abstract\+Menu Class Reference}
+\label{classAbstractMenu}\index{Abstract\+Menu@{Abstract\+Menu}}
+
+
+Abstract menu object for Pi\+Face C\+AD.  
+
+
+
+
+{\ttfamily \#include $<$abstractmenu.\+h$>$}
+
+
+
+Inheritance diagram for Abstract\+Menu\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{classAbstractMenu__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classAbstractMenu_a45d32cb02984b79e6bc6f6e930ee5c8c}{Abstract\+Menu} ()
+\item 
+virtual \hyperlink{classAbstractMenu_af4aacdda3e23fedf1de7781befe22116}{$\sim$\+Abstract\+Menu} ()
+\item 
+virtual \hyperlink{classAbstractMenu}{Abstract\+Menu} $\ast$ \hyperlink{classAbstractMenu_aef49c4a4ceeb1aad12101cb4768e1596}{new\+Menu} ()=0
+\begin{DoxyCompactList}\small\item\em Pure virtual function, creates the next Menu object Pure virtual function, that is meant to create a the \hyperlink{classAbstractMenu}{Abstract\+Menu} object that comes after the Menu\+Object that called it. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{set\+Upper\+Text} ()
+\begin{DoxyCompactList}\small\item\em Sets the first row of the Pi\+Face C\+AD to the current option choosen Uses the C library pifacecad.\+h to control the display. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classAbstractMenu_ab07feae31d2527f2830188fc10bcb728}{set\+Upper\+Text} (const char $\ast$)
+\begin{DoxyCompactList}\small\item\em Sets the first row of the Pi\+Face C\+AD to the current option choosen Uses the C library pifacecad.\+h to control the display. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}{next} ()
+\begin{DoxyCompactList}\small\item\em Toggles the second row of the Pi\+Face C\+AD to the next option Uses the C library pifacecad.\+h to control the display. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c}{set\+Lower\+Text} ()
+\begin{DoxyCompactList}\small\item\em Sets the second row of the Pi\+Face C\+AD to the current option choosen Uses the C library pifacecad.\+h to control the display. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::string $>$ \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}
+\begin{DoxyCompactList}\small\item\em std\+::vector containing the different options to display on the Pi\+Face C\+AD To be set by the derived \hyperlink{classAbstractMenu}{Abstract\+Menu} object \end{DoxyCompactList}\item 
+int \hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{number\+Of\+Options}
+\begin{DoxyCompactList}\small\item\em number of elements stored in the options vector. To be set by the derived \hyperlink{classAbstractMenu}{Abstract\+Menu} object \end{DoxyCompactList}\item 
+int \hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{current\+Option}
+\begin{DoxyCompactList}\small\item\em Counter that keeps track of the option visible on the Pi\+Face C\+AD. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract menu object for Pi\+Face C\+AD. 
+
+\hyperlink{classAbstractMenu}{Abstract\+Menu} is the base class for menu objects to be used to create a small logical menu that can be called from the Pi\+Face C\+AD
+
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+
+
+Definition at line \hyperlink{abstractmenu_8h_source_l00017}{17} of file \hyperlink{abstractmenu_8h_source}{abstractmenu.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Abstract\+Menu@{Abstract\+Menu}!Abstract\+Menu@{Abstract\+Menu}}
+\index{Abstract\+Menu@{Abstract\+Menu}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{Abstract\+Menu()}]{\setlength{\rightskip}{0pt plus 5cm}Abstract\+Menu\+::\+Abstract\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classAbstractMenu_a45d32cb02984b79e6bc6f6e930ee5c8c}{}\label{classAbstractMenu_a45d32cb02984b79e6bc6f6e930ee5c8c}
+
+
+Definition at line \hyperlink{abstractmenu_8cpp_source_l00004}{4} of file \hyperlink{abstractmenu_8cpp_source}{abstractmenu.\+cpp}.
+
+\index{Abstract\+Menu@{Abstract\+Menu}!````~Abstract\+Menu@{$\sim$\+Abstract\+Menu}}
+\index{````~Abstract\+Menu@{$\sim$\+Abstract\+Menu}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{$\sim$\+Abstract\+Menu()}]{\setlength{\rightskip}{0pt plus 5cm}virtual Abstract\+Menu\+::$\sim$\+Abstract\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classAbstractMenu_af4aacdda3e23fedf1de7781befe22116}{}\label{classAbstractMenu_af4aacdda3e23fedf1de7781befe22116}
+
+
+Definition at line \hyperlink{abstractmenu_8h_source_l00021}{21} of file \hyperlink{abstractmenu_8h_source}{abstractmenu.\+h}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAbstractMenu_af4aacdda3e23fedf1de7781befe22116_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Abstract\+Menu@{Abstract\+Menu}!new\+Menu@{new\+Menu}}
+\index{new\+Menu@{new\+Menu}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{new\+Menu()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf Abstract\+Menu}$\ast$ Abstract\+Menu\+::new\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classAbstractMenu_aef49c4a4ceeb1aad12101cb4768e1596}{}\label{classAbstractMenu_aef49c4a4ceeb1aad12101cb4768e1596}
+
+
+Pure virtual function, creates the next Menu object Pure virtual function, that is meant to create a the \hyperlink{classAbstractMenu}{Abstract\+Menu} object that comes after the Menu\+Object that called it. 
+
+What \hyperlink{classAbstractMenu}{Abstract\+Menu} object that are created depends on in which object the function was called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Option} & inherited from \hyperlink{classAbstractMenu}{Abstract\+Menu} to realize what Object to create. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \hyperlink{classEcgCaptureMenu_a610d2985e09cd56cb381e6e443dbbc72}{Ecg\+Capture\+Menu}, \hyperlink{classBluetoothMenu_a0fd16ad5a39ce3624613ad7834a55565}{Bluetooth\+Menu}, \hyperlink{classSettingsMenu_abc441c12e8044c13f1a99791e2ee30d1}{Settings\+Menu}, and \hyperlink{classBaseMenu_a722bb88987e9a64015c59f3419d89704}{Base\+Menu}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAbstractMenu_aef49c4a4ceeb1aad12101cb4768e1596_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Abstract\+Menu@{Abstract\+Menu}!next@{next}}
+\index{next@{next}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{next()}]{\setlength{\rightskip}{0pt plus 5cm}void Abstract\+Menu\+::next (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}{}\label{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}
+
+
+Toggles the second row of the Pi\+Face C\+AD to the next option Uses the C library pifacecad.\+h to control the display. 
+
+
+
+Definition at line \hyperlink{abstractmenu_8cpp_source_l00027}{27} of file \hyperlink{abstractmenu_8cpp_source}{abstractmenu.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Abstract\+Menu@{Abstract\+Menu}!set\+Lower\+Text@{set\+Lower\+Text}}
+\index{set\+Lower\+Text@{set\+Lower\+Text}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{set\+Lower\+Text()}]{\setlength{\rightskip}{0pt plus 5cm}void Abstract\+Menu\+::set\+Lower\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c}{}\label{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c}
+
+
+Sets the second row of the Pi\+Face C\+AD to the current option choosen Uses the C library pifacecad.\+h to control the display. 
+
+
+
+Definition at line \hyperlink{abstractmenu_8cpp_source_l00021}{21} of file \hyperlink{abstractmenu_8cpp_source}{abstractmenu.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Abstract\+Menu@{Abstract\+Menu}!set\+Upper\+Text@{set\+Upper\+Text}}
+\index{set\+Upper\+Text@{set\+Upper\+Text}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{set\+Upper\+Text()}]{\setlength{\rightskip}{0pt plus 5cm}void Abstract\+Menu\+::set\+Upper\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{}\label{classAbstractMenu_a4163c42d2127430e184612cb95211cda}
+
+
+Sets the first row of the Pi\+Face C\+AD to the current option choosen Uses the C library pifacecad.\+h to control the display. 
+
+
+
+Definition at line \hyperlink{abstractmenu_8cpp_source_l00009}{9} of file \hyperlink{abstractmenu_8cpp_source}{abstractmenu.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classAbstractMenu_a4163c42d2127430e184612cb95211cda_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Abstract\+Menu@{Abstract\+Menu}!set\+Upper\+Text@{set\+Upper\+Text}}
+\index{set\+Upper\+Text@{set\+Upper\+Text}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{set\+Upper\+Text(const char $\ast$)}]{\setlength{\rightskip}{0pt plus 5cm}void Abstract\+Menu\+::set\+Upper\+Text (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classAbstractMenu_ab07feae31d2527f2830188fc10bcb728}{}\label{classAbstractMenu_ab07feae31d2527f2830188fc10bcb728}
+
+
+Sets the first row of the Pi\+Face C\+AD to the current option choosen Uses the C library pifacecad.\+h to control the display. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em text} & to display on upper row of Pi\+Face C\+AD \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{abstractmenu_8cpp_source_l00015}{15} of file \hyperlink{abstractmenu_8cpp_source}{abstractmenu.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Abstract\+Menu@{Abstract\+Menu}!current\+Option@{current\+Option}}
+\index{current\+Option@{current\+Option}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{current\+Option}]{\setlength{\rightskip}{0pt plus 5cm}int Abstract\+Menu\+::current\+Option\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{}\label{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}
+
+
+Counter that keeps track of the option visible on the Pi\+Face C\+AD. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Option} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{abstractmenu_8h_source_l00082}{82} of file \hyperlink{abstractmenu_8h_source}{abstractmenu.\+h}.
+
+\index{Abstract\+Menu@{Abstract\+Menu}!number\+Of\+Options@{number\+Of\+Options}}
+\index{number\+Of\+Options@{number\+Of\+Options}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{number\+Of\+Options}]{\setlength{\rightskip}{0pt plus 5cm}int Abstract\+Menu\+::number\+Of\+Options\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{}\label{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}
+
+
+number of elements stored in the options vector. To be set by the derived \hyperlink{classAbstractMenu}{Abstract\+Menu} object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em number\+Of\+Options} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{abstractmenu_8h_source_l00076}{76} of file \hyperlink{abstractmenu_8h_source}{abstractmenu.\+h}.
+
+\index{Abstract\+Menu@{Abstract\+Menu}!options@{options}}
+\index{options@{options}!Abstract\+Menu@{Abstract\+Menu}}
+\subsubsection[{options}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$std\+::string$>$ Abstract\+Menu\+::options\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{}\label{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}
+
+
+std\+::vector containing the different options to display on the Pi\+Face C\+AD To be set by the derived \hyperlink{classAbstractMenu}{Abstract\+Menu} object 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{abstractmenu_8h_source_l00070}{70} of file \hyperlink{abstractmenu_8h_source}{abstractmenu.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Pi\+Face-\/\+Interface/\hyperlink{abstractmenu_8h}{abstractmenu.\+h}\item 
+src/\+Pi\+Face-\/\+Interface/\hyperlink{abstractmenu_8cpp}{abstractmenu.\+cpp}\end{DoxyCompactItemize}

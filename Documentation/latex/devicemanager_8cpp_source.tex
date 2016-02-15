@@ -1,0 +1,85 @@
+\hypertarget{devicemanager_8cpp_source}{}\section{devicemanager.\+cpp}
+\label{devicemanager_8cpp_source}\index{src/devicemanager.\+cpp@{src/devicemanager.\+cpp}}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{preprocessor}{#include <\hyperlink{samplingthread_8h}{samplingthread.h}>}
+00003 \textcolor{preprocessor}{#include "\hyperlink{devicemanager_8h}{devicemanager.h}"}
+00004 \textcolor{preprocessor}{#include "\hyperlink{settingssingleton_8h}{settingssingleton.h}"}
+00005 
+00006 \textcolor{preprocessor}{#include <QDebug>}
+00007 
+00008 
+00009 
+\hypertarget{devicemanager_8cpp_source.tex_l00010}{}\hyperlink{classDeviceManager_a4e6d37b581df235b46c5696e6c71ae79}{00010} \hyperlink{classDeviceManager_a4e6d37b581df235b46c5696e6c71ae79}{DeviceManager::DeviceManager}(): device(NULL)\{
+00011 
+00012 
+00013 
+00014 \}
+00015 
+\hypertarget{devicemanager_8cpp_source.tex_l00016}{}\hyperlink{classDeviceManager_ad91a247c8acfd51c533be52313ce7ddd}{00016} \hyperlink{classDeviceManager_ad91a247c8acfd51c533be52313ce7ddd}{DeviceManager::~DeviceManager}()\{
+00017     \textcolor{keyword}{delete} \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device};
+00018 \}
+00019 \textcolor{keywordtype}{void} DeviceManager::close()\{
+00020     \textcolor{keyword}{delete} \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device};
+00021     \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}=NULL;
+00022 
+00023 \}
+00024 
+\hypertarget{devicemanager_8cpp_source.tex_l00025}{}\hyperlink{classDeviceManager_a14f86d572f6ea7222032ec00499a16a8}{00025}     \textcolor{keywordtype}{void} \hyperlink{classDeviceManager_a14f86d572f6ea7222032ec00499a16a8}{DeviceManager::receiveSampleVector}(QVector<QVector<QPointF> > 
+      input)\{
+00026 
+00027         emit \hyperlink{classDeviceManager_a7f0794801ee0b28c74a253f3c2cf5659}{sendSampleVector}(input);
+00028     \}
+\hypertarget{devicemanager_8cpp_source.tex_l00029}{}\hyperlink{classDeviceManager_aa7b96de52a17b961688e81f5e999da74}{00029}     \textcolor{keywordtype}{void} \hyperlink{classDeviceManager_aa7b96de52a17b961688e81f5e999da74}{DeviceManager::receiveStatus}(QString input)\{
+00030         emit \hyperlink{classDeviceManager_a68b6e3b924cacf0a5cde44d02eb49d0c}{updateStatus}(input);
+00031     \}
+00032 
+\hypertarget{devicemanager_8cpp_source.tex_l00033}{}\hyperlink{classDeviceManager_a322e3bd6b6f57692116b6af7b9a57a9a}{00033} \textcolor{keywordtype}{void} \hyperlink{classDeviceManager_a322e3bd6b6f57692116b6af7b9a57a9a}{DeviceManager::collectData}(\hyperlink{classDataStream}{DataStream}& stream)\{
+00034 \textcolor{comment}{//    while(device->connected()) \{}
+00035         \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}->\hyperlink{classDeviceInterface_a03e9c1bfeabe1a97f05bf9107b89ae67}{init}(stream);
+00036         \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}->\hyperlink{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887}{getData}(stream);
+00037 
+00038 \textcolor{comment}{//    \}}
+00039     \textcolor{keywordflow}{return};
+00040 \}
+00041 
+\hypertarget{devicemanager_8cpp_source.tex_l00042}{}\hyperlink{classDeviceManager_a30358705658f1037ef6bb98e7a2d5e80}{00042} \textcolor{keywordtype}{void} \hyperlink{classDeviceManager_a30358705658f1037ef6bb98e7a2d5e80}{DeviceManager::startCapture}()\{
+00043 
+00044 
+00045         \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}->start();
+00046         emit \hyperlink{classDeviceManager_a68b6e3b924cacf0a5cde44d02eb49d0c}{updateStatus}(\textcolor{stringliteral}{"Device Started"});
+00047 \}
+00048 
+\hypertarget{devicemanager_8cpp_source.tex_l00049}{}\hyperlink{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}{00049} \textcolor{keywordtype}{void} \hyperlink{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}{DeviceManager::stop}()\{
+00050     \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}->\hyperlink{classDeviceInterface_a101b3b53a01add866737920e03a850a8}{stop}();
+00051 \}
+00052 
+\hypertarget{devicemanager_8cpp_source.tex_l00053}{}\hyperlink{classDeviceManager_a280116304655de3a0bbfbf49730f9384}{00053} \textcolor{keywordtype}{void} \hyperlink{classDeviceManager_a280116304655de3a0bbfbf49730f9384}{DeviceManager::init}(\textcolor{keywordtype}{int} deviceNumber, \hyperlink{classDataStream}{DataStream}& inputStream)\{
+00054     deviceNumber=\hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().
+      \hyperlink{classSettingsSingleton_aa6db88481c421b96974519b8e28192c9}{getSourceId}();
+00055     \textcolor{keywordflow}{if} (\hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}!=NULL)
+00056         close();
+00057     \textcolor{keywordflow}{if} (deviceNumber==4) \{
+00058         \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}=\textcolor{keyword}{new} \hyperlink{classEcgMock}{EcgMock}(inputStream);
+00059 
+00060     \}\textcolor{keywordflow}{else}  \{
+00061         \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}=\textcolor{keyword}{new} \hyperlink{classSamplingThread}{SamplingThread}(inputStream);
+00062 
+00063     \}
+00064     QThread *sampleT = \textcolor{keyword}{new} QThread;
+00065     \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}->moveToThread(sampleT);
+00066     \textcolor{comment}{//device->init(inputStream);}
+00067     connect(\hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}, SIGNAL(\hyperlink{classDeviceManager_a68b6e3b924cacf0a5cde44d02eb49d0c}{updateStatus}(QString)), \textcolor{keyword}{this}, SLOT(
+      \hyperlink{classDeviceManager_aa7b96de52a17b961688e81f5e999da74}{receiveStatus}(QString)),Qt::QueuedConnection);
+00068     connect(\hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}, SIGNAL(\hyperlink{classDeviceManager_a7f0794801ee0b28c74a253f3c2cf5659}{sendSampleVector}(QVector<QVector<QPointF> >)), \textcolor{keyword}{this}, SLOT(
+      \hyperlink{classDeviceManager_a14f86d572f6ea7222032ec00499a16a8}{receiveSampleVector}(QVector<QVector<QPointF> >)),Qt::QueuedConnection);
+00069 
+00070 
+00071 \}
+00072 
+00073 \textcolor{keywordtype}{bool} DeviceManager::connected()\{
+00074     \textcolor{keywordtype}{bool} state;
+00075     \textcolor{keywordflow}{return} state;
+00076 \}
+\end{DoxyCode}

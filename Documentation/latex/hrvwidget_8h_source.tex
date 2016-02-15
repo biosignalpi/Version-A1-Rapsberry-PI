@@ -1,0 +1,95 @@
+\hypertarget{hrvwidget_8h_source}{}\section{hrvwidget.\+h}
+\label{hrvwidget_8h_source}\index{src/hrvwidget.\+h@{src/hrvwidget.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * hrvwidget.h}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Nov 2, 2015}
+00005 \textcolor{comment}{ *      Author: martin}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#ifndef HRVWidget\_H\_}
+00009 \textcolor{preprocessor}{#define HRVWidget\_H\_}
+00010 
+00011 \textcolor{preprocessor}{#include <QWidget>}
+00012 \textcolor{preprocessor}{#include <QListWidget>}
+00013 
+00014 \textcolor{preprocessor}{#include <qwt\_plot\_curve.h>}
+00015 \textcolor{preprocessor}{#include <qwt\_plot.h>}
+00016 
+00017 \textcolor{preprocessor}{#include "\hyperlink{hrvanalysis_8h}{hrvanalysis.h}"}
+00018 \textcolor{preprocessor}{#include "HRV/rtwtypes.h"}
+00019 \textcolor{preprocessor}{#include "HRV/timeDomainHRV.h"}
+00020 \textcolor{preprocessor}{#include "HRV/rt\_nonfinite.h"}
+00021 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_types.h"}
+00022 \textcolor{preprocessor}{#include "HRV/freqDomainHRV\_types.h"}
+00023 
+00024 \textcolor{keyword}{class }\hyperlink{classPlot}{Plot};
+00025 \textcolor{keyword}{class }QLabel;
+00026 \textcolor{keyword}{class }QProgressBar;
+00027 \textcolor{keyword}{class }\hyperlink{classSliderWidget}{SliderWidget};
+00028 \textcolor{keyword}{class }QComboBox;
+00029 \textcolor{keyword}{class }QPushButton;
+00030 \textcolor{keyword}{class }QTextBrowser;
+00031 
+00032 
+00033 
+\hypertarget{hrvwidget_8h_source.tex_l00048}{}\hyperlink{classHrvWidget}{00048} \textcolor{keyword}{class }\hyperlink{classHrvWidget}{HrvWidget} : \textcolor{keyword}{public} QWidget
+00049 \{
+00050     Q\_OBJECT
+00051 
+00052 \textcolor{keyword}{public}:
+00053     \hyperlink{classHrvWidget_adfd3a1b7a3c35e4380208cbe8d620c88}{HrvWidget}(QWidget * = NULL);
+00054 
+00055 
+00056 \textcolor{keyword}{private}:
+00057     \textcolor{keywordtype}{void} setupComponents();  
+00058     \textcolor{keywordtype}{void} setupActions(); 
+00059     \textcolor{keywordtype}{void} setupLayout();
+00060 
+00066     \textcolor{keywordtype}{void} performHRV(QString fileName);
+00067     \textcolor{keywordtype}{void} printHRV(\textcolor{keyword}{const} struct0\_T *); 
+00068     \textcolor{keywordtype}{void} printHRV(\textcolor{keyword}{const} structFreq\_T *); 
+00069     \textcolor{keywordtype}{void} psdPlot(\textcolor{keyword}{const} structFreq\_T *); 
+00070     \textcolor{keywordtype}{void} saveFreqHrv(\textcolor{keyword}{const} structFreq\_T *); 
+00071 
+00072     QListWidget *ecgFilesWidget;
+00073 
+00074     QVector<Plot *> d\_plots;
+00075     QVector<QVector<QPointF> > ecgVals;
+00076     QLabel *tlbl;
+00077     QProgressBar *progBar;
+00078     \hyperlink{classSliderWidget}{SliderWidget} *startingPointSlider;
+00079     QComboBox *timeframeComboBox;
+00080     QTimer *playTimer;
+00081 
+00082     \textcolor{keywordtype}{int} recordingTime;
+00083     \textcolor{keywordtype}{int} nFrames;
+00084     \textcolor{keywordtype}{int} currentFrame;
+00085     \textcolor{keywordtype}{double} freq[102], psd[102];
+00086 
+00087     QPushButton *getFilesButton;
+00088     QPushButton *resetPlotButton;
+00089     QTextBrowser *headerTextArea;
+00090 
+00091      QTextBrowser *mainTextArea;
+00092     QwtPlot *lombPlot;
+00093     QwtPlotCurve *myCurve;
+00094 
+00095 
+00096 
+00097 \textcolor{keyword}{private} slots:
+00098     \textcolor{keywordtype}{void} fileFinished();
+00102     \textcolor{keywordtype}{void} getEcgFileList();
+00108     \textcolor{keywordtype}{void} fileSelected(QListWidgetItem*);
+00109     \textcolor{keywordtype}{void} clearPlot();
+00118     \textcolor{keywordtype}{void} performHRV(QVector<double> ibiData, QVector<double> timeData);
+00119 
+00120 
+00121 \};
+00122 
+00123 
+00124 
+00125 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* HRVWidget\_H\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

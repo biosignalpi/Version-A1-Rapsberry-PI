@@ -1,0 +1,30 @@
+\hypertarget{bluetoothmenu_8cpp_source}{}\section{bluetoothmenu.\+cpp}
+\label{bluetoothmenu_8cpp_source}\index{src/\+Pi\+Face-\/\+Interface/bluetoothmenu.\+cpp@{src/\+Pi\+Face-\/\+Interface/bluetoothmenu.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{bluetoothmenu_8h}{bluetoothmenu.h}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{settingsmenu_8h}{settingsmenu.h}"}
+00003 
+\hypertarget{bluetoothmenu_8cpp_source.tex_l00004}{}\hyperlink{classBluetoothMenu_a164151dbccd288a092ddd35f23dfd778}{00004} \hyperlink{classBluetoothMenu_a164151dbccd288a092ddd35f23dfd778}{BluetoothMenu::BluetoothMenu}()
+00005 \{
+00006     \hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{numberOfOptions}=1;
+00007     \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}=\{\textcolor{stringliteral}{"Default"}, \textcolor{stringliteral}{"Default"}\};
+00008 
+00009 \}
+00010 
+\hypertarget{bluetoothmenu_8cpp_source.tex_l00014}{}\hyperlink{classBluetoothMenu_a0fd16ad5a39ce3624613ad7834a55565}{00014} \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classBluetoothMenu_a0fd16ad5a39ce3624613ad7834a55565}{BluetoothMenu::newMenu}()\{
+00015     \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classBluetoothMenu_a0fd16ad5a39ce3624613ad7834a55565}{newMenu}=0;
+00016     \textcolor{keywordflow}{switch} (\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption})\{
+00017     \textcolor{keywordflow}{case} 0:
+00018         newMenu=\textcolor{keyword}{new} \hyperlink{classSettingsMenu}{SettingsMenu};
+00019         \textcolor{keywordflow}{break};
+00020     \textcolor{keywordflow}{case} 1:
+00021         newMenu=\textcolor{keyword}{new} \hyperlink{classBaseMenu_aac7431fdaecc0ecc3a0695511dc8426f}{BaseMenu};
+00022     \}
+00023     \textcolor{keywordflow}{return} \hyperlink{classBluetoothMenu_a0fd16ad5a39ce3624613ad7834a55565}{newMenu};
+00024 
+00025 
+00026 \}
+00027 
+00028 
+\end{DoxyCode}

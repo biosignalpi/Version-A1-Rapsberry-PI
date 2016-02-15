@@ -1,0 +1,218 @@
+\hypertarget{plotandcapturewidget_8cpp_source}{}\section{plotandcapturewidget.\+cpp}
+\label{plotandcapturewidget_8cpp_source}\index{src/plotandcapturewidget.\+cpp@{src/plotandcapturewidget.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * plotandcapturewidget.cpp}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Oct 29, 2015}
+00005 \textcolor{comment}{ *      Author: martin}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#include "\hyperlink{plotandcapturewidget_8h}{plotandcapturewidget.h}"}
+00009 \textcolor{preprocessor}{#include "\hyperlink{plot_8h}{plot.h}"}
+00010 \textcolor{preprocessor}{#include "\hyperlink{datalogger_8h}{datalogger.h}"}
+00011 
+00012 
+\hypertarget{plotandcapturewidget_8cpp_source.tex_l00013}{}\hyperlink{classPlotAndCaptureWidget_a12b93ad83cddd745f19c4745a9aa7af9}{00013} \hyperlink{classPlotAndCaptureWidget_a12b93ad83cddd745f19c4745a9aa7af9}{PlotAndCaptureWidget::PlotAndCaptureWidget}(QWidget *parent):
+00014 QWidget(parent), plottedPoints(0)
+00015 \{
+00016             d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Lead I"}, \textcolor{keyword}{this}));
+00017             d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Lead II"}, \textcolor{keyword}{this}));
+00018             d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Lead III"}, \textcolor{keyword}{this}));
+00019             d\_plots.append(\textcolor{keyword}{new} \hyperlink{classPlot}{Plot}(\textcolor{stringliteral}{"Respiration"}, \textcolor{keyword}{this}));
+00020 
+00021             d\_plots[0]->setCurveColor(Qt::red);
+00022             d\_plots[1]->setCurveColor(Qt::blue);
+00023             d\_plots[2]->setCurveColor(Qt::green);
+00024             d\_plots[3]->setCurveColor(Qt::black);
+00025 
+00026 
+00027             counter = 0;
+00028             loopCounter = 0;
+00029             currentTime = 0.0;
+00030             timeInterval = 10.0;
+00031             d\_clock.start();
+00032 
+00033 
+00034             device=\textcolor{keyword}{new} \hyperlink{classDeviceManager}{DeviceManager}();
+00035             stream=\textcolor{keyword}{new} \hyperlink{classDataStream}{DataStream}();
+00036                logger=\textcolor{keyword}{new} \hyperlink{classDataLogger}{DataLogger}();
+00037 
+00038       \textcolor{comment}{//         QThread *sampleT = new QThread;}
+00039       \textcolor{comment}{//         device->moveToThread(sampleT);}
+00040                 setupComponents();
+00041                 setupActions();
+00042                 setupLayout();
+00043 
+00044 
+00045 
+00046 
+00047 \}
+00048 
+00049 
+\hypertarget{plotandcapturewidget_8cpp_source.tex_l00050}{}\hyperlink{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}{00050} \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}{PlotAndCaptureWidget::takeScreen}() \{
+00051     \textcolor{comment}{//QPixmap pixmap = d\_plot->grab();}
+00052     QPixmap pixmap = this->grab();
+00053     pixmap.save(\textcolor{stringliteral}{"screen.png"});
+00054 \}
+00055 
+\hypertarget{plotandcapturewidget_8cpp_source.tex_l00059}{}\hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{00059} \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{PlotAndCaptureWidget::updateStatus}(QString status) \{
+00060     currentStatusLabel->setText(status);
+00061 \}
+00062 
+00063 
+00064 
+00065 
+\hypertarget{plotandcapturewidget_8cpp_source.tex_l00066}{}\hyperlink{classPlotAndCaptureWidget_a04d11f3f4d553c39b0d99da1a9ec0a11}{00066} \hyperlink{classPlotAndCaptureWidget_a04d11f3f4d553c39b0d99da1a9ec0a11}{PlotAndCaptureWidget::~PlotAndCaptureWidget}() \{
+00067     \textcolor{comment}{// TODO Auto-generated destructor stub}
+00068     \textcolor{keyword}{delete} device;
+00069     \textcolor{keyword}{delete} stream;
+00070     \textcolor{keyword}{delete} logger;
+00071 \}
+00072 
+\hypertarget{plotandcapturewidget_8cpp_source.tex_l00073}{}\hyperlink{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa}{00073} \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa}{PlotAndCaptureWidget::startCapture}()
+00074 \{
+00075 
+00076         device->\hyperlink{classDeviceManager_a280116304655de3a0bbfbf49730f9384}{init}(1, *stream);
+00077         connect(device, SIGNAL(sendSampleVector(QVector<QVector<QPointF> >)), \textcolor{keyword}{this}, SLOT(
+      \hyperlink{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f}{plotSampleVector}(QVector<QVector<QPointF> >)),Qt::QueuedConnection);
+00078         connect(device, SIGNAL(\hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{updateStatus}(QString)), \textcolor{keyword}{this}, SLOT(
+      \hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{updateStatus}(QString)),Qt::QueuedConnection);
+00079     stopButton->setEnabled(\textcolor{keyword}{true});
+00080     startButton->setDisabled(\textcolor{keyword}{true});
+00081     currentStatusLabel->setText(\textcolor{stringliteral}{"Recording..."});
+00082 
+00083 
+00084         device->\hyperlink{classDeviceManager_a30358705658f1037ef6bb98e7a2d5e80}{startCapture}();
+00085   
+00086 \}
+00087 
+\hypertarget{plotandcapturewidget_8cpp_source.tex_l00093}{}\hyperlink{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e}{00093} \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e}{PlotAndCaptureWidget::stopCapture}()
+00094 \{
+00095 
+00096 
+00097         device->\hyperlink{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}{stop}();
+00098     stream->size();
+00099     stopButton->setEnabled(\textcolor{keyword}{false});
+00100     currentStatusLabel->setText(\textcolor{stringliteral}{"Stopped!"});
+00101 
+00102     logger->\hyperlink{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}{save}(*stream);
+00103     startButton->setEnabled(\textcolor{keyword}{true});
+00104 \}
+00105 
+\hypertarget{plotandcapturewidget_8cpp_source.tex_l00106}{}\hyperlink{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f}{00106} \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f}{PlotAndCaptureWidget::plotSampleVector}(QVector<QVector<QPointF> 
+      > sampleVector)
+00107 \{
+00108 
+00109    \textcolor{comment}{// qDebug()<<sampleVector;}
+00110     \textcolor{keyword}{const} \textcolor{keywordtype}{int} sampleSize = sampleVector.length();
+00111     QPointF last = sampleVector.at(sampleSize-1).at(0);
+00112     \textcolor{keyword}{const} \textcolor{keywordtype}{double} elapsedTime = last.x();
+00113 
+00114     \textcolor{keywordflow}{if} (elapsedTime > currentTime+timeInterval)
+00115     \{
+00116         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00117             d\_plots[ii]->IncrementInterval();
+00118             d\_plots[ii]->ClearPlot();
+00119         \}
+00120 \textcolor{comment}{//        d\_plot->IncrementInterval();}
+00121 \textcolor{comment}{//        d\_plot->ClearPlot();}
+00122 
+00123 \textcolor{comment}{//        currentTime += timeInterval;}
+00124     \}
+00125 
+00126     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii < sampleSize; ii++) \{
+00127         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} jj = 0; jj<4; jj++) \{
+00128             d\_plots[jj]->AppendPoint(sampleVector.at(ii).at(jj));
+00129         \}
+00130 \textcolor{comment}{//        d\_plot->AppendPoint(sampleVector.at(ii).at(0));}
+00131     \}
+00132 
+00133     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00134         d\_plots[ii]->DrawCurveSegment(sampleSize);
+00135     \}
+00136 \textcolor{comment}{//    d\_plot->DrawCurveSegment(sampleSize);}
+00137 
+00138 \}
+00139 
+00140 \textcolor{keywordtype}{void} PlotAndCaptureWidget::setupComponents()
+00141 \{
+00142     \textcolor{comment}{//Status label}
+00143     currentStatusLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Off"});
+00144 
+00145 
+00146     \textcolor{comment}{//=====START CHANNEL CONTROL COMPONENTS=====}
+00147     channelControlGroup = \textcolor{keyword}{new} QGroupBox(\textcolor{stringliteral}{"Channel control"});
+00148     channelControlButtonGroup = \textcolor{keyword}{new} QButtonGroup;
+00149     leadIButton = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"Lead I"});
+00150     leadIIButton = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"Lead II"});
+00151     leadIIIButton = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"Lead III"});
+00152     respButton = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"Respiration"});
+00153     channelControlButtonGroup->addButton(leadIButton, 1);
+00154     channelControlButtonGroup->addButton(leadIIButton, 2);
+00155     channelControlButtonGroup->addButton(leadIIIButton, 3);
+00156     channelControlButtonGroup->addButton(respButton, 4);
+00157     leadIButton->setChecked(\textcolor{keyword}{true});
+00158     \textcolor{comment}{//=====END CHANNEL CONTROL COMPONENTS=====}
+00159 
+00160     \textcolor{comment}{//Buttons}
+00161     startButton = \textcolor{keyword}{new} QPushButton(tr(\textcolor{stringliteral}{"Start ECG capture"}));
+00162     startButton->show();
+00163     stopButton = \textcolor{keyword}{new} QPushButton(tr(\textcolor{stringliteral}{"Stop ECG capture"}));
+00164     stopButton->setDisabled(\textcolor{keyword}{true});
+00165     takeScreenshot = \textcolor{keyword}{new} QPushButton(\textcolor{stringliteral}{"Take screenshot"});
+00166 \}
+00167 
+00168 \textcolor{keywordtype}{void} PlotAndCaptureWidget::setupActions()
+00169 \{
+00170     \textcolor{comment}{//Signals-slots}
+00171     connect(takeScreenshot, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(\hyperlink{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}{takeScreen}()));
+00172     connect(startButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(\hyperlink{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa}{startCapture}()));
+00173     connect(stopButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(\hyperlink{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e}{stopCapture}()));
+00174      connect(logger, SIGNAL(\hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{updateStatus}(QString)), \textcolor{keyword}{this}, SLOT(
+      \hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{updateStatus}(QString)));
+00175 
+00176 \}
+00177 
+00178 \textcolor{keywordtype}{void} PlotAndCaptureWidget::setupLayout()
+00179 \{
+00180     QLabel *statusLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Status: "});
+00181     QLabel *xAxisLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Time [s]"});
+00182     xAxisLabel->setAlignment(Qt::AlignCenter);
+00183 
+00184     \textcolor{comment}{//Channel control layout}
+00185     QHBoxLayout *channelControlLayout = \textcolor{keyword}{new} QHBoxLayout;
+00186     channelControlLayout->addWidget(leadIButton);
+00187     channelControlLayout->addWidget(leadIIButton);
+00188     channelControlLayout->addWidget(leadIIIButton);
+00189     channelControlLayout->addWidget(respButton);
+00190 
+00191     channelControlGroup->setLayout(channelControlLayout);
+00192 
+00193     \textcolor{comment}{//Status bar layout}
+00194     QHBoxLayout *statusBarLayout = \textcolor{keyword}{new} QHBoxLayout;
+00195     statusBarLayout->addWidget(statusLabel);
+00196     statusBarLayout->addWidget(currentStatusLabel);
+00197     statusBarLayout->addStretch();
+00198 
+00199     \textcolor{comment}{//Buttons on the top of the widget}
+00200     QHBoxLayout *buttonLayout = \textcolor{keyword}{new} QHBoxLayout;
+00201     buttonLayout->addWidget(startButton);
+00202     buttonLayout->addWidget(stopButton);
+00203     buttonLayout->addWidget(takeScreenshot);
+00204 
+00205     \textcolor{comment}{//Main layout}
+00206     QVBoxLayout *mainLayout = \textcolor{keyword}{new} QVBoxLayout;
+00207     mainLayout->addLayout(buttonLayout);
+00208     mainLayout->addLayout(statusBarLayout);
+00209 
+00210     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<4; ii++) \{
+00211         mainLayout->addWidget(d\_plots[ii]);
+00212     \}
+00213     mainLayout->addWidget(xAxisLabel);
+00214     mainLayout->addWidget(channelControlGroup);
+00215 
+00216     setLayout(mainLayout);
+00217 \}
+\end{DoxyCode}

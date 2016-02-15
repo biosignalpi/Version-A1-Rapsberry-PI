@@ -1,0 +1,159 @@
+\hypertarget{classBaseMenu}{}\section{Base\+Menu Class Reference}
+\label{classBaseMenu}\index{Base\+Menu@{Base\+Menu}}
+
+
+Homepage of the Menu-\/system for the Pi\+Face G\+UI.  
+
+
+
+
+{\ttfamily \#include $<$basemenu.\+h$>$}
+
+
+
+Inheritance diagram for Base\+Menu\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=272pt]{classBaseMenu__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Base\+Menu\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=157pt]{classBaseMenu__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classBaseMenu_aac7431fdaecc0ecc3a0695511dc8426f}{Base\+Menu} ()
+\item 
+virtual \hyperlink{classBaseMenu_aea8cd4859286c711abee5f54d608cf1a}{$\sim$\+Base\+Menu} ()
+\item 
+virtual \hyperlink{classAbstractMenu}{Abstract\+Menu} $\ast$ \hyperlink{classBaseMenu_a722bb88987e9a64015c59f3419d89704}{new\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Pure virtual function, creates the next Menu object Pure virtual function, that is meant to create a the \hyperlink{classAbstractMenu}{Abstract\+Menu} object that comes after the Menu\+Object that called it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Homepage of the Menu-\/system for the Pi\+Face G\+UI. 
+
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+
+
+Definition at line \hyperlink{basemenu_8h_source_l00009}{9} of file \hyperlink{basemenu_8h_source}{basemenu.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Base\+Menu@{Base\+Menu}!Base\+Menu@{Base\+Menu}}
+\index{Base\+Menu@{Base\+Menu}!Base\+Menu@{Base\+Menu}}
+\subsubsection[{Base\+Menu()}]{\setlength{\rightskip}{0pt plus 5cm}Base\+Menu\+::\+Base\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classBaseMenu_aac7431fdaecc0ecc3a0695511dc8426f}{}\label{classBaseMenu_aac7431fdaecc0ecc3a0695511dc8426f}
+
+
+Definition at line \hyperlink{basemenu_8cpp_source_l00005}{5} of file \hyperlink{basemenu_8cpp_source}{basemenu.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBaseMenu_aac7431fdaecc0ecc3a0695511dc8426f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Base\+Menu@{Base\+Menu}!````~Base\+Menu@{$\sim$\+Base\+Menu}}
+\index{````~Base\+Menu@{$\sim$\+Base\+Menu}!Base\+Menu@{Base\+Menu}}
+\subsubsection[{$\sim$\+Base\+Menu()}]{\setlength{\rightskip}{0pt plus 5cm}virtual Base\+Menu\+::$\sim$\+Base\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classBaseMenu_aea8cd4859286c711abee5f54d608cf1a}{}\label{classBaseMenu_aea8cd4859286c711abee5f54d608cf1a}
+
+
+Definition at line \hyperlink{basemenu_8h_source_l00013}{13} of file \hyperlink{basemenu_8h_source}{basemenu.\+h}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBaseMenu_aea8cd4859286c711abee5f54d608cf1a_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Base\+Menu@{Base\+Menu}!new\+Menu@{new\+Menu}}
+\index{new\+Menu@{new\+Menu}!Base\+Menu@{Base\+Menu}}
+\subsubsection[{new\+Menu()}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Abstract\+Menu} $\ast$ Base\+Menu\+::new\+Menu (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classBaseMenu_a722bb88987e9a64015c59f3419d89704}{}\label{classBaseMenu_a722bb88987e9a64015c59f3419d89704}
+
+
+Pure virtual function, creates the next Menu object Pure virtual function, that is meant to create a the \hyperlink{classAbstractMenu}{Abstract\+Menu} object that comes after the Menu\+Object that called it. 
+
+What \hyperlink{classAbstractMenu}{Abstract\+Menu} object that are created depends on in which object the function was called.
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+Option} & inherited from \hyperlink{classAbstractMenu}{Abstract\+Menu} to realize what Object to create. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classAbstractMenu_aef49c4a4ceeb1aad12101cb4768e1596}{Abstract\+Menu}.
+
+
+
+Reimplemented in \hyperlink{classEcgCaptureMenu_a610d2985e09cd56cb381e6e443dbbc72}{Ecg\+Capture\+Menu}, \hyperlink{classBluetoothMenu_a0fd16ad5a39ce3624613ad7834a55565}{Bluetooth\+Menu}, and \hyperlink{classSettingsMenu_abc441c12e8044c13f1a99791e2ee30d1}{Settings\+Menu}.
+
+
+
+Definition at line \hyperlink{basemenu_8cpp_source_l00011}{11} of file \hyperlink{basemenu_8cpp_source}{basemenu.\+cpp}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classBaseMenu_a722bb88987e9a64015c59f3419d89704_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=349pt]{classBaseMenu_a722bb88987e9a64015c59f3419d89704_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Pi\+Face-\/\+Interface/\hyperlink{basemenu_8h}{basemenu.\+h}\item 
+src/\+Pi\+Face-\/\+Interface/\hyperlink{basemenu_8cpp}{basemenu.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,89 @@
+\hypertarget{loadbigfile_8cpp_source}{}\section{loadbigfile.\+cpp}
+\label{loadbigfile_8cpp_source}\index{src/loadbigfile.\+cpp@{src/loadbigfile.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{loadbigfile_8h}{loadbigfile.h}"}
+00002 \textcolor{preprocessor}{#include <QThread>}
+00003 \textcolor{preprocessor}{#include <QString>}
+00004 \textcolor{preprocessor}{#include <QVector>}
+00005 \textcolor{preprocessor}{#include <QPointF>}
+00006 \textcolor{preprocessor}{#include <QFile>}
+00007 \textcolor{preprocessor}{#include <QTextStream>}
+00008 \textcolor{preprocessor}{#include <QRegularExpression>}
+00009 \textcolor{preprocessor}{#include <QDebug>}
+00010 
+00011 \textcolor{comment}{/*}
+00012 \textcolor{comment}{ * Class used to load a big .txt file in a new thread}
+00013 \textcolor{comment}{ */}
+\hypertarget{loadbigfile_8cpp_source.tex_l00014}{}\hyperlink{classLoadBigFile_ad09a2464295530b5a7f202d7059e7e8a}{00014} \hyperlink{classLoadBigFile_ad09a2464295530b5a7f202d7059e7e8a}{LoadBigFile::LoadBigFile}(QString fileName, QObject *parent):
+00015 QThread( parent )
+00016 \{
+00017     fname = fileName;
+00018     decimateFlag = \textcolor{keyword}{true};
+00019 \}
+00020 
+\hypertarget{loadbigfile_8cpp_source.tex_l00024}{}\hyperlink{classLoadBigFile_a8a1ceb823a23faa69485c864c35cd60f}{00024} \textcolor{keywordtype}{void} \hyperlink{classLoadBigFile_a8a1ceb823a23faa69485c864c35cd60f}{LoadBigFile::run}()
+00025 \{
+00026     QFile myFile(fname);
+00027     \textcolor{keywordflow}{if} (myFile.open(QIODevice::ReadOnly | QIODevice::Text)) \{
+00028         QTextStream ecgInfo(&myFile);
+00029         QVector<QVector<QPointF> > ecgVals;
+00030         \textcolor{keywordtype}{int} iterations;
+00031         \textcolor{keywordflow}{if} (!ecgInfo.atEnd()) \{
+00032             QString strVals = ecgInfo.readLine();
+00033             \textcolor{keywordflow}{while} (!ecgInfo.atEnd()) \{
+00034                 strVals = ecgInfo.readLine();
+00035                 QStringList strPieces = strVals.split(QRegularExpression(\textcolor{stringliteral}{"\(\backslash\)\(\backslash\)s+"}));
+00036 
+00037                 \textcolor{keywordflow}{if} (strPieces.length()==5) \{
+00038                     \textcolor{comment}{//                double x = 0.0, y = 0.0;}
+00039                     \textcolor{comment}{//                x = strPieces[0].toDouble();}
+00040                     \textcolor{comment}{//                y = strPieces[1].toDouble();}
+00041 
+00042                     \textcolor{keywordtype}{double} elapsed = strPieces[0].toDouble();
+00043                     \textcolor{comment}{//    elapsed = elapsed/5;}
+00044 
+00045                     QVector<QPointF> tmp;
+00046                     tmp << QPointF(elapsed, strPieces[1].toDouble())
+00047                                     << QPointF(elapsed, strPieces[2].toDouble())
+00048                                     << QPointF(elapsed, strPieces[3].toDouble())
+00049                                     << QPointF(elapsed, strPieces[4].toDouble());
+00050 
+00051                     \textcolor{comment}{//                ecgVals.append(QPointF(x/1000,y));}
+00052                     ecgVals.append(tmp);
+00053                     tmp.clear();
+00054                 \}
+00055                 \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strPieces.length()==4)\{
+00056                     QVector<QPointF> tmp;
+00057                     tmp << QPointF(iterations/1000, strPieces[0].toDouble())
+00058                                                     << QPointF(iterations/1000, strPieces[1].toDouble())
+00059                                                     << QPointF(iterations/1000, strPieces[2].toDouble())
+00060                                                     << QPointF(iterations/1000, strPieces[3].toDouble());
+00061 
+00062                     \textcolor{comment}{//                ecgVals.append(QPointF(x/1000,y));}
+00063                     iterations++;
+00064                     ecgVals.append(tmp);
+00065                     tmp.clear();
+00066                 \}
+00067 
+00068                 \textcolor{comment}{//    for (int ii=0; ii<=8; ii++) \{}
+00069                 \textcolor{comment}{//        ecgInfo.readLine();}
+00070                 \textcolor{comment}{//    \}}
+00071             \}
+00072         \}
+00073         ecgInfo.flush();
+00074         myFile.close();
+00075 
+00076         \textcolor{keywordflow}{if} (decimateFlag) \{
+00077             decimate();
+00078         \}
+00079 
+00080         emit \hyperlink{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9}{sendFileData}(ecgVals);
+00081     \}
+00082 \}
+00083 
+00084 \textcolor{keywordtype}{void} LoadBigFile::decimate()
+00085 \{
+00086     \textcolor{comment}{//TODO}
+00087 \}
+\end{DoxyCode}

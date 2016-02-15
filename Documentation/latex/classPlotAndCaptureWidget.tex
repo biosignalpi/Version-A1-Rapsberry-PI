@@ -1,0 +1,261 @@
+\hypertarget{classPlotAndCaptureWidget}{}\section{Plot\+And\+Capture\+Widget Class Reference}
+\label{classPlotAndCaptureWidget}\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+
+
+Widget used for capture and plotting of data from the connected \hyperlink{classDeviceManager}{Device\+Manager}.  
+
+
+
+
+{\ttfamily \#include $<$plotandcapturewidget.\+h$>$}
+
+
+
+Inheritance diagram for Plot\+And\+Capture\+Widget\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classPlotAndCaptureWidget__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Plot\+And\+Capture\+Widget\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=196pt]{classPlotAndCaptureWidget__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa}{start\+Capture} ()
+\item 
+void \hyperlink{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e}{stop\+Capture} ()
+\begin{DoxyCompactList}\small\item\em Stop the E\+CG capture, this will stop the sampling thread so no more samples will be collected. \end{DoxyCompactList}\item 
+void \hyperlink{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f}{plot\+Sample\+Vector} (Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$)
+\item 
+void \hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{update\+Status} (Q\+String)
+\item 
+void \hyperlink{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}{take\+Screen} ()
+\begin{DoxyCompactList}\small\item\em Take a snapshot of the P\+L\+OT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPlotAndCaptureWidget_a12b93ad83cddd745f19c4745a9aa7af9}{Plot\+And\+Capture\+Widget} (Q\+Widget $\ast$=N\+U\+LL)
+\item 
+virtual \hyperlink{classPlotAndCaptureWidget_a04d11f3f4d553c39b0d99da1a9ec0a11}{$\sim$\+Plot\+And\+Capture\+Widget} ()
+\item 
+void \hyperlink{classPlotAndCaptureWidget_aeb21bda06882afc4636a311318166202}{plot\+Sample} (double)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Widget used for capture and plotting of data from the connected \hyperlink{classDeviceManager}{Device\+Manager}. 
+
+\begin{DoxyAuthor}{Author}
+Martin 
+
+Jonatan 
+\end{DoxyAuthor}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000023}{Todo}]Move comments from .cpp file to header file (.h) \end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{plotandcapturewidget_8h_source_l00031}{31} of file \hyperlink{plotandcapturewidget_8h_source}{plotandcapturewidget.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{Plot\+And\+Capture\+Widget(\+Q\+Widget $\ast$=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}Plot\+And\+Capture\+Widget\+::\+Plot\+And\+Capture\+Widget (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}\hypertarget{classPlotAndCaptureWidget_a12b93ad83cddd745f19c4745a9aa7af9}{}\label{classPlotAndCaptureWidget_a12b93ad83cddd745f19c4745a9aa7af9}
+
+
+Definition at line \hyperlink{plotandcapturewidget_8cpp_source_l00013}{13} of file \hyperlink{plotandcapturewidget_8cpp_source}{plotandcapturewidget.\+cpp}.
+
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!````~Plot\+And\+Capture\+Widget@{$\sim$\+Plot\+And\+Capture\+Widget}}
+\index{````~Plot\+And\+Capture\+Widget@{$\sim$\+Plot\+And\+Capture\+Widget}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{$\sim$\+Plot\+And\+Capture\+Widget()}]{\setlength{\rightskip}{0pt plus 5cm}Plot\+And\+Capture\+Widget\+::$\sim$\+Plot\+And\+Capture\+Widget (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classPlotAndCaptureWidget_a04d11f3f4d553c39b0d99da1a9ec0a11}{}\label{classPlotAndCaptureWidget_a04d11f3f4d553c39b0d99da1a9ec0a11}
+
+
+Definition at line \hyperlink{plotandcapturewidget_8cpp_source_l00066}{66} of file \hyperlink{plotandcapturewidget_8cpp_source}{plotandcapturewidget.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!plot\+Sample@{plot\+Sample}}
+\index{plot\+Sample@{plot\+Sample}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{plot\+Sample(double)}]{\setlength{\rightskip}{0pt plus 5cm}void Plot\+And\+Capture\+Widget\+::plot\+Sample (
+\begin{DoxyParamCaption}
+\item[{double}]{}
+\end{DoxyParamCaption}
+)}\hypertarget{classPlotAndCaptureWidget_aeb21bda06882afc4636a311318166202}{}\label{classPlotAndCaptureWidget_aeb21bda06882afc4636a311318166202}
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!plot\+Sample\+Vector@{plot\+Sample\+Vector}}
+\index{plot\+Sample\+Vector@{plot\+Sample\+Vector}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{plot\+Sample\+Vector}]{\setlength{\rightskip}{0pt plus 5cm}void Plot\+And\+Capture\+Widget\+::plot\+Sample\+Vector (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$}]{sample\+Vector}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f}{}\label{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f}
+
+
+Definition at line \hyperlink{plotandcapturewidget_8cpp_source_l00106}{106} of file \hyperlink{plotandcapturewidget_8cpp_source}{plotandcapturewidget.\+cpp}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!start\+Capture@{start\+Capture}}
+\index{start\+Capture@{start\+Capture}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{start\+Capture}]{\setlength{\rightskip}{0pt plus 5cm}void Plot\+And\+Capture\+Widget\+::start\+Capture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa}{}\label{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa}
+
+
+Definition at line \hyperlink{plotandcapturewidget_8cpp_source_l00073}{73} of file \hyperlink{plotandcapturewidget_8cpp_source}{plotandcapturewidget.\+cpp}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!stop\+Capture@{stop\+Capture}}
+\index{stop\+Capture@{stop\+Capture}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{stop\+Capture}]{\setlength{\rightskip}{0pt plus 5cm}void Plot\+And\+Capture\+Widget\+::stop\+Capture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e}{}\label{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e}
+
+
+Stop the E\+CG capture, this will stop the sampling thread so no more samples will be collected. 
+
+The collected samples will be saved and the status label will be updated accordingly. 
+
+Definition at line \hyperlink{plotandcapturewidget_8cpp_source_l00093}{93} of file \hyperlink{plotandcapturewidget_8cpp_source}{plotandcapturewidget.\+cpp}.
+
+
+
+Here is the call graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!take\+Screen@{take\+Screen}}
+\index{take\+Screen@{take\+Screen}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{take\+Screen}]{\setlength{\rightskip}{0pt plus 5cm}void Plot\+And\+Capture\+Widget\+::take\+Screen (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}{}\label{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}
+
+
+Take a snapshot of the P\+L\+OT. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000024}{Todo}]prevent overwriting previous snapshots \end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{plotandcapturewidget_8cpp_source_l00050}{50} of file \hyperlink{plotandcapturewidget_8cpp_source}{plotandcapturewidget.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}!update\+Status@{update\+Status}}
+\index{update\+Status@{update\+Status}!Plot\+And\+Capture\+Widget@{Plot\+And\+Capture\+Widget}}
+\subsubsection[{update\+Status}]{\setlength{\rightskip}{0pt plus 5cm}void Plot\+And\+Capture\+Widget\+::update\+Status (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{}\label{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}
+
+
+Definition at line \hyperlink{plotandcapturewidget_8cpp_source_l00059}{59} of file \hyperlink{plotandcapturewidget_8cpp_source}{plotandcapturewidget.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{plotandcapturewidget_8h}{plotandcapturewidget.\+h}\item 
+src/\hyperlink{plotandcapturewidget_8cpp}{plotandcapturewidget.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\hypertarget{settingswidget_8h_source}{}\section{settingswidget.\+h}
+\label{settingswidget_8h_source}\index{src/settingswidget.\+h@{src/settingswidget.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef SETTINGSWIDGET\_H}
+00002 \textcolor{preprocessor}{#define SETTINGSWIDGET\_H}
+00003 
+00004 \textcolor{preprocessor}{#include <QWidget>}
+00005 
+00006 \textcolor{keyword}{class }QLineEdit;
+00007 \textcolor{keyword}{class }QTextEdit;
+00008 \textcolor{keyword}{class }QPushButton;
+00009 \textcolor{keyword}{class }QButtonGroup;
+00010 \textcolor{keyword}{class }QRadioButton;
+00011 \textcolor{keyword}{class }QCheckBox;
+\hypertarget{settingswidget_8h_source.tex_l00018}{}\hyperlink{classSettingsWidget}{00018} \textcolor{keyword}{class }\hyperlink{classSettingsWidget}{SettingsWidget} : \textcolor{keyword}{public} QWidget
+00019 \{
+00020     Q\_OBJECT
+00021 
+00022 \textcolor{keyword}{public}:
+00023     \hyperlink{classSettingsWidget_a339891dcba7d2813bc5d894bff494a78}{SettingsWidget}(QWidget * = NULL);
+00024 
+00025 \textcolor{keyword}{private} slots:
+00026     \textcolor{keywordtype}{void} sourceChanged(\textcolor{keywordtype}{int});
+00027     \textcolor{keywordtype}{void} sampleRateChanged(\textcolor{keywordtype}{int});
+00028     \textcolor{keywordtype}{void} applyCaptureSettings();
+00029 
+00030 \textcolor{keyword}{private}:
+00031     \textcolor{keywordtype}{void} setupComponents();
+00032     \textcolor{keywordtype}{void} setupActions();
+00033     \textcolor{keywordtype}{void} setupLayout();
+00034     \textcolor{keywordtype}{int} idToSampleRate(\textcolor{keywordtype}{int});
+00035     QString idToSource(\textcolor{keywordtype}{int});
+00036 
+00037     QString iniPath;
+00038     QLineEdit *fileNameTextBox;
+00039     QLineEdit *nameTextBox;
+00040     QLineEdit *recordingNameTextBox;
+00041     QLineEdit *genderTextBox;
+00042     QLineEdit *birthdateTextBox;
+00043     QLineEdit *patientCodeTextBox;
+00044     QTextEdit *notesTextBox;
+00045     QPushButton *applyCaptureSettingsButton;
+00046     QButtonGroup *sourceControlButtonGroup;
+00047     QButtonGroup *sampleRateControlButtonGroup;
+00048     QCheckBox *saveAsEDFCheckbox;
+00049     QRadioButton *ecgSource;
+00050     QRadioButton *sin10Source;
+00051     QRadioButton *sin150Source;
+00052     QRadioButton *squareSource;
+00053     QRadioButton *ecgMockSource;
+00054     QRadioButton *lowSampleRate;
+00055     QRadioButton *midSampleRate;
+00056     QRadioButton *highSampleRate;
+00057 \};
+00058 
+00059 \textcolor{preprocessor}{#endif // SETTINGSWIDGET\_H}
+\end{DoxyCode}

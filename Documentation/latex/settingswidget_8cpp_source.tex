@@ -1,0 +1,280 @@
+\hypertarget{settingswidget_8cpp_source}{}\section{settingswidget.\+cpp}
+\label{settingswidget_8cpp_source}\index{src/settingswidget.\+cpp@{src/settingswidget.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{settingswidget_8h}{settingswidget.h}"}
+00002 \textcolor{preprocessor}{#include <QtWidgets>}
+00003 \textcolor{preprocessor}{#include <QSettings>}
+00004 \textcolor{preprocessor}{#include <QDebug>}
+00005 \textcolor{preprocessor}{#include "\hyperlink{settingssingleton_8h}{settingssingleton.h}"}
+00006 
+00007 
+00008 
+\hypertarget{settingswidget_8cpp_source.tex_l00009}{}\hyperlink{classSettingsWidget_a339891dcba7d2813bc5d894bff494a78}{00009} \hyperlink{classSettingsWidget_a339891dcba7d2813bc5d894bff494a78}{SettingsWidget::SettingsWidget}(QWidget *parent):
+00010     QWidget( parent )
+00011 \{
+00012     setupComponents();
+00013     setupActions();
+00014     setupLayout();
+00015 \}
+00016 
+00020 \textcolor{keywordtype}{void} SettingsWidget::sourceChanged(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})
+00021 \{
+00022     \textcolor{keywordflow}{if} ((\textcolor{keywordtype}{id} >= 0) && (\textcolor{keywordtype}{id} < 5)) \{
+00023         QSettings settings(iniPath, QSettings::IniFormat);
+00024         settings.setValue(\textcolor{stringliteral}{"ECGCapture/Source"}, \textcolor{keywordtype}{id});
+00025     \}
+00026 
+00027     \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_af3d750e4f32db65df430d03a9b947b16}{setSource}(idToSource(\textcolor{keywordtype}{id}));
+00028     \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_af4b9b4364b4146711000f425dd5f5aa9}{setSourceId}(\textcolor{keywordtype}{id});
+00029 
+00030 \}
+00031 
+00035 \textcolor{keywordtype}{void} SettingsWidget::sampleRateChanged(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})
+00036 \{
+00037     \textcolor{keywordflow}{if} ((\textcolor{keywordtype}{id} >= 0) && (\textcolor{keywordtype}{id} < 3)) \{
+00038         QSettings settings(iniPath, QSettings::IniFormat);
+00039         settings.setValue(\textcolor{stringliteral}{"ECGCapture/SampleRate"}, \textcolor{keywordtype}{id});
+00040 
+00041         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_afb6c1555d8a9a93fab574345b7e28e28}{setSampleRate}(idToSampleRate(\textcolor{keywordtype}{
+      id}));
+00042     \}
+00043 \}
+00044 
+00045 \textcolor{keywordtype}{int} SettingsWidget::idToSampleRate(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})
+00046 \{
+00047     \textcolor{keywordtype}{int} fs;
+00048 
+00049     \textcolor{keywordflow}{if} ((\textcolor{keywordtype}{id} >= 0) && (\textcolor{keywordtype}{id} < 3)) \{
+00050         \textcolor{keywordflow}{switch} (\textcolor{keywordtype}{id}) \{
+00051         \textcolor{keywordflow}{case} 0:
+00052             fs = 500;
+00053             \textcolor{keywordflow}{break};
+00054         \textcolor{keywordflow}{case} 1:
+00055             fs = 1000;
+00056             \textcolor{keywordflow}{break};
+00057         \textcolor{keywordflow}{case} 2:
+00058             fs = 2000;
+00059             \textcolor{keywordflow}{break};
+00060         \textcolor{keywordflow}{default}:
+00061             fs = -1;
+00062             \textcolor{keywordflow}{break};
+00063         \}
+00064     \}
+00065 
+00066     \textcolor{keywordflow}{return} fs;
+00067 \}
+00068 
+00069 QString SettingsWidget::idToSource(\textcolor{keywordtype}{int} \textcolor{keywordtype}{id})
+00070 \{
+00071     QString source = \textcolor{stringliteral}{""};
+00072 
+00073  \textcolor{comment}{//   if ((id >= 0) && (id < 4)) \{}
+00074         \textcolor{keywordflow}{switch} (\textcolor{keywordtype}{id}) \{
+00075         \textcolor{keywordflow}{case} 0:
+00076             source = \textcolor{stringliteral}{"ECG"};
+00077             \textcolor{keywordflow}{break};
+00078         \textcolor{keywordflow}{case} 1:
+00079             source = \textcolor{stringliteral}{"10 Hz sin test tone"};
+00080             \textcolor{keywordflow}{break};
+00081         \textcolor{keywordflow}{case} 2:
+00082             source = \textcolor{stringliteral}{"150 Hz sin test tone"};
+00083             \textcolor{keywordflow}{break};
+00084         \textcolor{keywordflow}{case} 3:
+00085             source = \textcolor{stringliteral}{"1 Hz Square wave test tone"};
+00086             \textcolor{keywordflow}{break};
+00087         \textcolor{keywordflow}{case} 4:
+00088             source=\textcolor{stringliteral}{"EcgMock"};
+00089             \textcolor{keywordflow}{break};
+00090         \textcolor{keywordflow}{default}:
+00091             \textcolor{keywordflow}{break};
+00092         \}
+00093  \textcolor{comment}{//   \}}
+00094 
+00095     \textcolor{keywordflow}{return} source;
+00096 \}
+00097 
+00104 \textcolor{keywordtype}{void} SettingsWidget::applyCaptureSettings()
+00105 \{
+00106     QString fileName = fileNameTextBox->text();
+00107     QString name = nameTextBox->text();
+00108     QString recordingName = recordingNameTextBox->text();
+00109     QString gender = genderTextBox->text();
+00110     QString birthDate = birthdateTextBox->text();
+00111     QString patientCode = patientCodeTextBox->text();
+00112     QString notes = notesTextBox->toPlainText();
+00113 
+00114     \textcolor{keywordflow}{if} (fileName != \textcolor{stringliteral}{""}) \{
+00115         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_aec045fc249983ef4ac0de4ba8925b300}{setFileName}(fileName);
+00116     \}
+00117 
+00118     \textcolor{keywordflow}{if} (name != \textcolor{stringliteral}{""}) \{
+00119         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a383c335986ea26502cb65886a9fea1ac}{setName}(name);
+00120     \}
+00121 
+00122     \textcolor{keywordflow}{if} (recordingName != \textcolor{stringliteral}{""}) \{
+00123         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().
+      \hyperlink{classSettingsSingleton_a015183461cfd8c90a1419341e09c7c92}{setRecordingName}(recordingName);
+00124     \}
+00125 
+00126     \textcolor{keywordflow}{if} (gender != \textcolor{stringliteral}{""}) \{
+00127         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a00746454430a23dc51fd64834e35bf0f}{setGender}(gender);
+00128     \}
+00129 
+00130     \textcolor{keywordflow}{if} (birthDate != \textcolor{stringliteral}{""}) \{
+00131         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a1b23c39146607ea723fc97f570e6e3e1}{setBirthDate}(birthDate);
+00132     \}
+00133 
+00134     \textcolor{keywordflow}{if} (patientCode != \textcolor{stringliteral}{""}) \{
+00135         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_a43d597e9d39a9b76a11c4575d8d71adc}{setPatientCode}(patientCode);
+00136     \}
+00137 
+00138     \textcolor{keywordflow}{if} (notes != \textcolor{stringliteral}{""}) \{
+00139         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_ac9c888265f360f1fe7ee3fb9441dd514}{setNotes}(notes);
+00140     \}
+00141 
+00142     \textcolor{keywordflow}{if} (saveAsEDFCheckbox->isChecked()) \{
+00143         \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_adb4221d2f742cff29038bfda74cfc784}{setSaveAsEdf}(\textcolor{keyword}{true});
+00144     \}
+00145 
+00146 
+00147 \}
+00148 
+00149 
+00153 \textcolor{keywordtype}{void} SettingsWidget::setupComponents()
+00154 \{
+00155     \textcolor{comment}{//Get settings from previous captures from the .ini-file}
+00156     iniPath = qApp->applicationDirPath() + \textcolor{stringliteral}{"/settings.ini"};
+00157     QSettings settings(iniPath, QSettings::IniFormat);
+00158 
+00159     \textcolor{comment}{//=====START SOURCE CONTROL=====}
+00160     QVector<QAbstractButton *> sourceButtonArray;
+00161     sourceControlButtonGroup = \textcolor{keyword}{new} QButtonGroup;
+00162 
+00163     ecgSource = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"ECG"});
+00164     sin10Source = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"10 Hz sin test tone"});
+00165     sin150Source = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"150 Hz sin test tone"});
+00166     squareSource = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"1 Hz square wave test tone"});
+00167     ecgMockSource = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"EcgMock"});
+00168 
+00169     sourceButtonArray.append(ecgSource);
+00170     sourceButtonArray.append(sin10Source);
+00171     sourceButtonArray.append(sin150Source);
+00172     sourceButtonArray.append(squareSource);
+00173     sourceButtonArray.append(ecgMockSource);
+00174 
+00175     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii=0; ii<sourceButtonArray.size(); ii++) \{
+00176         sourceControlButtonGroup->addButton(sourceButtonArray.at(ii), ii);
+00177     \}
+00178 
+00179     \textcolor{keywordtype}{int} sourceId = settings.value(\textcolor{stringliteral}{"/ECGCapture/Source"}, 0).toInt();
+00180     sourceButtonArray.at(sourceId)->setChecked(\textcolor{keyword}{true});
+00181     settings.setValue(\textcolor{stringliteral}{"ECGCapture/Source"}, sourceId);
+00182     \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_af3d750e4f32db65df430d03a9b947b16}{setSource}(idToSource(sourceId));
+00183     \textcolor{comment}{//=====END SOURCE CONTROL=====}
+00184 
+00185     \textcolor{comment}{//=====START SAMPLE RATE CONTROL=====}
+00186     QVector<QAbstractButton *> sampleRateButtonArray;
+00187     sampleRateControlButtonGroup = \textcolor{keyword}{new} QButtonGroup;
+00188 
+00189     lowSampleRate = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"500 Hz"});
+00190     midSampleRate = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"1000 Hz"});
+00191     highSampleRate = \textcolor{keyword}{new} QRadioButton(\textcolor{stringliteral}{"2000 Hz"});
+00192 
+00193     sampleRateButtonArray.append(lowSampleRate);
+00194     sampleRateButtonArray.append(midSampleRate);
+00195     sampleRateButtonArray.append(highSampleRate);
+00196 
+00197     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii=0; ii<sampleRateButtonArray.size(); ii++) \{
+00198         sampleRateControlButtonGroup->addButton(sampleRateButtonArray.at(ii), ii);
+00199     \}
+00200 
+00201     \textcolor{keywordtype}{int} sampleRateId = settings.value(\textcolor{stringliteral}{"/ECGCapture/SampleRate"}, 0).toInt();
+00202     sampleRateButtonArray.at(sampleRateId)->setChecked(\textcolor{keyword}{true});
+00203     settings.setValue(\textcolor{stringliteral}{"ECGCapture/SampleRate"}, sampleRateId);
+00204     \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_afb6c1555d8a9a93fab574345b7e28e28}{setSampleRate}(idToSampleRate(
+      sampleRateId));
+00205     \textcolor{comment}{//=====END SAMPLE RATE CONTROL=====}
+00206 
+00207     \textcolor{comment}{//Set up objects to be used}
+00208     fileNameTextBox = \textcolor{keyword}{new} QLineEdit;
+00209     nameTextBox = \textcolor{keyword}{new} QLineEdit;
+00210     recordingNameTextBox = \textcolor{keyword}{new} QLineEdit;
+00211     genderTextBox = \textcolor{keyword}{new} QLineEdit;
+00212     birthdateTextBox = \textcolor{keyword}{new} QLineEdit;
+00213     patientCodeTextBox = \textcolor{keyword}{new} QLineEdit;
+00214     notesTextBox = \textcolor{keyword}{new} QTextEdit;
+00215     applyCaptureSettingsButton = \textcolor{keyword}{new} QPushButton(\textcolor{stringliteral}{"Apply settings"});
+00216     saveAsEDFCheckbox = \textcolor{keyword}{new} QCheckBox;
+00217 \}
+00218 
+00222 \textcolor{keywordtype}{void} SettingsWidget::setupActions()
+00223 \{
+00224     \textcolor{comment}{//Signals-slots}
+00225     connect(sourceControlButtonGroup, SIGNAL(buttonClicked(\textcolor{keywordtype}{int})), \textcolor{keyword}{this}, SLOT(sourceChanged(\textcolor{keywordtype}{int})));
+00226     connect(sampleRateControlButtonGroup, SIGNAL(buttonClicked(\textcolor{keywordtype}{int})), \textcolor{keyword}{this}, SLOT(sampleRateChanged(\textcolor{keywordtype}{int})));
+00227     connect(applyCaptureSettingsButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(applyCaptureSettings()));
+00228 \}
+00229 
+00233 \textcolor{keywordtype}{void} SettingsWidget::setupLayout()
+00234 \{
+00235     QGroupBox *sampleRateControlGroup = \textcolor{keyword}{new} QGroupBox(\textcolor{stringliteral}{"Sample rate"});
+00236     QGroupBox *sourceControlGroup = \textcolor{keyword}{new} QGroupBox(\textcolor{stringliteral}{"Source"});
+00237     QGroupBox *captureSettingsGroup = \textcolor{keyword}{new} QGroupBox(\textcolor{stringliteral}{"ECG capture settings"});
+00238 
+00239     QLabel *sampleFreqNote = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"NOTE: some frames are dropped at 2000 Hz."});
+00240     QLabel *fileNameLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Filename: "});
+00241     QLabel *nameLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Name: "});
+00242     QLabel *recordingNameLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Recording name: "});
+00243     QLabel *genderLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Gender: "});
+00244     QLabel *birthdateLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Birth date: "});
+00245     QLabel *patientCodeLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Patient code: "});
+00246     QLabel *notesLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Notes: "});
+00247     QLabel *saveAsEDFLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"Save as EDF: "});
+00248 
+00249     \textcolor{comment}{//The ECG capture settings options layout}
+00250     QFormLayout *captureSettingsLayout = \textcolor{keyword}{new} QFormLayout;
+00251     captureSettingsLayout->addRow(fileNameLabel, fileNameTextBox);
+00252     captureSettingsLayout->addRow(nameLabel, nameTextBox);
+00253     captureSettingsLayout->addRow(recordingNameLabel, recordingNameTextBox);
+00254     captureSettingsLayout->addRow(genderLabel, genderTextBox);
+00255     captureSettingsLayout->addRow(birthdateLabel, birthdateTextBox);
+00256     captureSettingsLayout->addRow(patientCodeLabel, patientCodeTextBox);
+00257     captureSettingsLayout->addRow(notesLabel, notesTextBox);
+00258     captureSettingsLayout->addRow(saveAsEDFLabel, saveAsEDFCheckbox);
+00259     captureSettingsLayout->addWidget(applyCaptureSettingsButton);
+00260 
+00261     captureSettingsGroup->setLayout(captureSettingsLayout);
+00262 
+00263     \textcolor{comment}{//Source control layout}
+00264     QVBoxLayout *sourceControlLayout = \textcolor{keyword}{new} QVBoxLayout;
+00265 
+00266     sourceControlLayout->addWidget(ecgSource);
+00267     sourceControlLayout->addWidget(sin10Source);
+00268     sourceControlLayout->addWidget(sin150Source);
+00269     sourceControlLayout->addWidget(squareSource);
+00270     sourceControlLayout->addWidget(ecgMockSource);
+00271 
+00272     sourceControlGroup->setLayout(sourceControlLayout);
+00273 
+00274     \textcolor{comment}{//Sample rate layout}
+00275     QVBoxLayout *sampleRateControlLayout = \textcolor{keyword}{new} QVBoxLayout;
+00276     sampleRateControlLayout->addWidget(lowSampleRate);
+00277     sampleRateControlLayout->addWidget(midSampleRate);
+00278     sampleRateControlLayout->addWidget(highSampleRate);
+00279     sampleRateControlLayout->addWidget(sampleFreqNote);
+00280 
+00281     sampleRateControlGroup->setLayout(sampleRateControlLayout);
+00282 
+00283     \textcolor{comment}{//Main layout}
+00284     QVBoxLayout *mainLayout = \textcolor{keyword}{new} QVBoxLayout;
+00285     mainLayout->addWidget(sourceControlGroup);
+00286     mainLayout->addStretch();
+00287     mainLayout->addWidget(sampleRateControlGroup);
+00288     mainLayout->addStretch();
+00289     mainLayout->addWidget(captureSettingsGroup);
+00290     mainLayout->addStretch();
+00291 
+00292     setLayout(mainLayout);
+00293 \}
+\end{DoxyCode}

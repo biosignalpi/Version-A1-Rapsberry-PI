@@ -1,0 +1,456 @@
+\hypertarget{ecgcapture_8cpp_source}{}\section{ecgcapture.\+cpp}
+\label{ecgcapture_8cpp_source}\index{src/ecgcapture.\+cpp@{src/ecgcapture.\+cpp}}
+
+\begin{DoxyCode}
+00001 
+00002 \textcolor{preprocessor}{#include <libFiles/bcm2835.h>}
+00003 \textcolor{preprocessor}{#include "\hyperlink{ecgcapture_8h}{ecgcapture.h}"}
+00004 \textcolor{preprocessor}{#include <QVector>}
+00005 \textcolor{preprocessor}{#include <QDebug>}
+00006 \textcolor{preprocessor}{#include "stdio.h"}
+00007 \textcolor{preprocessor}{#include "\hyperlink{meanFilter_8h}{meanFilter.h}"}
+00008 
+\hypertarget{ecgcapture_8cpp_source.tex_l00009}{}\hyperlink{ecgcapture_8cpp_a42dbee90edd2f61e90f501fa3f667761}{00009} \textcolor{preprocessor}{#define PIN18 RPI\_GPIO\_P1\_18}
+\hypertarget{ecgcapture_8cpp_source.tex_l00010}{}\hyperlink{ecgcapture_8cpp_aa8a0f35acb2789eeeecec0b656a199b0}{00010} \textcolor{preprocessor}{#define PIN16 RPI\_GPIO\_P1\_16}
+00011 
+00012 \textcolor{keyword}{static} \textcolor{keywordtype}{float} vreff = 1.8, ECG\_GAIN = 1.4, RESPIRATION\_gain = 1;
+00013 \textcolor{keyword}{static} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} nFrames;
+00014 
+\hypertarget{ecgcapture_8cpp_source.tex_l00015}{}\hyperlink{group__Device-Facade_gaeef1c0708b94ee82330d6d165a2b5a71}{00015} \hyperlink{group__Device-Facade_gaeef1c0708b94ee82330d6d165a2b5a71}{EcgCapture::EcgCapture}()
+00016 \{
+00017     test = 0;
+00018 \}
+00019 
+\hypertarget{ecgcapture_8cpp_source.tex_l00026}{}\hyperlink{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0}{00026} \textcolor{keywordtype}{void} \hyperlink{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0}{EcgCapture::init}(\hyperlink{group__Device-Facade_gabf6e5cc9109a573e29add762dc36df9b}{OperatingMode} mode, \hyperlink{group__Device-Facade_gaaf4f7677ca26944edc0f65195b8729f3}{Frequency} freq)
+00027 \{
+00028     \textcolor{keywordflow}{if} (!bcm2835\_init()) \{
+00029             qDebug() << (\textcolor{stringliteral}{"Could not init bcm2835 in EcgCapture"}) << endl;
+00030            exit(EXIT\_FAILURE);
+00031     \}
+00032 
+00033     spiInit();
+00034 
+00035     QByteArray CMREFCTL;
+00036     CMREFCTL.resize(4);
+00037 
+00038     QByteArray FILTCTL;
+00039     FILTCTL.resize(4);
+00040 
+00041     QByteArray FRMCTL;
+00042     FRMCTL.resize(4);
+00043 
+00044     QByteArray ECGCTL;
+00045     ECGCTL.resize(4);
+00046 
+00047     QByteArray RESPCTL;
+00048     RESPCTL.resize(4);
+00049 
+00050     QByteArray TESTTONE;
+00051     TESTTONE.resize(4);
+00052 
+00053     QByteArray LOFFCTL;
+00054     LOFFCTL.resize(4);
+00055 
+00056     \textcolor{comment}{//Configure registers depending on source}
+00057     \textcolor{keywordflow}{switch} (mode) \{
+00058     \textcolor{keywordflow}{case} \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}{ecgCapture}:
+00059         \textcolor{comment}{//CMREFCTL is set to 0x85E0000A}
+00060         CMREFCTL[0] = 0x85;
+00061         CMREFCTL[1] = 0xE0;
+00062         CMREFCTL[2] = 0x00;
+00063         CMREFCTL[3] = 0x4A; \textcolor{comment}{//0x0A for the first board, 0x4A for the REV\_A board}
+00064 
+00065         \textcolor{comment}{//FILTCTL is set to 0x8B000000}
+00066         FILTCTL[0] = 0x8B;
+00067         FILTCTL[1] = 0x00;
+00068         FILTCTL[2] = 0x00;
+00069         FILTCTL[3] = 0x00;
+00070 
+00071         \textcolor{comment}{//FRMCTL is set to 0x8A1FCE00}
+00072         FRMCTL[0] = 0x8A;
+00073         FRMCTL[1] = 0x1F;
+00074         FRMCTL[2] = 0xC6; \textcolor{comment}{//CE = pace disabled, C6 = pace disabled LOFF enabled}
+00075         FRMCTL[3] = 0x00;
+00076 
+00077         LOFFCTL[0] = 0x82;
+00078         LOFFCTL[1] = 0x00;
+00079         LOFFCTL[2] = 0x00;
+00080         LOFFCTL[3] = 0x15;
+00081 
+00082         \textcolor{comment}{//ECGCTL is set to 0x81F800AE}
+00083         ECGCTL[0] = 0x81;
+00084         ECGCTL[1] = 0xF8;
+00085         ECGCTL[2] = 0x00;
+00086         ECGCTL[3] = 0xAE;
+00087 
+00088         \textcolor{comment}{//RESPCTL is set to 0x83002099}
+00089         RESPCTL[0] = 0x83;
+00090         RESPCTL[1] = 0x00;
+00091         RESPCTL[2] = 0x20;
+00092         RESPCTL[3] = 0x99;
+00093         \textcolor{keywordflow}{break};
+00094     \textcolor{keywordflow}{case} \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba8b349f0786d8e8247f4bc381baa51134}{testToneSquare}:
+00095         \textcolor{comment}{//CMREFCTL is set to 0x8500000B}
+00096         CMREFCTL[0] = 0x85;
+00097         CMREFCTL[1] = 0x00;
+00098         CMREFCTL[2] = 0x00;
+00099         CMREFCTL[3] = 0x0B;
+00100 
+00101         \textcolor{comment}{//TESTTONE is set to 0x88F8001D}
+00102         TESTTONE[0] = 0x88;
+00103         TESTTONE[1] = 0xF8;
+00104         TESTTONE[2] = 0x00;
+00105         TESTTONE[3] = 0x1D;
+00106 
+00107         \textcolor{comment}{//FILTCTL is set to 0x8B000008}
+00108         FILTCTL[0] = 0x8B;
+00109         FILTCTL[1] = 0x00;
+00110         FILTCTL[2] = 0x00;
+00111         FILTCTL[3] = 0x1D;
+00112 
+00113         \textcolor{comment}{//FRMCTL is set to 0x8A1FCE10}
+00114         FRMCTL[0] = 0x8A;
+00115         FRMCTL[1] = 0x1F;
+00116         FRMCTL[2] = 0xCE;
+00117         FRMCTL[3] = 0x10;
+00118 
+00119         \textcolor{comment}{//ECGCTL is set to 0x81F800AE}
+00120         ECGCTL[0] = 0x81;
+00121         ECGCTL[1] = 0xF8;
+00122         ECGCTL[2] = 0x00;
+00123         ECGCTL[3] = 0xAE;
+00124         \textcolor{keywordflow}{break};
+00125     \textcolor{keywordflow}{case} \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9ececd6d5264a0e5996556c6697a4f94}{testToneLowFreqSin}:
+00126         \textcolor{comment}{//CMREFCTL is set to 0x8500000B}
+00127         CMREFCTL[0] = 0x85;
+00128         CMREFCTL[1] = 0x00;
+00129         CMREFCTL[2] = 0x00;
+00130         CMREFCTL[3] = 0x0B;
+00131 
+00132         \textcolor{comment}{//TESTTONE is set to 0x88F80005}
+00133         TESTTONE[0] = 0x88;
+00134         TESTTONE[1] = 0xF8;
+00135         TESTTONE[2] = 0x00;
+00136         TESTTONE[3] = 0x05;
+00137 
+00138         \textcolor{comment}{//FILTCTL is set to 0x8B000008}
+00139         FILTCTL[0] = 0x8B;
+00140         FILTCTL[1] = 0x00;
+00141         FILTCTL[2] = 0x00;
+00142         FILTCTL[3] = 0x08;
+00143 
+00144         \textcolor{comment}{//FRMCTL is set to 0x8A1FCE10}
+00145         FRMCTL[0] = 0x8A;
+00146         FRMCTL[1] = 0x1F;
+00147         FRMCTL[2] = 0xCE;
+00148         FRMCTL[3] = 0x10;
+00149 
+00150         \textcolor{comment}{//ECGCTL is set to 0x81F800AE}
+00151         ECGCTL[0] = 0x81;
+00152         ECGCTL[1] = 0xF8;
+00153         ECGCTL[2] = 0x00;
+00154         ECGCTL[3] = 0xAE;
+00155         \textcolor{keywordflow}{break};
+00156     \textcolor{keywordflow}{case} \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba397d60b89ddb5aaf41d92c617868ed47}{testToneHighFreqSin}:
+00157         \textcolor{comment}{//CMREFCTL is set to 0x8500000B}
+00158         CMREFCTL[0] = 0x85;
+00159         CMREFCTL[1] = 0x00;
+00160         CMREFCTL[2] = 0x00;
+00161         CMREFCTL[3] = 0x0B;
+00162 
+00163         \textcolor{comment}{//TESTTONE is set to 0x88F8000D}
+00164         TESTTONE[0] = 0x88;
+00165         TESTTONE[1] = 0xF8;
+00166         TESTTONE[2] = 0x00;
+00167         TESTTONE[3] = 0x0D;
+00168 
+00169         \textcolor{comment}{//FILTCTL is set to 0x8B000008}
+00170         FILTCTL[0] = 0x8B;
+00171         FILTCTL[1] = 0x00;
+00172         FILTCTL[2] = 0x00;
+00173         FILTCTL[3] = 0x08;
+00174 
+00175         \textcolor{comment}{//FRMCTL is set to 0x8A1FCE10}
+00176         FRMCTL[0] = 0x8A;
+00177         FRMCTL[1] = 0x1F;
+00178         FRMCTL[2] = 0xCE;
+00179         FRMCTL[3] = 0x10;
+00180 
+00181         \textcolor{comment}{//ECGCTL is set to 0x81F800AE}
+00182         ECGCTL[0] = 0x81;
+00183         ECGCTL[1] = 0xF8;
+00184         ECGCTL[2] = 0x00;
+00185         ECGCTL[3] = 0xAE;
+00186         \textcolor{keywordflow}{break};
+00187     \textcolor{keywordflow}{default}:
+00188         \textcolor{keywordflow}{break};
+00189     \}
+00190 
+00191     \textcolor{comment}{//Set sampling frequency}
+00192     \textcolor{keywordflow}{switch} (freq) \{
+00193     \textcolor{keywordflow}{case} \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3acb281025a93800e7ed188605a7375838}{lowFreq}:
+00194         FRMCTL[3] = FRMCTL[3] & 0xF3;
+00195         FRMCTL[3] = FRMCTL[3] | 0x0C;
+00196         qDebug()<<\textcolor{stringliteral}{"Low freq"};
+00197         \textcolor{keywordflow}{break};
+00198     \textcolor{keywordflow}{case} \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3a2a968734e734a271ef5a52b83360122a}{midFreq}:
+00199         FRMCTL[3] = FRMCTL[3] & 0xF3;
+00200         FRMCTL[3] = FRMCTL[3] | 0x04;
+00201         qDebug()<<\textcolor{stringliteral}{"Mid freq"};
+00202         \textcolor{keywordflow}{break};
+00203     \textcolor{keywordflow}{case} \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3abd09d184c2c34f227532a8bc5fb90877}{highFreq}:
+00204         FRMCTL[3] = FRMCTL[3] & 0xF3;
+00205         FRMCTL[3] = FRMCTL[3] | 0x00;
+00206         qDebug()<<\textcolor{stringliteral}{"High freq"};
+00207         \textcolor{keywordflow}{break};
+00208     \textcolor{keywordflow}{default}:
+00209         \textcolor{keywordflow}{break};
+00210     \}
+00211 
+00212     \textcolor{keywordflow}{if} (mode == \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}{ecgCapture}) \{
+00213         setReg(CMREFCTL);
+00214         setReg(FILTCTL);
+00215         setReg(FRMCTL);
+00216         setReg(ECGCTL);
+00217         setReg(RESPCTL);
+00218         setReg(LOFFCTL);
+00219         leadMode = \hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9caf7786dce131009aa61ddfed4f8d8639b}{digital};
+00220         nFrames = 7;
+00221     \} \textcolor{keywordflow}{else} \{
+00222         setReg(CMREFCTL);
+00223         setReg(TESTTONE);
+00224         setReg(FILTCTL);
+00225         setReg(FRMCTL);
+00226         setReg(ECGCTL);
+00227         leadMode = \hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9ca21cabce4f74afcf79d24897058fdd6b9}{electrode};
+00228         nFrames = 6;
+00229     \}
+00230 \}
+00231 
+00235 \textcolor{keywordtype}{void} EcgCapture::spiInit()
+00236 \{
+00237     bcm2835\_gpio\_fsel(\hyperlink{ecgcapture_8cpp_a42dbee90edd2f61e90f501fa3f667761}{PIN18}, BCM2835\_GPIO\_FSEL\_OUTP);
+00238     bcm2835\_gpio\_write(\hyperlink{ecgcapture_8cpp_a42dbee90edd2f61e90f501fa3f667761}{PIN18}, LOW);
+00239     delay(100);
+00240     bcm2835\_gpio\_write(\hyperlink{ecgcapture_8cpp_a42dbee90edd2f61e90f501fa3f667761}{PIN18}, HIGH);
+00241     delay(100);
+00242     bcm2835\_spi\_begin();
+00243     bcm2835\_spi\_setBitOrder(BCM2835\_SPI\_BIT\_ORDER\_MSBFIRST);
+00244     bcm2835\_spi\_setDataMode(BCM2835\_SPI\_MODE0);
+00245     bcm2835\_spi\_setClockDivider(BCM2835\_SPI\_CLOCK\_DIVIDER\_512);
+00246     bcm2835\_spi\_chipSelect(BCM2835\_SPI\_CS0);
+00247     bcm2835\_spi\_setChipSelectPolarity(BCM2835\_SPI\_CS0, LOW);
+00248     bcm2835\_gpio\_fsel(\hyperlink{ecgcapture_8cpp_aa8a0f35acb2789eeeecec0b656a199b0}{PIN16}, BCM2835\_GPIO\_FSEL\_INPT);
+00249 \}
+00250 
+\hypertarget{ecgcapture_8cpp_source.tex_l00257}{}\hyperlink{group__Device-Facade_ga9f04dad928d472c92229f3f39a8f2445}{00257} \textcolor{keywordtype}{void} \hyperlink{group__Device-Facade_ga9f04dad928d472c92229f3f39a8f2445}{EcgCapture::testDevice}()
+00258 \{
+00259     QByteArray TESTIN;
+00260     TESTIN.resize(4);
+00261 
+00262     QByteArray TESTOUT;
+00263     TESTOUT.resize(4);
+00264 
+00265     TESTIN[0] = 0x01;
+00266     TESTIN[1] = 0x00;
+00267     TESTIN[2] = 0x00;
+00268     TESTIN[3] = 0x00;
+00269 
+00270     TESTOUT[0] = 0x11;
+00271     TESTOUT[1] = 0x11;
+00272     TESTOUT[2] = 0x11;
+00273     TESTOUT[3] = 0x11;
+00274 
+00275     qDebug()<<TESTOUT.toHex();
+00276 
+00277     bcm2835\_spi\_transfernb(TESTIN.data(), TESTOUT.data(), TESTIN.size());
+00278 
+00279     qDebug()<<TESTOUT.toHex();
+00280 
+00281     \textcolor{keywordflow}{if}(bcm2835\_gpio\_lev(\hyperlink{ecgcapture_8cpp_aa8a0f35acb2789eeeecec0b656a199b0}{PIN16})==LOW) \{
+00282         qDebug()<<\textcolor{stringliteral}{"LOW"};
+00283     \} \textcolor{keywordflow}{else} \{
+00284         qDebug()<<\textcolor{stringliteral}{"HIGH"};
+00285     \}
+00286 
+00287     QByteArray FRAMES;
+00288     QByteArray DATAOUT;
+00289     FRAMES.resize(4);
+00290     DATAOUT.resize(4);
+00291 
+00292     FRAMES[0] = 0x00;
+00293     FRAMES[1] = 0x00;
+00294     FRAMES[2] = 0x00;
+00295     FRAMES[3] = 0x00;
+00296 
+00297     DATAOUT[0] = 0x11;
+00298     DATAOUT[1] = 0x11;
+00299     DATAOUT[2] = 0x11;
+00300     DATAOUT[3] = 0x11;
+00301 
+00302     qDebug()<<DATAOUT.toHex();
+00303     bcm2835\_spi\_transfernb(FRAMES.data(), DATAOUT.data(), FRAMES.size());
+00304     qDebug()<<DATAOUT.toHex();
+00305 \}
+00306 
+00310 \textcolor{keywordtype}{bool} EcgCapture::setReg(QByteArray writeCommand)
+00311 \{
+00312     \textcolor{comment}{//Validate the input}
+00313     \textcolor{keywordflow}{if} (writeCommand.size() != 4)
+00314         \textcolor{keywordflow}{return} 0;
+00315 
+00316     enableRegisterWrite();
+00317     bcm2835\_spi\_transfern(writeCommand.data(), writeCommand.size());
+00318 
+00319     \textcolor{keywordflow}{return} 1;
+00320 \}
+00321 
+00325 \textcolor{keywordtype}{void} EcgCapture::csEnable()
+00326 \{
+00327     bcm2835\_spi\_setChipSelectPolarity(BCM2835\_SPI\_CS0, LOW);
+00328 \}
+00329 
+00334 \textcolor{keywordtype}{void} EcgCapture::csDisable()
+00335 \{
+00336     bcm2835\_spi\_setChipSelectPolarity(BCM2835\_SPI\_CS0, HIGH);
+00337 \}
+00338 
+00344 \textcolor{keywordtype}{void} EcgCapture::enableRegisterWrite()
+00345 \{
+00346     csDisable();
+00347     csEnable();
+00348 \}
+00349 
+\hypertarget{ecgcapture_8cpp_source.tex_l00353}{}\hyperlink{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793}{00353} \textcolor{keywordtype}{void} \hyperlink{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793}{EcgCapture::start}()
+00354 \{
+00355     enableRegisterWrite();
+00356 
+00357     \textcolor{keywordtype}{char} FRAMES1[] = \{0x40,0x00,0x00,0x00\};
+00358     bcm2835\_spi\_transfern(FRAMES1,\textcolor{keyword}{sizeof}(FRAMES1));
+00359 \}
+00360 
+00361 
+\hypertarget{ecgcapture_8cpp_source.tex_l00362}{}\hyperlink{group__Device-Facade_ga8fef74cdd0296256ab4a700dae2d02a4}{00362} \textcolor{keywordtype}{void} \hyperlink{group__Device-Facade_ga8fef74cdd0296256ab4a700dae2d02a4}{EcgCapture::stop}()
+00363 \{ 
+00364 
+00365 \}
+00366 
+00370 \textcolor{keywordtype}{double} EcgCapture::ecgVoltageConversion(\textcolor{keywordtype}{int} ADCDecimal, \hyperlink{group__Device-Facade_ga1750ac59389b67ba4d9d2834dd7c2d9c}{leadFormat} format)
+00371 \{
+00372     \textcolor{keywordtype}{double} ecg\_voltage = 0;
+00373 
+00374     \textcolor{keywordflow}{if} (format == \hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9caf7786dce131009aa61ddfed4f8d8639b}{digital}) \{
+00375         \textcolor{keywordflow}{if}(ADCDecimal> 8388608) \{
+00376             ecg\_voltage = ((4*vreff*(-(16777216-ADCDecimal))/ECG\_GAIN)/(16777215));
+00377         \} \textcolor{keywordflow}{else} \{
+00378             ecg\_voltage = ((4*vreff*ADCDecimal)/ECG\_GAIN)/(16777215);
+00379         \}
+00380     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (format == \hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9ca21cabce4f74afcf79d24897058fdd6b9}{electrode}) \{
+00381         ecg\_voltage = (2*ADCDecimal*(vreff/ECG\_GAIN))/(16777215);
+00382     \}
+00383 
+00384     \textcolor{keywordflow}{return} ecg\_voltage;
+00385 \}
+00386 
+00390 \textcolor{keywordtype}{double} EcgCapture::respVoltageConversion(\textcolor{keywordtype}{int} ADCDecimal)
+00391 \{
+00392     \textcolor{keywordflow}{return} 4*(vreff/(1.6468*RESPIRATION\_gain))*ADCDecimal/(16777215);
+00393 \}
+00394 
+\hypertarget{ecgcapture_8cpp_source.tex_l00400}{}\hyperlink{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd}{00400} \textcolor{keyword}{const} QVector<double> \hyperlink{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd}{EcgCapture::readFrame}()
+00401 \{
+00402     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} counter = 0;
+00403     \textcolor{keywordtype}{char} FRAMES[] = \{0x00,0x00,0x00,0x00\};
+00404     \textcolor{keywordtype}{char} DATAOUT[] = \{0,0,0,0\};
+00405     \textcolor{keywordtype}{int} lead = 0;
+00406     QVector<double> frame;
+00407     \textcolor{keywordtype}{bool} ecgFlag = \textcolor{keyword}{false};
+00408     \textcolor{keywordtype}{bool} respFlag = \textcolor{keyword}{false};
+00409     \textcolor{keywordtype}{bool} loffFlag = \textcolor{keyword}{false};
+00410 
+00411     csEnable();
+00412 
+00413     \textcolor{keywordflow}{while} (counter<nFrames) \{
+00414         \textcolor{keywordflow}{if}(bcm2835\_gpio\_lev(\hyperlink{ecgcapture_8cpp_aa8a0f35acb2789eeeecec0b656a199b0}{PIN16})==LOW) \{
+00415             bcm2835\_spi\_transfernb(FRAMES, DATAOUT, \textcolor{keyword}{sizeof}(FRAMES));
+00416 
+00417             \textcolor{comment}{//Uncomment theese lines to check if frames are dropped}
+00418             \textcolor{comment}{//NOTE: writing to the terminal is slow so for performance reasons}
+00419             \textcolor{comment}{//      theese code snipped is not used.}
+00420 \textcolor{comment}{//            if (DATAOUT[0] == 0xb0) \{}
+00421 \textcolor{comment}{//                test++;}
+00422 \textcolor{comment}{//                if (test%100 == 0) \{}
+00423 \textcolor{comment}{//                    printf("%d\(\backslash\)n",test);}
+00424 \textcolor{comment}{//                \}}
+00425 \textcolor{comment}{//            \}}
+00426 
+00427             lead = 0;
+00428 
+00429             \textcolor{keywordflow}{if} (DATAOUT[0] == 0x11) \{
+00430                 \textcolor{comment}{//Lead I}
+00431                 lead |= (DATAOUT[1] << 16);
+00432                 lead |= (DATAOUT[2] << 8);
+00433                 lead |= DATAOUT[3];
+00434                 ecgFlag = \textcolor{keyword}{true};
+00435             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (DATAOUT[0] == 0x12) \{
+00436                 \textcolor{comment}{//Lead II}
+00437                 lead |= (DATAOUT[1] << 16);
+00438                 lead |= (DATAOUT[2] << 8);
+00439                 lead |= DATAOUT[3];
+00440                 ecgFlag = \textcolor{keyword}{true};
+00441             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (DATAOUT[0] == 0x13) \{
+00442                 \textcolor{comment}{//Lead III}
+00443                 lead |= (DATAOUT[1] << 16);
+00444                 lead |= (DATAOUT[2] << 8);
+00445                 lead |= DATAOUT[3];
+00446                 ecgFlag = \textcolor{keyword}{true};
+00447             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (DATAOUT[0] == 27) \{
+00448                 \textcolor{comment}{//Resp mag.}
+00449                 lead |= (DATAOUT[1] << 16);
+00450                 lead |= (DATAOUT[2] << 8);
+00451                 lead |= DATAOUT[3];
+00452                 respFlag = \textcolor{keyword}{true};
+00453             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (DATAOUT[0] == 0x1D) \{
+00454                 \textcolor{comment}{//LOFF}
+00455                 \textcolor{keywordtype}{int} mask = 0xF0;
+00456                 \textcolor{keywordtype}{int} tmp = (DATAOUT[1] & mask) >> 4;
+00457                 \textcolor{keywordflow}{if} (tmp == 0x00) \{
+00458                     \textcolor{comment}{//Leads connected}
+00459                     lead = 0;
+00460                 \} \textcolor{keywordflow}{else} \{
+00461                     \textcolor{comment}{//Leads disconnected}
+00462                     lead = 1;
+00463                 \}
+00464                 loffFlag = \textcolor{keyword}{true};
+00465             \}
+00466 
+00467             \textcolor{keywordflow}{if} (ecgFlag) \{
+00468                 frame.append(ecgVoltageConversion(lead, leadMode));
+00469                 \textcolor{comment}{//frame.append(filterEcgVal(ecgVoltageConversion(lead)));}
+00470             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (respFlag) \{
+00471                 frame.append(\hyperlink{meanFilter_8cpp_a30d3375037ed32fa2ec845d42deebc3d}{filterVal}(respVoltageConversion(lead)));
+00472             \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (loffFlag) \{
+00473                 \textcolor{keywordflow}{if} (lead == 0) \{
+00474                     \textcolor{comment}{//Leads connected}
+00475                     frame.append(0.0);
+00476                 \} \textcolor{keywordflow}{else} \{
+00477                     \textcolor{comment}{//Leads disconnected}
+00478                     frame.append(1.0);
+00479                 \}
+00480             \}
+00481 
+00482             ecgFlag = \textcolor{keyword}{false};
+00483             respFlag = \textcolor{keyword}{false};
+00484             loffFlag = \textcolor{keyword}{false};
+00485             counter++;
+00486         \}
+00487     \}
+00488 
+00489     csDisable();
+00490 
+00491     counter = 0;
+00492 
+00493     \textcolor{keywordflow}{return} frame;
+00494 \}
+00495 
+\end{DoxyCode}

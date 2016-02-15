@@ -1,0 +1,45 @@
+\hypertarget{sliderwidget_8h_source}{}\section{sliderwidget.\+h}
+\label{sliderwidget_8h_source}\index{src/sliderwidget.\+h@{src/sliderwidget.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef SLIDERWIDGET\_H}
+00002 \textcolor{preprocessor}{#define SLIDERWIDGET\_H}
+00003 
+00004 \textcolor{preprocessor}{#include <QWidget>}
+00005 \textcolor{preprocessor}{#include <QSlider>}
+00006 \textcolor{preprocessor}{#include <QLabel>}
+00007 
+00008 
+\hypertarget{sliderwidget_8h_source.tex_l00014}{}\hyperlink{classSliderWidget}{00014} \textcolor{keyword}{class }\hyperlink{classSliderWidget}{SliderWidget} : \textcolor{keyword}{public} QWidget
+00015 \{
+00016     Q\_OBJECT
+00017 
+00018 \textcolor{keyword}{public}:
+00019     \hyperlink{classSliderWidget_a22d7be7e513e8d74ec95fcc73d96fdf6}{SliderWidget}(\textcolor{keywordtype}{int} min = 0, \textcolor{keywordtype}{int} max = 10, \textcolor{keywordtype}{int} tick = 1, QWidget * = NULL);
+00020     \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_a8d5fb2c86d6dbcbe67ae480590020af6}{setTickSize}(\textcolor{keywordtype}{int});
+00021     \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_aeb088af9a4577c8ca1e64a06bd74eaa1}{setInterval}(\textcolor{keywordtype}{int}, \textcolor{keywordtype}{int});
+00022     \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_a3aec05c05cefab0ec470f6eb79afa81b}{getTicksize}();
+00023     \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_a6606e549b1e934517a48f68f9d29ffa6}{getMin}();
+00024     \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_acdeb4972b7a4ae90f0d042317ff2965d}{getMax}();
+00025     \textcolor{keywordtype}{int} \hyperlink{classSliderWidget_a05ed61d5bb79a82da1f51f73b5e2466a}{value}();
+00026     \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_ad69dd98151b2132011341f7ae7799480}{setValue}(\textcolor{keywordtype}{int});
+00027 
+00028 signals:
+00029     \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_aa109c6305bc6e78efe3091982e787325}{sliderReleased}();
+00030     \textcolor{keywordtype}{void} \hyperlink{classSliderWidget_a23048ce6bec593c2b4d932293b055fa7}{valueChanged}(\textcolor{keywordtype}{int});
+00031 
+00032 \textcolor{keyword}{private} slots:
+00033     \textcolor{keywordtype}{void} setLabelValue(\textcolor{keywordtype}{int});
+00034 
+00035 \textcolor{keyword}{private}:
+00036     \textcolor{keywordtype}{void} updateRange();
+00037 
+00038     QSlider *slider;
+00039     QLabel *valueLabel;
+00040     \textcolor{keywordtype}{int} tickSize;
+00041     \textcolor{keywordtype}{int} sliderMin;
+00042     \textcolor{keywordtype}{int} sliderMax;
+00043 \};
+00044 
+00045 \textcolor{preprocessor}{#endif // SLIDERWIDGET\_H}
+\end{DoxyCode}

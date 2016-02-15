@@ -1,0 +1,339 @@
+\hypertarget{hrvwidget_8cpp_source}{}\section{hrvwidget.\+cpp}
+\label{hrvwidget_8cpp_source}\index{src/hrvwidget.\+cpp@{src/hrvwidget.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{hrvwidget_8h}{hrvwidget.h}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{sliderwidget_8h}{sliderwidget.h}"}
+00003 \textcolor{preprocessor}{#include "\hyperlink{convertecgtoibi_8h}{convertecgtoibi.h}"}
+00004 \textcolor{preprocessor}{#include <\hyperlink{plot_8h}{plot.h}>}
+00005 \textcolor{preprocessor}{#include <QtWidgets>}
+00006 \textcolor{preprocessor}{#include "\hyperlink{hrvanalysis_8h}{hrvanalysis.h}"}
+00007 
+00008 \textcolor{preprocessor}{#include <QDebug>}
+00009 
+00010 \textcolor{preprocessor}{#include <cmath>}
+00011 \textcolor{preprocessor}{#include <math.h>}
+00012 \textcolor{preprocessor}{#include <stddef.h>}
+00013 \textcolor{preprocessor}{#include <stdlib.h>}
+00014 \textcolor{preprocessor}{#include <string.h>}
+00015 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_emxAPI.h"}
+00016 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_terminate.h"}
+00017 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_initialize.h"}
+00018 \textcolor{preprocessor}{#include "HRV/freqDomainHRV\_types.h"}
+00019 
+00020 
+00021 
+\hypertarget{hrvwidget_8cpp_source.tex_l00022}{}\hyperlink{classHrvWidget_adfd3a1b7a3c35e4380208cbe8d620c88}{00022} \hyperlink{classHrvWidget_adfd3a1b7a3c35e4380208cbe8d620c88}{HrvWidget::HrvWidget}(QWidget *parent):
+00023 QWidget( parent )
+00024 \{
+00025 
+00026 
+00027     setupComponents();
+00028     setupActions();
+00029     setupLayout();
+00030 \}
+00031 
+00032 \textcolor{comment}{/*}
+00033 \textcolor{comment}{ * Load the supported ECG formats from the application directory.}
+00034 \textcolor{comment}{ *}
+00035 \textcolor{comment}{ * Supported formats: .txt, .edf, .bdf}
+00036 \textcolor{comment}{ */}
+00037 \textcolor{keywordtype}{void} HrvWidget::getEcgFileList()
+00038 \{
+00039     ecgFilesWidget->clear();
+00040 
+00041     QStringList nameFilter;
+00042     nameFilter << \textcolor{stringliteral}{"*.txt"};
+00043     nameFilter << \textcolor{stringliteral}{"*.edf"};
+00044     nameFilter << \textcolor{stringliteral}{"*.bdf"};
+00045     QDir directory(qApp->applicationDirPath());
+00046     QStringList ecgFiles = directory.entryList(nameFilter);
+00047 
+00048     ecgFilesWidget->addItems(ecgFiles);
+00049 \}
+00050 
+00051 \textcolor{comment}{/*}
+00052 \textcolor{comment}{ * If a file is double-clicked, load it in a different thread to prevent locking the GUI}
+00053 \textcolor{comment}{ */}
+00054 \textcolor{keywordtype}{void} HrvWidget::fileSelected(QListWidgetItem *item)
+00055 \{
+00056     tlbl->setText(\textcolor{stringliteral}{"Loading "}+item->text());
+00057     progBar->setVisible(\textcolor{keyword}{true});
+00058     progBar->setRange(0,0);
+00059     progBar->setValue(0);
+00060 
+00061     \hyperlink{classConvertEcgToIbi}{ConvertEcgToIbi} *loadFile = \textcolor{keyword}{new} \hyperlink{classConvertEcgToIbi}{ConvertEcgToIbi}(item->text());
+00062 
+00063     connect(loadFile, SIGNAL(sendFileData(QVector<double>, QVector<double>)), \textcolor{keyword}{this}, SLOT(performHRV(
+      QVector<double>, QVector<double>)));
+00064     connect(loadFile,SIGNAL(finished()),SLOT(fileFinished()));
+00065     loadFile->start();
+00066     headerTextArea->setText(\textcolor{stringliteral}{"Performing HRV-Calculations"});
+00067     \textcolor{comment}{//Read header file and display information about the recording}
+00068     QFileInfo fInfo(item->text());
+00069     QFile headerFile(fInfo.baseName()+\textcolor{stringliteral}{"\_header.txt"});
+00070     \textcolor{keywordflow}{if} (headerFile.open(QIODevice::ReadOnly | QIODevice::Text)) \{
+00071         QTextStream headerTextStream(&headerFile);
+00072         QString headerText;
+00073 
+00074         \textcolor{keywordflow}{while} (!headerTextStream.atEnd()) \{
+00075             headerText += headerTextStream.readLine() + \textcolor{stringliteral}{"\(\backslash\)n"};
+00076         \}
+00077 
+00078         headerTextArea->setText(headerText);
+00079         headerTextStream.flush();
+00080         headerFile.close();
+00081     \}
+00082     performHRV(fInfo.baseName());
+00083 
+00084 
+00085 
+00086 \}
+00087 
+00088 \textcolor{keywordtype}{void} HrvWidget::saveFreqHrv(\textcolor{keyword}{const} structFreq\_T *tobeSaved)\{
+00089     QFile outFile(\textcolor{stringliteral}{"outputFreqHRV.txt"});
+00090     \textcolor{keywordflow}{if} (!outFile.open(QIODevice::WriteOnly | QIODevice::Text)) \{
+00091         qDebug() << \textcolor{stringliteral}{"Failed to open data file for write"} << endl;
+00092     \} \textcolor{keywordflow}{else} \{
+00093         QTextStream out(&outFile);
+00094         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<512; i++)\{
+00095             out << QString::number(tobeSaved->lomb.f[i], \textcolor{charliteral}{'f'}, 3) << \textcolor{stringliteral}{"\(\backslash\)t"}
+00096                     << QString::number(tobeSaved->lomb.psd[i], \textcolor{charliteral}{'f'}, 3) << \textcolor{stringliteral}{"\(\backslash\)n"};
+00097         \}
+00098         outFile.close();
+00099     \}
+00100 \}
+00101 
+00102 \textcolor{keywordtype}{void} HrvWidget::performHRV(QString fileInfo) \{
+00103     QFile ibiFile(fileInfo+\textcolor{stringliteral}{".txt\_RR.txt"});
+00104     \textcolor{keywordflow}{if} (ibiFile.open(QIODevice::ReadOnly | QIODevice::Text)) \{
+00105         QTextStream ibiTextStream(&ibiFile);
+00106 
+00107         \textcolor{keywordtype}{int} i=0;
+00108         QString strVals = ibiTextStream.readLine();
+00109         QStringList strPieces = strVals.split(QRegularExpression(\textcolor{stringliteral}{"\(\backslash\)\(\backslash\)s+"}));
+00110         QVector <double> ibiData;
+00111         QVector <double> timeData;
+00112         \textcolor{keywordflow}{while} (!ibiTextStream.atEnd()) \{
+00113             strVals = ibiTextStream.readLine();
+00114             strPieces = strVals.split(QRegularExpression(\textcolor{stringliteral}{"\(\backslash\)\(\backslash\)s+"}));
+00115 
+00116             \textcolor{keywordflow}{if} (strPieces.length()==3) \{
+00117                 ibiData.append(strPieces[2].toDouble());
+00118                 timeData.append(strPieces[1].toDouble());
+00119             \}
+00120             \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (strPieces.length()==2) \{
+00121                 ibiData.append(strPieces[1].toDouble());
+00122                 timeData.append(strPieces[0].toDouble());
+00123             \}
+00124         \}
+00125          struct0\_T outputTime;
+00126          \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{performTimeDomainHrv}(&ibiData, &outputTime);
+00127          structFreq\_T outputFreq;
+00128          \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{performFreqDomainHrv}(&ibiData, &timeData, &outputFreq);
+00129          psdPlot(&outputFreq);
+00130          printHRV(&outputTime);
+00131          printHRV(&outputFreq);
+00132          saveFreqHrv(&outputFreq);
+00133 
+00134 
+00135         ibiTextStream.flush();
+00136         ibiFile.close();
+00137     \}
+00138 
+00139 
+00140 \}
+00141 
+00142 \textcolor{keywordtype}{void} HrvWidget::performHRV(QVector<double> ibiData, QVector<double> timeData)\{
+00143     struct0\_T outputTime;
+00144     \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{performTimeDomainHrv}(&ibiData, &outputTime);
+00145     structFreq\_T outputFreq;
+00146     \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{performFreqDomainHrv}(&ibiData, &timeData, &outputFreq);
+00147     psdPlot(&outputFreq);
+00148     printHRV(&outputTime);
+00149     printHRV(&outputFreq);
+00150     saveFreqHrv(&outputFreq);
+00151 
+00152 \}
+00153 
+00154 \textcolor{keywordtype}{void} HrvWidget::printHRV(\textcolor{keyword}{const} struct0\_T *outputHrv)\{
+00155     qDebug() << \textcolor{stringliteral}{"Max: "} << outputHrv->max << endl
+00156             << \textcolor{stringliteral}{"Mean HR: "} << outputHrv->meanHR << endl
+00157             << \textcolor{stringliteral}{"SDNN: "} << outputHrv->SDNN << endl
+00158             << \textcolor{stringliteral}{"SDANN: "} << outputHrv->SDANN << endl
+00159             << \textcolor{stringliteral}{"Mean: "} << outputHrv->mean << endl
+00160             << \textcolor{stringliteral}{"Min: "} << outputHrv->min << endl
+00161             << \textcolor{stringliteral}{"Median: "} << outputHrv->median << endl;
+00162     QString headerText;
+00163     headerTextArea->setText(\textcolor{stringliteral}{"<b>Time Domain Statistics: </b>"});
+00164     headerText=+ \textcolor{stringliteral}{"Max: "} + QString::number(outputHrv->max, \textcolor{charliteral}{'f'}, 3);
+00165     headerTextArea->append(headerText);headerText=+ \textcolor{stringliteral}{"Mean HR: "} + QString::number(outputHrv->meanHR, \textcolor{charliteral}{'f'}, 3
+      );
+00166     headerTextArea->append(headerText);headerText=+ \textcolor{stringliteral}{"SDNN: "} + QString::number(outputHrv->SDNN, \textcolor{charliteral}{'f'}, 3);
+00167     headerTextArea->append(headerText);headerText=+ \textcolor{stringliteral}{"SDANN: "} + QString::number(outputHrv->SDANN, \textcolor{charliteral}{'f'}, 3);
+00168     headerTextArea->append(headerText);headerText=+ \textcolor{stringliteral}{"Mean: "} + QString::number(outputHrv->mean, \textcolor{charliteral}{'f'}, 3);
+00169     headerTextArea->append(headerText);headerText=+ \textcolor{stringliteral}{"Min: "} + QString::number(outputHrv->min, \textcolor{charliteral}{'f'}, 3);
+00170     headerTextArea->append(headerText);headerText=+ \textcolor{stringliteral}{"Median: "} + QString::number(outputHrv->median, \textcolor{charliteral}{'f'}, 3)
+      ;
+00171     headerTextArea->append(headerText);
+00172 
+00173 \}
+00174 
+00175 \textcolor{keywordtype}{void} HrvWidget::printHRV(\textcolor{keyword}{const} structFreq\_T *outputHrv)\{
+00176     qDebug() << outputHrv->lomb.hrv.aHF << endl
+00177             << outputHrv->lomb.hrv.aHF << endl
+00178             << outputHrv->lomb.hrv.nLF << endl
+00179             << outputHrv->lomb.hrv.nHF << endl
+00180             << outputHrv->lomb.hrv.aTotal << endl
+00181             << outputHrv->lomb.hrv.aLF << endl
+00182             << outputHrv->lomb.hrv.LFHF << endl
+00183             << outputHrv->lomb.hrv.pVLF << endl;
+00184   mainTextArea->append(\textcolor{stringliteral}{"<b> Frequency Domain Statistics </b>"});
+00185     mainTextArea->append(\textcolor{stringliteral}{"LF / HF: "} + QString::number(outputHrv->lomb.hrv.LFHF, \textcolor{charliteral}{'f'}, 3));
+00186             mainTextArea->append(\textcolor{stringliteral}{"Power HF: "} + QString::number(outputHrv->lomb.hrv.pHF, \textcolor{charliteral}{'f'}, 3) + \textcolor{stringliteral}{"%"});
+00187             mainTextArea->append(\textcolor{stringliteral}{"Power LF: "} + QString::number(outputHrv->lomb.hrv.pLF, \textcolor{charliteral}{'f'}, 3)+ \textcolor{stringliteral}{"%"});
+00188         mainTextArea->append(\textcolor{stringliteral}{"Power VLF: "} + QString::number(outputHrv->lomb.hrv.pVLF, \textcolor{charliteral}{'f'}, 3) + \textcolor{stringliteral}{"%"});
+00189     \textcolor{comment}{//   myCurve->setRenderHint( QwtPlotItem::RenderAntialiased );}
+00190        myCurve->setPen( Qt::blue );
+00191      \textcolor{comment}{//  myCurve->setLegendAttribute( QwtPlotCurve::LegendShowLine );}
+00192      \textcolor{comment}{//  myCurve->setYAxis( QwtPlot::yLeft );}
+00193 
+00194        myCurve->setSamples(outputHrv->lomb.f,outputHrv->lomb.psd,100);
+00195        \textcolor{comment}{//myCurve->setSamples(freq,psd,100);}
+00196        myCurve->attach(lombPlot);
+00197        lombPlot->replot();
+00198 \}
+00199 
+00200 
+00205 \textcolor{keywordtype}{void} HrvWidget::psdPlot(\textcolor{keyword}{const} structFreq\_T *tobePloted) \{
+00206     \textcolor{keywordtype}{double} mean\_Freq=0,mean\_psd=0;
+00207     \textcolor{keywordtype}{int} index=5;
+00208     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i<102; i++) \{
+00209     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j=0; j<10;j++) \{
+00210         mean\_Freq+=tobePloted->lomb.f[index+j-5];
+00211         mean\_psd+=tobePloted->lomb.psd[index+j-5];
+00212 
+00213     \}
+00214     index++;
+00215     freq[i]=mean\_Freq/10;
+00216     psd[i]=mean\_psd/10;
+00217     mean\_Freq=0;
+00218     mean\_psd=0;
+00219     \}
+00220 
+00221 \}
+00225 \textcolor{keywordtype}{void} HrvWidget::clearPlot()
+00226 \{
+00227 
+00228         lombPlot->repaint();
+00229 
+00230 \}
+00231 
+00232 
+00233 
+00234 
+00235 \textcolor{keywordtype}{void} HrvWidget::fileFinished()\{
+00236     tlbl->setText(\textcolor{stringliteral}{"Done!"});
+00237     progBar->setMaximum(10);
+00238     progBar->setValue(10);
+00239 \}
+00240 
+00241 
+00242 
+00243 
+00244 
+00248 \textcolor{keywordtype}{void} HrvWidget::setupComponents()
+00249 \{
+00250 
+00251 
+00252     \textcolor{comment}{//Buttons}
+00253     getFilesButton = \textcolor{keyword}{new} QPushButton(\textcolor{stringliteral}{"Get ECG files"});
+00254     resetPlotButton = \textcolor{keyword}{new} QPushButton(\textcolor{stringliteral}{"Reset plot"});
+00255 
+00256     \textcolor{comment}{//Header text area}
+00257     headerTextArea = \textcolor{keyword}{new} QTextBrowser();
+00258     headerTextArea->setMinimumWidth(250);
+00259 
+00260     \textcolor{comment}{//Main text Area}
+00261     mainTextArea = \textcolor{keyword}{new} QTextBrowser();
+00262 
+00263     \textcolor{comment}{//Progressbar label}
+00264     tlbl = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"No file selected"});
+00265 
+00266     \textcolor{comment}{//List of ecg files}
+00267     ecgFilesWidget = \textcolor{keyword}{new} QListWidget;
+00268     ecgFilesWidget->setFixedSize(QSize(QWIDGETSIZE\_MAX,100));
+00269 
+00270     \textcolor{comment}{//Lomb Plot}
+00271     lombPlot=\textcolor{keyword}{new} QwtPlot(\textcolor{keyword}{this});
+00272     lombPlot->setTitle(\textcolor{stringliteral}{"Lomb"});
+00273     lombPlot->setFixedSize(QSize(QWIDGETSIZE\_MAX,300));
+00274     myCurve = \textcolor{keyword}{new} QwtPlotCurve( \textcolor{stringliteral}{"Lomb"} );
+00275 
+00276 
+00277     \textcolor{comment}{//Progress bar}
+00278     progBar = \textcolor{keyword}{new} QProgressBar();
+00279     progBar->setRange(0,0);
+00280     progBar->setVisible(\textcolor{keyword}{false});
+00281     progBar->setTextVisible(\textcolor{keyword}{false});
+00282 
+00283 
+00284 
+00285 \}
+00286 
+00290 \textcolor{keywordtype}{void} HrvWidget::setupActions()
+00291 \{
+00292 
+00293     \textcolor{comment}{//Signals-slots}
+00294     connect(resetPlotButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(clearPlot()));
+00295     connect(ecgFilesWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), \textcolor{keyword}{this}, SLOT(fileSelected(
+      QListWidgetItem*)));
+00296     connect(getFilesButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(getEcgFileList()));
+00297 
+00298 \}
+00299 
+00303 \textcolor{keywordtype}{void} HrvWidget::setupLayout()
+00304 \{
+00305 
+00306 
+00307 
+00308 
+00309     \textcolor{comment}{//Progressbar area}
+00310     QHBoxLayout *progressBarLayout = \textcolor{keyword}{new} QHBoxLayout;
+00311     progressBarLayout->addWidget(tlbl, 2);
+00312     progressBarLayout->addWidget(progBar, 8);
+00313 
+00314 
+00315 
+00316     \textcolor{comment}{//Area with navigation control components}
+00317     QHBoxLayout *playbackLayout = \textcolor{keyword}{new} QHBoxLayout;
+00318 
+00319 
+00320 
+00321     \textcolor{comment}{//Sidebar layout}
+00322     QVBoxLayout *sidebarLayout = \textcolor{keyword}{new} QVBoxLayout;
+00323     sidebarLayout->addWidget(getFilesButton);
+00324     sidebarLayout->addWidget(ecgFilesWidget);
+00325     sidebarLayout->addLayout(progressBarLayout);
+00326     sidebarLayout->addWidget(headerTextArea);
+00327     sidebarLayout->addStretch();
+00328     sidebarLayout->addWidget(resetPlotButton);
+00329 
+00330     \textcolor{comment}{//Plot layout}
+00331     QVBoxLayout *plotLayout = \textcolor{keyword}{new} QVBoxLayout;
+00332     plotLayout->addWidget(lombPlot);
+00333     plotLayout->addWidget(mainTextArea);
+00334 
+00335 
+00336 
+00337     \textcolor{comment}{//Main layout}
+00338     QHBoxLayout *mainLayout = \textcolor{keyword}{new} QHBoxLayout;
+00339 
+00340     mainLayout->addLayout(sidebarLayout, 1);
+00341     mainLayout->addLayout(plotLayout, 9);
+00342 
+00343     setLayout(mainLayout);
+00344 
+00345 
+00346 \}
+\end{DoxyCode}

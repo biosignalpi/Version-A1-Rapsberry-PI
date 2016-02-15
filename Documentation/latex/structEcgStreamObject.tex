@@ -1,0 +1,185 @@
+\hypertarget{structEcgStreamObject}{}\section{Ecg\+Stream\+Object Struct Reference}
+\label{structEcgStreamObject}\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+
+
+Struct to store Biosignal data from a specific time, combined with \hyperlink{classDataStream}{Data\+Stream} it will store a sequence of sampled data.  
+
+
+
+
+{\ttfamily \#include $<$ecgstreamobject.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structEcgStreamObject_ae7be034b8a6701ca31af84cf5cc6f1e2}{Ecg\+Stream\+Object} ()
+\item 
+\hyperlink{structEcgStreamObject_a51eafb78010c5589b8c488d89d057c60}{Ecg\+Stream\+Object} (double \hyperlink{structEcgStreamObject_ad6e113c9158619aa7305d7c95dc79d45}{frame1}, double \hyperlink{structEcgStreamObject_a7f297c636f2bb49ce4337e670f66752a}{frame2}, double \hyperlink{structEcgStreamObject_a40bfead3ce53e3a9677569dcdb80875a}{frame3}, double \hyperlink{structEcgStreamObject_ab8b391bafe34077ab3733e29d1b76b50}{resp}, double \hyperlink{structEcgStreamObject_a79a47ddd0a7c6c432d12b0da042091bf}{time})
+\begin{DoxyCompactList}\small\item\em Constructor for a \hyperlink{structEcgStreamObject}{Ecg\+Stream\+Object} to be used in a \hyperlink{classDataStream}{Data\+Stream} vector. \end{DoxyCompactList}\item 
+virtual \hyperlink{structEcgStreamObject_a0b44f43509360ffae050c6dedcbb59dd}{$\sim$\+Ecg\+Stream\+Object} ()
+\item 
+virtual Q\+String \hyperlink{structEcgStreamObject_ae988014880bd678ae693545b6b1f0175}{to\+Text} () const 
+\begin{DoxyCompactList}\small\item\em Converts the data from the struct into a Q\+String representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{structEcgStreamObject_ad6e113c9158619aa7305d7c95dc79d45}{frame1}
+\item 
+double \hyperlink{structEcgStreamObject_a7f297c636f2bb49ce4337e670f66752a}{frame2}
+\item 
+double \hyperlink{structEcgStreamObject_a40bfead3ce53e3a9677569dcdb80875a}{frame3}
+\item 
+double \hyperlink{structEcgStreamObject_ab8b391bafe34077ab3733e29d1b76b50}{resp}
+\item 
+double \hyperlink{structEcgStreamObject_a79a47ddd0a7c6c432d12b0da042091bf}{time}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Struct to store Biosignal data from a specific time, combined with \hyperlink{classDataStream}{Data\+Stream} it will store a sequence of sampled data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame1,frame2,frame3} & Captured E\+C\+G-\/data \\
+\hline
+{\em resp} & Respiration data \\
+\hline
+{\em time} & Timestamp information \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+
+
+Definition at line \hyperlink{ecgstreamobject_8h_source_l00014}{14} of file \hyperlink{ecgstreamobject_8h_source}{ecgstreamobject.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{Ecg\+Stream\+Object()}]{\setlength{\rightskip}{0pt plus 5cm}Ecg\+Stream\+Object\+::\+Ecg\+Stream\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{structEcgStreamObject_ae7be034b8a6701ca31af84cf5cc6f1e2}{}\label{structEcgStreamObject_ae7be034b8a6701ca31af84cf5cc6f1e2}
+
+
+Definition at line \hyperlink{ecgstreamobject_8cpp_source_l00003}{3} of file \hyperlink{ecgstreamobject_8cpp_source}{ecgstreamobject.\+cpp}.
+
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{Ecg\+Stream\+Object(double frame1, double frame2, double frame3, double resp, double time)}]{\setlength{\rightskip}{0pt plus 5cm}Ecg\+Stream\+Object\+::\+Ecg\+Stream\+Object (
+\begin{DoxyParamCaption}
+\item[{double}]{frame1, }
+\item[{double}]{frame2, }
+\item[{double}]{frame3, }
+\item[{double}]{resp, }
+\item[{double}]{time}
+\end{DoxyParamCaption}
+)}\hypertarget{structEcgStreamObject_a51eafb78010c5589b8c488d89d057c60}{}\label{structEcgStreamObject_a51eafb78010c5589b8c488d89d057c60}
+
+
+Constructor for a \hyperlink{structEcgStreamObject}{Ecg\+Stream\+Object} to be used in a \hyperlink{classDataStream}{Data\+Stream} vector. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em frame1,frame2,frame3} & Captured E\+C\+G-\/data \\
+\hline
+\mbox{\tt in}  & {\em resp} & Respiration data \\
+\hline
+\mbox{\tt in}  & {\em time} & Timestamp information \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{ecgstreamobject_8cpp_source_l00008}{8} of file \hyperlink{ecgstreamobject_8cpp_source}{ecgstreamobject.\+cpp}.
+
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!````~Ecg\+Stream\+Object@{$\sim$\+Ecg\+Stream\+Object}}
+\index{````~Ecg\+Stream\+Object@{$\sim$\+Ecg\+Stream\+Object}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{$\sim$\+Ecg\+Stream\+Object()}]{\setlength{\rightskip}{0pt plus 5cm}Ecg\+Stream\+Object\+::$\sim$\+Ecg\+Stream\+Object (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structEcgStreamObject_a0b44f43509360ffae050c6dedcbb59dd}{}\label{structEcgStreamObject_a0b44f43509360ffae050c6dedcbb59dd}
+
+
+Definition at line \hyperlink{ecgstreamobject_8cpp_source_l00020}{20} of file \hyperlink{ecgstreamobject_8cpp_source}{ecgstreamobject.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!to\+Text@{to\+Text}}
+\index{to\+Text@{to\+Text}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{to\+Text() const }]{\setlength{\rightskip}{0pt plus 5cm}Q\+String Ecg\+Stream\+Object\+::to\+Text (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{structEcgStreamObject_ae988014880bd678ae693545b6b1f0175}{}\label{structEcgStreamObject_ae988014880bd678ae693545b6b1f0175}
+
+
+Converts the data from the struct into a Q\+String representation. 
+
+\begin{DoxyReturn}{Returns}
+String representation of the Data with tab between values. 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{ecgstreamobject_8cpp_source_l00013}{13} of file \hyperlink{ecgstreamobject_8cpp_source}{ecgstreamobject.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structEcgStreamObject_ae988014880bd678ae693545b6b1f0175_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!frame1@{frame1}}
+\index{frame1@{frame1}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{frame1}]{\setlength{\rightskip}{0pt plus 5cm}double Ecg\+Stream\+Object\+::frame1}\hypertarget{structEcgStreamObject_ad6e113c9158619aa7305d7c95dc79d45}{}\label{structEcgStreamObject_ad6e113c9158619aa7305d7c95dc79d45}
+
+
+Definition at line \hyperlink{ecgstreamobject_8h_source_l00031}{31} of file \hyperlink{ecgstreamobject_8h_source}{ecgstreamobject.\+h}.
+
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!frame2@{frame2}}
+\index{frame2@{frame2}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{frame2}]{\setlength{\rightskip}{0pt plus 5cm}double Ecg\+Stream\+Object\+::frame2}\hypertarget{structEcgStreamObject_a7f297c636f2bb49ce4337e670f66752a}{}\label{structEcgStreamObject_a7f297c636f2bb49ce4337e670f66752a}
+
+
+Definition at line \hyperlink{ecgstreamobject_8h_source_l00031}{31} of file \hyperlink{ecgstreamobject_8h_source}{ecgstreamobject.\+h}.
+
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!frame3@{frame3}}
+\index{frame3@{frame3}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{frame3}]{\setlength{\rightskip}{0pt plus 5cm}double Ecg\+Stream\+Object\+::frame3}\hypertarget{structEcgStreamObject_a40bfead3ce53e3a9677569dcdb80875a}{}\label{structEcgStreamObject_a40bfead3ce53e3a9677569dcdb80875a}
+
+
+Definition at line \hyperlink{ecgstreamobject_8h_source_l00031}{31} of file \hyperlink{ecgstreamobject_8h_source}{ecgstreamobject.\+h}.
+
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!resp@{resp}}
+\index{resp@{resp}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{resp}]{\setlength{\rightskip}{0pt plus 5cm}double Ecg\+Stream\+Object\+::resp}\hypertarget{structEcgStreamObject_ab8b391bafe34077ab3733e29d1b76b50}{}\label{structEcgStreamObject_ab8b391bafe34077ab3733e29d1b76b50}
+
+
+Definition at line \hyperlink{ecgstreamobject_8h_source_l00031}{31} of file \hyperlink{ecgstreamobject_8h_source}{ecgstreamobject.\+h}.
+
+\index{Ecg\+Stream\+Object@{Ecg\+Stream\+Object}!time@{time}}
+\index{time@{time}!Ecg\+Stream\+Object@{Ecg\+Stream\+Object}}
+\subsubsection[{time}]{\setlength{\rightskip}{0pt plus 5cm}double Ecg\+Stream\+Object\+::time}\hypertarget{structEcgStreamObject_a79a47ddd0a7c6c432d12b0da042091bf}{}\label{structEcgStreamObject_a79a47ddd0a7c6c432d12b0da042091bf}
+
+
+Definition at line \hyperlink{ecgstreamobject_8h_source_l00031}{31} of file \hyperlink{ecgstreamobject_8h_source}{ecgstreamobject.\+h}.
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{ecgstreamobject_8h}{ecgstreamobject.\+h}\item 
+src/\hyperlink{ecgstreamobject_8cpp}{ecgstreamobject.\+cpp}\end{DoxyCompactItemize}
