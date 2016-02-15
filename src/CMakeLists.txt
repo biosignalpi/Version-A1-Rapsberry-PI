@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0.2)   ##Needed to generate Auto UIC
 PROJECT(BioPI)
 
 
-#add_subdirectory(Tests)
+add_subdirectory(Tests EXCLUDE_FROM_ALL)
 add_subdirectory(PiFace-Interface)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR})
@@ -36,10 +36,11 @@ FIND_PACKAGE(Qt5Bluetooth REQUIRED)
 FIND_PACKAGE(Qt5DBus REQUIRED)
 FIND_PACKAGE(Qwt REQUIRED)
 
-
+##Local directories needs to be set for the used system
 find_library(bcm2835_lib bcm2835 REQUIRED)
 include_directories("/mnt/rasp-rootfs/usr/local/include/")
 
+##Local directories needs to be set for the used system
 include_directories(
 "/usr/local/qwt-6.1.2/include"
 "/usr/local/qwt-6.1.2/lib") 
@@ -49,20 +50,20 @@ include_directories(
 
 
 ##Comment out /mnt/rasp-rootfs/ to build for ubuntu
+##Local directories needs to be set for the used system
 include_directories(SYSTEM
-"/mnt/rasp-rootfs/usr/include/arm-linux-gnueabihf"
-"/mnt/rasp-rootfs/usr/include"
-"/mnt/rasp-rootfs/usr/local/include"
-"/mnt/rasp-rootfs/usr/lib/arm-linux-gnueabihf"
+"/mnt/rasp-rootfs/usr/include/arm-linux-gnueabihf" "/mnt/rasp-rootfs/usr/include" "/mnt/rasp-rootfs/usr/local/include" "/mnt/rasp-rootfs/usr/lib/arm-linux-gnueabihf"
 ${QWT_INCLUDE_DIR}
 )
 
 
+##Local directories needs to be set for the used system
 ##Comment out /mnt/rasp-rootfs/ to build for ubuntu
 link_directories( 
-#"/mnt/rasp-rootfs/opt/vc/lib" "/mnt/rasp-rootfs/lib/arm-linux-gnueabihf" "/mnt/rasp-rootfs/rootfs/lib" "/mnt/rasp-rootfs/usr/lib/arm-linux-gnueabihf" "/mnt/rasp-rootfs/usr/lib" "/mnt/rasp-rootfs/usr/local/lib" "/mnt/rasp-rootfs/usr/local/qwt-6.1.2/lib"
+"/mnt/rasp-rootfs/opt/vc/lib" "/mnt/rasp-rootfs/lib/arm-linux-gnueabihf" "/mnt/rasp-rootfs/rootfs/lib" "/mnt/rasp-rootfs/usr/lib/arm-linux-gnueabihf" "/mnt/rasp-rootfs/usr/lib" "/mnt/rasp-rootfs/usr/local/lib" "/mnt/rasp-rootfs/usr/local/qwt-6.1.2/lib"
 "/usr/local/qwt-6.1.2/lib"
 )  
+
 
 add_library(model settingssingleton.cpp datastream.cpp datalogger.cpp ecgstreamobject.cpp )
 add_library(mainwindow mainwindow.cpp plotandcapturewidget.cpp plot.cpp 
@@ -81,14 +82,34 @@ file(GLOB hrv_SRC "HRV/*.cpp" "HRV/*.c")
 add_library(timeDomainHRV ${hrv_SRC} hrvwidget.cpp hrvanalysis.cpp  convertecgtoibi.cpp libFiles/QRSFILT.CPP libFiles/QRSDET2.CPP)
 
 
-
+### Bluetooth widget
 file(GLOB btfiletransfer "Qt-btfiletransfer/*.cpp")
 
 add_library(bluetoothwidget ${btfiletransfer})
 
 
+## DeviceManager 
 add_library(devicemanager devicemanager.cpp deviceinterface.cpp 
 ecgmock.cpp meanFilter.cpp ecgcapture.cpp samplingthread.cpp ecgstreamobject.cpp)
+
+
+## add a target to generate API documentation with Doxygen
+find_package(Doxygen)
+option(BUILD_DOCUMENTATION "Create and install the HTML based API documentation (requires Doxygen)" ${DOXYGEN_FOUND})
+
+if(BUILD_DOCUMENTATION)
+    if(NOT DOXYGEN_FOUND)
+        message(FATAL_ERROR "Doxygen is needed to build the documentation.")
+    endif()
+
+    set(doxyfile ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile)
+
+    add_custom_target(docs
+        COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+        COMMENT "Generating documentation with Doxygen"
+        VERBATIM)
+  endif()
 
 
 add_definitions(${QT5Widgets_DEFINITIONS})
@@ -97,7 +118,7 @@ target_link_libraries(devicemanager bcm2835)
 target_link_libraries(mainwindow qwt model)
 
 
-Target_Link_Libraries(BioPI mainwindow devicemanager bcm2835 timeDomainHRV bluetoothwidget) # wfdb)
+Target_Link_Libraries(BioPI mainwindow devicemanager bcm2835 timeDomainHRV bluetoothwidget)
 qt5_use_modules(mainwindow Core Widgets Bluetooth DBus)
 qt5_use_modules(devicemanager Core Widgets)
 qt5_use_modules(model Core Widgets)

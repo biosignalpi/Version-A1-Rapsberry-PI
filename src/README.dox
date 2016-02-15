@@ -9,20 +9,20 @@ This version provides 5-12 leads ECG and respiration measurement system based on
 
 ============
 
-# Functional Requirements:
-* Capture physiologicalsignal/data
-* Store captured data 
-* Visualize sampled data in real time
-* Visualize sampled data from file 
-* Process data
+### Functional Requirements:
+- Capture physiologicalsignal/data
+- Store captured data 
+- Visualize sampled data in real time
+- Visualize sampled data from file 
+- Process data
 
-# General Requirements:
-	* Highly modular with interchangable parts
-	* Extendable
-	* Hardware independence
-	* Easy to deploy 
-	* Testable classes,dependency reduction
-	* Open-source
+### General Requirements:
+	- Highly modular with interchangable parts
+	- Extendable
+	- Hardware independence
+	- Easy to deploy 
+	- Testable classes,dependency reduction
+	- Open-source
 
 */
 

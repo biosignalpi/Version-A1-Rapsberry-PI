@@ -16,7 +16,7 @@
     class EcgMock_test : public testing::Test {
     protected:
         EcgMock a;
-    
+
     };
     
     TEST_F(EcgMock_test, check_connected) {
