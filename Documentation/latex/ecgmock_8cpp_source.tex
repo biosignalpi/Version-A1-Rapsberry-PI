@@ -1,0 +1,120 @@
+\hypertarget{ecgmock_8cpp_source}{}\section{ecgmock.\+cpp}
+\label{ecgmock_8cpp_source}\index{src/ecgmock.\+cpp@{src/ecgmock.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{     * ECGmock.cpp}
+00003 \textcolor{comment}{     *}
+00004 \textcolor{comment}{     *  Created on: Sep 14, 2015}
+00005 \textcolor{comment}{     *      Author: Martin Rostin}
+00006 \textcolor{comment}{     */}
+00007 
+00008 \textcolor{preprocessor}{#include "\hyperlink{ecgmock_8h}{ecgmock.h}"}
+00009 \textcolor{preprocessor}{#include <iostream>}
+00010 \textcolor{preprocessor}{#include <math.h>}
+00011 \textcolor{preprocessor}{#include <QDebug>}
+00012 \textcolor{preprocessor}{#include "\hyperlink{ecgstreamobject_8h}{ecgstreamobject.h}"}
+00013 
+00014 
+\hypertarget{ecgmock_8cpp_source.tex_l00015}{}\hyperlink{classEcgMock_a880936385845728f4d96a54848d8ab6e}{00015} \hyperlink{classEcgMock_a880936385845728f4d96a54848d8ab6e}{EcgMock::EcgMock}(\hyperlink{classDataStream}{DataStream}& inputStream): 
+      \hyperlink{classDeviceInterface}{DeviceInterface}(inputStream) \{
+00016     init();
+00017 \}
+00018 
+\hypertarget{ecgmock_8cpp_source.tex_l00019}{}\hyperlink{classEcgMock_a977966ab6184171d95c9f9c01eca0c7a}{00019} \hyperlink{classEcgMock_a977966ab6184171d95c9f9c01eca0c7a}{EcgMock::~EcgMock}() \{
+00020     \hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{close}();
+00021 \}
+\hypertarget{ecgmock_8cpp_source.tex_l00028}{}\hyperlink{classEcgMock_aaa2628c0e8364980e6f252dfc3b86d1a}{00028} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_aaa2628c0e8364980e6f252dfc3b86d1a}{EcgMock::getData}(\hyperlink{classDataStream}{DataStream}& inputStream)\{
+00029     \textcolor{keywordtype}{int} \_sizeArray=2000;
+00030     \hyperlink{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}{updateStatus}(QString(\textcolor{stringliteral}{"EcgMock::GetData"}));
+00031     \textcolor{keywordtype}{int} \_angle=0;
+00032 
+00033     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0;i<\_sizeArray;i++)\{
+00034         \textcolor{comment}{//  EcgStruct4 tmp=EcgStruct4(cnt++,cnt++,cnt++,cnt++,cnt++);}
+00035         \hyperlink{classDeviceInterface_ac98f5cd34bafb43265436b29b9f734fa}{stream}.push\_back(\hyperlink{structEcgStreamObject}{EcgStreamObject}(sin(\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),cos(\_angle*
+      \hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),tan(\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),sin(\_angle*2*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180));
+00036         \textcolor{keywordflow}{if}(\_angle>360)\{
+00037             \_angle-=360;
+00038         \}
+00039         \_angle+=6;
+00040         \textcolor{comment}{/*      std::cerr << tmp.time << "  " << tmp.frame1 << "  " << tmp.frame1}
+00041 \textcolor{comment}{                << "  " << tmp.frame2}
+00042 \textcolor{comment}{                << "  " << tmp.frame3}
+00043 \textcolor{comment}{                <<std::endl; */}
+00044     \}
+00045     \textcolor{keywordflow}{return};
+00046 \}
+\hypertarget{ecgmock_8cpp_source.tex_l00047}{}\hyperlink{classEcgMock_a8822f99759fcfe9648262007cb380daa}{00047} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_a8822f99759fcfe9648262007cb380daa}{EcgMock::run}()\{
+00048     \textcolor{keywordtype}{double} counter,counter2=0;
+00049     \textcolor{keywordtype}{double} cosinus,angle,sinus,sinus2x,tangens=0.0;
+00050     \textcolor{keywordtype}{double} \_angle=0;
+00051     condition=\textcolor{keyword}{true};
+00052     emit \hyperlink{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}{updateStatus}(QString(\textcolor{stringliteral}{"EcgMock Started"}));
+00053     \textcolor{keywordflow}{while}(condition) \{
+00054         \hyperlink{classDeviceInterface_ac98f5cd34bafb43265436b29b9f734fa}{stream}.append(\hyperlink{structEcgStreamObject}{EcgStreamObject}(sin(\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),cos(\_angle*
+      \hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),tan(\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),sin(\_angle*2*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180),\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180));
+00055         \textcolor{keywordflow}{if}(counter2>100)\{
+00056             counter2=0;
+00057             msleep(200);
+00058         \}
+00059         angle+=\_angle;
+00060         cosinus+=cos(\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180);
+00061         sinus2x+=sin(\_angle*2*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180);
+00062         sinus+=sin(\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180);
+00063         tangens+=tan(\_angle*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/180);
+00064         \_angle+=0.2;
+00065         counter++;
+00066         counter2++;
+00067 
+00068 
+00069         \textcolor{keywordflow}{if} (counter >= 10) \{
+00070             QVector<QPointF> tmp;
+00071             \textcolor{keywordtype}{double} time=(\_angle)*\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{PI}/1800;
+00072             tmp << QPointF(time,sinus/10) << QPointF(time,cosinus/10) << QPointF(time,tangens/10) << 
+      QPointF(time,sinus2x/10);
+00073             \textcolor{comment}{//privateSamples->append(QPointF(elapsed/1000,lead1/10));}
+00074             privateSamples->append(tmp);
+00075             tmp.clear();
+00076 
+00077             angle = 0;
+00078             sinus = 0.0;
+00079             cosinus = 0.0;
+00080             tangens = 0.0;
+00081             sinus2x = 0.0;
+00082             counter=0.0;
+00083         \}
+00084 
+00085         \textcolor{keywordflow}{if} (privateSamples->size() >= 20) \{
+00086             QVector<QVector<QPointF> > sampleVector = *privateSamples;
+00087             emit \hyperlink{classDeviceInterface_ae1bcd766865161a659076d2561e79dc5}{sendSampleVector}(sampleVector);
+00088             privateSamples->clear();
+00089 
+00090 
+00091         \}
+00092     \}
+00093 \}
+\hypertarget{ecgmock_8cpp_source.tex_l00094}{}\hyperlink{classEcgMock_aa65eb7c062913402c77ed1dc628168a7}{00094} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_aa65eb7c062913402c77ed1dc628168a7}{EcgMock::stop}()\{
+00095     condition=\textcolor{keyword}{false};
+00096 \}
+00097 
+00098 
+\hypertarget{ecgmock_8cpp_source.tex_l00099}{}\hyperlink{classEcgMock_ab5e3aac9d92b52b23fafb6e540902f28}{00099} \textcolor{keywordtype}{bool} \hyperlink{classEcgMock_ab5e3aac9d92b52b23fafb6e540902f28}{EcgMock::connected}()\{
+00100 
+00101     \textcolor{keywordflow}{return} state;
+00102 \}
+\hypertarget{ecgmock_8cpp_source.tex_l00103}{}\hyperlink{classEcgMock_aed480e6edc6016917a5663f61b3a5091}{00103} \textcolor{keywordtype}{void}  \hyperlink{classEcgMock_aed480e6edc6016917a5663f61b3a5091}{EcgMock::reconnect}()\{
+00104     \textcolor{keywordflow}{if} (!state)
+00105         init();
+00106 \}
+\hypertarget{ecgmock_8cpp_source.tex_l00107}{}\hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{00107} \textcolor{keywordtype}{void}  \hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{EcgMock::close}()\{
+00108     state=\textcolor{keyword}{false};
+00109     \textcolor{keyword}{delete} privateSamples;
+00110     \textcolor{keyword}{delete} sampleData;
+00111 \}
+00112 
+00113 \textcolor{keywordtype}{void} EcgMock::init()\{
+00114     state=\textcolor{keyword}{true};
+00115     privateSamples = \textcolor{keyword}{new} QVector<QVector<QPointF> >;
+00116     sampleData = \textcolor{keyword}{new} QVector<QVector<double> >;
+00117 \}
+\end{DoxyCode}

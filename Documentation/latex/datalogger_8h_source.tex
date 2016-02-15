@@ -1,0 +1,30 @@
+\hypertarget{datalogger_8h_source}{}\section{datalogger.\+h}
+\label{datalogger_8h_source}\index{src/datalogger.\+h@{src/datalogger.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef DATALOGGER\_H}
+00002 \textcolor{preprocessor}{#define DATALOGGER\_H}
+00003 
+00009 \textcolor{preprocessor}{#include <QObject>}
+00010 \textcolor{preprocessor}{#include "\hyperlink{datastream_8h}{datastream.h}"}
+00011 
+\hypertarget{datalogger_8h_source.tex_l00016}{}\hyperlink{classDataLogger}{00016} \textcolor{keyword}{class }\hyperlink{classDataLogger}{DataLogger} : \textcolor{keyword}{public} QObject
+00017 \{
+00018     Q\_OBJECT
+00019 \textcolor{keyword}{public}:
+00020     \textcolor{keyword}{explicit} \hyperlink{classDataLogger_a4b383913e0fd834ff9b0d8bbd295c2db}{DataLogger}(QObject *parent = 0);
+00021     \hyperlink{classDataLogger_a9aaff109f3e7749a0a0a0313655da50a}{~DataLogger}();
+00022 
+00023     \textcolor{keywordtype}{void} \hyperlink{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}{save}(\hyperlink{classDataStream}{DataStream}& input); 
+00024 \textcolor{keyword}{private}:
+00025     \textcolor{keywordtype}{void} saveAsText(\hyperlink{classDataStream}{DataStream}& input); 
+00026     \textcolor{keywordtype}{void} saveAsEdf(\hyperlink{classDataStream}{DataStream}& input); 
+00027 
+00028 
+00029 signals:
+00030     \textcolor{keywordtype}{void} \hyperlink{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{updateStatus}(QString status); 
+00031 \textcolor{keyword}{public} slots:
+00032 \};
+00033 
+00038 \textcolor{preprocessor}{#endif // DATALOGGER\_H}
+\end{DoxyCode}

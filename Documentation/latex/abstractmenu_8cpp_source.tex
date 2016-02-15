@@ -1,0 +1,44 @@
+\hypertarget{abstractmenu_8cpp_source}{}\section{abstractmenu.\+cpp}
+\label{abstractmenu_8cpp_source}\index{src/\+Pi\+Face-\/\+Interface/abstractmenu.\+cpp@{src/\+Pi\+Face-\/\+Interface/abstractmenu.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{abstractmenu_8h}{abstractmenu.h}"}
+00002 \textcolor{preprocessor}{#include "pifacecad.h"}
+00003 
+\hypertarget{abstractmenu_8cpp_source.tex_l00004}{}\hyperlink{classAbstractMenu_a45d32cb02984b79e6bc6f6e930ee5c8c}{00004} \hyperlink{classAbstractMenu_a45d32cb02984b79e6bc6f6e930ee5c8c}{AbstractMenu::AbstractMenu}()
+00005 \{
+00006  \hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}=0;
+00007 \}
+00008 
+\hypertarget{abstractmenu_8cpp_source.tex_l00009}{}\hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{00009} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{AbstractMenu::setUpperText}()\{
+00010     pifacecad\_lcd\_clear();
+00011     pifacecad\_lcd\_set\_cursor(0,0);
+00012     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * tmp = \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}.at(\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}).c\_str();
+00013     pifacecad\_lcd\_write(tmp);
+00014 \}
+\hypertarget{abstractmenu_8cpp_source.tex_l00015}{}\hyperlink{classAbstractMenu_ab07feae31d2527f2830188fc10bcb728}{00015} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{AbstractMenu::setUpperText}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} * input)\{
+00016     pifacecad\_lcd\_clear();
+00017     pifacecad\_lcd\_set\_cursor(0,0);
+00018     pifacecad\_lcd\_write(input);
+00019 \}
+00020 
+\hypertarget{abstractmenu_8cpp_source.tex_l00021}{}\hyperlink{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c}{00021} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c}{AbstractMenu::setLowerText}()\{
+00022     pifacecad\_lcd\_set\_cursor(0,1);
+00023     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * tmp = \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}.at(\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}).c\_str();
+00024     pifacecad\_lcd\_write(tmp);
+00025 \}
+00026 
+\hypertarget{abstractmenu_8cpp_source.tex_l00027}{}\hyperlink{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}{00027} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}{AbstractMenu::next}()\{
+00028     \textcolor{keywordflow}{if}(\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}==\hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{numberOfOptions})
+00029         \hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}=0;
+00030     \textcolor{keywordflow}{else}
+00031         \hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}=\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}+1;
+00032     pifacecad\_lcd\_set\_cursor(0,1);
+00033     pifacecad\_lcd\_write(\textcolor{stringliteral}{"                   "});
+00034     pifacecad\_lcd\_set\_cursor(0,1);
+00035     \textcolor{keyword}{const} \textcolor{keywordtype}{char} * tmp = \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}.at(\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption}).c\_str();
+00036     pifacecad\_lcd\_write(tmp);
+00037 
+00038 
+00039 \}
+\end{DoxyCode}

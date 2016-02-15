@@ -1,0 +1,11 @@
+<map id="SettingsSingleton::getSampleRate" name="SettingsSingleton::getSampleRate">
+<area shape="rect" id="node2" href="$classDataLogger.html#a17296a2d3088e979c9b1f48e68caf9ad" title="Saves the input to a txt&#45;file, header&#45;file and edf&#45;file(if bool saveAsEdf in SettingsSingleton) ..." alt="" coords="218,64,343,91"/>
+<area shape="rect" id="node8" href="$classSamplingThread.html#ab1284bf5429771100bf0a60ffe3aacef" title="SamplingThread::startThread" alt="" coords="185,123,376,149"/>
+<area shape="rect" id="node3" href="$classEcgCaptureMenu.html#a610d2985e09cd56cb381e6e443dbbc72" title="Enter SettingsMenu for case 0 and starts DeviceManager and EcgCapture for case 1. ..." alt="" coords="424,5,611,32"/>
+<area shape="rect" id="node5" href="$classPlotAndCaptureWidget.html#a5f9fe948c3683ae9026a8f792782e67e" title="Stop the ECG capture, this will stop the sampling thread so no more samples will be collected..." alt="" coords="440,57,595,98"/>
+<area shape="rect" id="node4" href="$classEcgCaptureMenu.html#ac779737a084cb49d1517974543d4965b" title="EcgCaptureMenu::~EcgCaptureMenu" alt="" coords="659,5,899,32"/>
+<area shape="rect" id="node6" href="$classPlotAndCaptureWidget.html#a7dca31208a65906f0a96bf4143e0da4f" title="PlotAndCaptureWidget\l::plotSampleVector" alt="" coords="701,57,856,98"/>
+<area shape="rect" id="node7" href="$classPlotAndCaptureWidget.html#a232d01f00a25365382f094ad8eedb7fa" title="PlotAndCaptureWidget\l::startCapture" alt="" coords="947,57,1101,98"/>
+<area shape="rect" id="node9" href="$classSamplingThread.html#a3145c2d8049b3f126f78cb1274154eeb" title="SamplingThread::run" alt="" coords="446,123,589,149"/>
+<area shape="rect" id="node10" href="$classSamplingThread.html#aa52f1e7171ae5cb8432e949635b02d25" title="Populates DataStream vector with values. " alt="" coords="432,173,603,200"/>
+</map>

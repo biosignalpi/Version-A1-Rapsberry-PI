@@ -1,0 +1,99 @@
+\hypertarget{settingssingleton_8cpp_source}{}\section{settingssingleton.\+cpp}
+\label{settingssingleton_8cpp_source}\index{src/settingssingleton.\+cpp@{src/settingssingleton.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include <\hyperlink{settingssingleton_8h}{settingssingleton.h}>}
+00002 
+\hypertarget{settingssingleton_8cpp_source.tex_l00003}{}\hyperlink{classSettingsSingleton_af3d8ea55c2c625c0b6504b472d8664af}{00003} \hyperlink{classSettingsSingleton_af3d8ea55c2c625c0b6504b472d8664af}{SettingsSingleton::SettingsSingleton}() \{
+00004 
+00005     fileName=\textcolor{stringliteral}{"default"};
+00006     name=\textcolor{stringliteral}{""};
+00007     gender=\textcolor{stringliteral}{""};
+00008     birthDate=\textcolor{stringliteral}{""};
+00009     patientCode=\textcolor{stringliteral}{""};
+00010     recordingName=\textcolor{stringliteral}{""};
+00011     notes=\textcolor{stringliteral}{""};
+00012     sampleRate=500;
+00013     source=\textcolor{stringliteral}{""};
+00014     sourceId=4;
+00015     saveAsEdf=\textcolor{keyword}{false};
+00016 
+00017 \}
+00018 
+\hypertarget{settingssingleton_8cpp_source.tex_l00019}{}\hyperlink{classSettingsSingleton_a91b78db84657cbeb299c30e4aac3c269}{00019} \hyperlink{classSettingsSingleton_a91b78db84657cbeb299c30e4aac3c269}{SettingsSingleton::~SettingsSingleton}() \{
+00020 
+00021 \}
+00022 
+\hypertarget{settingssingleton_8cpp_source.tex_l00023}{}\hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{00023} \hyperlink{classSettingsSingleton}{SettingsSingleton}& \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}()\{
+00024     \textcolor{keyword}{static} \hyperlink{classSettingsSingleton}{SettingsSingleton} \_instance;
+00025     \textcolor{keywordflow}{return} \_instance;
+00026 \}
+00027 
+\hypertarget{settingssingleton_8cpp_source.tex_l00028}{}\hyperlink{classSettingsSingleton_aec045fc249983ef4ac0de4ba8925b300}{00028} \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_aec045fc249983ef4ac0de4ba8925b300}{SettingsSingleton::setFileName}(QString input)\{
+00029     fileName=input;
+00030 \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00031}{}\hyperlink{classSettingsSingleton_a383c335986ea26502cb65886a9fea1ac}{00031}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_a383c335986ea26502cb65886a9fea1ac}{SettingsSingleton::setName}(QString input)\{
+00032         name=input;
+00033     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00034}{}\hyperlink{classSettingsSingleton_a00746454430a23dc51fd64834e35bf0f}{00034}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_a00746454430a23dc51fd64834e35bf0f}{SettingsSingleton::setGender}(QString input)\{
+00035         gender=input;
+00036     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00037}{}\hyperlink{classSettingsSingleton_a1b23c39146607ea723fc97f570e6e3e1}{00037}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_a1b23c39146607ea723fc97f570e6e3e1}{SettingsSingleton::setBirthDate}(QString input)\{
+00038         birthDate=input;
+00039     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00040}{}\hyperlink{classSettingsSingleton_a43d597e9d39a9b76a11c4575d8d71adc}{00040}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_a43d597e9d39a9b76a11c4575d8d71adc}{SettingsSingleton::setPatientCode}(QString input)\{
+00041         patientCode=input;
+00042     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00043}{}\hyperlink{classSettingsSingleton_a015183461cfd8c90a1419341e09c7c92}{00043}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_a015183461cfd8c90a1419341e09c7c92}{SettingsSingleton::setRecordingName}(QString input)\{
+00044         recordingName=input;
+00045     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00046}{}\hyperlink{classSettingsSingleton_ac9c888265f360f1fe7ee3fb9441dd514}{00046}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_ac9c888265f360f1fe7ee3fb9441dd514}{SettingsSingleton::setNotes}(QString input)\{
+00047         notes=input;
+00048     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00049}{}\hyperlink{classSettingsSingleton_afb6c1555d8a9a93fab574345b7e28e28}{00049}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_afb6c1555d8a9a93fab574345b7e28e28}{SettingsSingleton::setSampleRate}(\textcolor{keywordtype}{int} input)\{
+00050         sampleRate=input;
+00051     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00052}{}\hyperlink{classSettingsSingleton_af3d750e4f32db65df430d03a9b947b16}{00052}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_af3d750e4f32db65df430d03a9b947b16}{SettingsSingleton::setSource}(QString input)\{
+00053         source=input;
+00054     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00055}{}\hyperlink{classSettingsSingleton_af4b9b4364b4146711000f425dd5f5aa9}{00055}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_af4b9b4364b4146711000f425dd5f5aa9}{SettingsSingleton::setSourceId}(\textcolor{keywordtype}{int} input)\{
+00056         sourceId=input;
+00057     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00058}{}\hyperlink{classSettingsSingleton_adb4221d2f742cff29038bfda74cfc784}{00058}     \textcolor{keywordtype}{void} \hyperlink{classSettingsSingleton_adb4221d2f742cff29038bfda74cfc784}{SettingsSingleton::setSaveAsEdf}(\textcolor{keywordtype}{bool} input)\{
+00059         saveAsEdf=input;
+00060     \}
+00061 
+\hypertarget{settingssingleton_8cpp_source.tex_l00062}{}\hyperlink{classSettingsSingleton_aa5c7ee7b9966f8391d7431a7e8ab3949}{00062}     QString \hyperlink{classSettingsSingleton_aa5c7ee7b9966f8391d7431a7e8ab3949}{SettingsSingleton::getFileName}()\{
+00063         \textcolor{keywordflow}{return} fileName;
+00064     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00065}{}\hyperlink{classSettingsSingleton_ab9e0ab27c53f748e458cfb14f71a94ea}{00065}     QString \hyperlink{classSettingsSingleton_ab9e0ab27c53f748e458cfb14f71a94ea}{SettingsSingleton::getName}()\{
+00066         \textcolor{keywordflow}{return} name;
+00067     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00068}{}\hyperlink{classSettingsSingleton_a3e61e7730d97ab3e893499538aba04ba}{00068}     QString \hyperlink{classSettingsSingleton_a3e61e7730d97ab3e893499538aba04ba}{SettingsSingleton::getGender}()\{
+00069         \textcolor{keywordflow}{return} gender;
+00070     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00071}{}\hyperlink{classSettingsSingleton_a8e25762548883f476860ed5e1ab0b366}{00071}     QString \hyperlink{classSettingsSingleton_a8e25762548883f476860ed5e1ab0b366}{SettingsSingleton::getBirthDate}()\{
+00072         \textcolor{keywordflow}{return} birthDate;
+00073     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00074}{}\hyperlink{classSettingsSingleton_a01b74f6d99cfbbd5bc6114b69ee5c87c}{00074}     QString \hyperlink{classSettingsSingleton_a01b74f6d99cfbbd5bc6114b69ee5c87c}{SettingsSingleton::getPatientCode}()\{
+00075         \textcolor{keywordflow}{return} patientCode;
+00076     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00077}{}\hyperlink{classSettingsSingleton_a0275cd8a138fa91222ad36d9fbf465d2}{00077}     QString \hyperlink{classSettingsSingleton_a0275cd8a138fa91222ad36d9fbf465d2}{SettingsSingleton::getRecordingName}()\{
+00078         \textcolor{keywordflow}{return} recordingName;
+00079     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00080}{}\hyperlink{classSettingsSingleton_a14e8cddfa2bfbc896b9f31bddb4e675b}{00080}     QString \hyperlink{classSettingsSingleton_a14e8cddfa2bfbc896b9f31bddb4e675b}{SettingsSingleton::getNotes}()\{
+00081         \textcolor{keywordflow}{return} notes;
+00082     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00083}{}\hyperlink{classSettingsSingleton_a11896cc46cb374ae6a8234e1cd3cb68f}{00083}     \textcolor{keywordtype}{int} \hyperlink{classSettingsSingleton_a11896cc46cb374ae6a8234e1cd3cb68f}{SettingsSingleton::getSampleRate}()\{
+00084         \textcolor{keywordflow}{return} sampleRate;
+00085     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00086}{}\hyperlink{classSettingsSingleton_a612c925c64e9862b0fdeca1b5f8f4773}{00086}     QString \hyperlink{classSettingsSingleton_a612c925c64e9862b0fdeca1b5f8f4773}{SettingsSingleton::getSource}()\{
+00087         \textcolor{keywordflow}{return} source;
+00088     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00089}{}\hyperlink{classSettingsSingleton_aa6db88481c421b96974519b8e28192c9}{00089}     \textcolor{keywordtype}{int} \hyperlink{classSettingsSingleton_aa6db88481c421b96974519b8e28192c9}{SettingsSingleton::getSourceId}()\{
+00090         \textcolor{keywordflow}{return} sourceId;
+00091     \}
+\hypertarget{settingssingleton_8cpp_source.tex_l00092}{}\hyperlink{classSettingsSingleton_ad40343fdaed55e07e0b98361792ab142}{00092}     \textcolor{keywordtype}{bool} \hyperlink{classSettingsSingleton_ad40343fdaed55e07e0b98361792ab142}{SettingsSingleton::getSaveAsEdf}()\{
+00093         \textcolor{keywordflow}{return} saveAsEdf;
+00094     \}
+\end{DoxyCode}

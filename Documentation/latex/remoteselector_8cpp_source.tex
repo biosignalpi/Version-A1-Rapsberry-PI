@@ -1,0 +1,419 @@
+\hypertarget{remoteselector_8cpp_source}{}\section{remoteselector.\+cpp}
+\label{remoteselector_8cpp_source}\index{src/\+Qt-\/btfiletransfer/remoteselector.\+cpp@{src/\+Qt-\/btfiletransfer/remoteselector.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/****************************************************************************}
+00002 \textcolor{comment}{**}
+00003 \textcolor{comment}{** Copyright (C) 2015 The Qt Company Ltd.}
+00004 \textcolor{comment}{** Contact: http://www.qt.io/licensing/}
+00005 \textcolor{comment}{**}
+00006 \textcolor{comment}{** This file is part of the QtBluetooth module of the Qt Toolkit.}
+00007 \textcolor{comment}{**}
+00008 \textcolor{comment}{** $QT\_BEGIN\_LICENSE:BSD$}
+00009 \textcolor{comment}{** You may use this file under the terms of the BSD license as follows:}
+00010 \textcolor{comment}{**}
+00011 \textcolor{comment}{** "Redistribution and use in source and binary forms, with or without}
+00012 \textcolor{comment}{** modification, are permitted provided that the following conditions are}
+00013 \textcolor{comment}{** met:}
+00014 \textcolor{comment}{**   * Redistributions of source code must retain the above copyright}
+00015 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer.}
+00016 \textcolor{comment}{**   * Redistributions in binary form must reproduce the above copyright}
+00017 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer in}
+00018 \textcolor{comment}{**     the documentation and/or other materials provided with the}
+00019 \textcolor{comment}{**     distribution.}
+00020 \textcolor{comment}{**   * Neither the name of The Qt Company Ltd nor the names of its}
+00021 \textcolor{comment}{**     contributors may be used to endorse or promote products derived}
+00022 \textcolor{comment}{**     from this software without specific prior written permission.}
+00023 \textcolor{comment}{**}
+00024 \textcolor{comment}{**}
+00025 \textcolor{comment}{** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00026 \textcolor{comment}{** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00027 \textcolor{comment}{** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00028 \textcolor{comment}{** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00029 \textcolor{comment}{** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00030 \textcolor{comment}{** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00031 \textcolor{comment}{** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00032 \textcolor{comment}{** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00033 \textcolor{comment}{** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00034 \textcolor{comment}{** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00035 \textcolor{comment}{** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."}
+00036 \textcolor{comment}{**}
+00037 \textcolor{comment}{** $QT\_END\_LICENSE$}
+00038 \textcolor{comment}{**}
+00039 \textcolor{comment}{****************************************************************************/}
+00040 
+00041 \textcolor{preprocessor}{#include "\hyperlink{remoteselector_8h}{remoteselector.h}"}
+00042 \textcolor{preprocessor}{#include "ui\_remoteselector.h"}
+00043 
+00044 \textcolor{preprocessor}{#include <qbluetoothdeviceinfo.h>}
+00045 \textcolor{preprocessor}{#include <qbluetoothaddress.h>}
+00046 \textcolor{preprocessor}{#include <qbluetoothtransferrequest.h>}
+00047 \textcolor{preprocessor}{#include <qbluetoothtransferreply.h>}
+00048 \textcolor{preprocessor}{#include <qbluetoothlocaldevice.h>}
+00049 
+00050 \textcolor{preprocessor}{#include <QMovie>}
+00051 \textcolor{preprocessor}{#include <QMessageBox>}
+00052 \textcolor{preprocessor}{#include <QFileDialog>}
+00053 \textcolor{preprocessor}{#include <QCheckBox>}
+00054 
+00055 \textcolor{preprocessor}{#include "\hyperlink{progress_8h}{progress.h}"}
+00056 \textcolor{preprocessor}{#include "\hyperlink{pindisplay_8h}{pindisplay.h}"}
+00057 
+00058 QT\_USE\_NAMESPACE
+00059 
+\hypertarget{remoteselector_8cpp_source.tex_l00060}{}\hyperlink{classRemoteSelector_afd501861aba4f67aee79d24c40c9944c}{00060} \hyperlink{classRemoteSelector_afd501861aba4f67aee79d24c40c9944c}{RemoteSelector::RemoteSelector}(QWidget *parent)
+00061 :   QDialog(parent), ui(new \hyperlink{namespaceUi}{Ui}::\hyperlink{classRemoteSelector}{RemoteSelector}),
+00062     m\_localDevice(new QBluetoothLocalDevice), m\_pindisplay(0),
+00063     m\_pairingError(false)
+00064 \{
+00065     ui->setupUi(\textcolor{keyword}{this});
+00066 
+00067     \textcolor{comment}{//Using default Bluetooth adapter}
+00068     QBluetoothAddress adapterAddress = m\_localDevice->address();
+00069 
+00070     \textcolor{comment}{/*}
+00071 \textcolor{comment}{     * In case of multiple Bluetooth adapters it is possible to}
+00072 \textcolor{comment}{     * set which adapter will be used by providing MAC Address.}
+00073 \textcolor{comment}{     * Example code:}
+00074 \textcolor{comment}{     *}
+00075 \textcolor{comment}{     * QBluetoothAddress adapterAddress("XX:XX:XX:XX:XX:XX");}
+00076 \textcolor{comment}{     * m\_discoveryAgent = new QBluetoothServiceDiscoveryAgent(adapterAddress);}
+00077 \textcolor{comment}{     */}
+00078 
+00079     m\_discoveryAgent = \textcolor{keyword}{new} QBluetoothServiceDiscoveryAgent(adapterAddress);
+00080 
+00081     connect(m\_discoveryAgent, SIGNAL(serviceDiscovered(QBluetoothServiceInfo)),
+00082             \textcolor{keyword}{this}, SLOT(serviceDiscovered(QBluetoothServiceInfo)));
+00083     connect(m\_discoveryAgent, SIGNAL(finished()), \textcolor{keyword}{this}, SLOT(discoveryFinished()));
+00084     connect(m\_discoveryAgent, SIGNAL(canceled()), \textcolor{keyword}{this}, SLOT(discoveryFinished()));
+00085 
+00086     ui->remoteDevices->setColumnWidth(3, 75);
+00087     ui->remoteDevices->setColumnWidth(4, 100);
+00088 
+00089     connect(m\_localDevice, SIGNAL(pairingDisplayPinCode(QBluetoothAddress,QString)),
+00090             \textcolor{keyword}{this}, SLOT(displayPin(QBluetoothAddress,QString)));
+00091     connect(m\_localDevice, SIGNAL(pairingDisplayConfirmation(QBluetoothAddress,QString)),
+00092             \textcolor{keyword}{this}, SLOT(displayConfirmation(QBluetoothAddress,QString)));
+00093     connect(m\_localDevice, SIGNAL(pairingFinished(QBluetoothAddress,QBluetoothLocalDevice::Pairing)),
+00094             \textcolor{keyword}{this}, SLOT(pairingFinished(QBluetoothAddress,QBluetoothLocalDevice::Pairing)));
+00095     connect(m\_localDevice, SIGNAL(error(QBluetoothLocalDevice::Error)),
+00096             \textcolor{keyword}{this}, SLOT(pairingError(QBluetoothLocalDevice::Error)));
+00097 
+00098     ui->busyWidget->setMovie(\textcolor{keyword}{new} QMovie(\textcolor{stringliteral}{":/icons/busy.gif"}));
+00099     ui->busyWidget->movie()->start();
+00100 
+00101     ui->pairingBusy->setMovie(\textcolor{keyword}{new} QMovie(\textcolor{stringliteral}{":/icons/pairing.gif"}));
+00102     ui->pairingBusy->hide();
+00103 
+00104     ui->remoteDevices->clearContents();
+00105     ui->remoteDevices->setRowCount(0);
+00106 \}
+00107 
+\hypertarget{remoteselector_8cpp_source.tex_l00108}{}\hyperlink{classRemoteSelector_afa7b3a154952183e183d06c0a01f9c84}{00108} \hyperlink{classRemoteSelector_afa7b3a154952183e183d06c0a01f9c84}{RemoteSelector::~RemoteSelector}()
+00109 \{
+00110     \textcolor{keyword}{delete} ui;
+00111     \textcolor{keyword}{delete} m\_discoveryAgent;
+00112     \textcolor{keyword}{delete} m\_localDevice;
+00113 \}
+00114 
+\hypertarget{remoteselector_8cpp_source.tex_l00115}{}\hyperlink{classRemoteSelector_aae9c338f7593d9b25d540d48da452111}{00115} \textcolor{keywordtype}{void} \hyperlink{classRemoteSelector_a63cf76514fa5b2bf1b85b87db1a49e99}{RemoteSelector::startDiscovery}(\textcolor{keyword}{const} QBluetoothUuid &uuid)
+00116 \{
+00117     ui->stopButton->setDisabled(\textcolor{keyword}{false});
+00118     \textcolor{keywordflow}{if} (m\_discoveryAgent->isActive())
+00119         m\_discoveryAgent->stop();
+00120 
+00121     m\_discoveryAgent->setUuidFilter(uuid);
+00122     m\_discoveryAgent->start();
+00123 
+00124     \textcolor{keywordflow}{if} (!m\_discoveryAgent->isActive() ||
+00125             m\_discoveryAgent->error() != QBluetoothServiceDiscoveryAgent::NoError) \{
+00126         ui->status->setText(tr(\textcolor{stringliteral}{"Cannot find remote services."}));
+00127     \} \textcolor{keywordflow}{else} \{
+00128         ui->status->setText(tr(\textcolor{stringliteral}{"Scanning..."}));
+00129         ui->busyWidget->show();
+00130         ui->busyWidget->movie()->start();
+00131     \}
+00132 \}
+00133 
+\hypertarget{remoteselector_8cpp_source.tex_l00134}{}\hyperlink{classRemoteSelector_ada5543d127d62eb91591d4d11294b8b2}{00134} QBluetoothServiceInfo \hyperlink{classRemoteSelector_ada5543d127d62eb91591d4d11294b8b2}{RemoteSelector::service}()\textcolor{keyword}{ const}
+00135 \textcolor{keyword}{}\{
+00136     \textcolor{keywordflow}{return} m\_service;
+00137 \}
+00138 
+00139 \textcolor{keywordtype}{void} RemoteSelector::serviceDiscovered(\textcolor{keyword}{const} QBluetoothServiceInfo &serviceInfo)
+00140 \{
+00141 \textcolor{preprocessor}{#if 0}
+00142     qDebug() << \textcolor{stringliteral}{"Discovered service on"}
+00143              << serviceInfo.device().name() << serviceInfo.device().address().toString();
+00144     qDebug() << \textcolor{stringliteral}{"\(\backslash\)tService name:"} << serviceInfo.serviceName();
+00145     qDebug() << \textcolor{stringliteral}{"\(\backslash\)tDescription:"}
+00146              << serviceInfo.attribute(QBluetoothServiceInfo::ServiceDescription).toString();
+00147     qDebug() << \textcolor{stringliteral}{"\(\backslash\)tProvider:"}
+00148              << serviceInfo.attribute(QBluetoothServiceInfo::ServiceProvider).toString();
+00149     qDebug() << \textcolor{stringliteral}{"\(\backslash\)tL2CAP protocol service multiplexer:"}
+00150              << serviceInfo.protocolServiceMultiplexer();
+00151     qDebug() << \textcolor{stringliteral}{"\(\backslash\)tRFCOMM server channel:"} << serviceInfo.serverChannel();
+00152 \textcolor{preprocessor}{#endif}
+00153 
+00154     QString remoteName;
+00155     \textcolor{keywordflow}{if} (serviceInfo.device().name().isEmpty())
+00156         remoteName = serviceInfo.device().address().toString();
+00157     \textcolor{keywordflow}{else}
+00158         remoteName = serviceInfo.device().name();
+00159 
+00160 \textcolor{comment}{//    QListWidgetItem *item =}
+00161 \textcolor{comment}{//        new
+       QListWidgetItem(QString::fromLatin1("%1\(\backslash\)t%2\(\backslash\)t%3").arg(serviceInfo.device().address().toString(),}
+00162 \textcolor{comment}{//                                                             serviceInfo.device().name(),
+       serviceInfo.serviceName()));}
+00163 
+00164     QMutableMapIterator<int, QBluetoothServiceInfo> i(m\_discoveredServices);
+00165     \textcolor{keywordflow}{while} (i.hasNext())\{
+00166         i.next();
+00167         \textcolor{keywordflow}{if} (serviceInfo.device().address() == i.value().device().address())\{
+00168             i.setValue(serviceInfo);
+00169             \textcolor{keywordflow}{return};
+00170         \}
+00171     \}
+00172 
+00173     \textcolor{keywordtype}{int} row = ui->remoteDevices->rowCount();
+00174     ui->remoteDevices->insertRow(row);
+00175     QTableWidgetItem *item = \textcolor{keyword}{new} QTableWidgetItem(serviceInfo.device().address().toString());
+00176     ui->remoteDevices->setItem(row, 0, item);
+00177     item = \textcolor{keyword}{new} QTableWidgetItem(serviceInfo.device().name());
+00178     ui->remoteDevices->setItem(row, 1, item);
+00179     item = \textcolor{keyword}{new} QTableWidgetItem(serviceInfo.serviceName());
+00180 
+00181     ui->remoteDevices->setItem(row, 2, item);
+00182 
+00183     QBluetoothLocalDevice::Pairing p;
+00184 
+00185     p = m\_localDevice->pairingStatus(serviceInfo.device().address());
+00186 
+00187     ui->remoteDevices->blockSignals(\textcolor{keyword}{true});
+00188 
+00189     item = \textcolor{keyword}{new} QTableWidgetItem();
+00190     \textcolor{keywordflow}{if} ((p&QBluetoothLocalDevice::Paired) || (p&QBluetoothLocalDevice::AuthorizedPaired))
+00191         item->setCheckState(Qt::Checked);
+00192     \textcolor{keywordflow}{else}
+00193         item->setCheckState(Qt::Unchecked);
+00194     ui->remoteDevices->setItem(row, 3, item);
+00195 
+00196     item = \textcolor{keyword}{new} QTableWidgetItem();
+00197     \textcolor{keywordflow}{if} (p&QBluetoothLocalDevice::AuthorizedPaired)
+00198         item->setCheckState(Qt::Checked);
+00199     \textcolor{keywordflow}{else}
+00200         item->setCheckState(Qt::Unchecked);
+00201 
+00202     ui->remoteDevices->setItem(row, 4, item);
+00203 
+00204     ui->remoteDevices->blockSignals(\textcolor{keyword}{false});
+00205 
+00206 
+00207     m\_discoveredServices.insert(row, serviceInfo);
+00208 \}
+00209 
+00210 \textcolor{keywordtype}{void} RemoteSelector::discoveryFinished()
+00211 \{
+00212     ui->status->setText(tr(\textcolor{stringliteral}{"Select the device to send to."}));
+00213     ui->stopButton->setDisabled(\textcolor{keyword}{true});
+00214     ui->busyWidget->movie()->stop();
+00215     ui->busyWidget->hide();
+00216 \}
+00217 
+\hypertarget{remoteselector_8cpp_source.tex_l00218}{}\hyperlink{classRemoteSelector_a63cf76514fa5b2bf1b85b87db1a49e99}{00218} \textcolor{keywordtype}{void} \hyperlink{classRemoteSelector_a63cf76514fa5b2bf1b85b87db1a49e99}{RemoteSelector::startDiscovery}()
+00219 \{
+00220     \hyperlink{classRemoteSelector_a63cf76514fa5b2bf1b85b87db1a49e99}{startDiscovery}(QBluetoothUuid(QBluetoothUuid::ObexObjectPush));
+00221 \}
+00222 
+00223 \textcolor{keywordtype}{void} RemoteSelector::on\_refreshPB\_clicked()
+00224 \{
+00225     \hyperlink{classRemoteSelector_a63cf76514fa5b2bf1b85b87db1a49e99}{startDiscovery}();
+00226     ui->stopButton->setDisabled(\textcolor{keyword}{false});
+00227 \}
+00228 
+00229 \textcolor{keywordtype}{void} RemoteSelector::on\_fileSelectPB\_clicked()
+00230 \{
+00231     ui->fileName->setText(QFileDialog::getOpenFileName());
+00232     \textcolor{keywordflow}{if} (m\_service.isValid())
+00233         ui->sendButton->setDisabled(\textcolor{keyword}{false});
+00234 \}
+00235 
+00236 \textcolor{keywordtype}{void} RemoteSelector::on\_sendButton\_clicked()
+00237 \{
+00238     QBluetoothTransferManager mgr;
+00239     QBluetoothTransferRequest req(m\_service.device().address());
+00240 
+00241     m\_file = \textcolor{keyword}{new} QFile(ui->fileName->text());
+00242 
+00243     \hyperlink{classProgress}{Progress} *p = \textcolor{keyword}{new} \hyperlink{classProgress}{Progress};
+00244     p->\hyperlink{classProgress_ae2fec44e18b6cfb3e4cba984bdb16824}{setStatus}(\textcolor{stringliteral}{"Sending to: "} + m\_service.device().name(), \textcolor{stringliteral}{"Waiting for start"});
+00245     p->show();
+00246 
+00247     QBluetoothTransferReply *reply = mgr.put(req, m\_file);
+00248     \textcolor{comment}{//mgr is default parent}
+00249     \textcolor{comment}{//ensure that mgr doesn't take reply down when leaving scope}
+00250     reply->setParent(\textcolor{keyword}{this});
+00251     \textcolor{keywordflow}{if} (reply->error())\{
+00252         qDebug() << \textcolor{stringliteral}{"Failed to send file"};
+00253         p->finished(reply);
+00254         reply->deleteLater();
+00255         \textcolor{keywordflow}{return};
+00256     \}
+00257 
+00258     connect(reply, SIGNAL(transferProgress(qint64,qint64)), p, SLOT(uploadProgress(qint64,qint64)));
+00259     connect(reply, SIGNAL(finished(QBluetoothTransferReply*)), p, SLOT(finished(QBluetoothTransferReply*)))
+      ;
+00260     connect(p, SIGNAL(rejected()), reply, SLOT(abort()));
+00261 \}
+00262 
+00263 \textcolor{keywordtype}{void} RemoteSelector::on\_stopButton\_clicked()
+00264 \{
+00265     m\_discoveryAgent->stop();
+00266 \}
+00267 
+00268 QString RemoteSelector::addressToName(\textcolor{keyword}{const} QBluetoothAddress &address)
+00269 \{
+00270     QMapIterator<int, QBluetoothServiceInfo> i(m\_discoveredServices);
+00271     \textcolor{keywordflow}{while} (i.hasNext())\{
+00272         i.next();
+00273         \textcolor{keywordflow}{if} (i.value().device().address() == address)
+00274             \textcolor{keywordflow}{return} i.value().device().name();
+00275     \}
+00276     \textcolor{keywordflow}{return} address.toString();
+00277 \}
+00278 
+00279 \textcolor{keywordtype}{void} RemoteSelector::displayPin(\textcolor{keyword}{const} QBluetoothAddress &address, QString pin)
+00280 \{
+00281     \textcolor{keywordflow}{if} (m\_pindisplay)
+00282         m\_pindisplay->deleteLater();
+00283     m\_pindisplay = \textcolor{keyword}{new} \hyperlink{classpinDisplay}{pinDisplay}(QString(\textcolor{stringliteral}{"Enter pairing pin on: %1"}).arg(addressToName(address))
+      , pin, \textcolor{keyword}{this});
+00284     m\_pindisplay->show();
+00285 \}
+00286 
+00287 \textcolor{keywordtype}{void} RemoteSelector::displayConfirmation(\textcolor{keyword}{const} QBluetoothAddress &address, QString pin)
+00288 \{
+00289     Q\_UNUSED(address);
+00290 
+00291     \textcolor{keywordflow}{if} (m\_pindisplay)
+00292         m\_pindisplay->deleteLater();
+00293     m\_pindisplay = \textcolor{keyword}{new} \hyperlink{classpinDisplay}{pinDisplay}(QString(\textcolor{stringliteral}{"Confirm this pin is the same"}), pin, \textcolor{keyword}{this});
+00294     connect(m\_pindisplay, SIGNAL(accepted()), \textcolor{keyword}{this}, SLOT(displayConfAccepted()));
+00295     connect(m\_pindisplay, SIGNAL(rejected()), \textcolor{keyword}{this}, SLOT(displayConfReject()));
+00296     m\_pindisplay->setOkCancel();
+00297     m\_pindisplay->show();
+00298 \}
+00299 
+00300 \textcolor{keywordtype}{void} RemoteSelector::displayConfAccepted()
+00301 \{
+00302     m\_localDevice->pairingConfirmation(\textcolor{keyword}{true});
+00303 \}
+00304 \textcolor{keywordtype}{void} RemoteSelector::displayConfReject()
+00305 \{
+00306     m\_localDevice->pairingConfirmation(\textcolor{keyword}{false});
+00307 \}
+00308 
+00309 \textcolor{keywordtype}{void} RemoteSelector::pairingFinished(\textcolor{keyword}{const} QBluetoothAddress &address, QBluetoothLocalDevice::Pairing 
+      status)
+00310 \{
+00311     QBluetoothServiceInfo \hyperlink{classRemoteSelector_ada5543d127d62eb91591d4d11294b8b2}{service};
+00312     \textcolor{keywordtype}{int} row = 0;
+00313 
+00314     ui->pairingBusy->hide();
+00315     ui->pairingBusy->movie()->stop();
+00316 
+00317     ui->remoteDevices->blockSignals(\textcolor{keyword}{true});
+00318 
+00319     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < m\_discoveredServices.count(); i++)\{
+00320         \textcolor{keywordflow}{if} (m\_discoveredServices.value(i).device().address() == address)\{
+00321             service = m\_discoveredServices.value(i);
+00322             row = i;
+00323             \textcolor{keywordflow}{break};
+00324         \}
+00325     \}
+00326 
+00327     \textcolor{keywordflow}{if} (m\_pindisplay)
+00328         \textcolor{keyword}{delete} m\_pindisplay;
+00329 
+00330     QMessageBox msgBox;
+00331     \textcolor{keywordflow}{if} (m\_pairingError) \{
+00332         msgBox.setText(\textcolor{stringliteral}{"Pairing failed with "} + address.toString());
+00333     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (status == QBluetoothLocalDevice::Paired
+00334                || status == QBluetoothLocalDevice::AuthorizedPaired) \{
+00335         msgBox.setText(\textcolor{stringliteral}{"Paired successfully with "} + address.toString());
+00336     \} \textcolor{keywordflow}{else} \{
+00337         msgBox.setText(\textcolor{stringliteral}{"Pairing released with "} + address.toString());
+00338     \}
+00339 
+00340     \textcolor{keywordflow}{if} (service.isValid())\{
+00341         \textcolor{keywordflow}{if} (status == QBluetoothLocalDevice::AuthorizedPaired)\{
+00342             ui->remoteDevices->item(row, 3)->setCheckState(Qt::Checked);
+00343             ui->remoteDevices->item(row, 4)->setCheckState(Qt::Checked);
+00344         \}
+00345         \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (status == QBluetoothLocalDevice::Paired)\{
+00346             ui->remoteDevices->item(row, 3)->setCheckState(Qt::Checked);
+00347             ui->remoteDevices->item(row, 4)->setCheckState(Qt::Unchecked);
+00348         \}
+00349         \textcolor{keywordflow}{else} \{
+00350             ui->remoteDevices->item(row, 3)->setCheckState(Qt::Unchecked);
+00351             ui->remoteDevices->item(row, 4)->setCheckState(Qt::Unchecked);
+00352         \}
+00353     \}
+00354 
+00355     m\_pairingError = \textcolor{keyword}{false};
+00356     msgBox.exec();
+00357 
+00358     ui->remoteDevices->blockSignals(\textcolor{keyword}{false});
+00359 \}
+00360 
+00361 \textcolor{keywordtype}{void} RemoteSelector::pairingError(QBluetoothLocalDevice::Error error)
+00362 \{
+00363     \textcolor{keywordflow}{if} (error != QBluetoothLocalDevice::PairingError)
+00364         \textcolor{keywordflow}{return};
+00365 
+00366     m\_pairingError = \textcolor{keyword}{true};
+00367     pairingFinished(m\_service.device().address(), QBluetoothLocalDevice::Unpaired);
+00368 \}
+00369 
+00370 \textcolor{keywordtype}{void} RemoteSelector::on\_remoteDevices\_cellClicked(\textcolor{keywordtype}{int} row, \textcolor{keywordtype}{int} column)
+00371 \{
+00372     Q\_UNUSED(column);
+00373 
+00374     m\_service = m\_discoveredServices.value(row);
+00375     \textcolor{keywordflow}{if} (!ui->fileName->text().isEmpty()) \{
+00376         ui->sendButton->setDisabled(\textcolor{keyword}{false});
+00377     \}
+00378 \}
+00379 
+00380 \textcolor{keywordtype}{void} RemoteSelector::on\_remoteDevices\_itemChanged(QTableWidgetItem* item)
+00381 \{
+00382     \textcolor{keywordtype}{int} row = item->row();
+00383     \textcolor{keywordtype}{int} column = item->column();
+00384     m\_service = m\_discoveredServices.value(row);
+00385 
+00386     \textcolor{keywordflow}{if} (column < 3)
+00387         \textcolor{keywordflow}{return};
+00388 
+00389     \textcolor{keywordflow}{if} (item->checkState() == Qt::Unchecked && column == 3)\{
+00390         m\_localDevice->requestPairing(m\_service.device().address(), QBluetoothLocalDevice::Unpaired);
+00391         \textcolor{keywordflow}{return}; \textcolor{comment}{// don't continue and start movie}
+00392     \}
+00393     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} ((item->checkState() == Qt::Checked && column == 3) ||
+00394             (item->checkState() == Qt::Unchecked && column == 4))\{
+00395         m\_localDevice->requestPairing(m\_service.device().address(), QBluetoothLocalDevice::Paired);
+00396         ui->remoteDevices->blockSignals(\textcolor{keyword}{true});
+00397         ui->remoteDevices->item(row, column)->setCheckState(Qt::PartiallyChecked);
+00398         ui->remoteDevices->blockSignals(\textcolor{keyword}{false});
+00399     \}
+00400     \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (item->checkState() == Qt::Checked && column == 4)\{
+00401         m\_localDevice->requestPairing(m\_service.device().address(), QBluetoothLocalDevice::AuthorizedPaired
+      );
+00402         ui->remoteDevices->blockSignals(\textcolor{keyword}{true});
+00403         ui->remoteDevices->item(row, column)->setCheckState(Qt::PartiallyChecked);
+00404         ui->remoteDevices->blockSignals(\textcolor{keyword}{false});
+00405     \}
+00406     ui->pairingBusy->show();
+00407     ui->pairingBusy->movie()->start();
+00408 \}
+\end{DoxyCode}

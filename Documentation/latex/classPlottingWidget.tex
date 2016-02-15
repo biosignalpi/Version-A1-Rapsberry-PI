@@ -1,0 +1,112 @@
+\hypertarget{classPlottingWidget}{}\section{Plotting\+Widget Class Reference}
+\label{classPlottingWidget}\index{Plotting\+Widget@{Plotting\+Widget}}
+
+
+Widget that can read E\+CG information from file and plots the data.  
+
+
+
+
+{\ttfamily \#include $<$plottingwidget.\+h$>$}
+
+
+
+Inheritance diagram for Plotting\+Widget\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classPlottingWidget__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Plotting\+Widget\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=160pt]{classPlottingWidget__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPlottingWidget_a094b0449651206a5d5fbad95489d9a05}{Plotting\+Widget} (Q\+Widget $\ast$=N\+U\+LL)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classPlottingWidget_abcb7d54e226df7067f821c954bb3589b}{wheel\+Event} (Q\+Wheel\+Event $\ast$event)
+\begin{DoxyCompactList}\small\item\em Handles the events triggered by moving the scroll button Catches the event when the mouse is in the widget are and the scroll button is moved. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Widget that can read E\+CG information from file and plots the data. 
+
+\begin{DoxyAuthor}{Author}
+Jonatan 
+
+Martin 
+\end{DoxyAuthor}
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000025}{Todo}]Use the \hyperlink{classDataLogger}{Data\+Logger} instead of load\+Big\+File for reading data from txt and edf file. This needs to be implemented both in this class and also in the \hyperlink{classDataLogger}{Data\+Logger} Class.\end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{plottingwidget_8h_source_l00030}{30} of file \hyperlink{plottingwidget_8h_source}{plottingwidget.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Plotting\+Widget@{Plotting\+Widget}!Plotting\+Widget@{Plotting\+Widget}}
+\index{Plotting\+Widget@{Plotting\+Widget}!Plotting\+Widget@{Plotting\+Widget}}
+\subsubsection[{Plotting\+Widget(\+Q\+Widget $\ast$=\+N\+U\+L\+L)}]{\setlength{\rightskip}{0pt plus 5cm}Plotting\+Widget\+::\+Plotting\+Widget (
+\begin{DoxyParamCaption}
+\item[{Q\+Widget $\ast$}]{parent = {\ttfamily NULL}}
+\end{DoxyParamCaption}
+)}\hypertarget{classPlottingWidget_a094b0449651206a5d5fbad95489d9a05}{}\label{classPlottingWidget_a094b0449651206a5d5fbad95489d9a05}
+
+
+Definition at line \hyperlink{plottingwidget_8cpp_source_l00007}{7} of file \hyperlink{plottingwidget_8cpp_source}{plottingwidget.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classPlottingWidget_a094b0449651206a5d5fbad95489d9a05_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Function Documentation}
+\index{Plotting\+Widget@{Plotting\+Widget}!wheel\+Event@{wheel\+Event}}
+\index{wheel\+Event@{wheel\+Event}!Plotting\+Widget@{Plotting\+Widget}}
+\subsubsection[{wheel\+Event(\+Q\+Wheel\+Event $\ast$event)}]{\setlength{\rightskip}{0pt plus 5cm}void Plotting\+Widget\+::wheel\+Event (
+\begin{DoxyParamCaption}
+\item[{Q\+Wheel\+Event $\ast$}]{event}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classPlottingWidget_abcb7d54e226df7067f821c954bb3589b}{}\label{classPlottingWidget_abcb7d54e226df7067f821c954bb3589b}
+
+
+Handles the events triggered by moving the scroll button Catches the event when the mouse is in the widget are and the scroll button is moved. 
+
+If scrolled away from the user the next methos is triggered and a step forward is made, if scrolled towards the user the prev method is triggered to browse backwards. 
+\begin{DoxyParams}{Parameters}
+{\em event} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{plottingwidget_8cpp_source_l00263}{263} of file \hyperlink{plottingwidget_8cpp_source}{plottingwidget.\+cpp}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{plottingwidget_8h}{plottingwidget.\+h}\item 
+src/\hyperlink{plottingwidget_8cpp}{plottingwidget.\+cpp}\end{DoxyCompactItemize}

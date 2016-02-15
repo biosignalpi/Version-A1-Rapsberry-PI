@@ -1,0 +1,7 @@
+<map id="DeviceManager::init" name="DeviceManager::init">
+<area shape="rect" id="node2" href="$classEcgCaptureMenu.html#ac430bc0a2eb1879fe77cd0133d4dd704" title="EcgCaptureMenu::EcgCaptureMenu" alt="" coords="192,5,424,32"/>
+<area shape="rect" id="node5" href="$classPlotAndCaptureWidget.html#a232d01f00a25365382f094ad8eedb7fa" title="PlotAndCaptureWidget\l::startCapture" alt="" coords="231,57,385,98"/>
+<area shape="rect" id="node3" href="$classSettingsMenu.html#abc441c12e8044c13f1a99791e2ee30d1" title="Unimplemented. " alt="" coords="472,5,639,32"/>
+<area shape="rect" id="node4" href="$classSettingsMenu.html#a02ee4145d9109e70bad37893a88c94c7" title="SettingsMenu::~SettingsMenu" alt="" coords="687,5,885,32"/>
+<area shape="rect" id="node6" href="$classPlotAndCaptureWidget.html#a7dca31208a65906f0a96bf4143e0da4f" title="PlotAndCaptureWidget\l::plotSampleVector" alt="" coords="478,57,633,98"/>
+</map>

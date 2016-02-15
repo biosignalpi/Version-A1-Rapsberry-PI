@@ -1,0 +1,43 @@
+\hypertarget{convertecgtoibi_8h_source}{}\section{convertecgtoibi.\+h}
+\label{convertecgtoibi_8h_source}\index{src/convertecgtoibi.\+h@{src/convertecgtoibi.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * convertecgtoibi.h}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Nov 5, 2015}
+00005 \textcolor{comment}{ *      Author: martin}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#ifndef CONVERTECGTOIBI\_H\_}
+00009 \textcolor{preprocessor}{#define CONVERTECGTOIBI\_H\_}
+00010 
+00011 \textcolor{preprocessor}{#include <QThread>}
+00012 \textcolor{preprocessor}{#include <QVector>}
+00013 \textcolor{preprocessor}{#include <QPointF>}
+00014 \textcolor{preprocessor}{#include <QTime>}
+00015 
+\hypertarget{convertecgtoibi_8h_source.tex_l00027}{}\hyperlink{classConvertEcgToIbi}{00027} \textcolor{keyword}{class }\hyperlink{classConvertEcgToIbi}{ConvertEcgToIbi} : \textcolor{keyword}{public} QThread
+00028 \{
+00029     Q\_OBJECT
+00030 
+00031 \textcolor{keyword}{public}:
+00037     \hyperlink{classConvertEcgToIbi_add4a7e9eceff1edadcce6e7aa417c05f}{ConvertEcgToIbi}(QString fileName, QObject *parent = NULL);
+00038     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classConvertEcgToIbi_a3d9ea57ed19352295382095febc82f71}{run}();
+00039 
+00040 signals:
+00047       \textcolor{keywordtype}{void} \hyperlink{classConvertEcgToIbi_a34d6d61a81e88116c65a2ba9198b7f1c}{sendFileData}(QVector<double> qrsPeaks, QVector<double> timeData);
+00048 
+00049 \textcolor{keyword}{private}:
+00050 
+00051     QString fname;
+00052     \textcolor{keywordtype}{double} sampRate=128;  
+00053 
+00057     \textcolor{keywordtype}{void} saveAsIbiFile(QVector<double>*);
+00066     \textcolor{keywordtype}{void} extractRtoR(QVector<int>*,QVector<double>*);
+00067     QTime time;
+00068 \};
+00074 \textcolor{keywordtype}{int} \hyperlink{group__HRV-Analysis_ga5c14f0d7dd58dec49e939470bcb5db1c}{QRSDet}(\textcolor{keywordtype}{int},\textcolor{keywordtype}{int});
+00075 
+00078 \textcolor{preprocessor}{#endif // ConvertEcgToIbi\_H}
+\end{DoxyCode}

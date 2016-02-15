@@ -1,0 +1,30 @@
+\hypertarget{datastream_8h_source}{}\section{datastream.\+h}
+\label{datastream_8h_source}\index{src/datastream.\+h@{src/datastream.\+h}}
+
+\begin{DoxyCode}
+00001 
+00002 
+00003 \textcolor{preprocessor}{#ifndef DATASTREAM\_H\_}
+00004 \textcolor{preprocessor}{#define DATASTREAM\_H\_}
+00005 
+00006 
+00007 \textcolor{preprocessor}{#include <QVector>}
+00008 \textcolor{preprocessor}{#include <QString>}
+00009 \textcolor{preprocessor}{#include "\hyperlink{ecgstreamobject_8h}{ecgstreamobject.h}"}
+00010 
+\hypertarget{datastream_8h_source.tex_l00016}{}\hyperlink{classDataStream}{00016} \textcolor{keyword}{class }\hyperlink{classDataStream}{DataStream} : \textcolor{keyword}{public} QVector<EcgStreamObject> \{
+00017 
+00018 \textcolor{keyword}{public}:
+00019     \hyperlink{classDataStream_aadb8f27fe18a349a25b2cd656d686f92}{DataStream}();
+00020 
+00021     \textcolor{keyword}{virtual} \hyperlink{classDataStream_ab1ab2421685bd8ee669ec94d3b0239b8}{~DataStream}();
+00027     QString \hyperlink{classDataStream_a4876a67f0408d22a85ab785a138bcf35}{toText}(\textcolor{keywordtype}{int} index);
+\hypertarget{datastream_8h_source.tex_l00028}{}\hyperlink{classDataStream_a5b27985e1e797aad7dead2fa690b1638}{00028}     \textcolor{keywordtype}{int} \hyperlink{classDataStream_a5b27985e1e797aad7dead2fa690b1638}{samplingRate};
+00029 
+00030 
+00031 
+00032 
+00033 \};
+00034 
+00035 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* DATASTREAM\_H\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

@@ -1,0 +1,8 @@
+<map id="DeviceInterface::stop" name="DeviceInterface::stop">
+<area shape="rect" id="node2" href="$classDeviceManager.html#a8569742b2eb08d95052506e372b6bd31" title="Stops the running device. " alt="" coords="200,35,347,61"/>
+<area shape="rect" id="node3" href="$classEcgCaptureMenu.html#a610d2985e09cd56cb381e6e443dbbc72" title="Enter SettingsMenu for case 0 and starts DeviceManager and EcgCapture for case 1. ..." alt="" coords="395,5,581,32"/>
+<area shape="rect" id="node5" href="$classPlotAndCaptureWidget.html#a5f9fe948c3683ae9026a8f792782e67e" title="Stop the ECG capture, this will stop the sampling thread so no more samples will be collected..." alt="" coords="411,57,565,98"/>
+<area shape="rect" id="node4" href="$classEcgCaptureMenu.html#ac779737a084cb49d1517974543d4965b" title="EcgCaptureMenu::~EcgCaptureMenu" alt="" coords="629,5,869,32"/>
+<area shape="rect" id="node6" href="$classPlotAndCaptureWidget.html#a7dca31208a65906f0a96bf4143e0da4f" title="PlotAndCaptureWidget\l::plotSampleVector" alt="" coords="672,57,827,98"/>
+<area shape="rect" id="node7" href="$classPlotAndCaptureWidget.html#a232d01f00a25365382f094ad8eedb7fa" title="PlotAndCaptureWidget\l::startCapture" alt="" coords="917,57,1072,98"/>
+</map>

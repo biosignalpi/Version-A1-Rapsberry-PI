@@ -1,0 +1,5 @@
+<map id="EcgCapture::start" name="EcgCapture::start">
+<area shape="rect" id="node2" href="$classSamplingThread.html#ab1284bf5429771100bf0a60ffe3aacef" title="SamplingThread::startThread" alt="" coords="179,31,369,57"/>
+<area shape="rect" id="node3" href="$classSamplingThread.html#a3145c2d8049b3f126f78cb1274154eeb" title="SamplingThread::run" alt="" coords="431,5,574,32"/>
+<area shape="rect" id="node4" href="$classSamplingThread.html#aa52f1e7171ae5cb8432e949635b02d25" title="Populates DataStream vector with values. " alt="" coords="417,56,588,83"/>
+</map>

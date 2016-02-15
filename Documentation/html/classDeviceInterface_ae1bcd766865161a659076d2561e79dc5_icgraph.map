@@ -1,0 +1,5 @@
+<map id="DeviceInterface::sendSampleVector" name="DeviceInterface::sendSampleVector">
+<area shape="rect" id="node2" href="$classDeviceInterface.html#adae4c7e07e9bdbbe62be961fd306b5c8" title="DeviceInterface::sendSample\lVectorFunction" alt="" coords="248,5,443,47"/>
+<area shape="rect" id="node3" href="$classEcgMock.html#a8822f99759fcfe9648262007cb380daa" title="EcgMock::run" alt="" coords="294,71,397,98"/>
+<area shape="rect" id="node4" href="$classSamplingThread.html#ade4c865b24840742b532a71208101f39" title="SamplingThread::setFileType" alt="" coords="250,122,441,149"/>
+</map>

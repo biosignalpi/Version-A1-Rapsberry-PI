@@ -1,0 +1,54 @@
+\hypertarget{ecgcapturemenu_8cpp_source}{}\section{ecgcapturemenu.\+cpp}
+\label{ecgcapturemenu_8cpp_source}\index{src/\+Pi\+Face-\/\+Interface/ecgcapturemenu.\+cpp@{src/\+Pi\+Face-\/\+Interface/ecgcapturemenu.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{ecgcapturemenu_8h}{ecgcapturemenu.h}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{settingsmenu_8h}{settingsmenu.h}"}
+00003 \textcolor{preprocessor}{#include "../settingssingleton.h"}
+00004 \textcolor{preprocessor}{#include <chrono>}
+00005 \textcolor{preprocessor}{#include <thread>}
+00006 \textcolor{preprocessor}{#include "pifacecad.h"}
+00007 
+\hypertarget{ecgcapturemenu_8cpp_source.tex_l00008}{}\hyperlink{classEcgCaptureMenu_ac430bc0a2eb1879fe77cd0133d4dd704}{00008} \hyperlink{classEcgCaptureMenu_ac430bc0a2eb1879fe77cd0133d4dd704}{EcgCaptureMenu::EcgCaptureMenu}()
+00009 \{
+00010     \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}=\{\textcolor{stringliteral}{"Settings"}, \textcolor{stringliteral}{"Start"}\};
+00011     \hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{numberOfOptions}=1;
+00012     device=\textcolor{keyword}{new} \hyperlink{classDeviceManager}{DeviceManager}();
+00013     stream=\textcolor{keyword}{new} \hyperlink{classDataStream}{DataStream}();
+00014     \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().\hyperlink{classSettingsSingleton_af4b9b4364b4146711000f425dd5f5aa9}{setSourceId}(0);
+00015     device->\hyperlink{classDeviceManager_a280116304655de3a0bbfbf49730f9384}{init}(0, *stream);
+00016 
+00017     QThread *sampleT = \textcolor{keyword}{new} QThread;
+00018     device->moveToThread(sampleT);
+00019 
+00020 \}
+\hypertarget{ecgcapturemenu_8cpp_source.tex_l00021}{}\hyperlink{classEcgCaptureMenu_a610d2985e09cd56cb381e6e443dbbc72}{00021} \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classEcgCaptureMenu_a610d2985e09cd56cb381e6e443dbbc72}{EcgCaptureMenu::newMenu}()\{
+00022     \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classEcgCaptureMenu_a610d2985e09cd56cb381e6e443dbbc72}{newMenu}=0;
+00023     \textcolor{keywordflow}{switch} (\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption})\{
+00024     \textcolor{keywordflow}{case} 0:
+00025         \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{setUpperText}();
+00026         newMenu=\textcolor{keyword}{new} \hyperlink{classSettingsMenu}{SettingsMenu};
+00027         \textcolor{keywordflow}{break};
+00028 
+00029     \textcolor{keywordflow}{case} 1:
+00030         \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{setUpperText}(\textcolor{stringliteral}{"Stop"});
+00031         device->start();
+00032         \textcolor{keywordflow}{while}(\textcolor{keyword}{true}) \{
+00033             std::this\_thread::sleep\_for(std::chrono::milliseconds(300));  \textcolor{comment}{// IMPORTANT if not using this
+       time-out the read\_switch fucntion would read a push more then once.}
+00034             \textcolor{keywordflow}{if}(!pifacecad\_read\_switch(5)) \{
+00035                 device->\hyperlink{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}{stop}();
+00036                 logger->\hyperlink{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}{save}(*stream);
+00037                 \textcolor{keywordflow}{break};
+00038             \}
+00039         \}
+00040 
+00041     \}
+00042     \textcolor{keywordflow}{return} \hyperlink{classEcgCaptureMenu_a610d2985e09cd56cb381e6e443dbbc72}{newMenu};
+00043 
+00044 
+00045 \}
+00046 
+00047 
+00048 
+\end{DoxyCode}

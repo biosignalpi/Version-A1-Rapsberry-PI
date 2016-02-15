@@ -1,0 +1,29 @@
+\hypertarget{settingsmenu_8cpp_source}{}\section{settingsmenu.\+cpp}
+\label{settingsmenu_8cpp_source}\index{src/\+Pi\+Face-\/\+Interface/settingsmenu.\+cpp@{src/\+Pi\+Face-\/\+Interface/settingsmenu.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{settingsmenu_8h}{settingsmenu.h}"}
+00002 
+\hypertarget{settingsmenu_8cpp_source.tex_l00003}{}\hyperlink{classSettingsMenu_a951edfbd3cf728a1e91887fe08df8d7e}{00003} \hyperlink{classSettingsMenu_a951edfbd3cf728a1e91887fe08df8d7e}{SettingsMenu::SettingsMenu}()
+00004 \{
+00005         \hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{numberOfOptions}=0;
+00006         \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options}=\{\textcolor{stringliteral}{"Setting1"}, \textcolor{stringliteral}{"Setting2"}\};
+00007 
+00008 \}
+00009 
+\hypertarget{settingsmenu_8cpp_source.tex_l00010}{}\hyperlink{classSettingsMenu_abc441c12e8044c13f1a99791e2ee30d1}{00010} \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classSettingsMenu_abc441c12e8044c13f1a99791e2ee30d1}{SettingsMenu::newMenu}()\{
+00011     \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classSettingsMenu_abc441c12e8044c13f1a99791e2ee30d1}{newMenu}=0;
+00012     \textcolor{keywordflow}{switch} (\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption})\{
+00013     \textcolor{keywordflow}{case} 0:
+00014         \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{setUpperText}();
+00015         newMenu=\textcolor{keyword}{new} \hyperlink{classEcgCaptureMenu_ac430bc0a2eb1879fe77cd0133d4dd704}{EcgCaptureMenu};
+00016         \textcolor{keywordflow}{break};
+00017 
+00018     \textcolor{keywordflow}{case} 1:
+00019         newMenu=\textcolor{keyword}{new} \hyperlink{classEcgCaptureMenu_ac430bc0a2eb1879fe77cd0133d4dd704}{EcgCaptureMenu};
+00020         \textcolor{keywordflow}{break};
+00021     \}
+00022     \textcolor{keywordflow}{return} \hyperlink{classSettingsMenu_abc441c12e8044c13f1a99791e2ee30d1}{newMenu};
+00023 
+00024 \}
+\end{DoxyCode}

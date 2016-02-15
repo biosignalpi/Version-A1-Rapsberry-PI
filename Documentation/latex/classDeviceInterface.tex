@@ -1,0 +1,289 @@
+\hypertarget{classDeviceInterface}{}\section{Device\+Interface Class Reference}
+\label{classDeviceInterface}\index{Device\+Interface@{Device\+Interface}}
+
+
+Abstract interface for all devices.  
+
+
+
+
+{\ttfamily \#include $<$deviceinterface.\+h$>$}
+
+
+
+Inheritance diagram for Device\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=244pt]{classDeviceInterface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Device\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classDeviceInterface__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDeviceInterface_ae1bcd766865161a659076d2561e79dc5}{send\+Sample\+Vector} (Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$)
+\item 
+void \hyperlink{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}{update\+Status} (Q\+String)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDeviceInterface_a9923935a7fa7b3134568ec7fd97705e3}{Device\+Interface} (\hyperlink{classDataStream}{Data\+Stream} \&input\+Stream)
+\item 
+virtual \hyperlink{classDeviceInterface_a668a221c7a77701e25719f406d407746}{$\sim$\+Device\+Interface} ()
+\item 
+virtual void \hyperlink{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887}{get\+Data} (\hyperlink{classDataStream}{Data\+Stream} \&)=0
+\item 
+virtual bool \hyperlink{classDeviceInterface_a4c7fa83218b6a7c5700cb75253b2165e}{connected} ()=0
+\item 
+virtual void \hyperlink{classDeviceInterface_a03e9c1bfeabe1a97f05bf9107b89ae67}{init} (\hyperlink{classDataStream}{Data\+Stream} \&)
+\item 
+virtual void \hyperlink{classDeviceInterface_a08473443413b1725a3930aace12e2837}{close} ()=0
+\item 
+virtual void \hyperlink{classDeviceInterface_a6511c2845f5198acc94f5d7dd21cae57}{run} ()=0
+\item 
+virtual void \hyperlink{classDeviceInterface_a101b3b53a01add866737920e03a850a8}{stop} ()=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDeviceInterface_a83df9dc924dbe0e6c3e0d0fef2a604d0}{update\+Status\+Function} (Q\+String)
+\item 
+void \hyperlink{classDeviceInterface_adae4c7e07e9bdbbe62be961fd306b5c8}{send\+Sample\+Vector\+Function} (Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDataStream}{Data\+Stream} \& \hyperlink{classDeviceInterface_ac98f5cd34bafb43265436b29b9f734fa}{stream}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Abstract interface for all devices. 
+
+Specifies pure virtual functions that specifies the functionality all devices should have
+
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+
+
+Definition at line \hyperlink{deviceinterface_8h_source_l00029}{29} of file \hyperlink{deviceinterface_8h_source}{deviceinterface.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Device\+Interface@{Device\+Interface}!Device\+Interface@{Device\+Interface}}
+\index{Device\+Interface@{Device\+Interface}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{Device\+Interface(\+Data\+Stream \&input\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}Device\+Interface\+::\+Device\+Interface (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{input\+Stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classDeviceInterface_a9923935a7fa7b3134568ec7fd97705e3}{}\label{classDeviceInterface_a9923935a7fa7b3134568ec7fd97705e3}
+
+
+Definition at line \hyperlink{deviceinterface_8cpp_source_l00004}{4} of file \hyperlink{deviceinterface_8cpp_source}{deviceinterface.\+cpp}.
+
+\index{Device\+Interface@{Device\+Interface}!````~Device\+Interface@{$\sim$\+Device\+Interface}}
+\index{````~Device\+Interface@{$\sim$\+Device\+Interface}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{$\sim$\+Device\+Interface()}]{\setlength{\rightskip}{0pt plus 5cm}Device\+Interface\+::$\sim$\+Device\+Interface (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDeviceInterface_a668a221c7a77701e25719f406d407746}{}\label{classDeviceInterface_a668a221c7a77701e25719f406d407746}
+
+
+Definition at line \hyperlink{deviceinterface_8cpp_source_l00008}{8} of file \hyperlink{deviceinterface_8cpp_source}{deviceinterface.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\index{Device\+Interface@{Device\+Interface}!close@{close}}
+\index{close@{close}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{close()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\+Interface\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classDeviceInterface_a08473443413b1725a3930aace12e2837}{}\label{classDeviceInterface_a08473443413b1725a3930aace12e2837}
+
+
+Implemented in \hyperlink{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{Sampling\+Thread}, and \hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{Ecg\+Mock}.
+
+\index{Device\+Interface@{Device\+Interface}!connected@{connected}}
+\index{connected@{connected}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{connected()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool Device\+Interface\+::connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classDeviceInterface_a4c7fa83218b6a7c5700cb75253b2165e}{}\label{classDeviceInterface_a4c7fa83218b6a7c5700cb75253b2165e}
+
+
+Implemented in \hyperlink{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{Sampling\+Thread}, and \hyperlink{classEcgMock_ab5e3aac9d92b52b23fafb6e540902f28}{Ecg\+Mock}.
+
+\index{Device\+Interface@{Device\+Interface}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{get\+Data(\+Data\+Stream \&)=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\+Interface\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887}{}\label{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887}
+
+
+Implemented in \hyperlink{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}{Sampling\+Thread}, and \hyperlink{classEcgMock_aaa2628c0e8364980e6f252dfc3b86d1a}{Ecg\+Mock}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Interface@{Device\+Interface}!init@{init}}
+\index{init@{init}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{init(\+Data\+Stream \&)}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Interface\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{input\+Stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classDeviceInterface_a03e9c1bfeabe1a97f05bf9107b89ae67}{}\label{classDeviceInterface_a03e9c1bfeabe1a97f05bf9107b89ae67}
+
+
+Definition at line \hyperlink{deviceinterface_8cpp_source_l00011}{11} of file \hyperlink{deviceinterface_8cpp_source}{deviceinterface.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceInterface_a03e9c1bfeabe1a97f05bf9107b89ae67_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Interface@{Device\+Interface}!run@{run}}
+\index{run@{run}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{run()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\+Interface\+::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classDeviceInterface_a6511c2845f5198acc94f5d7dd21cae57}{}\label{classDeviceInterface_a6511c2845f5198acc94f5d7dd21cae57}
+
+
+Implemented in \hyperlink{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb}{Sampling\+Thread}, and \hyperlink{classEcgMock_a8822f99759fcfe9648262007cb380daa}{Ecg\+Mock}.
+
+\index{Device\+Interface@{Device\+Interface}!send\+Sample\+Vector@{send\+Sample\+Vector}}
+\index{send\+Sample\+Vector@{send\+Sample\+Vector}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{send\+Sample\+Vector}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Interface\+::send\+Sample\+Vector (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classDeviceInterface_ae1bcd766865161a659076d2561e79dc5}{}\label{classDeviceInterface_ae1bcd766865161a659076d2561e79dc5}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceInterface_ae1bcd766865161a659076d2561e79dc5_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Interface@{Device\+Interface}!send\+Sample\+Vector\+Function@{send\+Sample\+Vector\+Function}}
+\index{send\+Sample\+Vector\+Function@{send\+Sample\+Vector\+Function}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{send\+Sample\+Vector\+Function(\+Q\+Vector$<$ Q\+Vector$<$ Q\+Point\+F $>$ $>$)}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Interface\+::send\+Sample\+Vector\+Function (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classDeviceInterface_adae4c7e07e9bdbbe62be961fd306b5c8}{}\label{classDeviceInterface_adae4c7e07e9bdbbe62be961fd306b5c8}
+
+
+Definition at line \hyperlink{deviceinterface_8cpp_source_l00014}{14} of file \hyperlink{deviceinterface_8cpp_source}{deviceinterface.\+cpp}.
+
+\index{Device\+Interface@{Device\+Interface}!stop@{stop}}
+\index{stop@{stop}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{stop()=0}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Device\+Interface\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classDeviceInterface_a101b3b53a01add866737920e03a850a8}{}\label{classDeviceInterface_a101b3b53a01add866737920e03a850a8}
+
+
+Implemented in \hyperlink{classSamplingThread_a6e758c7b8266755c201ca002520f5e2e}{Sampling\+Thread}, and \hyperlink{classEcgMock_aa65eb7c062913402c77ed1dc628168a7}{Ecg\+Mock}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceInterface_a101b3b53a01add866737920e03a850a8_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Interface@{Device\+Interface}!update\+Status@{update\+Status}}
+\index{update\+Status@{update\+Status}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{update\+Status}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Interface\+::update\+Status (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}{}\label{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Interface@{Device\+Interface}!update\+Status\+Function@{update\+Status\+Function}}
+\index{update\+Status\+Function@{update\+Status\+Function}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{update\+Status\+Function(\+Q\+String)}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Interface\+::update\+Status\+Function (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classDeviceInterface_a83df9dc924dbe0e6c3e0d0fef2a604d0}{}\label{classDeviceInterface_a83df9dc924dbe0e6c3e0d0fef2a604d0}
+
+
+Definition at line \hyperlink{deviceinterface_8cpp_source_l00018}{18} of file \hyperlink{deviceinterface_8cpp_source}{deviceinterface.\+cpp}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Device\+Interface@{Device\+Interface}!stream@{stream}}
+\index{stream@{stream}!Device\+Interface@{Device\+Interface}}
+\subsubsection[{stream}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Data\+Stream}\& Device\+Interface\+::stream\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classDeviceInterface_ac98f5cd34bafb43265436b29b9f734fa}{}\label{classDeviceInterface_ac98f5cd34bafb43265436b29b9f734fa}
+
+
+Definition at line \hyperlink{deviceinterface_8h_source_l00048}{48} of file \hyperlink{deviceinterface_8h_source}{deviceinterface.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{deviceinterface_8h}{deviceinterface.\+h}\item 
+src/\hyperlink{deviceinterface_8cpp}{deviceinterface.\+cpp}\end{DoxyCompactItemize}

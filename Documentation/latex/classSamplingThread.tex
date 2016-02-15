@@ -1,0 +1,350 @@
+\hypertarget{classSamplingThread}{}\section{Sampling\+Thread Class Reference}
+\label{classSamplingThread}\index{Sampling\+Thread@{Sampling\+Thread}}
+
+
+\hyperlink{classDeviceInterface}{Device\+Interface} Class responsible for sampling E\+CG.  
+
+
+
+
+{\ttfamily \#include $<$samplingthread.\+h$>$}
+
+
+
+Inheritance diagram for Sampling\+Thread\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=167pt]{classSamplingThread__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Sampling\+Thread\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classSamplingThread__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSamplingThread_ad97231cf2bf7bbf0d1273b2076a18bab}{set\+Channel} (int)
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classSamplingThread_a0ba71431079dd2c80adee37f3e392d98}{Sampling\+Thread} (\hyperlink{classDataStream}{Data\+Stream} \&input\+Stream)
+\item 
+virtual \hyperlink{classSamplingThread_af1f6a9a930f6c9e3c2ecc3d3d1646373}{$\sim$\+Sampling\+Thread} ()
+\item 
+void \hyperlink{classSamplingThread_a55abdfd5263e59857dd3ef5c78489cf9}{clear\+Samples} ()
+\item 
+void \hyperlink{classSamplingThread_a3b186d0fbb2ff172593895ddb094f98d}{set\+Source} (int)
+\item 
+void \hyperlink{classSamplingThread_a3363a57aa7bc6a4f3867dafd1e35bd72}{set\+File\+Name} (Q\+String)
+\item 
+void \hyperlink{classSamplingThread_ade4c865b24840742b532a71208101f39}{set\+File\+Type} (Q\+String)
+\item 
+void \hyperlink{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}{start\+Thread} ()
+\item 
+virtual void \hyperlink{classSamplingThread_a6e758c7b8266755c201ca002520f5e2e}{stop} ()
+\item 
+virtual void \hyperlink{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb}{run} ()
+\item 
+virtual void \hyperlink{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}{get\+Data} (\hyperlink{classDataStream}{Data\+Stream} \&)
+\begin{DoxyCompactList}\small\item\em Populates \hyperlink{classDataStream}{Data\+Stream} vector with values. \end{DoxyCompactList}\item 
+virtual bool \hyperlink{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{connected} ()
+\begin{DoxyCompactList}\small\item\em Boolean for check whether the device is connected$<$. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{close} ()
+\begin{DoxyCompactList}\small\item\em Closes the connection to bcm2835. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{classDeviceInterface}{Device\+Interface} Class responsible for sampling E\+CG. 
+
+\begin{DoxyAuthor}{Author}
+Martin 
+
+Jonatan 
+\end{DoxyAuthor}
+
+
+Definition at line \hyperlink{samplingthread_8h_source_l00027}{27} of file \hyperlink{samplingthread_8h_source}{samplingthread.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Sampling\+Thread@{Sampling\+Thread}!Sampling\+Thread@{Sampling\+Thread}}
+\index{Sampling\+Thread@{Sampling\+Thread}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{Sampling\+Thread(\+Data\+Stream \&input\+Stream)}]{\setlength{\rightskip}{0pt plus 5cm}Sampling\+Thread\+::\+Sampling\+Thread (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{input\+Stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classSamplingThread_a0ba71431079dd2c80adee37f3e392d98}{}\label{classSamplingThread_a0ba71431079dd2c80adee37f3e392d98}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00016}{16} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+\index{Sampling\+Thread@{Sampling\+Thread}!````~Sampling\+Thread@{$\sim$\+Sampling\+Thread}}
+\index{````~Sampling\+Thread@{$\sim$\+Sampling\+Thread}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{$\sim$\+Sampling\+Thread()}]{\setlength{\rightskip}{0pt plus 5cm}Sampling\+Thread\+::$\sim$\+Sampling\+Thread (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSamplingThread_af1f6a9a930f6c9e3c2ecc3d3d1646373}{}\label{classSamplingThread_af1f6a9a930f6c9e3c2ecc3d3d1646373}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00026}{26} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\index{Sampling\+Thread@{Sampling\+Thread}!clear\+Samples@{clear\+Samples}}
+\index{clear\+Samples@{clear\+Samples}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{clear\+Samples()}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::clear\+Samples (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSamplingThread_a55abdfd5263e59857dd3ef5c78489cf9}{}\label{classSamplingThread_a55abdfd5263e59857dd3ef5c78489cf9}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00134}{134} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+\index{Sampling\+Thread@{Sampling\+Thread}!close@{close}}
+\index{close@{close}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{close()}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::close (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{}\label{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}
+
+
+Closes the connection to bcm2835. 
+
+\hyperlink{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{Sampling\+Thread\+::close}.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000030}{Todo}]Implement function \end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000027}{Todo}]Implement \end{DoxyRefDesc}
+
+
+Implements \hyperlink{classDeviceInterface_a08473443413b1725a3930aace12e2837}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00425}{425} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+\index{Sampling\+Thread@{Sampling\+Thread}!connected@{connected}}
+\index{connected@{connected}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{connected()}]{\setlength{\rightskip}{0pt plus 5cm}bool Sampling\+Thread\+::connected (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{}\label{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}
+
+
+Boolean for check whether the device is connected$<$. 
+
+\hyperlink{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{Sampling\+Thread\+::connected}.
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000029}{Todo}]Implement function \end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000026}{Todo}]Implement \begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\end{DoxyRefDesc}
+
+
+Implements \hyperlink{classDeviceInterface_a4c7fa83218b6a7c5700cb75253b2165e}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00418}{418} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+\index{Sampling\+Thread@{Sampling\+Thread}!get\+Data@{get\+Data}}
+\index{get\+Data@{get\+Data}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{get\+Data(\+Data\+Stream \&)}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::get\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{input\+Stream}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}{}\label{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}
+
+
+Populates \hyperlink{classDataStream}{Data\+Stream} vector with values. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000028}{Todo}]\end{DoxyRefDesc}
+
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000007}{Deprecated}]Not used \end{DoxyRefDesc}
+
+
+Implements \hyperlink{classDeviceInterface_aeaf032ef412df905fe4f2609cc284887}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00390}{390} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Sampling\+Thread@{Sampling\+Thread}!run@{run}}
+\index{run@{run}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{run()}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb}{}\label{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb}
+
+
+Implements \hyperlink{classDeviceInterface_a6511c2845f5198acc94f5d7dd21cae57}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00034}{34} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Sampling\+Thread@{Sampling\+Thread}!set\+Channel@{set\+Channel}}
+\index{set\+Channel@{set\+Channel}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{set\+Channel}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::set\+Channel (
+\begin{DoxyParamCaption}
+\item[{int}]{channel}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classSamplingThread_ad97231cf2bf7bbf0d1273b2076a18bab}{}\label{classSamplingThread_ad97231cf2bf7bbf0d1273b2076a18bab}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00139}{139} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+\index{Sampling\+Thread@{Sampling\+Thread}!set\+File\+Name@{set\+File\+Name}}
+\index{set\+File\+Name@{set\+File\+Name}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{set\+File\+Name(\+Q\+String)}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::set\+File\+Name (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{fname}
+\end{DoxyParamCaption}
+)}\hypertarget{classSamplingThread_a3363a57aa7bc6a4f3867dafd1e35bd72}{}\label{classSamplingThread_a3363a57aa7bc6a4f3867dafd1e35bd72}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00150}{150} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+\index{Sampling\+Thread@{Sampling\+Thread}!set\+File\+Type@{set\+File\+Type}}
+\index{set\+File\+Type@{set\+File\+Type}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{set\+File\+Type(\+Q\+String)}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::set\+File\+Type (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{ftype}
+\end{DoxyParamCaption}
+)}\hypertarget{classSamplingThread_ade4c865b24840742b532a71208101f39}{}\label{classSamplingThread_ade4c865b24840742b532a71208101f39}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00157}{157} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSamplingThread_ade4c865b24840742b532a71208101f39_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Sampling\+Thread@{Sampling\+Thread}!set\+Source@{set\+Source}}
+\index{set\+Source@{set\+Source}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{set\+Source(int)}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::set\+Source (
+\begin{DoxyParamCaption}
+\item[{int}]{source}
+\end{DoxyParamCaption}
+)}\hypertarget{classSamplingThread_a3b186d0fbb2ff172593895ddb094f98d}{}\label{classSamplingThread_a3b186d0fbb2ff172593895ddb094f98d}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00145}{145} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+\index{Sampling\+Thread@{Sampling\+Thread}!start\+Thread@{start\+Thread}}
+\index{start\+Thread@{start\+Thread}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{start\+Thread()}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::start\+Thread (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}{}\label{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00067}{67} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Sampling\+Thread@{Sampling\+Thread}!stop@{stop}}
+\index{stop@{stop}!Sampling\+Thread@{Sampling\+Thread}}
+\subsubsection[{stop()}]{\setlength{\rightskip}{0pt plus 5cm}void Sampling\+Thread\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSamplingThread_a6e758c7b8266755c201ca002520f5e2e}{}\label{classSamplingThread_a6e758c7b8266755c201ca002520f5e2e}
+
+
+Implements \hyperlink{classDeviceInterface_a101b3b53a01add866737920e03a850a8}{Device\+Interface}.
+
+
+
+Definition at line \hyperlink{samplingthread_8cpp_source_l00062}{62} of file \hyperlink{samplingthread_8cpp_source}{samplingthread.\+cpp}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{samplingthread_8h}{samplingthread.\+h}\item 
+src/\hyperlink{samplingthread_8cpp}{samplingthread.\+cpp}\end{DoxyCompactItemize}

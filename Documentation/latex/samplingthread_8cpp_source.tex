@@ -1,0 +1,409 @@
+\hypertarget{samplingthread_8cpp_source}{}\section{samplingthread.\+cpp}
+\label{samplingthread_8cpp_source}\index{src/samplingthread.\+cpp@{src/samplingthread.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{samplingthread_8h}{samplingthread.h}"}
+00002 \textcolor{preprocessor}{#include "\hyperlink{ecgcapture_8h}{ecgcapture.h}"}
+00003 \textcolor{preprocessor}{#include "\hyperlink{settingssingleton_8h}{settingssingleton.h}"}
+00004 \textcolor{preprocessor}{#include <QVector>}
+00005 \textcolor{preprocessor}{#include <QPointF>}
+00006 \textcolor{preprocessor}{#include <QDebug>}
+00007 \textcolor{preprocessor}{#include <QFile>}
+00008 \textcolor{preprocessor}{#include <QSettings>}
+00009 \textcolor{preprocessor}{#include <QCoreApplication>}
+00010 \textcolor{comment}{//#include <qwt\_system\_clock.h>}
+00011 \textcolor{preprocessor}{#include <QtMath>}
+00012 \textcolor{preprocessor}{#include "\hyperlink{ecgstreamobject_8h}{ecgstreamobject.h}"}
+00013 \textcolor{comment}{//#include "edflib.h"}
+00014 \textcolor{comment}{//#include "settings.h"}
+00015 
+\hypertarget{samplingthread_8cpp_source.tex_l00016}{}\hyperlink{classSamplingThread_a0ba71431079dd2c80adee37f3e392d98}{00016} \hyperlink{classSamplingThread_a0ba71431079dd2c80adee37f3e392d98}{SamplingThread::SamplingThread}(\hyperlink{classDataStream}{DataStream}& inputStream):channelId(1
+      ), \hyperlink{classDeviceInterface}{DeviceInterface}(inputStream)
+00017 \{
+00018     privateSamples = \textcolor{keyword}{new} QVector<QVector<QPointF> >;
+00019    \textcolor{comment}{//sampleData = new QVector<QVector<double> >;}
+00020     ecg = \textcolor{keyword}{new} \hyperlink{classEcgCapture}{EcgCapture}();
+00021     fileName = \textcolor{stringliteral}{"ECG"};
+00022     fileType = \textcolor{stringliteral}{"text"};
+00023 \}
+00024 
+00025 
+\hypertarget{samplingthread_8cpp_source.tex_l00026}{}\hyperlink{classSamplingThread_af1f6a9a930f6c9e3c2ecc3d3d1646373}{00026} \hyperlink{classSamplingThread_af1f6a9a930f6c9e3c2ecc3d3d1646373}{SamplingThread::~SamplingThread}()\{
+00027     \textcolor{keyword}{delete} sampleData;
+00028     \textcolor{keyword}{delete} ecg;
+00029     \textcolor{keyword}{delete} privateSamples;
+00030 \}
+00031 
+00032 
+00033 
+\hypertarget{samplingthread_8cpp_source.tex_l00034}{}\hyperlink{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb}{00034} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb}{SamplingThread::run}()
+00035 \{
+00036     clock.start();
+00037         prevTime = clock.elapsed();
+00038         \hyperlink{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}{startThread}();
+00039         emit \hyperlink{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}{updateStatus}(QString(\textcolor{stringliteral}{"Collecting samples..."}));
+00040         \textcolor{keywordflow}{while}(!stopThread) \{
+00041 
+00042             \textcolor{keywordtype}{double} elapsed = clock.elapsed();
+00043             sample(elapsed, \hyperlink{classDeviceInterface_ac98f5cd34bafb43265436b29b9f734fa}{stream});
+00044 
+00045             \textcolor{comment}{//If sampling is too fast the sampling thread will need to wait}
+00046             \textcolor{comment}{//The wait interval is depending on the sampling frequency}
+00047             \textcolor{keyword}{const} \textcolor{keywordtype}{double} usec = (sleepInterval-(clock.elapsed()-elapsed))*1000;
+00048 
+00049             \textcolor{keywordflow}{if} (usec>1) \{
+00050                 usleep(usec);
+00051             \}
+00052 
+00053         \}
+00054 
+00055 
+00056 
+00057 
+00058 
+00059 
+00060 \}
+00061 
+\hypertarget{samplingthread_8cpp_source.tex_l00062}{}\hyperlink{classSamplingThread_a6e758c7b8266755c201ca002520f5e2e}{00062} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a6e758c7b8266755c201ca002520f5e2e}{SamplingThread::stop}()
+00063 \{
+00064     stopThread = \textcolor{keyword}{true};
+00065 \}
+00066 
+\hypertarget{samplingthread_8cpp_source.tex_l00067}{}\hyperlink{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}{00067} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}{SamplingThread::startThread}()
+00068 \{
+00069 
+00070     QString iniPath = qApp->applicationDirPath() + \textcolor{stringliteral}{"/settings.ini"};
+00071     QSettings settings(iniPath, QSettings::IniFormat);
+00072 
+00073     fileName =\hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().
+      \hyperlink{classSettingsSingleton_aa5c7ee7b9966f8391d7431a7e8ab3949}{getFileName}();
+00074     sourceId = \hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().
+      \hyperlink{classSettingsSingleton_aa6db88481c421b96974519b8e28192c9}{getSourceId}(); \textcolor{comment}{//settings.value("/ECGCapture/Source", 0).toInt();}
+00075     sampleRate =\hyperlink{classSettingsSingleton_aad528becd7ce5903c418a5b8b718074c}{SettingsSingleton::instance}().
+      \hyperlink{classSettingsSingleton_a11896cc46cb374ae6a8234e1cd3cb68f}{getSampleRate}(); \textcolor{comment}{//settings.value("/ECGCapture/SampleRate", 0).toInt();}
+00076     counter = 0;
+00077     counterII=0;
+00078     sleepInterval = 0.0;
+00079 
+00080     qDebug() << \textcolor{stringliteral}{"SourceID:"} << sourceId  << endl;
+00081 
+00082     \hyperlink{group__Device-Facade_gabf6e5cc9109a573e29add762dc36df9b}{EcgCapture::OperatingMode} source;
+00083     \hyperlink{group__Device-Facade_gaaf4f7677ca26944edc0f65195b8729f3}{EcgCapture::Frequency} freq;
+00084 
+00085     \textcolor{keywordflow}{switch} (sourceId) \{
+00086     \textcolor{keywordflow}{case} 0:
+00087         source = \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}{EcgCapture::ecgCapture};
+00088         \textcolor{keywordflow}{break};
+00089     \textcolor{keywordflow}{case} 1:
+00090         source = \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9ececd6d5264a0e5996556c6697a4f94}{EcgCapture::testToneLowFreqSin};
+00091         \textcolor{keywordflow}{break};
+00092     \textcolor{keywordflow}{case} 2:
+00093         source = \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba397d60b89ddb5aaf41d92c617868ed47}{EcgCapture::testToneHighFreqSin};
+00094         \textcolor{keywordflow}{break};
+00095     \textcolor{keywordflow}{case} 3:
+00096         source = \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba8b349f0786d8e8247f4bc381baa51134}{EcgCapture::testToneSquare};
+00097         \textcolor{keywordflow}{break};
+00098     \textcolor{keywordflow}{default}:
+00099         source = \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}{EcgCapture::ecgCapture};
+00100         \textcolor{keywordflow}{break};
+00101     \}
+00102 
+00103     \textcolor{keywordflow}{switch} (sampleRate) \{
+00104     \textcolor{keywordflow}{case} 0:
+00105         freq = \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3acb281025a93800e7ed188605a7375838}{EcgCapture::lowFreq};
+00106         sleepInterval = 1.70;
+00107         Fs = 500;
+00108         \textcolor{keywordflow}{break};
+00109     \textcolor{keywordflow}{case} 1:
+00110         freq = \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3a2a968734e734a271ef5a52b83360122a}{EcgCapture::midFreq};
+00111         sleepInterval = 0.70;
+00112         Fs = 1000;
+00113         \textcolor{keywordflow}{break};
+00114     \textcolor{keywordflow}{case} 2:
+00115         freq = \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3abd09d184c2c34f227532a8bc5fb90877}{EcgCapture::highFreq};
+00116         sleepInterval = 0.0;
+00117         Fs = 2000;
+00118         \textcolor{keywordflow}{break};
+00119     \textcolor{keywordflow}{default}:
+00120         freq = \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3a2a968734e734a271ef5a52b83360122a}{EcgCapture::midFreq};
+00121         sleepInterval = 0.70;
+00122         Fs = 1000;
+00123         \textcolor{keywordflow}{break};
+00124     \}
+00125 
+00126     ecg->\hyperlink{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0}{init}(source, freq);
+00127     ecg->\hyperlink{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793}{start}();
+00128     stopThread=\textcolor{keyword}{false};
+00129 
+00130 
+00131 \}
+00132 
+00133 
+\hypertarget{samplingthread_8cpp_source.tex_l00134}{}\hyperlink{classSamplingThread_a55abdfd5263e59857dd3ef5c78489cf9}{00134} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a55abdfd5263e59857dd3ef5c78489cf9}{SamplingThread::clearSamples}()
+00135 \{
+00136     privateSamples->clear();
+00137 \}
+00138 
+\hypertarget{samplingthread_8cpp_source.tex_l00139}{}\hyperlink{classSamplingThread_ad97231cf2bf7bbf0d1273b2076a18bab}{00139} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_ad97231cf2bf7bbf0d1273b2076a18bab}{SamplingThread::setChannel}(\textcolor{keywordtype}{int} channel)
+00140 \{
+00141 
+00142     channelId = channel;
+00143 \}
+00144 
+\hypertarget{samplingthread_8cpp_source.tex_l00145}{}\hyperlink{classSamplingThread_a3b186d0fbb2ff172593895ddb094f98d}{00145} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a3b186d0fbb2ff172593895ddb094f98d}{SamplingThread::setSource}(\textcolor{keywordtype}{int} source)
+00146 \{
+00147     sourceId = source;
+00148 \}
+00149 
+\hypertarget{samplingthread_8cpp_source.tex_l00150}{}\hyperlink{classSamplingThread_a3363a57aa7bc6a4f3867dafd1e35bd72}{00150} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a3363a57aa7bc6a4f3867dafd1e35bd72}{SamplingThread::setFileName}(QString fname)
+00151 \{
+00152     \textcolor{keywordflow}{if} (fname != \textcolor{stringliteral}{""}) \{
+00153         fileName = fname;
+00154     \}
+00155 \}
+00156 
+\hypertarget{samplingthread_8cpp_source.tex_l00157}{}\hyperlink{classSamplingThread_ade4c865b24840742b532a71208101f39}{00157} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_ade4c865b24840742b532a71208101f39}{SamplingThread::setFileType}(QString ftype)
+00158 \{
+00159     \textcolor{keywordflow}{if} (ftype == \textcolor{stringliteral}{"text"}) \{
+00160         fileType = \textcolor{stringliteral}{"text"};
+00161     \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (ftype == \textcolor{stringliteral}{"bdf"}) \{
+00162         fileType = \textcolor{stringliteral}{"bdf"};
+00163     \}
+00164 \}
+00165 
+00170 \textcolor{keywordtype}{void} SamplingThread::saveAsText()
+00171 \{
+00172     \textcolor{comment}{/*    QFile outFileHeader(fileName+"\_header.txt");}
+00173 \textcolor{comment}{}
+00174 \textcolor{comment}{    if (!outFileHeader.open(QIODevice::WriteOnly | QIODevice::Text)) \{}
+00175 \textcolor{comment}{        emit updateStatus("Failed to open data file for write!");}
+00176 \textcolor{comment}{    \} else \{}
+00177 \textcolor{comment}{        QTextStream outHeader(&outFileHeader);}
+00178 \textcolor{comment}{}
+00179 \textcolor{comment}{        outHeader   << "[ECG CAPTURE SETTINGS]\(\backslash\)n"}
+00180 \textcolor{comment}{                    << "Filename: " <<      Settings::instance().getFilename() << ".txt \(\backslash\)n"}
+00181 \textcolor{comment}{                    << "Samples: " <<       QString::number(sampleData->length()) << "\(\backslash\)n"}
+00182 \textcolor{comment}{                    << "Duration: " <<      QString::number(sampleData->last().at(0)) << "ms \(\backslash\)n"}
+00183 \textcolor{comment}{                    << "Sample rate: " <<   QString::number(Settings::instance().getSampleRate()) << "
+       Hz\(\backslash\)n"}
+00184 \textcolor{comment}{                    << "Source: "  <<       Settings::instance().getSource() << "\(\backslash\)n"}
+00185 \textcolor{comment}{                    << "\(\backslash\)n[RECORDING INFORMATION]\(\backslash\)n"}
+00186 \textcolor{comment}{                    << "Recording name: " <<    Settings::instance().getRecordingName() << "\(\backslash\)n"}
+00187 \textcolor{comment}{                    << "Patient code: " <<      Settings::instance().getPatientCode() << "\(\backslash\)n"}
+00188 \textcolor{comment}{                    << "Name: " <<              Settings::instance().getName() << "\(\backslash\)n"}
+00189 \textcolor{comment}{                    << "Gender: " <<            Settings::instance().getGender() << "\(\backslash\)n"}
+00190 \textcolor{comment}{                    << "Birthdate: " <<         Settings::instance().getBirthDate() << "\(\backslash\)n"}
+00191 \textcolor{comment}{                    << "Notes: " <<             Settings::instance().getNotes() << "\(\backslash\)n";}
+00192 \textcolor{comment}{}
+00193 \textcolor{comment}{        outFileHeader.close();}
+00194 \textcolor{comment}{}
+00195 \textcolor{comment}{    \}}
+00196 \textcolor{comment}{}
+00197 \textcolor{comment}{    QFile outFile(fileName+".txt");}
+00198 \textcolor{comment}{}
+00199 \textcolor{comment}{    if (!outFile.open(QIODevice::WriteOnly | QIODevice::Text)) \{}
+00200 \textcolor{comment}{        emit updateStatus("Failed to open data file for write!");}
+00201 \textcolor{comment}{    \} else \{}
+00202 \textcolor{comment}{        QTextStream out(&outFile);}
+00203 \textcolor{comment}{}
+00204 \textcolor{comment}{        emit updateStatus(QString("Writing " + QString::number(sampleData->length()) + " samples to " +
+       fileName + "..."));}
+00205 \textcolor{comment}{}
+00206 \textcolor{comment}{        for (int ii =0; ii < sampleData->length(); ii++) \{}
+00207 \textcolor{comment}{            out << QString::number(sampleData->at(ii).at(0)) << "\(\backslash\)t"}
+00208 \textcolor{comment}{                << QString::number(sampleData->at(ii).at(1)) << "\(\backslash\)t"}
+00209 \textcolor{comment}{                << QString::number(sampleData->at(ii).at(2)) << "\(\backslash\)t"}
+00210 \textcolor{comment}{                << QString::number(sampleData->at(ii).at(3)) << "\(\backslash\)t"}
+00211 \textcolor{comment}{                << QString::number(sampleData->at(ii).at(4)) << "\(\backslash\)n";}
+00212 \textcolor{comment}{        \}}
+00213 \textcolor{comment}{}
+00214 \textcolor{comment}{        emit updateStatus(QString("Samples saved in text format"));}
+00215 \textcolor{comment}{}
+00216 \textcolor{comment}{        outFile.close();}
+00217 \textcolor{comment}{    \}}
+00218 \textcolor{comment}{     */}
+00219 \}
+00220 
+00225 \textcolor{keywordtype}{void} SamplingThread::saveAsBDF()
+00226 \{ \textcolor{comment}{/*}
+00227 \textcolor{comment}{    emit updateStatus(QString("Saving as BDF file..."));}
+00228 \textcolor{comment}{}
+00229 \textcolor{comment}{    int nseconds = static\_cast<int>(sampleData->last().at(0)/1000);}
+00230 \textcolor{comment}{    int smpfreq = Fs;}
+00231 \textcolor{comment}{}
+00232 \textcolor{comment}{    if (sampleData->length() < nseconds*smpfreq)}
+00233 \textcolor{comment}{    \{}
+00234 \textcolor{comment}{        emit updateStatus("Error: too many samples missing!");}
+00235 \textcolor{comment}{    \} else \{}
+00236 \textcolor{comment}{        int i, j, k,}
+00237 \textcolor{comment}{                hdl,}
+00238 \textcolor{comment}{                chns;}
+00239 \textcolor{comment}{}
+00240 \textcolor{comment}{        double buf[smpfreq];}
+00241 \textcolor{comment}{}
+00242 \textcolor{comment}{        //QString tmp = fileName+".bdf";}
+00243 \textcolor{comment}{        QString tmp = fileName+".edf";}
+00244 \textcolor{comment}{}
+00245 \textcolor{comment}{        //Convert the filename to the correct format}
+00246 \textcolor{comment}{        const char* fname = tmp.toLocal8Bit().data();}
+00247 \textcolor{comment}{}
+00248 \textcolor{comment}{        chns = 4;}
+00249 \textcolor{comment}{}
+00250 \textcolor{comment}{        //Open the file for write}
+00251 \textcolor{comment}{        //hdl = edfopen\_file\_writeonly(fname, EDFLIB\_FILETYPE\_BDFPLUS, chns);}
+00252 \textcolor{comment}{        hdl = edfopen\_file\_writeonly(fname, EDFLIB\_FILETYPE\_EDFPLUS, chns);}
+00253 \textcolor{comment}{}
+00254 \textcolor{comment}{        //All channels have the same sampling frequency}
+00255 \textcolor{comment}{        for (i=0; i<chns; i++) \{}
+00256 \textcolor{comment}{            edf\_set\_samplefrequency(hdl, i, smpfreq);}
+00257 \textcolor{comment}{        \}}
+00258 \textcolor{comment}{}
+00259 \textcolor{comment}{//        for (i=0; i<chns; i++) \{}
+00260 \textcolor{comment}{//            edf\_set\_physical\_maximum(hdl, i, 3.0);}
+00261 \textcolor{comment}{//        \}}
+00262 \textcolor{comment}{}
+00263 \textcolor{comment}{//        for (i=0; i<chns; i++) \{}
+00264 \textcolor{comment}{//            edf\_set\_digital\_maximum(hdl, i, 8388607);}
+00265 \textcolor{comment}{//        \}}
+00266 \textcolor{comment}{}
+00267 \textcolor{comment}{//        for (i=0; i<chns; i++) \{}
+00268 \textcolor{comment}{//            edf\_set\_digital\_minimum(hdl, i, -8388607);}
+00269 \textcolor{comment}{//        \}}
+00270 \textcolor{comment}{}
+00271 \textcolor{comment}{//        for (i=0; i<chns; i++) \{}
+00272 \textcolor{comment}{//            edf\_set\_physical\_minimum(hdl, i, -3.0);}
+00273 \textcolor{comment}{//        \}}
+00274 \textcolor{comment}{}
+00275 \textcolor{comment}{        for (i=0; i<chns; i++) \{}
+00276 \textcolor{comment}{            edf\_set\_physical\_maximum(hdl, i, 1);}
+00277 \textcolor{comment}{        \}}
+00278 \textcolor{comment}{}
+00279 \textcolor{comment}{        for (i=0; i<chns; i++) \{}
+00280 \textcolor{comment}{            edf\_set\_digital\_maximum(hdl, i, 32767);}
+00281 \textcolor{comment}{        \}}
+00282 \textcolor{comment}{}
+00283 \textcolor{comment}{        for (i=0; i<chns; i++) \{}
+00284 \textcolor{comment}{            edf\_set\_digital\_minimum(hdl, i, -32768);}
+00285 \textcolor{comment}{        \}}
+00286 \textcolor{comment}{}
+00287 \textcolor{comment}{        for (i=0; i<chns; i++) \{}
+00288 \textcolor{comment}{            edf\_set\_physical\_minimum(hdl, i, -1);}
+00289 \textcolor{comment}{        \}}
+00290 \textcolor{comment}{}
+00291 \textcolor{comment}{        edf\_set\_label(hdl, 0, "Lead I");}
+00292 \textcolor{comment}{        edf\_set\_label(hdl, 1, "Lead II");}
+00293 \textcolor{comment}{        edf\_set\_label(hdl, 2, "Lead III");}
+00294 \textcolor{comment}{        edf\_set\_label(hdl, 3, "Respiration");}
+00295 \textcolor{comment}{}
+00296 \textcolor{comment}{        for (i=0; i<chns; i++) \{}
+00297 \textcolor{comment}{            edf\_set\_physical\_dimension(hdl, i, "V");}
+00298 \textcolor{comment}{        \}}
+00299 \textcolor{comment}{}
+00300 \textcolor{comment}{        //Data is written in blocks of 1s each}
+00301 \textcolor{comment}{        for (j=0; j<nseconds; j++) \{}
+00302 \textcolor{comment}{            for (k=1; k<=chns; k++) \{}
+00303 \textcolor{comment}{                for (i=0; i<smpfreq; i++) \{}
+00304 \textcolor{comment}{                    buf[i] = sampleData->at(i+(j*smpfreq)).at(k);}
+00305 \textcolor{comment}{                \}}
+00306 \textcolor{comment}{                edfwrite\_physical\_samples(hdl, buf);}
+00307 \textcolor{comment}{            \}}
+00308 \textcolor{comment}{        \}}
+00309 \textcolor{comment}{}
+00310 \textcolor{comment}{        edfclose\_file(hdl);}
+00311 \textcolor{comment}{}
+00312 \textcolor{comment}{        emit updateStatus(QString("Samples saved in BDF format..."));}
+00313 \textcolor{comment}{    \}}
+00314 \textcolor{comment}{ */}
+00315 \}
+00316 
+00317 
+00328 \textcolor{keywordtype}{void} SamplingThread::sample(\textcolor{keywordtype}{double} elapsed,\hyperlink{classDataStream}{DataStream}& inputStream)\{
+00329 
+00330     \textcolor{comment}{// FRAME FORMAT:}
+00331     \textcolor{comment}{//ELAPSED (ms) | LEAD 1 | LEAD 2 | LEAD 3 | RESPIRATION | LEAD OFF DETECTION}
+00332     \textcolor{comment}{//Lead off: 1 = leads disconnected, 0 = leads connected}
+00333 
+00334     QVector<double> frame;
+00335     frame.append(elapsed);
+00336     frame << ecg->\hyperlink{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd}{readFrame}();
+00337     \textcolor{comment}{//double y = frame.at(channelId);}
+00338     \textcolor{keyword}{static} \textcolor{keywordtype}{double} lead1, lead2, lead3, respiration;
+00339     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} userNotified = \textcolor{keyword}{false};
+00340 
+00341     \textcolor{keywordflow}{if} (sourceId == 0) \{
+00342         \textcolor{comment}{//If lead is disconnected, notify}
+00343         \textcolor{keywordflow}{if} (frame[5] == 1) \{
+00344             \textcolor{keywordflow}{if} (!userNotified) \{
+00345                 userNotified = \textcolor{keyword}{true};
+00346                 emit \hyperlink{classDeviceInterface_ac64a65f54f41f0b7ff4c846ac7fdbef7}{updateStatus}(\textcolor{stringliteral}{"Leads disconnected"});
+00347             \}
+00348         \}
+00349     \}
+00350 
+00351     lead1 += frame.at(1);
+00352     lead2 += frame.at(2);
+00353     lead3 += frame.at(3);
+00354     respiration += frame.at(4);
+00355 
+00356     inputStream.append(\hyperlink{structEcgStreamObject}{EcgStreamObject}(frame.at(1), frame.at(2),frame.at(3), frame.at(4),
+      elapsed/1000));
+00357 
+00358     counter++;
+00359 
+00360 
+00361     \textcolor{keywordflow}{if} (counter >= 10) \{
+00362         QVector<QPointF> tmp;
+00363         tmp << QPointF(elapsed/1000,lead1/10) << QPointF(elapsed/1000,lead2/10) << QPointF(elapsed/1000,
+      lead3/10) << QPointF(elapsed/1000, respiration/10);
+00364 
+00365         privateSamples->append(tmp);
+00366         tmp.clear();
+00367 
+00368         counter = 0;
+00369         lead1 = 0.0;
+00370         lead2 = 0.0;
+00371         lead3 = 0.0;
+00372         respiration = 0.0;
+00373     \}
+00374 
+00375     \textcolor{keywordflow}{if} (privateSamples->size() >= 20) \{
+00376         QVector<QVector<QPointF> > sampleVector = *privateSamples;
+00377 
+00378         privateSamples->clear();
+00379         emit \hyperlink{classDeviceInterface_ae1bcd766865161a659076d2561e79dc5}{sendSampleVector}(sampleVector);
+00380 
+00381     \}
+00382 
+00383 \}
+00384 
+00385 
+\hypertarget{samplingthread_8cpp_source.tex_l00390}{}\hyperlink{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}{00390} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}{SamplingThread::getData}(\hyperlink{classDataStream}{DataStream}& inputStream)\{
+00391     clock.start();
+00392     prevTime = clock.elapsed();
+00393     \hyperlink{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}{startThread}();
+00394     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii=0; ii<30000 ;ii++) \{
+00395 
+00396         \textcolor{keywordtype}{double} elapsed = clock.elapsed();
+00397         sample(elapsed, inputStream);
+00398 
+00399         \textcolor{comment}{//If sampling is too fast the sampling thread will need to wait}
+00400         \textcolor{comment}{//The wait interval is depending on the sampling frequency}
+00401         \textcolor{keyword}{const} \textcolor{keywordtype}{double} usec = (sleepInterval-(clock.elapsed()-elapsed))*1000;
+00402 
+00403         \textcolor{keywordflow}{if} (usec>1) \{
+00404             usleep(usec);
+00405             qDebug() << \textcolor{stringliteral}{"sleep"} << usec  << endl;
+00406 
+00407         \}
+00408 
+00409     \}
+00410 
+00411 \}
+00412 
+\hypertarget{samplingthread_8cpp_source.tex_l00418}{}\hyperlink{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{00418} \textcolor{keywordtype}{bool} \hyperlink{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{SamplingThread::connected}() \{
+00419     \textcolor{keywordflow}{return} \textcolor{keyword}{true};
+00420 \}
+\hypertarget{samplingthread_8cpp_source.tex_l00425}{}\hyperlink{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{00425} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{SamplingThread::close}() \{
+00426 
+00427 \}
+\end{DoxyCode}

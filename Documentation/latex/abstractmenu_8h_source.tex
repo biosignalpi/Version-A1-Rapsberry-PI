@@ -1,0 +1,41 @@
+\hypertarget{abstractmenu_8h_source}{}\section{abstractmenu.\+h}
+\label{abstractmenu_8h_source}\index{src/\+Pi\+Face-\/\+Interface/abstractmenu.\+h@{src/\+Pi\+Face-\/\+Interface/abstractmenu.\+h}}
+
+\begin{DoxyCode}
+00001 
+00011 \textcolor{preprocessor}{#ifndef ABSTRACTMENU\_H}
+00012 \textcolor{preprocessor}{#define ABSTRACTMENU\_H}
+00013 
+00014 \textcolor{preprocessor}{#include <string>}
+00015 \textcolor{preprocessor}{#include <vector>}
+00016 
+\hypertarget{abstractmenu_8h_source.tex_l00017}{}\hyperlink{classAbstractMenu}{00017} \textcolor{keyword}{class }\hyperlink{classAbstractMenu}{AbstractMenu}
+00018 \{
+00019 \textcolor{keyword}{public}:
+00020     \hyperlink{classAbstractMenu_a45d32cb02984b79e6bc6f6e930ee5c8c}{AbstractMenu}();
+\hypertarget{abstractmenu_8h_source.tex_l00021}{}\hyperlink{classAbstractMenu_af4aacdda3e23fedf1de7781befe22116}{00021}     \textcolor{keyword}{virtual} \hyperlink{classAbstractMenu_af4aacdda3e23fedf1de7781befe22116}{~AbstractMenu}()\{\};
+00022 
+00032     \textcolor{keyword}{virtual} \hyperlink{classAbstractMenu}{AbstractMenu} *\hyperlink{classAbstractMenu_aef49c4a4ceeb1aad12101cb4768e1596}{newMenu}()=0;
+00033 
+00039     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{setUpperText}();
+00040 
+00047     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_a4163c42d2127430e184612cb95211cda}{setUpperText}(\textcolor{keyword}{const} \textcolor{keywordtype}{char} *);
+00048 
+00049 
+00050 
+00056     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}{next}();
+00057 
+00063     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c}{setLowerText}();
+00064 \textcolor{keyword}{protected}:
+00065 
+\hypertarget{abstractmenu_8h_source.tex_l00070}{}\hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{00070}     std::vector<std::string> \hyperlink{classAbstractMenu_a990dc4299fbe86152487fd35d46a403b}{options};
+00071 
+\hypertarget{abstractmenu_8h_source.tex_l00076}{}\hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{00076}     \textcolor{keywordtype}{int} \hyperlink{classAbstractMenu_a6caff7f6281c6c2912e5f808c2906123}{numberOfOptions};
+00077 
+\hypertarget{abstractmenu_8h_source.tex_l00082}{}\hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{00082}     \textcolor{keywordtype}{int} \hyperlink{classAbstractMenu_a589fea1bf68c33e0eff64c8b609cb980}{currentOption};
+00083 \};
+00084 
+00085 \textcolor{preprocessor}{#endif // ABSTRACTMENU\_H}
+00086 
+00087 
+\end{DoxyCode}

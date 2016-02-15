@@ -1,0 +1,41 @@
+\hypertarget{plot_8h_source}{}\section{plot.\+h}
+\label{plot_8h_source}\index{src/plot.\+h@{src/plot.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef PLOT\_H}
+00002 \textcolor{preprocessor}{#define PLOT\_H}
+00003 
+00004 \textcolor{preprocessor}{#include <qwt\_plot.h>}
+00005 
+00006 \textcolor{keyword}{class }QwtPlotCurve;
+00007 \textcolor{keyword}{class }QwtPlotDirectPainter;
+\hypertarget{plot_8h_source.tex_l00014}{}\hyperlink{classPlot}{00014} \textcolor{keyword}{class }\hyperlink{classPlot}{Plot}: \textcolor{keyword}{public} QwtPlot
+00015 \{
+00016     Q\_OBJECT
+00017 
+00018 \textcolor{keyword}{public}:
+00019     \hyperlink{classPlot_a26093e28c6d18a6324f421278474538d}{Plot}( QString curveTitle = \textcolor{stringliteral}{""},  QWidget *parent = NULL );
+00020     \textcolor{keyword}{virtual} \hyperlink{classPlot_a277e9c79c4357b3a317d74d61dabefcf}{~Plot}();
+00021 
+00022     \textcolor{keywordtype}{void} \hyperlink{classPlot_a983cc18b014a7da6a9ebd18d941a2810}{AppendPoint}(\textcolor{keyword}{const} QPointF &);
+00023     \textcolor{keywordtype}{void} \hyperlink{classPlot_a19036300cad7a088f1453ff17162490f}{DrawCurveSegment}(\textcolor{keyword}{const} \textcolor{keywordtype}{int} length);
+00024     \textcolor{keywordtype}{void} \hyperlink{classPlot_af2b50b6923556e2bb04fd0b0dc7da318}{ClearPlot}();
+00025     \textcolor{keywordtype}{void} \hyperlink{classPlot_acb0268b78902a0105c27e456e272e9b0}{DrawSinglePoint}();
+00026     \textcolor{keywordtype}{void} \hyperlink{classPlot_a3deed9a4018d838d2c21d37e7b550fe0}{IncrementInterval}();
+00027     \textcolor{keywordtype}{void} \hyperlink{classPlot_a02379d1d3094929aff97df8aa5c83fd6}{ClearInterval}();
+00028     \textcolor{keywordtype}{void} \hyperlink{classPlot_a932e846d63f6e6192485fa8402c1c7bf}{setInterval}(\textcolor{keywordtype}{int} xmin, \textcolor{keywordtype}{int} xmax);
+00029     \textcolor{keywordtype}{void} \hyperlink{classPlot_af2d2fb49ecae0a12196606a153f5bee0}{setCurveColor}(\textcolor{keyword}{const} QColor & color);
+00030     \textcolor{keywordtype}{void} \hyperlink{classPlot_a06a7d71c936d5e303fddbed3aac9b99f}{setCurveMargin}(\textcolor{keywordtype}{double});
+00031     \textcolor{keywordtype}{void} \hyperlink{classPlot_a783f800388cb6615b60efbafa523fbf0}{setYAxis}(\textcolor{keywordtype}{double}, \textcolor{keywordtype}{double});
+00032 
+00033 \textcolor{keyword}{private}:
+00034     QwtPlotCurve *d\_curve;
+00035     QwtPlotDirectPainter *d\_directPainter;
+00036 
+00037     QwtInterval x\_interval;
+00038     \textcolor{keywordtype}{double} x\_intervalSize;
+00039     \textcolor{keywordtype}{double} curveMargin;
+00040 \};
+00041 
+00042 \textcolor{preprocessor}{#endif // PLOT\_H}
+\end{DoxyCode}

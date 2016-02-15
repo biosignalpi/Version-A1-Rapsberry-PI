@@ -1,0 +1,4 @@
+<map id="BluetoothMenu" name="BluetoothMenu">
+<area shape="rect" id="node2" href="$classBaseMenu.html" title="Homepage of the Menu&#45;system for the PiFace GUI. " alt="" coords="18,80,102,107"/>
+<area shape="rect" id="node3" href="$classAbstractMenu.html" title="Abstract menu object for PiFace CAD. " alt="" coords="9,5,111,32"/>
+</map>

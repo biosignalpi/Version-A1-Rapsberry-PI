@@ -1,0 +1,369 @@
+\hypertarget{classDeviceManager}{}\section{Device\+Manager Class Reference}
+\label{classDeviceManager}\index{Device\+Manager@{Device\+Manager}}
+
+
+Handles which device to connect through the \hyperlink{classDeviceInterface}{Device\+Interface}.  
+
+
+
+
+{\ttfamily \#include $<$devicemanager.\+h$>$}
+
+
+
+Inheritance diagram for Device\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{classDeviceManager__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Device\+Manager\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=261pt]{classDeviceManager__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDeviceManager_a14f86d572f6ea7222032ec00499a16a8}{receive\+Sample\+Vector} (Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$)
+\begin{DoxyCompactList}\small\item\em Slot used to transfer send\+Sample\+Vector from initiated device to the local signal. \end{DoxyCompactList}\item 
+void \hyperlink{classDeviceManager_aa7b96de52a17b961688e81f5e999da74}{receive\+Status} (Q\+String)
+\begin{DoxyCompactList}\small\item\em Slot used to transfer update\+Status from initiated device to the local signal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDeviceManager_a7f0794801ee0b28c74a253f3c2cf5659}{send\+Sample\+Vector} (Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$)
+\begin{DoxyCompactList}\small\item\em Sends a Q\+Vector that can be used for a G\+UI to plot in \char`\"{}\+Real-\/time\char`\"{}. \end{DoxyCompactList}\item 
+void \hyperlink{classDeviceManager_a68b6e3b924cacf0a5cde44d02eb49d0c}{update\+Status} (Q\+String)
+\begin{DoxyCompactList}\small\item\em Information signal for updating status about progress. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDeviceManager_a4e6d37b581df235b46c5696e6c71ae79}{Device\+Manager} ()
+\item 
+\hyperlink{classDeviceManager_ad91a247c8acfd51c533be52313ce7ddd}{$\sim$\+Device\+Manager} ()
+\item 
+void \hyperlink{classDeviceManager_a322e3bd6b6f57692116b6af7b9a57a9a}{collect\+Data} (\hyperlink{classDataStream}{Data\+Stream} \&)
+\begin{DoxyCompactList}\small\item\em Collects data from the connected device. \end{DoxyCompactList}\item 
+void \hyperlink{classDeviceManager_a30358705658f1037ef6bb98e7a2d5e80}{start\+Capture} ()
+\begin{DoxyCompactList}\small\item\em Starts the initiated device through a call to start() \end{DoxyCompactList}\item 
+void \hyperlink{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}{stop} ()
+\begin{DoxyCompactList}\small\item\em Stops the running device. \end{DoxyCompactList}\item 
+void \hyperlink{classDeviceManager_a280116304655de3a0bbfbf49730f9384}{init} (int, \hyperlink{classDataStream}{Data\+Stream} \&)
+\begin{DoxyCompactList}\small\item\em Prepares a new data-\/collection,. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDeviceInterface}{Device\+Interface} $\ast$ \hyperlink{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{device}
+\begin{DoxyCompactList}\small\item\em The connected device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Handles which device to connect through the \hyperlink{classDeviceInterface}{Device\+Interface}. 
+
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+
+
+Definition at line \hyperlink{devicemanager_8h_source_l00023}{23} of file \hyperlink{devicemanager_8h_source}{devicemanager.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Device\+Manager@{Device\+Manager}!Device\+Manager@{Device\+Manager}}
+\index{Device\+Manager@{Device\+Manager}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{Device\+Manager()}]{\setlength{\rightskip}{0pt plus 5cm}Device\+Manager\+::\+Device\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDeviceManager_a4e6d37b581df235b46c5696e6c71ae79}{}\label{classDeviceManager_a4e6d37b581df235b46c5696e6c71ae79}
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00010}{10} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+\index{Device\+Manager@{Device\+Manager}!````~Device\+Manager@{$\sim$\+Device\+Manager}}
+\index{````~Device\+Manager@{$\sim$\+Device\+Manager}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{$\sim$\+Device\+Manager()}]{\setlength{\rightskip}{0pt plus 5cm}Device\+Manager\+::$\sim$\+Device\+Manager (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDeviceManager_ad91a247c8acfd51c533be52313ce7ddd}{}\label{classDeviceManager_ad91a247c8acfd51c533be52313ce7ddd}
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00016}{16} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\index{Device\+Manager@{Device\+Manager}!collect\+Data@{collect\+Data}}
+\index{collect\+Data@{collect\+Data}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{collect\+Data(\+Data\+Stream \&)}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::collect\+Data (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classDeviceManager_a322e3bd6b6f57692116b6af7b9a57a9a}{}\label{classDeviceManager_a322e3bd6b6f57692116b6af7b9a57a9a}
+
+
+Collects data from the connected device. 
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000001}{Deprecated}]\end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00033}{33} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a322e3bd6b6f57692116b6af7b9a57a9a_cgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Manager@{Device\+Manager}!init@{init}}
+\index{init@{init}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{init(int, Data\+Stream \&)}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::init (
+\begin{DoxyParamCaption}
+\item[{int}]{device\+Number, }
+\item[{{\bf Data\+Stream} \&}]{input\+Stream}
+\end{DoxyParamCaption}
+)}\hypertarget{classDeviceManager_a280116304655de3a0bbfbf49730f9384}{}\label{classDeviceManager_a280116304655de3a0bbfbf49730f9384}
+
+
+Prepares a new data-\/collection,. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em device\+Number} & Which device to connect \\
+\hline
+{\em output\+Stream} & \hyperlink{classDataStream}{Data\+Stream} to store the collected values in. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00053}{53} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a280116304655de3a0bbfbf49730f9384_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a280116304655de3a0bbfbf49730f9384_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Manager@{Device\+Manager}!receive\+Sample\+Vector@{receive\+Sample\+Vector}}
+\index{receive\+Sample\+Vector@{receive\+Sample\+Vector}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{receive\+Sample\+Vector}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::receive\+Sample\+Vector (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classDeviceManager_a14f86d572f6ea7222032ec00499a16a8}{}\label{classDeviceManager_a14f86d572f6ea7222032ec00499a16a8}
+
+
+Slot used to transfer send\+Sample\+Vector from initiated device to the local signal. 
+
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00025}{25} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a14f86d572f6ea7222032ec00499a16a8_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Manager@{Device\+Manager}!receive\+Status@{receive\+Status}}
+\index{receive\+Status@{receive\+Status}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{receive\+Status}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::receive\+Status (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{input}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [slot]}}\hypertarget{classDeviceManager_aa7b96de52a17b961688e81f5e999da74}{}\label{classDeviceManager_aa7b96de52a17b961688e81f5e999da74}
+
+
+Slot used to transfer update\+Status from initiated device to the local signal. 
+
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00029}{29} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_aa7b96de52a17b961688e81f5e999da74_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Manager@{Device\+Manager}!send\+Sample\+Vector@{send\+Sample\+Vector}}
+\index{send\+Sample\+Vector@{send\+Sample\+Vector}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{send\+Sample\+Vector}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::send\+Sample\+Vector (
+\begin{DoxyParamCaption}
+\item[{Q\+Vector$<$ Q\+Vector$<$ Q\+PointF $>$ $>$}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classDeviceManager_a7f0794801ee0b28c74a253f3c2cf5659}{}\label{classDeviceManager_a7f0794801ee0b28c74a253f3c2cf5659}
+
+
+Sends a Q\+Vector that can be used for a G\+UI to plot in \char`\"{}\+Real-\/time\char`\"{}. 
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a7f0794801ee0b28c74a253f3c2cf5659_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Manager@{Device\+Manager}!start\+Capture@{start\+Capture}}
+\index{start\+Capture@{start\+Capture}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{start\+Capture()}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::start\+Capture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDeviceManager_a30358705658f1037ef6bb98e7a2d5e80}{}\label{classDeviceManager_a30358705658f1037ef6bb98e7a2d5e80}
+
+
+Starts the initiated device through a call to start() 
+
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00042}{42} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a30358705658f1037ef6bb98e7a2d5e80_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Manager@{Device\+Manager}!stop@{stop}}
+\index{stop@{stop}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{stop()}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}{}\label{classDeviceManager_a8569742b2eb08d95052506e372b6bd31}
+
+
+Stops the running device. 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000009}{Todo}]use connected() before execution \end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{devicemanager_8cpp_source_l00049}{49} of file \hyperlink{devicemanager_8cpp_source}{devicemanager.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=336pt]{classDeviceManager_a8569742b2eb08d95052506e372b6bd31_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a8569742b2eb08d95052506e372b6bd31_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device\+Manager@{Device\+Manager}!update\+Status@{update\+Status}}
+\index{update\+Status@{update\+Status}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{update\+Status}]{\setlength{\rightskip}{0pt plus 5cm}void Device\+Manager\+::update\+Status (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classDeviceManager_a68b6e3b924cacf0a5cde44d02eb49d0c}{}\label{classDeviceManager_a68b6e3b924cacf0a5cde44d02eb49d0c}
+
+
+Information signal for updating status about progress. 
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDeviceManager_a68b6e3b924cacf0a5cde44d02eb49d0c_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+\subsection{Member Data Documentation}
+\index{Device\+Manager@{Device\+Manager}!device@{device}}
+\index{device@{device}!Device\+Manager@{Device\+Manager}}
+\subsubsection[{device}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Device\+Interface}$\ast$ Device\+Manager\+::device}\hypertarget{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}{}\label{classDeviceManager_aa916ac4224ab9a874e6242c0a9f50a56}
+
+
+The connected device. 
+
+
+
+Definition at line \hyperlink{devicemanager_8h_source_l00033}{33} of file \hyperlink{devicemanager_8h_source}{devicemanager.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{devicemanager_8h}{devicemanager.\+h}\item 
+src/\hyperlink{devicemanager_8cpp}{devicemanager.\+cpp}\end{DoxyCompactItemize}

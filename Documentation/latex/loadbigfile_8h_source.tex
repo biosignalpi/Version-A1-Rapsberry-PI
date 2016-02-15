@@ -1,0 +1,29 @@
+\hypertarget{loadbigfile_8h_source}{}\section{loadbigfile.\+h}
+\label{loadbigfile_8h_source}\index{src/loadbigfile.\+h@{src/loadbigfile.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef LOADBIGFILE\_H}
+00002 \textcolor{preprocessor}{#define LOADBIGFILE\_H}
+00003 
+00004 \textcolor{preprocessor}{#include <QThread>}
+00005 \textcolor{preprocessor}{#include <QVector>}
+00006 \textcolor{preprocessor}{#include <QPointF>}
+\hypertarget{loadbigfile_8h_source.tex_l00014}{}\hyperlink{classLoadBigFile}{00014} \textcolor{keyword}{class }\hyperlink{classLoadBigFile}{LoadBigFile} : \textcolor{keyword}{public} QThread
+00015 \{
+00016     Q\_OBJECT
+00017 
+00018 \textcolor{keyword}{public}:
+00019     \hyperlink{classLoadBigFile_ad09a2464295530b5a7f202d7059e7e8a}{LoadBigFile}(QString fileName, QObject *parent = NULL);
+00020     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classLoadBigFile_a8a1ceb823a23faa69485c864c35cd60f}{run}();
+00021 
+00022 signals:
+00026     \textcolor{keywordtype}{void} \hyperlink{classLoadBigFile_ad0c00cd9faeeb4e03a94f530152c69d9}{sendFileData}(QVector<QVector<QPointF> >);
+00027 
+00028 \textcolor{keyword}{private}:
+00029     \textcolor{keywordtype}{void} decimate(); \textcolor{comment}{//TODO}
+00030     \textcolor{keywordtype}{bool} decimateFlag;
+00031     QString fname;
+00032 \};
+00033 
+00034 \textcolor{preprocessor}{#endif // LOADBIGFILE\_H}
+\end{DoxyCode}

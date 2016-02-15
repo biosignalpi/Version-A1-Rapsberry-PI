@@ -1,0 +1,5 @@
+<map id="HrvWidget::HrvWidget" name="HrvWidget::HrvWidget">
+<area shape="rect" id="node2" href="$group__HRV-Analysis.html#ga2bd6c358a622e01babb7fdbca313c50f" title="Performs the Statistical Time Domain calculations for HRV Analysis. " alt="" coords="208,5,369,32"/>
+<area shape="rect" id="node4" href="$group__HRV-Analysis.html#ga3cfec29967efe1561722a05d03f26158" title="Performs calculations for Frequency Domain HRV Analysis. " alt="" coords="209,56,368,83"/>
+<area shape="rect" id="node3" href="$group__HRV-Analysis.html#ga97aad354e1ec35fab4e98f111f4ed4b4" title="Creates the emxArray_real_T needed for performTimeDomainHrv() The emxArray_real_T is the input vector..." alt="" coords="417,23,563,65"/>
+</map>

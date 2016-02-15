@@ -1,0 +1,10 @@
+<map id="SettingsMenu::newMenu" name="SettingsMenu::newMenu">
+<area shape="rect" id="node2" href="$classAbstractMenu.html#a4163c42d2127430e184612cb95211cda" title="Sets the first row of the PiFace CAD to the current option choosen Uses the C library pifacecad..." alt="" coords="241,21,431,47"/>
+<area shape="rect" id="node3" href="$classEcgCaptureMenu.html#ac430bc0a2eb1879fe77cd0133d4dd704" title="EcgCaptureMenu::EcgCaptureMenu" alt="" coords="220,71,452,98"/>
+<area shape="rect" id="node4" href="$classSettingsSingleton.html#aad528becd7ce5903c418a5b8b718074c" title="Retrives a reference to the ONE and ONLY SettingsSingleton created for the application. " alt="" coords="724,5,856,47"/>
+<area shape="rect" id="node5" href="$classSettingsSingleton.html#af4b9b4364b4146711000f425dd5f5aa9" title="Used to set private int name. " alt="" coords="503,64,635,105"/>
+<area shape="rect" id="node6" href="$classDeviceManager.html#a280116304655de3a0bbfbf49730f9384" title="Prepares a new data&#45;collection,. " alt="" coords="500,130,639,157"/>
+<area shape="rect" id="node7" href="$classSettingsSingleton.html#aa6db88481c421b96974519b8e28192c9" title="Returns a int containing the value from private int sourceId. " alt="" coords="724,71,856,112"/>
+<area shape="rect" id="node8" href="$classDeviceManager.html#aa7b96de52a17b961688e81f5e999da74" title="Slot used to transfer updateStatus from initiated device to the local signal. " alt="" coords="689,137,891,163"/>
+<area shape="rect" id="node9" href="$classDeviceManager.html#a14f86d572f6ea7222032ec00499a16a8" title="Slot used to transfer sendSampleVector from initiated device to the local signal. ..." alt="" coords="687,188,893,229"/>
+</map>

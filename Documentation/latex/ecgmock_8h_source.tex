@@ -1,0 +1,44 @@
+\hypertarget{ecgmock_8h_source}{}\section{ecgmock.\+h}
+\label{ecgmock_8h_source}\index{src/ecgmock.\+h@{src/ecgmock.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef ECGMOCK\_H\_}
+00002 \textcolor{preprocessor}{#define ECGMOCK\_H\_}
+00003 
+00004 \textcolor{preprocessor}{#include "\hyperlink{datastream_8h}{datastream.h}"}
+00005 \textcolor{preprocessor}{#include "\hyperlink{deviceinterface_8h}{deviceinterface.h}"}
+00006 
+00007 \textcolor{comment}{//#include "ecgstream\_fourchannels.h"}
+00008 
+00009 
+\hypertarget{ecgmock_8h_source.tex_l00021}{}\hyperlink{classEcgMock}{00021} \textcolor{keyword}{class }\hyperlink{classEcgMock}{EcgMock}   : \textcolor{keyword}{public} \hyperlink{classDeviceInterface}{DeviceInterface} \{
+00022     Q\_OBJECT
+00023 \textcolor{keyword}{public}:
+00024     \hyperlink{classEcgMock_a880936385845728f4d96a54848d8ab6e}{EcgMock}(\hyperlink{classDataStream}{DataStream}& inputStream);
+00025     \textcolor{keyword}{virtual} \hyperlink{classEcgMock_a977966ab6184171d95c9f9c01eca0c7a}{~EcgMock}();
+00026     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_aaa2628c0e8364980e6f252dfc3b86d1a}{getData}(\hyperlink{classDataStream}{DataStream}&); 
+00027     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classEcgMock_ab5e3aac9d92b52b23fafb6e540902f28}{connected}(); 
+00028     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_aed480e6edc6016917a5663f61b3a5091}{reconnect}(); 
+00029     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_a34af13005b5ea44386b7b875b72e9fc3}{close}(); 
+00030 
+00031     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_aa65eb7c062913402c77ed1dc628168a7}{stop}();
+00032 
+00033 
+00034 
+00035 \textcolor{keyword}{protected}:
+00036     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classEcgMock_a8822f99759fcfe9648262007cb380daa}{run}();
+00037 \textcolor{keyword}{private}:
+00038     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} init();
+00039     \textcolor{keywordtype}{bool} state,condition;
+00040     \textcolor{keywordtype}{double} cnt=0;
+00041     QVector<QVector<QPointF> > *privateSamples;
+00042     QVector<QVector<double> > *sampleData;
+00043 \};
+00044 
+00047 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* ECGMOCK\_H\_ */}\textcolor{preprocessor}{}
+00048 
+00049 \textcolor{preprocessor}{#ifndef PI}
+\hypertarget{ecgmock_8h_source.tex_l00050}{}\hyperlink{ecgmock_8h_a598a3330b3c21701223ee0ca14316eca}{00050} \textcolor{preprocessor}{#define PI 3.14159265}
+00051 \textcolor{preprocessor}{#endif}
+00052 
+\end{DoxyCode}

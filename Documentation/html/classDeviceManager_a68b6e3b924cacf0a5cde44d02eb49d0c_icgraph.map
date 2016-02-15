@@ -1,0 +1,10 @@
+<map id="DeviceManager::updateStatus" name="DeviceManager::updateStatus">
+<area shape="rect" id="node2" href="$classDeviceManager.html#aa7b96de52a17b961688e81f5e999da74" title="Slot used to transfer updateStatus from initiated device to the local signal. " alt="" coords="252,5,453,32"/>
+<area shape="rect" id="node3" href="$classDeviceManager.html#a280116304655de3a0bbfbf49730f9384" title="Prepares a new data&#45;collection,. " alt="" coords="529,52,667,79"/>
+<area shape="rect" id="node9" href="$classDeviceManager.html#a30358705658f1037ef6bb98e7a2d5e80" title="Starts the initiated device through a call to start() " alt="" coords="501,107,695,133"/>
+<area shape="rect" id="node4" href="$classEcgCaptureMenu.html#ac430bc0a2eb1879fe77cd0133d4dd704" title="EcgCaptureMenu::EcgCaptureMenu" alt="" coords="743,48,975,75"/>
+<area shape="rect" id="node7" href="$classPlotAndCaptureWidget.html#a232d01f00a25365382f094ad8eedb7fa" title="PlotAndCaptureWidget\l::startCapture" alt="" coords="781,99,936,141"/>
+<area shape="rect" id="node5" href="$classSettingsMenu.html#abc441c12e8044c13f1a99791e2ee30d1" title="Unimplemented. " alt="" coords="1023,48,1189,75"/>
+<area shape="rect" id="node6" href="$classSettingsMenu.html#a02ee4145d9109e70bad37893a88c94c7" title="SettingsMenu::~SettingsMenu" alt="" coords="1237,48,1436,75"/>
+<area shape="rect" id="node8" href="$classPlotAndCaptureWidget.html#a7dca31208a65906f0a96bf4143e0da4f" title="PlotAndCaptureWidget\l::plotSampleVector" alt="" coords="1029,99,1183,141"/>
+</map>

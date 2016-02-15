@@ -1,0 +1,102 @@
+\hypertarget{progress_8cpp_source}{}\section{progress.\+cpp}
+\label{progress_8cpp_source}\index{src/\+Qt-\/btfiletransfer/progress.\+cpp@{src/\+Qt-\/btfiletransfer/progress.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/****************************************************************************}
+00002 \textcolor{comment}{**}
+00003 \textcolor{comment}{** Copyright (C) 2015 The Qt Company Ltd.}
+00004 \textcolor{comment}{** Contact: http://www.qt.io/licensing/}
+00005 \textcolor{comment}{**}
+00006 \textcolor{comment}{** This file is part of the QtBluetooth module of the Qt Toolkit.}
+00007 \textcolor{comment}{**}
+00008 \textcolor{comment}{** $QT\_BEGIN\_LICENSE:BSD$}
+00009 \textcolor{comment}{** You may use this file under the terms of the BSD license as follows:}
+00010 \textcolor{comment}{**}
+00011 \textcolor{comment}{** "Redistribution and use in source and binary forms, with or without}
+00012 \textcolor{comment}{** modification, are permitted provided that the following conditions are}
+00013 \textcolor{comment}{** met:}
+00014 \textcolor{comment}{**   * Redistributions of source code must retain the above copyright}
+00015 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer.}
+00016 \textcolor{comment}{**   * Redistributions in binary form must reproduce the above copyright}
+00017 \textcolor{comment}{**     notice, this list of conditions and the following disclaimer in}
+00018 \textcolor{comment}{**     the documentation and/or other materials provided with the}
+00019 \textcolor{comment}{**     distribution.}
+00020 \textcolor{comment}{**   * Neither the name of The Qt Company Ltd nor the names of its}
+00021 \textcolor{comment}{**     contributors may be used to endorse or promote products derived}
+00022 \textcolor{comment}{**     from this software without specific prior written permission.}
+00023 \textcolor{comment}{**}
+00024 \textcolor{comment}{**}
+00025 \textcolor{comment}{** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS}
+00026 \textcolor{comment}{** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT}
+00027 \textcolor{comment}{** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR}
+00028 \textcolor{comment}{** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT}
+00029 \textcolor{comment}{** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,}
+00030 \textcolor{comment}{** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT}
+00031 \textcolor{comment}{** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,}
+00032 \textcolor{comment}{** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY}
+00033 \textcolor{comment}{** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT}
+00034 \textcolor{comment}{** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE}
+00035 \textcolor{comment}{** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."}
+00036 \textcolor{comment}{**}
+00037 \textcolor{comment}{** $QT\_END\_LICENSE$}
+00038 \textcolor{comment}{**}
+00039 \textcolor{comment}{****************************************************************************/}
+00040 
+00041 \textcolor{preprocessor}{#include "\hyperlink{progress_8h}{progress.h}"}
+00042 \textcolor{preprocessor}{#include "ui\_progress.h"}
+00043 
+00044 \textcolor{preprocessor}{#include <qbluetoothdeviceinfo.h>}
+00045 \textcolor{preprocessor}{#include <qbluetoothaddress.h>}
+00046 \textcolor{preprocessor}{#include <qbluetoothtransferrequest.h>}
+00047 \textcolor{preprocessor}{#include <qbluetoothtransferreply.h>}
+00048 
+00049 QT\_USE\_NAMESPACE
+00050 
+\hypertarget{progress_8cpp_source.tex_l00051}{}\hyperlink{classProgress_a51e0a5625142fedf57d9d822afb1b8d4}{00051} \hyperlink{classProgress_a51e0a5625142fedf57d9d822afb1b8d4}{Progress::Progress}(QWidget *parent) :
+00052     QDialog(parent),
+00053     ui(new \hyperlink{namespaceUi}{Ui}::\hyperlink{classProgress}{Progress})
+00054 \{
+00055     ui->setupUi(\textcolor{keyword}{this});
+00056     ui->progressBar->setRange(0, 1);
+00057     connect(ui->cancelButton, SIGNAL(clicked()), \textcolor{keyword}{this}, SLOT(close()));
+00058 \}
+00059 
+\hypertarget{progress_8cpp_source.tex_l00060}{}\hyperlink{classProgress_abfa443f16958768636a59a560b625317}{00060} \hyperlink{classProgress_abfa443f16958768636a59a560b625317}{Progress::~Progress}()
+00061 \{
+00062     \textcolor{keyword}{delete} ui;
+00063 \}
+00064 
+\hypertarget{progress_8cpp_source.tex_l00065}{}\hyperlink{classProgress_ae2fec44e18b6cfb3e4cba984bdb16824}{00065} \textcolor{keywordtype}{void} \hyperlink{classProgress_ae2fec44e18b6cfb3e4cba984bdb16824}{Progress::setStatus}(QString title, QString filename) \{
+00066     ui->titleLabel->setText(title);
+00067     ui->statusLabel->setText(filename);
+00068 \}
+00069 
+\hypertarget{progress_8cpp_source.tex_l00070}{}\hyperlink{classProgress_a15a8bf25ca7faafcc866813f1fd90677}{00070} \textcolor{keywordtype}{void} \hyperlink{classProgress_a15a8bf25ca7faafcc866813f1fd90677}{Progress::finished}(QBluetoothTransferReply *reply)\{
+00071     \textcolor{keywordflow}{if} (reply->error() != QBluetoothTransferReply::NoError)\{
+00072         ui->progressBar->setDisabled(\textcolor{keyword}{true});
+00073         ui->statusLabel->setText(tr(\textcolor{stringliteral}{"Failed: %1"}).arg(reply->errorString()));
+00074     \}
+00075     \textcolor{keywordflow}{else} \{
+00076         ui->statusLabel->setText(tr(\textcolor{stringliteral}{"Transfer complete"}));
+00077     \}
+00078     ui->cancelButton->setText(tr(\textcolor{stringliteral}{"Dismiss"}));
+00079 \}
+00080 
+\hypertarget{progress_8cpp_source.tex_l00081}{}\hyperlink{classProgress_ae4b8bbb82b1713a353688fb24ea39864}{00081} \textcolor{keywordtype}{void} \hyperlink{classProgress_ae4b8bbb82b1713a353688fb24ea39864}{Progress::uploadProgress}(qint64 bytesSent, qint64 bytesTotal)
+00082 \{
+00083     \textcolor{keywordflow}{if} (bytesSent == 0)\{
+00084         start.start();
+00085     \}
+00086 
+00087     ui->progressBar->setMaximum(bytesTotal);
+00088     ui->progressBar->setValue(bytesSent);
+00089     \textcolor{keywordflow}{if} (bytesSent && bytesTotal &&
+00090             (start.elapsed() > 1000) &&
+00091             (bytesSent > start.elapsed()/1000)) \{
+00092 
+00093         ui->statusLabel->setText(tr(\textcolor{stringliteral}{"Transferring...ETA: %1s"})
+00094                 .arg(((bytesTotal-bytesSent)/(bytesSent/(start.elapsed()/1000)))));
+00095     \}
+00096 \}
+00097 
+\end{DoxyCode}

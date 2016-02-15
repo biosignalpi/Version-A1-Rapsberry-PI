@@ -1,0 +1,4 @@
+<map id="DeviceInterface" name="DeviceInterface">
+<area shape="rect" id="node3" href="$classEcgMock.html" title="Mock version of an device The EcgMock device will return sine and cosine functions as data..." alt="" coords="5,155,83,181"/>
+<area shape="rect" id="node4" href="$classSamplingThread.html" title="DeviceInterface Class responsible for sampling ECG. " alt="" coords="107,155,223,181"/>
+</map>

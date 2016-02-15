@@ -1,0 +1,155 @@
+\hypertarget{classDataLogger}{}\section{Data\+Logger Class Reference}
+\label{classDataLogger}\index{Data\+Logger@{Data\+Logger}}
+
+
+The \hyperlink{classDataLogger}{Data\+Logger} class.  
+
+
+
+
+{\ttfamily \#include $<$datalogger.\+h$>$}
+
+
+
+Inheritance diagram for Data\+Logger\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=147pt]{classDataLogger__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Data\+Logger\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=147pt]{classDataLogger__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{update\+Status} (Q\+String status)
+\begin{DoxyCompactList}\small\item\em Signal emitting status messages during the process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classDataLogger_a4b383913e0fd834ff9b0d8bbd295c2db}{Data\+Logger} (Q\+Object $\ast$parent=0)
+\item 
+\hyperlink{classDataLogger_a9aaff109f3e7749a0a0a0313655da50a}{$\sim$\+Data\+Logger} ()
+\item 
+void \hyperlink{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}{save} (\hyperlink{classDataStream}{Data\+Stream} \&input)
+\begin{DoxyCompactList}\small\item\em Saves the input to a txt-\/file, header-\/file and edf-\/file(if bool save\+As\+Edf in \hyperlink{classSettingsSingleton}{Settings\+Singleton}) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The \hyperlink{classDataLogger}{Data\+Logger} class. 
+
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+
+
+Definition at line \hyperlink{datalogger_8h_source_l00016}{16} of file \hyperlink{datalogger_8h_source}{datalogger.\+h}.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Data\+Logger@{Data\+Logger}!Data\+Logger@{Data\+Logger}}
+\index{Data\+Logger@{Data\+Logger}!Data\+Logger@{Data\+Logger}}
+\subsubsection[{Data\+Logger(\+Q\+Object $\ast$parent=0)}]{\setlength{\rightskip}{0pt plus 5cm}Data\+Logger\+::\+Data\+Logger (
+\begin{DoxyParamCaption}
+\item[{Q\+Object $\ast$}]{parent = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [explicit]}}\hypertarget{classDataLogger_a4b383913e0fd834ff9b0d8bbd295c2db}{}\label{classDataLogger_a4b383913e0fd834ff9b0d8bbd295c2db}
+
+
+Definition at line \hyperlink{datalogger_8cpp_source_l00009}{9} of file \hyperlink{datalogger_8cpp_source}{datalogger.\+cpp}.
+
+\index{Data\+Logger@{Data\+Logger}!````~Data\+Logger@{$\sim$\+Data\+Logger}}
+\index{````~Data\+Logger@{$\sim$\+Data\+Logger}!Data\+Logger@{Data\+Logger}}
+\subsubsection[{$\sim$\+Data\+Logger()}]{\setlength{\rightskip}{0pt plus 5cm}Data\+Logger\+::$\sim$\+Data\+Logger (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classDataLogger_a9aaff109f3e7749a0a0a0313655da50a}{}\label{classDataLogger_a9aaff109f3e7749a0a0a0313655da50a}
+
+
+Definition at line \hyperlink{datalogger_8cpp_source_l00014}{14} of file \hyperlink{datalogger_8cpp_source}{datalogger.\+cpp}.
+
+
+
+\subsection{Member Function Documentation}
+\index{Data\+Logger@{Data\+Logger}!save@{save}}
+\index{save@{save}!Data\+Logger@{Data\+Logger}}
+\subsubsection[{save(\+Data\+Stream \&input)}]{\setlength{\rightskip}{0pt plus 5cm}void Data\+Logger\+::save (
+\begin{DoxyParamCaption}
+\item[{{\bf Data\+Stream} \&}]{input}
+\end{DoxyParamCaption}
+)}\hypertarget{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}{}\label{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad}
+
+
+Saves the input to a txt-\/file, header-\/file and edf-\/file(if bool save\+As\+Edf in \hyperlink{classSettingsSingleton}{Settings\+Singleton}) 
+
+Saves the information from an \hyperlink{structEcgStreamObject}{Ecg\+Stream\+Object} stored in a \hyperlink{classDataStream}{Data\+Stream} vector.
+
+lements. 
+
+Definition at line \hyperlink{datalogger_8cpp_source_l00021}{21} of file \hyperlink{datalogger_8cpp_source}{datalogger.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDataLogger_a17296a2d3088e979c9b1f48e68caf9ad_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Data\+Logger@{Data\+Logger}!update\+Status@{update\+Status}}
+\index{update\+Status@{update\+Status}!Data\+Logger@{Data\+Logger}}
+\subsubsection[{update\+Status}]{\setlength{\rightskip}{0pt plus 5cm}void Data\+Logger\+::update\+Status (
+\begin{DoxyParamCaption}
+\item[{Q\+String}]{status}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [signal]}}\hypertarget{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}{}\label{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c}
+
+
+Signal emitting status messages during the process. 
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classDataLogger_a59e42d6e77f7fd97ea23529abb6c275c_icgraph}
+\end{center}
+\end{figure}
+
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{datalogger_8h}{datalogger.\+h}\item 
+src/\hyperlink{datalogger_8cpp}{datalogger.\+cpp}\end{DoxyCompactItemize}

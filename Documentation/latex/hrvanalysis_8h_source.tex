@@ -1,0 +1,44 @@
+\hypertarget{hrvanalysis_8h_source}{}\section{hrvanalysis.\+h}
+\label{hrvanalysis_8h_source}\index{src/hrvanalysis.\+h@{src/hrvanalysis.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * hrvanalysis.h}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Nov 23, 2015}
+00005 \textcolor{comment}{ *      Author: martin}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#ifndef HRVANALYSIS\_H\_}
+00009 \textcolor{preprocessor}{#define HRVANALYSIS\_H\_}
+00010 
+00011 \textcolor{preprocessor}{#include "HRV/rtwtypes.h"}
+00012 \textcolor{preprocessor}{#include "HRV/timeDomainHRV.h"}
+00013 \textcolor{preprocessor}{#include "HRV/rt\_nonfinite.h"}
+00014 \textcolor{preprocessor}{#include "HRV/timeDomainHRV\_types.h"}
+00015 \textcolor{preprocessor}{#include "HRV/freqDomainHRV.h"}
+00016 \textcolor{preprocessor}{#include "HRV/freqDomainHRV\_types.h"}
+00017 
+00018 
+00019 \textcolor{preprocessor}{#include <QVector>}
+00020 
+00044     \textcolor{keywordtype}{void} \hyperlink{group__HRV-Analysis_ga2bd6c358a622e01babb7fdbca313c50f}{performTimeDomainHrv}(\textcolor{keyword}{const} QVector<double>* ibiData, struct0\_T *output);
+00045 
+00056     \textcolor{keywordtype}{void} \hyperlink{group__HRV-Analysis_ga3cfec29967efe1561722a05d03f26158}{performFreqDomainHrv}(\textcolor{keyword}{const} QVector<double>* ibiData,\textcolor{keyword}{const} QVector<double>* 
+      timeData, structFreq\_T *output);
+00057     \textcolor{comment}{// Function Declarations for timeDomainHRV}
+00058 
+00059 
+00060 
+00067         \textcolor{keyword}{static} emxArray\_real\_T *\hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}();
+00075         \textcolor{keyword}{static} emxArray\_real\_T *\hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}(\textcolor{keyword}{const} QVector<double>*
+       ibiData);
+00084         \textcolor{keyword}{static} emxArray\_real\_T *\hyperlink{group__HRV-Analysis_ga97aad354e1ec35fab4e98f111f4ed4b4}{argInit\_Unboundedx2\_real\_T}(\textcolor{keyword}{const} QVector<double>*
+       ibiData,\textcolor{keyword}{const} QVector<double>*timeData);
+00085 
+00086 
+00087 
+00088 
+00089 
+00093 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* HRVANALYSIS\_H\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

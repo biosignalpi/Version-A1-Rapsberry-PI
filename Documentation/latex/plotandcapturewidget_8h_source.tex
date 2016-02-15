@@ -1,0 +1,86 @@
+\hypertarget{plotandcapturewidget_8h_source}{}\section{plotandcapturewidget.\+h}
+\label{plotandcapturewidget_8h_source}\index{src/plotandcapturewidget.\+h@{src/plotandcapturewidget.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{comment}{/*}
+00002 \textcolor{comment}{ * plotandcapturewidget.h}
+00003 \textcolor{comment}{ *}
+00004 \textcolor{comment}{ *  Created on: Oct 29, 2015}
+00005 \textcolor{comment}{ *      Author: martin}
+00006 \textcolor{comment}{ */}
+00007 
+00008 \textcolor{preprocessor}{#ifndef PLOTANDCAPTUREWIDGET\_H\_}
+00009 \textcolor{preprocessor}{#define PLOTANDCAPTUREWIDGET\_H\_}
+00010 
+00011 \textcolor{preprocessor}{#include <QtWidgets>}
+00012 \textcolor{preprocessor}{#include <QString>}
+00013 \textcolor{preprocessor}{#include <qwt\_plot.h>}
+00014 \textcolor{preprocessor}{#include <QElapsedTimer>}
+00015 \textcolor{preprocessor}{#include "\hyperlink{devicemanager_8h}{devicemanager.h}"}
+00016 \textcolor{preprocessor}{#include "\hyperlink{datalogger_8h}{datalogger.h}"}
+00017 \textcolor{preprocessor}{#include "\hyperlink{datastream_8h}{datastream.h}"}
+00018 
+00019 
+00020 \textcolor{keyword}{class }QLabel;
+00021 \textcolor{keyword}{class }QPushButton;
+00022 \textcolor{keyword}{class }\hyperlink{classPlot}{Plot};
+00023 
+\hypertarget{plotandcapturewidget_8h_source.tex_l00031}{}\hyperlink{classPlotAndCaptureWidget}{00031} \textcolor{keyword}{class }\hyperlink{classPlotAndCaptureWidget}{PlotAndCaptureWidget}: \textcolor{keyword}{public} QWidget \{
+00032 
+00033     Q\_OBJECT
+00034 
+00035 \textcolor{keyword}{public}:
+00036     \hyperlink{classPlotAndCaptureWidget_a12b93ad83cddd745f19c4745a9aa7af9}{PlotAndCaptureWidget}(QWidget * = NULL);
+00037     \textcolor{keyword}{virtual} \hyperlink{classPlotAndCaptureWidget_a04d11f3f4d553c39b0d99da1a9ec0a11}{~PlotAndCaptureWidget}();
+00038     \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_aeb21bda06882afc4636a311318166202}{plotSample}(\textcolor{keywordtype}{double});
+00039 
+00040 
+00041 
+00042 \textcolor{keyword}{public} slots:
+00043     \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a232d01f00a25365382f094ad8eedb7fa}{startCapture}();
+00044     \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a5f9fe948c3683ae9026a8f792782e67e}{stopCapture}();
+00045     \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a7dca31208a65906f0a96bf4143e0da4f}{plotSampleVector}(QVector<QVector<QPointF> >);
+00046     \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a769ecd243154ae9c4ecae9bd4fcbccdb}{updateStatus}(QString);
+00047 
+00053     \textcolor{keywordtype}{void} \hyperlink{classPlotAndCaptureWidget_a77ecf5a130215ce0246b8817e44081f7}{takeScreen}();
+00054 
+00055 
+00056 
+00057 \textcolor{keyword}{private}:
+00058     \textcolor{keywordtype}{void} setupComponents();
+00059     \textcolor{keywordtype}{void} setupActions();
+00060     \textcolor{keywordtype}{void} setupLayout();
+00061 
+00062     QGroupBox *sampleRateControlGroup;
+00063     QGroupBox *sourceControlGroup;
+00064     QGroupBox *channelControlGroup;
+00065     QPushButton *startButton;
+00066     QPushButton *stopButton;
+00067     QPushButton *applySettingsButton;
+00068     QPushButton *takeScreenshot;
+00069     QButtonGroup *channelControlButtonGroup;
+00070     QLabel *currentStatusLabel;
+00071     QLineEdit *nameTextBox;
+00072     QLineEdit *recordingNameTextBox;
+00073 
+00074      QElapsedTimer d\_clock;
+00075         \textcolor{keywordtype}{double} currentTime;
+00076         \textcolor{keywordtype}{double} timeInterval;
+00077 
+00078         \hyperlink{classDeviceManager}{DeviceManager}* device;
+00079         \hyperlink{classDataStream}{DataStream}* stream;
+00080     \hyperlink{classDataLogger}{DataLogger}* logger;
+00081 
+00082 
+00083 
+00084     \textcolor{keywordtype}{int} counter, plottedPoints, loopCounter;
+00085     QRadioButton *leadIButton, *leadIIButton, *leadIIIButton, *respButton;
+00086 
+00087 
+00088     QVector<Plot *> d\_plots;
+00089 
+00090 
+00091 \};
+00092 
+00093 \textcolor{preprocessor}{#endif }\textcolor{comment}{/* PLOTANDCAPTUREWIDGET\_H\_ */}\textcolor{preprocessor}{}
+\end{DoxyCode}

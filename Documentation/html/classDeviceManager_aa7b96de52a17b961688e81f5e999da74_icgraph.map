@@ -1,0 +1,8 @@
+<map id="DeviceManager::receiveStatus" name="DeviceManager::receiveStatus">
+<area shape="rect" id="node2" href="$classDeviceManager.html#a280116304655de3a0bbfbf49730f9384" title="Prepares a new data&#45;collection,. " alt="" coords="255,35,393,61"/>
+<area shape="rect" id="node3" href="$classEcgCaptureMenu.html#ac430bc0a2eb1879fe77cd0133d4dd704" title="EcgCaptureMenu::EcgCaptureMenu" alt="" coords="441,5,673,32"/>
+<area shape="rect" id="node6" href="$classPlotAndCaptureWidget.html#a232d01f00a25365382f094ad8eedb7fa" title="PlotAndCaptureWidget\l::startCapture" alt="" coords="480,57,635,98"/>
+<area shape="rect" id="node4" href="$classSettingsMenu.html#abc441c12e8044c13f1a99791e2ee30d1" title="Unimplemented. " alt="" coords="721,5,888,32"/>
+<area shape="rect" id="node5" href="$classSettingsMenu.html#a02ee4145d9109e70bad37893a88c94c7" title="SettingsMenu::~SettingsMenu" alt="" coords="936,5,1135,32"/>
+<area shape="rect" id="node7" href="$classPlotAndCaptureWidget.html#a7dca31208a65906f0a96bf4143e0da4f" title="PlotAndCaptureWidget\l::plotSampleVector" alt="" coords="727,57,882,98"/>
+</map>

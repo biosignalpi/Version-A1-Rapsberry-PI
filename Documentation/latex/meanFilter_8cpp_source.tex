@@ -1,0 +1,47 @@
+\hypertarget{meanFilter_8cpp_source}{}\section{mean\+Filter.\+cpp}
+\label{meanFilter_8cpp_source}\index{src/mean\+Filter.\+cpp@{src/mean\+Filter.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{meanFilter_8h}{meanFilter.h}"}
+00002 
+\hypertarget{meanFilter_8cpp_source.tex_l00003}{}\hyperlink{meanFilter_8h_ab08c7e91b48571e12575c66e10896ade}{00003} \textcolor{keywordtype}{double} \hyperlink{meanFilter_8cpp_a30d3375037ed32fa2ec845d42deebc3d}{filterVal}(\textcolor{keywordtype}{double} val)
+00004 \{
+00005     \textcolor{keyword}{static} \textcolor{keywordtype}{double} x[100];
+00006     \textcolor{keywordtype}{int} n = 100;
+00007     \textcolor{keywordtype}{double} mean = 0.0;
+00008 
+00009     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<n-1; ii++) \{
+00010         x[ii] = x[ii+1];
+00011     \}
+00012 
+00013     x[n-1] = val;
+00014 
+00015     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<n-1; ii++) \{
+00016         mean += x[ii];
+00017     \}
+00018 
+00019     \textcolor{keywordflow}{return} mean/n;
+00020 \}
+00021 
+\hypertarget{meanFilter_8cpp_source.tex_l00022}{}\hyperlink{meanFilter_8h_a7a0a0543e497b3f649b43fa07c19798a}{00022} \textcolor{keywordtype}{double} \hyperlink{meanFilter_8cpp_aff5ded5d4ff3c667ea23c9cdcf76206a}{filterEcgVal}(\textcolor{keywordtype}{double} val)
+00023 \{
+00024     \textcolor{keyword}{static} \textcolor{keywordtype}{double} x[201];
+00025     \textcolor{keyword}{static} \textcolor{keywordtype}{double} y[100];
+00026 
+00027     \textcolor{keywordtype}{double} mean = 0.0;
+00028 
+00029     x[200] = y[0];
+00030 
+00031     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<99; ii++) \{
+00032         y[ii] = y[ii+1];
+00033     \}
+00034 
+00035     y[99] = val;
+00036 
+00037     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} ii = 0; ii<201; ii++) \{
+00038         mean += x[ii];
+00039     \}
+00040 
+00041     \textcolor{keywordflow}{return} x[100]-mean/201;
+00042 \}
+\end{DoxyCode}

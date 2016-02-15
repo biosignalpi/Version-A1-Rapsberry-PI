@@ -1,0 +1,64 @@
+\hypertarget{homepagewidget_8cpp_source}{}\section{homepagewidget.\+cpp}
+\label{homepagewidget_8cpp_source}\index{src/homepagewidget.\+cpp@{src/homepagewidget.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{homepagewidget_8h}{homepagewidget.h}"}
+00002 \textcolor{preprocessor}{#include <QtWidgets>}
+00003 
+\hypertarget{homepagewidget_8cpp_source.tex_l00004}{}\hyperlink{classHomePageWidget_a72947da81d3ac3ce6edc9da05fd809ac}{00004} \hyperlink{classHomePageWidget_a72947da81d3ac3ce6edc9da05fd809ac}{HomePageWidget::HomePageWidget}(QWidget *parent):
+00005     QWidget( parent )
+00006 \{
+00007     QLabel *headerLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"<span style=\(\backslash\)"font-size:24px; font-weight:bold;\(\backslash\)">Biosignal PI</span>
+      "});
+00008     headerLabel->setTextFormat(Qt::RichText);
+00009 
+00010     QLabel *textLabel = \textcolor{keyword}{new} QLabel();
+00011     textLabel->setText(\textcolor{stringliteral}{"This is a 5 lead ECG system for the raspberry PI <br /><br />"}
+00012                        \textcolor{stringliteral}{"How to record an ECG:"}
+00013                        \textcolor{stringliteral}{"<ol>"}
+00014                        \textcolor{stringliteral}{"<li>Click on the settings button, choose source and sampling rate. 1 kHz sampling
+       rate is recommended in order to prevent frame drops.</li>"}
+00015                        \textcolor{stringliteral}{"<li>Fill in the ECG capture settings (optional).</li>"}
+00016                        \textcolor{stringliteral}{"<li>Connect the leads as show in the image.</li>"}
+00017                        \textcolor{stringliteral}{"<li>Click on the ECG capture button and then on Start ECG capture.</li>"}
+00018                        \textcolor{stringliteral}{"<li>To stop the capture, press the Stop ECG capture button, this will save the
+       captured data to a file.</li>"}
+00019                        \textcolor{stringliteral}{"</ol> <br />"}
+00020                        \textcolor{stringliteral}{"How to view an ECG:"}
+00021                        \textcolor{stringliteral}{"<ol>"}
+00022                        \textcolor{stringliteral}{"<li>Click on the View ECG button.</li>"}
+00023                        \textcolor{stringliteral}{"<li>Click on the Get ECG files button.</li>"}
+00024                        \textcolor{stringliteral}{"<li>Double-click on the file with the ECG values.</li>"}
+00025                        \textcolor{stringliteral}{"<li>The ECG will now be loaded and viewed at the right side of the screen.</li>"}
+00026                        \textcolor{stringliteral}{"</ol>"});
+00027     textLabel->setWordWrap(\textcolor{keyword}{true});
+00028 
+00029 
+00030     QLabel *placementHeaderLabel = \textcolor{keyword}{new} QLabel(\textcolor{stringliteral}{"<b>Electrode placement</b>"});
+00031     placementHeaderLabel->setAlignment(Qt::AlignHCenter);
+00032 
+00033     QLabel *placementLabel = \textcolor{keyword}{new} QLabel();
+00034     placementLabel->setPixmap(QPixmap(\textcolor{stringliteral}{":/images/images/5-electrode-ECG.jpg"}));
+00035 
+00036     QVBoxLayout *leftSideLayout = \textcolor{keyword}{new} QVBoxLayout;
+00037     leftSideLayout->addStretch();
+00038     leftSideLayout->addWidget(headerLabel);
+00039     leftSideLayout->addWidget(textLabel);
+00040     leftSideLayout->addStretch();
+00041 
+00042     QVBoxLayout *rightSideLayout = \textcolor{keyword}{new} QVBoxLayout;
+00043     rightSideLayout->addStretch();
+00044     rightSideLayout->addWidget(placementHeaderLabel);
+00045     rightSideLayout->addWidget(placementLabel);
+00046     rightSideLayout->addStretch();
+00047 
+00048     QHBoxLayout *mainLayout = \textcolor{keyword}{new} QHBoxLayout;
+00049     mainLayout->addStretch();
+00050     mainLayout->addLayout(leftSideLayout);
+00051     mainLayout->addStretch();
+00052     mainLayout->addLayout(rightSideLayout);
+00053     mainLayout->addStretch();
+00054 
+00055     setLayout(mainLayout);
+00056 \}
+\end{DoxyCode}

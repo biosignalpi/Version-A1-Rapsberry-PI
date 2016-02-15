@@ -1,0 +1,4 @@
+<map id="EcgMock" name="EcgMock">
+<area shape="rect" id="node2" href="$classDeviceInterface.html" title="Abstract interface for all devices. " alt="" coords="21,171,136,197"/>
+<area shape="rect" id="node4" href="$classDataStream.html" title="Abstract Interface that should be used for storing data in the memory. " alt="" coords="102,81,194,108"/>
+</map>

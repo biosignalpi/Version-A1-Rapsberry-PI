@@ -1,0 +1,63 @@
+\hypertarget{pifacecontrolandview_8cpp_source}{}\section{pifacecontrolandview.\+cpp}
+\label{pifacecontrolandview_8cpp_source}\index{src/\+Pi\+Face-\/\+Interface/pifacecontrolandview.\+cpp@{src/\+Pi\+Face-\/\+Interface/pifacecontrolandview.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include "\hyperlink{pifacecontrolandview_8h}{pifacecontrolandview.h}"}
+00002 \textcolor{preprocessor}{#include "pifacecad.h"}
+00003 \textcolor{preprocessor}{#include <chrono>}
+00004 \textcolor{preprocessor}{#include <thread>}
+00005 \textcolor{preprocessor}{#include "\hyperlink{abstractmenu_8h}{abstractmenu.h}"}
+00006 \textcolor{preprocessor}{#include "\hyperlink{basemenu_8h}{basemenu.h}"}
+00007 
+00008 
+00009 
+00010 
+00011 
+\hypertarget{pifacecontrolandview_8cpp_source.tex_l00012}{}\hyperlink{classPiFaceControlAndView_aaf210318d47c72e1262372662c554c25}{00012}  \hyperlink{classPiFaceControlAndView_aaf210318d47c72e1262372662c554c25}{PiFaceControlAndView::PiFaceControlAndView}(QObject *parent):
+00013     QObject(parent)
+00014 \{
+00015 
+00016 \}
+00017 
+\hypertarget{pifacecontrolandview_8cpp_source.tex_l00018}{}\hyperlink{classPiFaceControlAndView_aeb3977adb33eddb01288de16cffc1730}{00018} \hyperlink{classPiFaceControlAndView_aeb3977adb33eddb01288de16cffc1730}{PiFaceControlAndView::~PiFaceControlAndView}()\{
+00019 
+00020 \}
+00021 
+\hypertarget{pifacecontrolandview_8cpp_source.tex_l00022}{}\hyperlink{classPiFaceControlAndView_a5463b09284910cea9db7997f59b5345a}{00022} \textcolor{keywordtype}{void} \hyperlink{classPiFaceControlAndView_a5463b09284910cea9db7997f59b5345a}{PiFaceControlAndView::run}()
+00023 \{
+00024     pifacecad\_open();
+00025     pifacecad\_lcd\_backlight\_on();
+00026     pifacecad\_lcd\_write(\textcolor{stringliteral}{"Chose option"});
+00027     \hyperlink{classAbstractMenu}{AbstractMenu}* currentMenu=\textcolor{keyword}{new} \hyperlink{classBaseMenu}{BaseMenu}();
+00028     currentMenu->\hyperlink{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}{next}();
+00029 
+00030     \textcolor{keywordflow}{while}(\textcolor{keyword}{true})\{
+00031         \textcolor{keywordflow}{if}(!pifacecad\_read\_switch(7))\{
+00032             currentMenu->\hyperlink{classAbstractMenu_afc9ee4bf101f2761b4e8e083ef3c4a9b}{next}();
+00033         \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!pifacecad\_read\_switch(5))\{
+00034             \hyperlink{classAbstractMenu}{AbstractMenu}* tempMenu;
+00035             tempMenu=currentMenu->\hyperlink{classAbstractMenu_aef49c4a4ceeb1aad12101cb4768e1596}{newMenu}();
+00036             \textcolor{keywordflow}{if} (tempMenu)\{
+00037                 \textcolor{keyword}{delete} currentMenu;
+00038                 currentMenu=tempMenu;
+00039             \}
+00040             \textcolor{keywordflow}{else}
+00041                 \textcolor{keyword}{delete} tempMenu;
+00042             currentMenu->\hyperlink{classAbstractMenu_a5fd1c385e4acd825631ede5bb0424a5c}{setLowerText}();
+00043 
+00044         \}\textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(!pifacecad\_read\_switch(4))
+00045             \textcolor{keywordflow}{break};
+00046 
+00047 
+00048         std::this\_thread::sleep\_for(std::chrono::milliseconds(300));  \textcolor{comment}{// IMPORTANT if not using this
+       time-out the read\_switch fucntion would read a push more then once.}
+00049     \}
+00050     pifacecad\_lcd\_clear();
+00051     pifacecad\_lcd\_home();
+00052     \textcolor{keyword}{delete} currentMenu;
+00053     pifacecad\_lcd\_write(\textcolor{stringliteral}{"QUIT"});
+00054     pifacecad\_close();
+00055 
+00056     emit \hyperlink{classPiFaceControlAndView_a704d233cb698bce10515c0af721581ce}{finished}();
+00057 \}
+\end{DoxyCode}

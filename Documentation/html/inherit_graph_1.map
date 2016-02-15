@@ -1,0 +1,8 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classConvertEcgToIbi.html" title="Converts textfile with ECG&#45;data into IBI file. " alt="" coords="125,5,244,32"/>
+<area shape="rect" id="node3" href="$classDeviceInterface.html" title="Abstract interface for all devices. " alt="" coords="127,56,242,83"/>
+<area shape="rect" id="node6" href="$classDeviceManager.html" title="Handles which device to connect through the DeviceInterface. " alt="" coords="128,107,241,133"/>
+<area shape="rect" id="node7" href="$classLoadBigFile.html" title="Class used to load a big .txt file in a new thread. " alt="" coords="139,157,230,184"/>
+<area shape="rect" id="node4" href="$classEcgMock.html" title="Mock version of an device The EcgMock device will return sine and cosine functions as data..." alt="" coords="311,31,389,57"/>
+<area shape="rect" id="node5" href="$classSamplingThread.html" title="DeviceInterface Class responsible for sampling ECG. " alt="" coords="292,81,408,108"/>
+</map>

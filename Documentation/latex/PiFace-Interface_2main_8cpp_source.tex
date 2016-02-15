@@ -1,0 +1,50 @@
+\hypertarget{PiFace-Interface_2main_8cpp_source}{}\section{main.\+cpp}
+\label{PiFace-Interface_2main_8cpp_source}\index{src/\+Pi\+Face-\/\+Interface/main.\+cpp@{src/\+Pi\+Face-\/\+Interface/main.\+cpp}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#include <iostream>}
+00002 \textcolor{preprocessor}{#include <QCoreApplication>}
+00003 \textcolor{preprocessor}{#include <QVector>}
+00004 \textcolor{preprocessor}{#include <QPointF>}
+00005 \textcolor{preprocessor}{#include <QTimer>}
+00006 \textcolor{preprocessor}{#include <QDebug>}
+00007 \textcolor{preprocessor}{#include <stdio.h>}
+00008 \textcolor{preprocessor}{#include "\hyperlink{pifacecontrolandview_8h}{pifacecontrolandview.h}"}
+00009 \textcolor{preprocessor}{#include "pifacecad.h"}
+00010 
+00011 
+00012 
+\hypertarget{PiFace-Interface_2main_8cpp_source.tex_l00013}{}\hyperlink{PiFace-Interface_2main_8cpp_a1b0b7c662f8b2e55151eb0a4e0292ea2}{00013} \textcolor{keywordtype}{bool} \hyperlink{PiFace-Interface_2main_8cpp_a1b0b7c662f8b2e55151eb0a4e0292ea2}{piFaceConnected}(\textcolor{keywordtype}{int} i)\{
+00014     \textcolor{keywordflow}{if} (i<2)
+00015         \textcolor{keywordflow}{return} \textcolor{keyword}{false};
+00016 \}
+00017 
+00018 
+\hypertarget{PiFace-Interface_2main_8cpp_source.tex_l00019}{}\hyperlink{PiFace-Interface_2main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{00019} \textcolor{keywordtype}{int} \hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}(\textcolor{keywordtype}{int} argc, \textcolor{keywordtype}{char} *argv[])
+00020 \{
+00021     QCoreApplication a(argc, argv);
+00022 
+00023     qRegisterMetaType< QVector<QPointF> >(\textcolor{stringliteral}{"QVector<QPointF>"});
+00024     qRegisterMetaType< QPointF >(\textcolor{stringliteral}{"QPointF"});
+00025     qRegisterMetaType< QVector<QVector<QPointF> > >(\textcolor{stringliteral}{"QVector<QVector<QPointF> >"});
+00026 
+00027     \textcolor{keywordflow}{if} (pifacecad\_open()>=0)\{    \textcolor{comment}{// if no PiFace is connected the pifacecad\_open will return -1}
+00028         \hyperlink{classPiFaceControlAndView}{PiFaceControlAndView} *piFaceViewAndControl=\textcolor{keyword}{new} 
+      \hyperlink{classPiFaceControlAndView}{PiFaceControlAndView}(&a);
+00029 
+00030         QObject::connect(piFaceViewAndControl, SIGNAL(finished()), &a, SLOT(quit()));
+00031         QTimer::singleShot(0,piFaceViewAndControl, SLOT(run()));
+00032 
+00033     \}
+00034     \textcolor{keywordflow}{else}\{
+00035        qDebug() << \textcolor{stringliteral}{"No PiFaceConnected, (provide input argument) "} << endl;
+00036        \textcolor{keywordflow}{return} 1;
+00037     \}
+00038 
+00039     \textcolor{keywordflow}{return} a.exec();
+00040 
+00041 \}
+00042 
+00043 
+00044 
+\end{DoxyCode}

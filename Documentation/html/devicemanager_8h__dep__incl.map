@@ -1,0 +1,12 @@
+<map id="src/devicemanager.h" name="src/devicemanager.h">
+<area shape="rect" id="node2" href="$devicemanager_8cpp.html" title="src/devicemanager.cpp" alt="" coords="5,87,161,114"/>
+<area shape="rect" id="node3" href="$plotandcapturewidget_8h.html" title="src/plotandcapturewidget.h" alt="" coords="186,87,365,114"/>
+<area shape="rect" id="node6" href="$ecgcapturemenu_8h.html" title="src/PiFace&#45;Interface\l/ecgcapturemenu.h" alt="" coords="479,80,619,121"/>
+<area shape="rect" id="node4" href="$mainwindow_8cpp.html" title="src/mainwindow.cpp" alt="" coords="15,177,155,203"/>
+<area shape="rect" id="node5" href="$plotandcapturewidget_8cpp.html" title="src/plotandcapturewidget.cpp" alt="" coords="179,177,371,203"/>
+<area shape="rect" id="node7" href="$basemenu_8cpp.html" title="src/PiFace&#45;Interface\l/basemenu.cpp" alt="" coords="396,169,536,211"/>
+<area shape="rect" id="node8" href="$settingsmenu_8h.html" title="src/PiFace&#45;Interface\l/settingsmenu.h" alt="" coords="560,169,700,211"/>
+<area shape="rect" id="node10" href="$ecgcapturemenu_8cpp.html" title="src/PiFace&#45;Interface\l/ecgcapturemenu.cpp" alt="" coords="709,259,855,300"/>
+<area shape="rect" id="node9" href="$bluetoothmenu_8cpp.html" title="src/PiFace&#45;Interface\l/bluetoothmenu.cpp" alt="" coords="380,259,520,300"/>
+<area shape="rect" id="node11" href="$settingsmenu_8cpp.html" title="src/PiFace&#45;Interface\l/settingsmenu.cpp" alt="" coords="544,259,684,300"/>
+</map>

@@ -1,0 +1,71 @@
+\hypertarget{samplingthread_8h_source}{}\section{samplingthread.\+h}
+\label{samplingthread_8h_source}\index{src/samplingthread.\+h@{src/samplingthread.\+h}}
+
+\begin{DoxyCode}
+00001 \textcolor{preprocessor}{#ifndef SAMPLINGTHREAD\_H}
+00002 \textcolor{preprocessor}{#define SAMPLINGTHREAD\_H}
+00003 
+00004 \textcolor{preprocessor}{#include <QPointF>}
+00005 \textcolor{preprocessor}{#include <QFile>}
+00006 \textcolor{preprocessor}{#include <QTextStream>}
+00007 \textcolor{preprocessor}{#include <QThread>}
+00008 \textcolor{preprocessor}{#include "\hyperlink{deviceinterface_8h}{deviceinterface.h}"}
+00009 \textcolor{preprocessor}{#include <QElapsedTimer>}
+00010 
+00011 
+00012 
+00013 \textcolor{keyword}{class }\hyperlink{classEcgCapture}{EcgCapture};
+00014 
+\hypertarget{samplingthread_8h_source.tex_l00027}{}\hyperlink{classSamplingThread}{00027} \textcolor{keyword}{class }\hyperlink{classSamplingThread}{SamplingThread}: \textcolor{keyword}{public} \hyperlink{classDeviceInterface}{DeviceInterface}
+00028 \{
+00029 Q\_OBJECT
+00030 
+00031 \textcolor{keyword}{public}:
+00032   \textcolor{comment}{//  SamplingThread(QObject *parent = NULL);}
+00033     \hyperlink{classSamplingThread_a0ba71431079dd2c80adee37f3e392d98}{SamplingThread}(\hyperlink{classDataStream}{DataStream}& inputStream);
+00034     \textcolor{keyword}{virtual} \hyperlink{classSamplingThread_af1f6a9a930f6c9e3c2ecc3d3d1646373}{~SamplingThread}();
+00035     \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a55abdfd5263e59857dd3ef5c78489cf9}{clearSamples}();
+00036     \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a3b186d0fbb2ff172593895ddb094f98d}{setSource}(\textcolor{keywordtype}{int});
+00037     \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a3363a57aa7bc6a4f3867dafd1e35bd72}{setFileName}(QString);
+00038     \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_ade4c865b24840742b532a71208101f39}{setFileType}(QString);
+00039     \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_ab1284bf5429771100bf0a60ffe3aacef}{startThread}();
+00040     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a6e758c7b8266755c201ca002520f5e2e}{stop}();
+00041     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_a3145c2d8049b3f126f78cb1274154eeb}{run}();
+00042 
+00043     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_aa52f1e7171ae5cb8432e949635b02d25}{getData}(\hyperlink{classDataStream}{DataStream}&); 
+00044     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} \hyperlink{classSamplingThread_a0770f5d1d0c0160cf023fae294010961}{connected}(); 
+00045     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_aade561b442e580b0ca4af112de2d7a41}{close}(); 
+00046 
+00047 \textcolor{keyword}{public} slots:
+00048     \textcolor{keywordtype}{void} \hyperlink{classSamplingThread_ad97231cf2bf7bbf0d1273b2076a18bab}{setChannel}(\textcolor{keywordtype}{int});
+00049 
+00050 \textcolor{keyword}{private}:
+00051 
+00052     QVector<QVector<QPointF> > *privateSamples;
+00053     QVector<QVector<double> > *sampleData;
+00054 
+00055     \hyperlink{classEcgCapture}{EcgCapture} *ecg;
+00056 
+00057 
+00058     \textcolor{keywordtype}{int} sampleRate;
+00059     \textcolor{keywordtype}{int} Fs;
+00060     \textcolor{keywordtype}{int} sourceId;
+00061     \textcolor{keywordtype}{int} channelId;
+00062     \textcolor{keywordtype}{int} counter,counterII;
+00063     \textcolor{keywordtype}{bool} stopThread;
+00064     \textcolor{keywordtype}{double} prevTime;
+00065     \textcolor{keywordtype}{double} prevVal;
+00066     \textcolor{keywordtype}{double} sleepInterval;
+00067 
+00068     QString fileName;
+00069     QString fileType;
+00070     QElapsedTimer clock;
+00071 
+00076     \textcolor{keywordtype}{void} sample(\textcolor{keywordtype}{double},\hyperlink{classDataStream}{DataStream}&);
+00077     \textcolor{keywordtype}{void} saveAsText();
+00078     \textcolor{keywordtype}{void} saveAsBDF();
+00079 
+00080 \};
+00081 
+00084 \textcolor{preprocessor}{#endif // SAMPLINGTHREAD\_H}
+\end{DoxyCode}

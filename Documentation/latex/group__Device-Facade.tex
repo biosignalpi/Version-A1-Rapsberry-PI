@@ -1,0 +1,272 @@
+\hypertarget{group__Device-Facade}{}\section{Device-\/\+Facade}
+\label{group__Device-Facade}\index{Device-\/\+Facade@{Device-\/\+Facade}}
+
+
+Module responsible for all connection to the Bio\+Medical Devices used.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classDeviceInterface}{Device\+Interface}
+\begin{DoxyCompactList}\small\item\em Abstract interface for all devices. \end{DoxyCompactList}\item 
+class \hyperlink{classDeviceManager}{Device\+Manager}
+\begin{DoxyCompactList}\small\item\em Handles which device to connect through the \hyperlink{classDeviceInterface}{Device\+Interface}. \end{DoxyCompactList}\item 
+class \hyperlink{classEcgCapture}{Ecg\+Capture}
+\begin{DoxyCompactList}\small\item\em Responsible for communication with A\+D\+AS. \end{DoxyCompactList}\item 
+class \hyperlink{classEcgMock}{Ecg\+Mock}
+\begin{DoxyCompactList}\small\item\em Mock version of an device The \hyperlink{classEcgMock}{Ecg\+Mock} device will return sine and cosine functions as data. \end{DoxyCompactList}\item 
+class \hyperlink{classSamplingThread}{Sampling\+Thread}
+\begin{DoxyCompactList}\small\item\em \hyperlink{classDeviceInterface}{Device\+Interface} Class responsible for sampling E\+CG. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group__Device-Facade_gabf6e5cc9109a573e29add762dc36df9b}{Ecg\+Capture\+::\+Operating\+Mode} \{ \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}{Ecg\+Capture\+::ecg\+Capture}, 
+\hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba8b349f0786d8e8247f4bc381baa51134}{Ecg\+Capture\+::test\+Tone\+Square}, 
+\hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9ececd6d5264a0e5996556c6697a4f94}{Ecg\+Capture\+::test\+Tone\+Low\+Freq\+Sin}, 
+\hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba397d60b89ddb5aaf41d92c617868ed47}{Ecg\+Capture\+::test\+Tone\+High\+Freq\+Sin}
+ \}
+\item 
+enum \hyperlink{group__Device-Facade_gaaf4f7677ca26944edc0f65195b8729f3}{Ecg\+Capture\+::\+Frequency} \{ \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3acb281025a93800e7ed188605a7375838}{Ecg\+Capture\+::low\+Freq}, 
+\hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3a2a968734e734a271ef5a52b83360122a}{Ecg\+Capture\+::mid\+Freq}, 
+\hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3abd09d184c2c34f227532a8bc5fb90877}{Ecg\+Capture\+::high\+Freq}
+ \}
+\item 
+enum \hyperlink{group__Device-Facade_ga1750ac59389b67ba4d9d2834dd7c2d9c}{Ecg\+Capture\+::lead\+Format} \{ \hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9caf7786dce131009aa61ddfed4f8d8639b}{Ecg\+Capture\+::digital}, 
+\hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9ca21cabce4f74afcf79d24897058fdd6b9}{Ecg\+Capture\+::electrode}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__Device-Facade_gaeef1c0708b94ee82330d6d165a2b5a71}{Ecg\+Capture\+::\+Ecg\+Capture} ()
+\item 
+void \hyperlink{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0}{Ecg\+Capture\+::init} (Operating\+Mode, Frequency)
+\begin{DoxyCompactList}\small\item\em Initiate the device by configuring the registers depending on operating mode and sampling frequency. \end{DoxyCompactList}\item 
+void \hyperlink{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793}{Ecg\+Capture\+::start} ()
+\begin{DoxyCompactList}\small\item\em Start capturing frames from the A\+D\+A\+S1000. \end{DoxyCompactList}\item 
+void \hyperlink{group__Device-Facade_ga8fef74cdd0296256ab4a700dae2d02a4}{Ecg\+Capture\+::stop} ()
+\begin{DoxyCompactList}\small\item\em stop capture \end{DoxyCompactList}\item 
+void \hyperlink{group__Device-Facade_ga9f04dad928d472c92229f3f39a8f2445}{Ecg\+Capture\+::test\+Device} ()
+\begin{DoxyCompactList}\small\item\em Method used to test if the device is working properly. \end{DoxyCompactList}\item 
+const Q\+Vector$<$ double $>$ \hyperlink{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd}{Ecg\+Capture\+::read\+Frame} ()
+\begin{DoxyCompactList}\small\item\em Reads a single frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Module responsible for all connection to the Bio\+Medical Devices used. 
+
+\begin{DoxyAuthor}{Author}
+Martin 
+\end{DoxyAuthor}
+
+
+\subsection{Enumeration Type Documentation}
+\index{Device-\/\+Facade@{Device-\/\+Facade}!Frequency@{Frequency}}
+\index{Frequency@{Frequency}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{Frequency}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ecg\+Capture\+::\+Frequency}}\hypertarget{group__Device-Facade_gaaf4f7677ca26944edc0f65195b8729f3}{}\label{group__Device-Facade_gaaf4f7677ca26944edc0f65195b8729f3}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{low\+Freq@{low\+Freq}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!low\+Freq@{low\+Freq}}\item[{\em 
+low\+Freq\hypertarget{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3acb281025a93800e7ed188605a7375838}{}\label{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3acb281025a93800e7ed188605a7375838}
+}]\index{mid\+Freq@{mid\+Freq}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!mid\+Freq@{mid\+Freq}}\item[{\em 
+mid\+Freq\hypertarget{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3a2a968734e734a271ef5a52b83360122a}{}\label{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3a2a968734e734a271ef5a52b83360122a}
+}]\index{high\+Freq@{high\+Freq}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!high\+Freq@{high\+Freq}}\item[{\em 
+high\+Freq\hypertarget{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3abd09d184c2c34f227532a8bc5fb90877}{}\label{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3abd09d184c2c34f227532a8bc5fb90877}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line \hyperlink{ecgcapture_8h_source_l00037}{37} of file \hyperlink{ecgcapture_8h_source}{ecgcapture.\+h}.
+
+\index{Device-\/\+Facade@{Device-\/\+Facade}!lead\+Format@{lead\+Format}}
+\index{lead\+Format@{lead\+Format}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{lead\+Format}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ecg\+Capture\+::lead\+Format}}\hypertarget{group__Device-Facade_ga1750ac59389b67ba4d9d2834dd7c2d9c}{}\label{group__Device-Facade_ga1750ac59389b67ba4d9d2834dd7c2d9c}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{digital@{digital}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!digital@{digital}}\item[{\em 
+digital\hypertarget{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9caf7786dce131009aa61ddfed4f8d8639b}{}\label{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9caf7786dce131009aa61ddfed4f8d8639b}
+}]\index{electrode@{electrode}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!electrode@{electrode}}\item[{\em 
+electrode\hypertarget{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9ca21cabce4f74afcf79d24897058fdd6b9}{}\label{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9ca21cabce4f74afcf79d24897058fdd6b9}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line \hyperlink{ecgcapture_8h_source_l00043}{43} of file \hyperlink{ecgcapture_8h_source}{ecgcapture.\+h}.
+
+\index{Device-\/\+Facade@{Device-\/\+Facade}!Operating\+Mode@{Operating\+Mode}}
+\index{Operating\+Mode@{Operating\+Mode}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{Operating\+Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Ecg\+Capture\+::\+Operating\+Mode}}\hypertarget{group__Device-Facade_gabf6e5cc9109a573e29add762dc36df9b}{}\label{group__Device-Facade_gabf6e5cc9109a573e29add762dc36df9b}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{ecg\+Capture@{ecg\+Capture}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!ecg\+Capture@{ecg\+Capture}}\item[{\em 
+ecg\+Capture\hypertarget{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}{}\label{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}
+}]\index{test\+Tone\+Square@{test\+Tone\+Square}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!test\+Tone\+Square@{test\+Tone\+Square}}\item[{\em 
+test\+Tone\+Square\hypertarget{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba8b349f0786d8e8247f4bc381baa51134}{}\label{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba8b349f0786d8e8247f4bc381baa51134}
+}]\index{test\+Tone\+Low\+Freq\+Sin@{test\+Tone\+Low\+Freq\+Sin}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!test\+Tone\+Low\+Freq\+Sin@{test\+Tone\+Low\+Freq\+Sin}}\item[{\em 
+test\+Tone\+Low\+Freq\+Sin\hypertarget{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9ececd6d5264a0e5996556c6697a4f94}{}\label{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9ececd6d5264a0e5996556c6697a4f94}
+}]\index{test\+Tone\+High\+Freq\+Sin@{test\+Tone\+High\+Freq\+Sin}!Device-\/\+Facade@{Device-\/\+Facade}}\index{Device-\/\+Facade@{Device-\/\+Facade}!test\+Tone\+High\+Freq\+Sin@{test\+Tone\+High\+Freq\+Sin}}\item[{\em 
+test\+Tone\+High\+Freq\+Sin\hypertarget{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba397d60b89ddb5aaf41d92c617868ed47}{}\label{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba397d60b89ddb5aaf41d92c617868ed47}
+}]\end{description}
+\end{Desc}
+
+
+Definition at line \hyperlink{ecgcapture_8h_source_l00030}{30} of file \hyperlink{ecgcapture_8h_source}{ecgcapture.\+h}.
+
+
+
+\subsection{Function Documentation}
+\index{Device-\/\+Facade@{Device-\/\+Facade}!Ecg\+Capture@{Ecg\+Capture}}
+\index{Ecg\+Capture@{Ecg\+Capture}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{Ecg\+Capture()}]{\setlength{\rightskip}{0pt plus 5cm}Ecg\+Capture\+::\+Ecg\+Capture (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Device-Facade_gaeef1c0708b94ee82330d6d165a2b5a71}{}\label{group__Device-Facade_gaeef1c0708b94ee82330d6d165a2b5a71}
+
+
+Definition at line \hyperlink{ecgcapture_8cpp_source_l00015}{15} of file \hyperlink{ecgcapture_8cpp_source}{ecgcapture.\+cpp}.
+
+\index{Device-\/\+Facade@{Device-\/\+Facade}!init@{init}}
+\index{init@{init}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{init(\+Operating\+Mode, Frequency)}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Capture\+::init (
+\begin{DoxyParamCaption}
+\item[{{\bf Operating\+Mode}}]{mode, }
+\item[{{\bf Frequency}}]{freq}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0}{}\label{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0}
+
+
+Initiate the device by configuring the registers depending on operating mode and sampling frequency. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em Operating\+Mode} & enum stating which operating mode to use \\
+\hline
+\mbox{\tt in}  & {\em Frequency} & enum stating the which frequency to sample in \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \hyperlink{ecgcapture_8cpp_source_l00026}{26} of file \hyperlink{ecgcapture_8cpp_source}{ecgcapture.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device-\/\+Facade@{Device-\/\+Facade}!read\+Frame@{read\+Frame}}
+\index{read\+Frame@{read\+Frame}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{read\+Frame()}]{\setlength{\rightskip}{0pt plus 5cm}const Q\+Vector$<$ double $>$ Ecg\+Capture\+::read\+Frame (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd}{}\label{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd}
+
+
+Reads a single frame. 
+
+\begin{DoxyReturn}{Returns}
+Q\+Vector$<$double$>$ single\+Frame 
+\end{DoxyReturn}
+
+
+Definition at line \hyperlink{ecgcapture_8cpp_source_l00400}{400} of file \hyperlink{ecgcapture_8cpp_source}{ecgcapture.\+cpp}.
+
+
+
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=286pt]{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd_cgraph}
+\end{center}
+\end{figure}
+
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device-\/\+Facade@{Device-\/\+Facade}!start@{start}}
+\index{start@{start}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{start()}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Capture\+::start (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793}{}\label{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793}
+
+
+Start capturing frames from the A\+D\+A\+S1000. 
+
+Start sending frames. 
+
+Definition at line \hyperlink{ecgcapture_8cpp_source_l00353}{353} of file \hyperlink{ecgcapture_8cpp_source}{ecgcapture.\+cpp}.
+
+
+
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793_icgraph}
+\end{center}
+\end{figure}
+
+
+\index{Device-\/\+Facade@{Device-\/\+Facade}!stop@{stop}}
+\index{stop@{stop}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{stop()}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Capture\+::stop (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Device-Facade_ga8fef74cdd0296256ab4a700dae2d02a4}{}\label{group__Device-Facade_ga8fef74cdd0296256ab4a700dae2d02a4}
+
+
+stop capture 
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000012}{Todo}]Implement\end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{ecgcapture_8cpp_source_l00362}{362} of file \hyperlink{ecgcapture_8cpp_source}{ecgcapture.\+cpp}.
+
+\index{Device-\/\+Facade@{Device-\/\+Facade}!test\+Device@{test\+Device}}
+\index{test\+Device@{test\+Device}!Device-\/\+Facade@{Device-\/\+Facade}}
+\subsubsection[{test\+Device()}]{\setlength{\rightskip}{0pt plus 5cm}void Ecg\+Capture\+::test\+Device (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{group__Device-Facade_ga9f04dad928d472c92229f3f39a8f2445}{}\label{group__Device-Facade_ga9f04dad928d472c92229f3f39a8f2445}
+
+
+Method used to test if the device is working properly. 
+
+It works by writing to a register and then reading the same register.
+
+\begin{DoxyRefDesc}{Deprecated}
+\item[\hyperlink{deprecated__deprecated000002}{Deprecated}]Currently not in use. \end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{ecgcapture_8cpp_source_l00257}{257} of file \hyperlink{ecgcapture_8cpp_source}{ecgcapture.\+cpp}.
+

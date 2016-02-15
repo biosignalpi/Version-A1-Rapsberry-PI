@@ -1,0 +1,6 @@
+<map id="AbstractMenu::~AbstractMenu" name="AbstractMenu::~AbstractMenu">
+<area shape="rect" id="node2" href="$classAbstractMenu.html#aef49c4a4ceeb1aad12101cb4768e1596" title="Pure virtual function, creates the next Menu object Pure virtual function, that is meant to create a ..." alt="" coords="265,5,431,32"/>
+<area shape="rect" id="node3" href="$classAbstractMenu.html#a4163c42d2127430e184612cb95211cda" title="Sets the first row of the PiFace CAD to the current option choosen Uses the C library pifacecad..." alt="" coords="253,56,443,83"/>
+<area shape="rect" id="node4" href="$classAbstractMenu.html#afc9ee4bf101f2761b4e8e083ef3c4a9b" title="Toggles the second row of the PiFace CAD to the next option Uses the C library pifacecad.h to control the display. " alt="" coords="280,107,416,133"/>
+<area shape="rect" id="node5" href="$classAbstractMenu.html#a5fd1c385e4acd825631ede5bb0424a5c" title="Sets the second row of the PiFace CAD to the current option choosen Uses the C library pifacecad..." alt="" coords="253,157,443,184"/>
+</map>

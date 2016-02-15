@@ -1,0 +1,90 @@
+\hypertarget{classEcgCapture}{}\section{Ecg\+Capture Class Reference}
+\label{classEcgCapture}\index{Ecg\+Capture@{Ecg\+Capture}}
+
+
+Responsible for communication with A\+D\+AS.  
+
+
+
+
+{\ttfamily \#include $<$ecgcapture.\+h$>$}
+
+
+
+Inheritance diagram for Ecg\+Capture\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classEcgCapture__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Ecg\+Capture\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=148pt]{classEcgCapture__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{group__Device-Facade_gabf6e5cc9109a573e29add762dc36df9b}{Operating\+Mode} \{ \hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9e4c8f425af52209ee3eb7c466852b22}{ecg\+Capture}, 
+\hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba8b349f0786d8e8247f4bc381baa51134}{test\+Tone\+Square}, 
+\hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba9ececd6d5264a0e5996556c6697a4f94}{test\+Tone\+Low\+Freq\+Sin}, 
+\hyperlink{group__Device-Facade_ggabf6e5cc9109a573e29add762dc36df9ba397d60b89ddb5aaf41d92c617868ed47}{test\+Tone\+High\+Freq\+Sin}
+ \}
+\item 
+enum \hyperlink{group__Device-Facade_gaaf4f7677ca26944edc0f65195b8729f3}{Frequency} \{ \hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3acb281025a93800e7ed188605a7375838}{low\+Freq}, 
+\hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3a2a968734e734a271ef5a52b83360122a}{mid\+Freq}, 
+\hyperlink{group__Device-Facade_ggaaf4f7677ca26944edc0f65195b8729f3abd09d184c2c34f227532a8bc5fb90877}{high\+Freq}
+ \}
+\item 
+enum \hyperlink{group__Device-Facade_ga1750ac59389b67ba4d9d2834dd7c2d9c}{lead\+Format} \{ \hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9caf7786dce131009aa61ddfed4f8d8639b}{digital}, 
+\hyperlink{group__Device-Facade_gga1750ac59389b67ba4d9d2834dd7c2d9ca21cabce4f74afcf79d24897058fdd6b9}{electrode}
+ \}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group__Device-Facade_gaeef1c0708b94ee82330d6d165a2b5a71}{Ecg\+Capture} ()
+\item 
+void \hyperlink{group__Device-Facade_ga8f080b59e8caab0993bb7ee6b872b6a0}{init} (\hyperlink{group__Device-Facade_gabf6e5cc9109a573e29add762dc36df9b}{Operating\+Mode}, \hyperlink{group__Device-Facade_gaaf4f7677ca26944edc0f65195b8729f3}{Frequency})
+\begin{DoxyCompactList}\small\item\em Initiate the device by configuring the registers depending on operating mode and sampling frequency. \end{DoxyCompactList}\item 
+void \hyperlink{group__Device-Facade_ga9582047c81db34a3cab2bb315fcb1793}{start} ()
+\begin{DoxyCompactList}\small\item\em Start capturing frames from the A\+D\+A\+S1000. \end{DoxyCompactList}\item 
+void \hyperlink{group__Device-Facade_ga8fef74cdd0296256ab4a700dae2d02a4}{stop} ()
+\begin{DoxyCompactList}\small\item\em stop capture \end{DoxyCompactList}\item 
+void \hyperlink{group__Device-Facade_ga9f04dad928d472c92229f3f39a8f2445}{test\+Device} ()
+\begin{DoxyCompactList}\small\item\em Method used to test if the device is working properly. \end{DoxyCompactList}\item 
+const Q\+Vector$<$ double $>$ \hyperlink{group__Device-Facade_ga644ec3752de6ee1e818b5fcd1de5decd}{read\+Frame} ()
+\begin{DoxyCompactList}\small\item\em Reads a single frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Responsible for communication with A\+D\+AS. 
+
+\hyperlink{classEcgCapture}{Ecg\+Capture} is the main class responsible for communication with the A\+D\+A\+S1000. It uses the B\+C\+M2835.\+h library for access to the G\+P\+IO pins of R\+PI
+
+\begin{DoxyRefDesc}{Todo}
+\item[\hyperlink{todo__todo000011}{Todo}]Move all function descriptions from the .cpp file to the headerfile (.h file) \begin{DoxyAuthor}{Author}
+Jonathan 
+
+Martin 
+\end{DoxyAuthor}
+\end{DoxyRefDesc}
+\begin{DoxyRefDesc}{Bug}
+\item[\hyperlink{bug__bug000003}{Bug}]Crashes with a Q\+Vector index out of range. Problem caused by the read\+Frame function when it dosent provide a array with at least 5 elements \end{DoxyRefDesc}
+
+
+Definition at line \hyperlink{ecgcapture_8h_source_l00024}{24} of file \hyperlink{ecgcapture_8h_source}{ecgcapture.\+h}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{ecgcapture_8h}{ecgcapture.\+h}\item 
+src/\hyperlink{ecgcapture_8cpp}{ecgcapture.\+cpp}\end{DoxyCompactItemize}
