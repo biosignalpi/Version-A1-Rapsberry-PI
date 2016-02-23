@@ -10,7 +10,7 @@ cd qt5
 git checkout 5.5
 perl init-repository
 cd qtbase
-./configure -confirm-license -developer-build -opensource -no-gtkstyle -nomake examples -nomake tests --optimized-qmake  > outputConfigure.txt 2> errorsConfigure.txt
+./configure -release -device linux-rasp-pi2-g++ -device-option CROSS_COMPILE=$HOME/raspberry/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf- -opengl es2 -optimized-qmake  -make libs -opensource -confirm-license -reduce-relocations -reduce-exports -sysroot /mnt/rasp-rootfs -prefix /usr/local/qt5 -hostprefix /usr/local/qt5
 pwd
 echo "make" 
 make > outputMake.txt 2> ../ErrorList.txt
